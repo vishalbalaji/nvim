@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/vishal/.config'
+let g:netrw_dirhist_3='/etc/modprobe.d'
+let g:netrw_dirhist_2='/home/vishal/.config/dmenu/.git'
+let g:netrw_dirhist_1='/home/vishal/.config/mpv/playlists'
+let g:netrw_dirhist_0='/media/DATA/pg_admissions/vishal_LOR'
+let g:netrw_dirhist_9='/home/vishal/.config/nvim/plugged/lightline-gruvbox.vim'
+let g:netrw_dirhist_8='/home/vishal/.config/fish'
+let g:netrw_dirhist_7='/home/vishal/.config/.git'
+let g:netrw_dirhist_6='/home/vishal/.config/nvim/plugged/lightline-bufferline/plugin'
+let g:netrw_dirhist_5='/home/vishal/.config/nvim/plugged/lightline-bufferline'

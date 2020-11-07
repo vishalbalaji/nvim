@@ -1,0 +1,18 @@
+{
+	"coc.preferences.formatOnSaveFiletypes": [
+		"css",
+		"javascript",
+		"graphql",
+		"html",
+		"yaml",
+		"json",
+		"haskell",
+		"java"
+	],
+	"python.linting.enabled": true,
+	"python.linting.pylintEnabled": true,
+
+	"prettier.useTabs": true,
+	"explorer.icon.enableVimDevicons": true,
+	"emmet.includeLanguages": { "jsp": "html" }
+}
