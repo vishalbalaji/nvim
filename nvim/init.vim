@@ -208,6 +208,7 @@ set concealcursor=
 set ic
 set timeoutlen=200
 set formatoptions-=cro
+set ignorecase
 if &columns <= 120
 	set nowrap
 endif
