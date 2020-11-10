@@ -14,5 +14,12 @@
 
 	"prettier.useTabs": true,
 	"explorer.icon.enableVimDevicons": true,
-	"emmet.includeLanguages": { "jsp": "html" }
+	"emmet.includeLanguages": { "jsp": "html" },
+	"list": {
+		"source": {
+			"bibtex": {
+				"files": ["refs/*.bib"]
+			}
+		}
+	}
 }
