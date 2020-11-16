@@ -42,7 +42,6 @@ Plug 'vimlab/split-term.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'Honza/vim-snippets'
 Plug 'alx741/vim-hindent'
-Plug 'neovimhaskell/haskell-vim'
 Plug 'kovetskiy/sxhkd-vim'
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 Plug 'lervag/vimtex'
