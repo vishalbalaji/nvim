@@ -46,8 +46,8 @@ Plug 'kovetskiy/sxhkd-vim'
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 Plug 'lervag/vimtex'
 Plug 'adborden/vim-notmuch-address'
-
-
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'roxma/vim-tmux-clipboard'
 call plug#end()
 
 " Let
