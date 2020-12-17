@@ -1,9 +1,10 @@
 augroup vimWiki
 	autocmd FileType vimwiki hi! link VimwikiListTodo GruvboxPurpleBold
+	autocmd FileType vimwiki hi! link VimwikiHeaderChar GruvboxOrange
 	autocmd FileType vimwiki hi! link VimwikiHeader1 GruvboxYellowBold
 	autocmd FileType vimwiki hi! link VimwikiHeader2 GruvboxRedBold
 	autocmd FileType vimwiki hi! link VimwikiHeader3 GruvboxGreenBold
-	autocmd FileType vimwiki hi! link VimwikiHeader4 GruvboxOrangeBold
+	autocmd FileType vimwiki hi! link VimwikiHeader4 GruvboxAquaBold
 	autocmd FileType vimwiki hi! link VimwikiHeader5 GruvboxPurpleBold
 	autocmd FileType vimwiki hi! link VimwikiHeader6 GruvboxBlueBold
 	autocmd FileType vimwiki hi! link VimwikiCellSeparator GruvboxYellow
