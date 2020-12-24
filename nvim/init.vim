@@ -48,6 +48,7 @@ Plug 'lervag/vimtex'
 Plug 'adborden/vim-notmuch-address'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
+
 call plug#end()
 
 " Let
@@ -135,6 +136,9 @@ inoremap <M-h> <Esc>:call Indent("left")<cr>
 
 try
 	command Q qa!
+	command W w!
+	command Wq wq
+	command WQ wq
 catch
 	echo ""
 endtry
@@ -195,7 +199,6 @@ hi Done ctermbg=green ctermfg=235 guibg=#b8bb26 guifg=#282828
 " Set
 
 set number
-set mouse=a
 set cursorline
 set showtabline=2
 set autoindent
