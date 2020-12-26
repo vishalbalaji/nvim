@@ -198,7 +198,7 @@ hi Done ctermbg=green ctermfg=235 guibg=#b8bb26 guifg=#282828
 
 " Set
 
-set number
+set number relativenumber
 set cursorline
 set showtabline=2
 set autoindent
