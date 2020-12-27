@@ -218,3 +218,4 @@ set ignorecase
 if &columns <= 120
 	set nowrap
 endif
+
