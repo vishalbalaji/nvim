@@ -8,7 +8,12 @@ augroup vimWiki
 	autocmd FileType vimwiki hi! link VimwikiHeader5 GruvboxPurpleBold
 	autocmd FileType vimwiki hi! link VimwikiHeader6 GruvboxBlueBold
 	autocmd FileType vimwiki hi! link VimwikiCellSeparator GruvboxYellow
-	autocmd FileType vimwiki hi! link VimwikiBoldChar Bold
+	autocmd FileType vimwiki hi! link VimwikiBoldChar GruvboxOrangeBold
+	autocmd FileType vimwiki hi! link VimwikiBoldCharT GruvboxOrangeBold
+	autocmd FileType vimwiki hi! link VimwikiBold GruvboxOrangeBold
+	autocmd FileType vimwiki hi VimwikiItalicChar cterm=italic ctermfg=108 gui=italic guifg=#8ec07c
+	autocmd FileType vimwiki hi VimwikiItalicCharT cterm=italic ctermfg=108 gui=italic guifg=#8ec07c
+	autocmd FileType vimwiki hi VimwikiItalic cterm=italic ctermfg=108 gui=italic guifg=#8ec07c
 	autocmd FileType vimwiki hi VimwikiImage ctermfg=208 guifg=#fe8019 cterm=underline
 	autocmd FileType vimwiki map <M-cr> :call FollowLink()<cr>
 	autocmd FileType vimwiki map <M-]> ]\|
