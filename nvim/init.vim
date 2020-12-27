@@ -90,6 +90,8 @@ autocmd VimEnter,BufEnter,BufWinEnter *.md inoremap <silent><expr> <cr> pumvisib
 autocmd FileType qf hi! link Search CursorLine
 autocmd FileType mail hi! link mailURL Link
 autocmd FileType mail set textwidth=0 wrapmargin=0
+autocmd FileType mail set spell!
+autocmd FileType gitcommit set spell!
 autocmd VimEnter * nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 " Map
@@ -216,4 +218,3 @@ set ignorecase
 if &columns <= 120
 	set nowrap
 endif
-
