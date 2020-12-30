@@ -62,6 +62,12 @@ let g:markdown_enable_insert_mode_mappings = 0
 let g:hindent_on_save = 1
 let &termguicolors=1
 let g:tex_flavor='latex'
+let g:gitgutter_sign_added = '┃'
+let g:gitgutter_sign_modified = '┃'
+let g:gitgutter_sign_removed = '┃'
+let g:gitgutter_sign_removed_first_line = '┃'
+let g:gitgutter_sign_removed_above_and_below = '┃'
+let g:gitgutter_sign_modified_removed = '┃'
 
 " Au
 
