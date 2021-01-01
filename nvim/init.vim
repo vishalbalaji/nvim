@@ -136,6 +136,7 @@ map <leader>gd :Git diff<cr>
 map <leader>gc :Gco<cr>
 map <leader>gp :cd %:p:h<cr>:15Term git push origin master<cr>
 map <leader>d :cd %:p:h<cr>:pwd<cr>
+map <leader>u :UndotreeToggle<cr>
 inoremap <M-l> <Esc>:call Indent("right")<cr>
 inoremap <M-h> <Esc>:call Indent("left")<cr>
 
