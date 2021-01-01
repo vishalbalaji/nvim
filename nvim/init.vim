@@ -46,6 +46,7 @@ Plug 'lervag/vimtex'
 Plug 'adborden/vim-notmuch-address'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
+Plug 'mbbill/undotree'
 
 call plug#end()
 
@@ -221,5 +222,10 @@ set formatoptions-=cro
 set ignorecase
 if &columns <= 120
 	set nowrap
+endif
+
+if has("persistent_undo")
+    set undodir=$HOME/.cache/undotree
+    set undofile
 endif
 
