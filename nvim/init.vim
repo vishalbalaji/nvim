@@ -1,9 +1,9 @@
-"         _                                              
-"  __   _(_)_ __ ___  _ __ ___                           
-"  \ \ / / | '_ ` _ \| '__/ __|  Vishal Balaji D         
-"   \ V /| | | | | | | | | (__    vishalbalaji@gmail.com 
-"    \_/ |_|_| |_| |_|_|  \___|                          
-"                                                        
+"         _
+"  __   _(_)_ __ ___  _ __ ___
+"  \ \ / / | '_ ` _ \| '__/ __|   Vishal Balaji D
+"   \ V /| | | | | | | | | (__    vishalbalaji@gmail.com
+"    \_/ |_|_| |_| |_|_|  \___|
+"
 
 " Plugins
 
@@ -47,6 +47,7 @@ Plug 'adborden/vim-notmuch-address'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'mbbill/undotree'
+Plug 'goerz/jupytext.vim'
 
 call plug#end()
 
@@ -101,7 +102,7 @@ autocmd VimEnter * nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 " Map
 
-map <M-r> :source ~/.config/nvim/init.vim<cr>:call lightline#update()<cr>:echo "Config reloaded"<cr>
+map <M-r> :source $MYVIMRC<cr>:call lightline#update()<cr>:echo "Config reloaded"<cr>
 map <C-_> <leader>c<space>
 vmap <C-_> <leader>c<space>gv
 map <C-l> :bn!<cr>
@@ -226,7 +227,7 @@ if &columns <= 120
 endif
 
 if has("persistent_undo")
-    set undodir=$HOME/.cache/undotree
-    set undofile
+	set undodir=$HOME/.cache/undotree
+	set undofile
 endif
 
