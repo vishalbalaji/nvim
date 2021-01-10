@@ -48,6 +48,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'mbbill/undotree'
 Plug 'goerz/jupytext.vim'
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -55,19 +56,12 @@ call plug#end()
 
 let mapleader=" "
 let maplocalleader = " "
-let $FZF_DEFAULT_OPTS = '--reverse -i'
 let g:netrw_browsex_viewer = "notify-send '  Opening link...' && setsid -f firefox"
 let g:vimwiki_table_mappings = 0
 let g:markdown_enable_insert_mode_mappings = 0
 let g:hindent_on_save = 1
 let &termguicolors=1
 let g:tex_flavor='latex'
-let g:gitgutter_sign_added = '┃'
-let g:gitgutter_sign_modified = '┃'
-let g:gitgutter_sign_removed = '┃'
-let g:gitgutter_sign_removed_first_line = '┃'
-let g:gitgutter_sign_removed_above_and_below = '┃'
-let g:gitgutter_sign_modified_removed = '┃'
 
 " Au
 
@@ -99,6 +93,7 @@ autocmd FileType mail set textwidth=0 wrapmargin=0
 autocmd FileType mail set spell!
 autocmd FileType gitcommit set spell!
 autocmd VimEnter * nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+autocmd VimEnter * if filereadable('.nvimrc') | so .nvimrc | endif
 
 " Map
 
