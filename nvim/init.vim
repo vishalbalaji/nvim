@@ -124,7 +124,7 @@ nnoremap <leader>pc :PlugClean<cr>
 map <leader>gs :Git<cr>
 map <leader>gd :Git diff<cr>
 map <leader>gc :Gco<cr>
-map <leader>gp :cd %:p:h<cr>:15Term git push origin master<cr>
+map <leader>gp :cd %:p:h<cr>:15Term git push origin HEAD<cr>
 map <leader>d :cd %:p:h<cr>:pwd<cr>
 map <leader>u :UndotreeToggle<cr>
 inoremap <M-l> <Esc>:call Indent("right")<cr>
@@ -223,4 +223,3 @@ if has("persistent_undo")
 	set undofile
 endif
 
-o
