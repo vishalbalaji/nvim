@@ -35,7 +35,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'jrudess/vim-foldtext'
 Plug 'dkarter/bullets.vim'
-Plug 'dhruvasagar/vim-table-mode'
 Plug 'vimlab/split-term.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'Honza/vim-snippets'
@@ -49,6 +48,7 @@ Plug 'roxma/vim-tmux-clipboard'
 Plug 'mbbill/undotree'
 Plug 'goerz/jupytext.vim'
 Plug 'junegunn/fzf.vim'
+Plug 'dhruvasagar/vim-table-mode'
 
 call plug#end()
 
@@ -59,13 +59,11 @@ let maplocalleader = " "
 let g:netrw_browsex_viewer = "notify-send '  Opening link...' && setsid -f firefox"
 let g:vimwiki_table_mappings = 0
 let g:markdown_enable_insert_mode_mappings = 0
-let g:hindent_on_save = 1
 let &termguicolors=1
 let g:tex_flavor='latex'
 
 " Au
 
-"au VimEnter * ColorHighlight
 lua require'colorizer'.setup()
 au VimEnter * RainbowParenthesesToggle
 autocmd VimResized * if (&columns <= 120) | set nowrap | else | set wrap | endif
@@ -77,9 +75,6 @@ au BufWritePost ~/.config/xresources silent !xrdb %
 autocmd BufWritePost ~/.config/dwm/dwmblocks/config.h !cd ~/.config/dwm/dwmblocks/; SUDO_ASKPASS=~dpass sudo -A make install && { killall -q dwmblocks;setsid dwmblocks & }
 augroup AutoSaveFolds
 	autocmd!
-	" view files are about 500 bytes
-	" bufleave but not bufwinleave captures closing 2nd tab
-	" nested is needed by bufwrite* (if triggered via other autocmd)
 	autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview!
 	autocmd BufWinEnter,BufEnter ?* silent! loadview | call lightline#update()
 augroup end
@@ -87,7 +82,6 @@ autocmd VimEnter,BufEnter,BufWinEnter * if &filetype == "vimwiki" | call matchad
 autocmd VimEnter,BufEnter,BufWinEnter * if &filetype == "vimwiki" | call matchadd('Done', ':DONE:') | else | call matchadd('Done', 'DONE:') | endif |
 autocmd VimEnter,BufEnter,BufWinEnter *.md if exists('*complete_info') | inoremap <expr> <M-CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>" | else | inoremap <expr> <M-CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>" | endif |
 autocmd VimEnter,BufEnter,BufWinEnter *.md inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-autocmd FileType qf hi! link Search CursorLine
 autocmd FileType mail hi! link mailURL Link
 autocmd FileType mail set textwidth=0 wrapmargin=0
 autocmd FileType mail set spell!
@@ -184,13 +178,13 @@ syntax on
 " Hi
 
 colorscheme gruvbox
-"hi Normal ctermfg=223 ctermbg=NONE guifg=#ebdbb2 guibg=#282828
-"hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE
 hi Folded cterm=BOLD ctermbg=236 guibg=#32302f
 hi FoldColumn ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
+"hi Normal ctermfg=223 ctermbg=NONE guifg=#ebdbb2 guibg=#282828
+"hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE
 "hi Folded ctermbg=NONE
 "hi Folded ctermfg=gray cterm=BOLD
-hi SignColumn ctermbg=NONE guibg=NONE
 
 syn match Link "\(https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(in\|uk\|us\|net\|org\|edu\|com\|cc\|br\|jp\|dk\|gs\|de\|xyz\)\(\/[^ ]*\)\?\>"
 syn match EmailId #\v[_=a-z\./+0-9-]+\@[a-z0-9._-]+\a{2}#  contains=@NoSpell
@@ -203,20 +197,23 @@ hi Done ctermbg=green ctermfg=235 guibg=#b8bb26 guifg=#282828
 " Set
 
 set number relativenumber
+set noerrorbells
 set cursorline
 set showtabline=2
-set autoindent
-set noexpandtab
-set tabstop=2
+set tabstop=2 softtabstop=2
 set shiftwidth=2
+set noexpandtab
+set smartindent
 set splitbelow splitright
 set list lcs=tab:\|\ 
-set nocompatible
 set concealcursor=
-set ic
+set ignorecase smartcase
 set timeoutlen=200
 set formatoptions-=cro
 set ignorecase
+set noswapfile
+set nobackup
+
 if &columns <= 120
 	set nowrap
 endif
