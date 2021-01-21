@@ -20,7 +20,7 @@ function! coc#source#bibtex#complete(opt, cb) abort
 		let items = []
 		for entry in entries
 			let tag = substitute(split(matchstr(entry, '^@.[^\n]*'), '{')[1], ',', '', 'g')
-			let title = substitute(substitute(split(matchstr(entry, 'title = [^\n]*'), '= ')[1], '{', '', 'g'), '}', '', 'g')[:-2]
+			let title = substitute(substitute(split(matchstr(entry, 'title\s*=[^\n]*'), '= ')[1], '{', '', 'g'), '}', '', 'g')[:-2]
 			let item = {'word': tag, 'abbr': '@'.tag, 'info': title}
 			call add(items, item)
 		endfor
