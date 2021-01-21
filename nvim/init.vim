@@ -210,7 +210,6 @@ set concealcursor=
 set ignorecase smartcase
 set timeoutlen=200
 set formatoptions-=cro
-set ignorecase
 set noswapfile
 set nobackup
 
