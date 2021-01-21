@@ -12,7 +12,8 @@ function! coc#source#gh_emoji#complete(opt, cb) abort
 			\{
 			\ 'word': 'arrow_up:',
 			\ 'menu':  '⬆ ', 
-			\ 'abbr': ':arrow_up:'},
+			\ 'abbr': ':arrow_up:'
+			\},
 			\{
 			\ 'word': 'x:',
 			\ 'menu': '❌', 

@@ -8,13 +8,21 @@ function! coc#source#bibtex#init() abort
 endfunction
 
 function! coc#source#bibtex#complete(opt, cb) abort
-	if filereadable('refs/refs.bib') 
-		let raw = readfile('refs/refs.bib')
+	try
+		let metadata = split(join(readfile(expand('%')), '\n'), '---')[0]
+		let file = split(matchstr(metadata, 'bibliography:[^\\n]*'), " ")[1]
+	catch
+		let file = g:ref_file
+	endtry
+	if filereadable(file) 
+		let raw = join(readfile(file), "\n")
+		let entries = split(raw, "\n\n")
 		let items = []
-		for item in raw
-			if item[0] == '@'
-				call add(items, substitute(split(item, '{')[1], ",", "", "g"))
-			endif
+		for entry in entries
+			let tag = substitute(split(matchstr(entry, '^@.[^\n]*'), '{')[1], ',', '', 'g')
+			let title = substitute(substitute(split(matchstr(entry, 'title = [^\n]*'), '= ')[1], '{', '', 'g'), '}', '', 'g')[:-2]
+			let item = {'word': tag, 'abbr': '@'.tag, 'info': title}
+			call add(items, item)
 		endfor
 		call a:cb(items)
 	endif
