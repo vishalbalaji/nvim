@@ -10,7 +10,7 @@ endfunction
 function! coc#source#gh_emoji#complete(opt, cb) abort
 	let items = [
 			\{
-			\ 'word': ':arrow_up:',
+			\ 'word': 'arrow_up:',
 			\ 'menu':  '⬆ ', 
 			\ 'abbr': ':arrow_up:'
 			\},
@@ -20,17 +20,17 @@ function! coc#source#gh_emoji#complete(opt, cb) abort
 			\ 'abbr': ':x:'
 			\},
 			\{
-			\ 'word': ':arrow_left:',
+			\ 'word': 'arrow_left:',
 			\ 'menu': '⬅ ', 
 			\ 'abbr': ':arrow_left:'
 			\},
 			\{
-			\ 'word': ':sparkles:',
+			\ 'word': 'sparkles:',
 			\ 'menu': '✨', 
 			\ 'abbr': ':sparkles:'
 			\},
 			\{
-			\ 'word': ':heavy_plus_sign:',
+			\ 'word': 'heavy_plus_sign:',
 			\ 'menu': '➕', 
 			\ 'abbr': ':heavy_plus_sign:'
 			\}
