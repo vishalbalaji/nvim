@@ -144,7 +144,7 @@ endtry
 
 " Misc
 
-runtime! ./custom_configs/*.vim
+runtime! ~/.config/nvim/custom_configs/*.vim
 
 function! SynGroup(...)
 	let l:s = synID(line('.'), col('.'), 1)
@@ -179,8 +179,10 @@ syntax on
 
 colorscheme gruvbox
 hi Folded cterm=BOLD ctermbg=236 guibg=#32302f
-hi FoldColumn ctermbg=NONE guibg=NONE
-hi SignColumn ctermbg=NONE guibg=NONE
+"hi FoldColumn ctermbg=NONE guibg=NONE
+"hi SignColumn ctermbg=NONE guibg=NONE
+hi clear SignColumn
+hi clear FoldColumn
 "hi Normal ctermfg=223 ctermbg=NONE guifg=#ebdbb2 guibg=#282828
 "hi CursorLine cterm=NONE ctermbg=236 ctermfg=NONE
 "hi Folded ctermbg=NONE
@@ -221,4 +223,6 @@ if has("persistent_undo")
 	set undodir=$HOME/.cache/undotree
 	set undofile
 endif
+
+runtime! ./custom_configs/*.vim
 
