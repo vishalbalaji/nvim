@@ -26,9 +26,6 @@ let g:lightline = {
 	\ }
 \ }
 
-let g:lightline#colorscheme#gruvbox#palette.tabline.middle = [['#928374', '#282828', 244, 235]]
-let g:lightline#colorscheme#gruvbox#palette.tabline.tabsel = [['#a89984', '#504945', 246, 239]]
-
 function! s:check_back_space() abort
 	let col = col('.') - 1
 	return !col || getline('.')[col - 1]  =~# '\s'
