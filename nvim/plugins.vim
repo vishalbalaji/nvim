@@ -37,5 +37,7 @@ Plug 'goerz/jupytext.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'dense-analysis/ale'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'honza/vim-snippets'
 
 call plug#end()

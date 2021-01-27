@@ -1,7 +1,7 @@
 "Colorizer
 lua require'colorizer'.setup()
 
-"RainbowParantheses
+"Rainbow
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
@@ -89,3 +89,13 @@ endfu
 
 inoremap <M-l> <Esc>:call Indent("right")<cr>
 inoremap <M-h> <Esc>:call Indent("left")<cr>
+
+"Bullets
+"let g:bullets_set_mappings = 0
+"let g:bullets_mapping_leader = '<M-b>'
+
+"Mail
+autocmd FileType mail hi! link mailURL Link
+autocmd FileType mail set textwidth=0 wrapmargin=0
+autocmd FileType mail set spell!
+

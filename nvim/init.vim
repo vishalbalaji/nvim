@@ -17,7 +17,7 @@ let maplocalleader = ' '
 
 set nu rnu
 set noerrorbells
-set list listchars=nbsp:␣,eol:¬,tab:\⏐\ ,extends:›,precedes:‹,trail:·,space:·
+set list listchars=nbsp:␣,tab:\⏐\ ,extends:›,precedes:‹,trail:·,space:·
 
 set tabstop=2 softtabstop=2
 set shiftwidth=2
@@ -39,9 +39,9 @@ set nobackup
 
 autocmd VimResized * if (&columns <= 120) | set nowrap | else | set wrap | endif
 augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave * mkview
-  autocmd BufWinEnter * silent! loadview
+	autocmd!
+	autocmd BufWinLeave * silent! mkview
+	autocmd BufWinEnter * silent! loadview
 augroup END
 
 "Commands
