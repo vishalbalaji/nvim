@@ -33,6 +33,11 @@ function! coc#source#gh_emoji#complete(opt, cb) abort
 			\ 'word': 'heavy_plus_sign:',
 			\ 'menu': '➕', 
 			\ 'abbr': ':heavy_plus_sign:'
+			\},
+			\{
+			\ 'word': 'bug:',
+			\ 'menu': '🐛', 
+			\ 'abbr': ':bug:'
 			\}
 		\]
 	call a:cb(items)
