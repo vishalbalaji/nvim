@@ -1,6 +1,6 @@
 function! coc#source#email#init() abort
 	return {
-				\ 'priority': 11,
+				\ 'priority': 0,
 				\ 'shortcut': 'Email',
 				\ 'filetypes': ['mail', 'markdown'],
 				\}

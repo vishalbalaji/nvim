@@ -1,6 +1,6 @@
 function! coc#source#bibtex#init() abort
 	return {
-				\ 'priority': 9,
+				\ 'priority': 0,
 				\ 'shortcut': 'Bibtex',
 				\ 'filetypes': ['vimwiki', 'markdown', 'markdown.pandoc'],
 				\ 'triggerCharacters': ['@']

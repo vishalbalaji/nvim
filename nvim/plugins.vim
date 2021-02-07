@@ -18,7 +18,9 @@ Plug 'matze/vim-move'
 Plug 'unblevable/quick-scope'
 Plug 'junegunn/goyo.vim'
 Plug 'vimlab/split-term.vim'
-Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'mbbill/undotree'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -39,5 +41,6 @@ Plug 'dense-analysis/ale'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()

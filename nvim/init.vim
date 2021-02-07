@@ -12,6 +12,7 @@ hi clear SignColumn
 let &termguicolors = 1
 let mapleader=' '
 let maplocalleader = ' '
+let g:netrw_browsex_viewer = "notify-send '  Opening link...' && setsid -f firefox"
 
 "Set
 
@@ -38,10 +39,11 @@ set nobackup
 "Au
 
 autocmd VimResized * if (&columns <= 120) | set nowrap | else | set wrap | endif
+autocmd VimEnter * if filereadable('.nvimrc') | so .nvimrc | endif
 augroup remember_folds
-	autocmd!
 	autocmd BufWinLeave * silent! mkview
-	autocmd BufWinEnter * silent! loadview
+	autocmd!
+	autocmd BufWinEnter * silent! loadview | call lightline#update()
 augroup END
 
 "Commands
@@ -57,16 +59,16 @@ endtry
 
 "Map
 
-map <M-r> :source $MYVIMRC<cr>:call lightline#update()<cr>:echo "Config reloaded"<cr>
-map <leader>d :cd %:p:h<cr>:pwd<cr>
-map <leader>pi :PlugInstall<cr>
-map <leader>pc :PlugClean<cr>
-map <M-S-Right> :bn!<cr>
-map <M-S-Left> :bp!<cr>
-map <M-S-k> :bn!<cr>
-map <M-S-j> :bp!<cr>
-map <M-S-x> :bd!<cr>
-map <M-S-t> :tabnew!<cr>
+map <M-r> <cmd>source $MYVIMRC<cr><cmd>call lightline#update()<cr><cmd>echo "Config reloaded"<cr>
+map <leader>d <cmd>cd %:p:h<cr><cmd>pwd<cr>
+map <leader>pi <cmd>PlugInstall<cr>
+map <leader>pc <cmd>PlugClean<cr>
+map <M-S-Right> <cmd>bn!<cr>
+map <M-S-Left> <cmd>bp!<cr>
+map <M-S-k> <cmd>bn!<cr>
+map <M-S-j> <cmd>bp!<cr>
+map <M-S-x> <cmd>bd!<cr>
+map <M-S-t> <cmd>tabnew!<cr>
 map <C-Right> <C-w>l
 map <C-Left> <C-w>h
 map <C-Up> <C-w>k
@@ -79,7 +81,7 @@ map <Tab> za
 
 inoremap <M-v> <Esc>"+pi
 
-map <Esc> <Esc>:noh<cr>
+map <Esc> <Esc><cmd>noh<cr>
 map <M-v> "+p
 
 vmap <M-c> "+y

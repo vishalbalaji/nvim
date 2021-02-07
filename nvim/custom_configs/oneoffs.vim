@@ -21,12 +21,13 @@ vmap <expr> <M-h> {'v': "",
 			\  '\<c-v>': "",
 			\ }[mode()]
 
-"FZF
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
-let $FZF_DEFAULT_OPTS = '-i'
+"Telescope
 
-map <C-p> :Files<cr>
-map <leader>gf :GFiles<cr>
+nnoremap <leader>ff <cmd>cd %:p:h<cr><cmd>Telescope find_files<cr>
+nnoremap <leader>gf <cmd>cd %:p:h<cr><cmd>Telescope git_files<cr>
+nnoremap <leader>fg <cmd>cd %:p:h<cr><cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 "Fugitive
 map <leader>gs :Git<cr>
@@ -90,12 +91,24 @@ endfu
 inoremap <M-l> <Esc>:call Indent("right")<cr>
 inoremap <M-h> <Esc>:call Indent("left")<cr>
 
-"Bullets
-"let g:bullets_set_mappings = 0
-"let g:bullets_mapping_leader = '<M-b>'
+"Multiple-cursors
+let g:multi_cursor_use_default_mapping=0
+
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-d>'
+let g:multi_cursor_select_all_word_key = '<A-d>'
+let g:multi_cursor_start_key           = 'g<C-d>'
+let g:multi_cursor_select_all_key      = 'g<A-d>'
+let g:multi_cursor_next_key            = '<C-d>'
+let g:multi_cursor_prev_key            = '<C-M-d>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
 
 "Mail
 autocmd FileType mail hi! link mailURL Link
 autocmd FileType mail set textwidth=0 wrapmargin=0
 autocmd FileType mail set spell!
 
+
+"Markdown
+autocmd Filetype markdown set ft=markdown.pandoc
