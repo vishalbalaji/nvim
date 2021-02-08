@@ -42,5 +42,6 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'sheerun/vim-polyglot'
+Plug 'numirias/semshi'
 
 call plug#end()

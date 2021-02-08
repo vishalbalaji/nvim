@@ -109,6 +109,5 @@ autocmd FileType mail hi! link mailURL Link
 autocmd FileType mail set textwidth=0 wrapmargin=0
 autocmd FileType mail set spell!
 
-
 "Markdown
 autocmd Filetype markdown set ft=markdown.pandoc
