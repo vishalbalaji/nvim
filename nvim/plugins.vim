@@ -28,6 +28,7 @@ Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 Plug 'kovetskiy/sxhkd-vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'mhinz/vim-startify'
 
 "" Coding utils
 Plug 'scrooloose/nerdcommenter'
