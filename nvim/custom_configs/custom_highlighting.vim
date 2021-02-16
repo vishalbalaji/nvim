@@ -1,6 +1,5 @@
-syn match Link "\(https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(in\|uk\|us\|net\|org\|edu\|com\|cc\|br\|jp\|dk\|gs\|de\|xyz\)\(\/[^ ]*\)\?\>"
-syn match EmailId #\v[_=a-z\./+0-9-]+\@[a-z0-9._-]+\a{2}# contains=@NoSpell
-
+autocmd VimEnter,BufEnter,BufWinEnter * syn match Link "\(https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(in\|uk\|us\|net\|org\|edu\|com\|cc\|br\|jp\|dk\|gs\|de\|xyz\)\(\/[^ ]*\)\?\>"
+autocmd VimEnter,BufEnter,BufWinEnter * syn match EmailId #\v[_=a-z\./+0-9-]+\@[a-z0-9._-]+\a{2}# contains=@NoSpell
 autocmd VimEnter,BufEnter,BufWinEnter * call matchadd('Todo', 'TODO:')
 autocmd VimEnter,BufEnter,BufWinEnter * call matchadd('Done', 'DONE:')
 autocmd VimEnter,BufEnter,BufWinEnter * call matchadd('Credit', 'CREDIT:')
@@ -20,3 +19,5 @@ hi! GruvboxOrangeSign ctermbg=NONE guibg=NONE
 hi! GruvboxPurpleSign ctermbg=NONE guibg=NONE
 hi! GruvboxRedSign ctermbg=NONE guibg=NONE
 hi! GruvboxYellowSign ctermbg=NONE guibg=NONE
+
+hi Normal ctermfg=223 ctermbg=NONE guifg=#ebdbb2 guibg=NONE
