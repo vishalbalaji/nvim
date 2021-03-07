@@ -32,7 +32,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 "Fugitive
 map <leader>gs :Git<cr>
 map <leader>gd :Git diff<cr>
-map <leader>gc :Gco<cr>
+map <leader>gc :Git commit<cr>
 map <leader>gp :cd %:p:h<cr>:15Term git push origin HEAD<cr>
 
 "Gitgutter
@@ -95,12 +95,12 @@ inoremap <M-h> <Esc>:call Indent("left")<cr>
 let g:multi_cursor_use_default_mapping=0
 
 " Default mapping
-let g:multi_cursor_start_word_key      = '<C-d>'
-let g:multi_cursor_select_all_word_key = '<A-d>'
-let g:multi_cursor_start_key           = 'g<C-d>'
-let g:multi_cursor_select_all_key      = 'g<A-d>'
-let g:multi_cursor_next_key            = '<C-d>'
-let g:multi_cursor_prev_key            = '<C-M-d>'
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
@@ -111,3 +111,6 @@ autocmd FileType mail set spell!
 
 "Markdown
 autocmd Filetype markdown set ft=markdown.pandoc
+
+"Xresources
+autocmd BufWritePost ~/.config/xresources silent !xrdb ~/.config/xresources

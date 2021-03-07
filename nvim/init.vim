@@ -18,7 +18,7 @@ let g:netrw_browsex_viewer = "notify-send '  Opening link...' && setsid -f fi
 
 set nu rnu
 set noerrorbells
-set list listchars=nbsp:␣,tab:\⏐\ ,extends:›,precedes:‹,trail:·,space:·
+set list listchars=nbsp:␣,tab:\│\ ,extends:›,precedes:‹,trail:·,space:·
 
 set tabstop=2 softtabstop=2
 set shiftwidth=2

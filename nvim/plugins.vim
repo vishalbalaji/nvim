@@ -29,6 +29,7 @@ Plug 'kovetskiy/sxhkd-vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mhinz/vim-startify'
+Plug 'junegunn/vim-easy-align'
 
 "" Coding utils
 Plug 'scrooloose/nerdcommenter'

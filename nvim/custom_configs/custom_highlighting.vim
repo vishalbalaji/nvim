@@ -3,6 +3,7 @@ autocmd VimEnter,BufEnter,BufWinEnter * syn match EmailId #\v[_=a-z\./+0-9-]+\@[
 autocmd VimEnter,BufEnter,BufWinEnter * call matchadd('Todo', 'TODO:')
 autocmd VimEnter,BufEnter,BufWinEnter * call matchadd('Done', 'DONE:')
 autocmd VimEnter,BufEnter,BufWinEnter * call matchadd('Credit', 'CREDIT:')
+autocmd FileType markdown.pandoc.mail source ~/.config/nvim/custom_configs/syntax/mail.vim
 
 hi Link cterm=UNDERLINE ctermfg=blue guifg=#83a598 gui=underline
 hi! link EmailId Special

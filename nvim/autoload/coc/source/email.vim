@@ -2,7 +2,7 @@ function! coc#source#email#init() abort
 	return {
 				\ 'priority': 0,
 				\ 'shortcut': 'Email',
-				\ 'filetypes': ['mail', 'markdown'],
+				\ 'filetypes': ['markdown.pandoc.mail'],
 				\}
 endfunction
 

@@ -40,3 +40,5 @@ function! GitStatus()
 		return printf("")
 	endif
 endfunction
+
+let g:lightline#bufferline#min_buffer_count = 2
