@@ -30,6 +30,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/vim-easy-align'
+Plug 'bkad/CamelCaseMotion'
 
 "" Coding utils
 Plug 'scrooloose/nerdcommenter'

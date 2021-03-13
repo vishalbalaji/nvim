@@ -116,18 +116,28 @@ autocmd Filetype markdown set ft=markdown.pandoc
 autocmd BufWritePost ~/.config/xresources silent !xrdb ~/.config/xresources
 
 "Restore cursor
-  " Put these in an autocmd group, so that you can revert them with:
-  " ":augroup vimStartup | au! | augroup END"
-  augroup vimStartup
-    au!
+" Put these in an autocmd group, so that you can revert them with:
+" ":augroup vimStartup | au! | augroup END"
+augroup vimStartup
+	au!
 
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid, when inside an event handler
-    " (happens when dropping a file on gvim) and for a commit message (it's
-    " likely a different one than last time).
-    autocmd BufReadPost *
-      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-      \ |   exe "normal! g`\""
-      \ | endif
+	" When editing a file, always jump to the last known cursor position.
+	" Don't do it when the position is invalid, when inside an event handler
+	" (happens when dropping a file on gvim) and for a commit message (it's
+	" likely a different one than last time).
+	autocmd BufReadPost *
+		\ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+		\ |   exe "normal! g`\""
+		\ | endif
 
-  augroup END
+augroup END
+
+"CamelCaseMotion
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge

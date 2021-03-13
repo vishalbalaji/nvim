@@ -30,6 +30,8 @@ set showtabline=2
 set signcolumn=auto
 set formatoptions-=cro
 
+set iskeyword-=_
+
 set ignorecase smartcase
 set splitbelow splitright
 set timeoutlen=200
