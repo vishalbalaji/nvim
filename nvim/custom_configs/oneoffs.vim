@@ -31,7 +31,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 "Fugitive
 map <leader>gs :Git<cr>
-map <leader>gd :Git diff<cr>
+map <leader>gd :Git diff %<cr>
 map <leader>gc :Git commit<cr>
 map <leader>gp :cd %:p:h<cr>:15Term git push origin HEAD<cr>
 
