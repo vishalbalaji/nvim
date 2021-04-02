@@ -6,7 +6,8 @@ Plug 'shinchu/lightline-gruvbox.vim'
 
 "" Lightline
 Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
+Plug 'romgrk/barbar.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 
 "" Git
 Plug 'tpope/vim-fugitive'
@@ -26,7 +27,6 @@ Plug 'roxma/vim-tmux-clipboard'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 Plug 'kovetskiy/sxhkd-vim'
-Plug 'ryanoasis/vim-devicons'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/vim-easy-align'
 Plug 'bkad/CamelCaseMotion'

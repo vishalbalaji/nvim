@@ -65,10 +65,6 @@ map <M-r> <cmd>source $MYVIMRC<cr><cmd>call lightline#update()<cr><cmd>echo "Con
 map <leader>d <cmd>cd %:p:h<cr><cmd>pwd<cr>
 map <leader>pi <cmd>PlugInstall<cr>
 map <leader>pc <cmd>PlugClean<cr>
-map <M-S-Right> <cmd>bn!<cr>
-map <M-S-Left> <cmd>bp!<cr>
-map <M-S-k> <cmd>bn!<cr>
-map <M-S-j> <cmd>bp!<cr>
 map <M-S-x> <cmd>bd!<cr>
 map <M-S-t> <cmd>tabnew!<cr>
 map <C-Right> <C-w>l

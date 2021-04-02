@@ -175,3 +175,19 @@ let g:dashboard_custom_shortcut={
 \ }
 
 autocmd FileType dashboard map <buffer> q :q!<CR>
+
+"coc-explorer
+map <leader>e :CocCommand explorer<CR>
+
+"barbar
+
+let bufferline = get(g:, 'bufferline', {})
+let bufferline.animation = v:false
+let bufferline.auto_hide = v:true
+
+map <M-S-Right> <cmd>BufferNext<cr>
+map <M-S-Left> <cmd>BufferPrevious<cr>
+map <M-S-k> <cmd>BufferNext<cr>
+map <M-S-j> <cmd>BufferPrevious<cr>
+map <M-S-h> <cmd>BufferMovePrev<cr>
+map <M-S-l> <cmd>BufferMoveNext<cr>
