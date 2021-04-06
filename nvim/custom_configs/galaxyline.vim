@@ -36,6 +36,7 @@ gls.left[1] = {
       [''] = ' VBLOCK ',
       V = ' VLINE ',
       c = ' CMD ',
+      t = ' TERM ',
     }
 
     local mode_color = {n = colors.yellow,
@@ -61,6 +62,7 @@ gls.left[1] = {
     vim.api.nvim_command('hi GalaxyViMode guibg='..mode_color[vim.fn.mode()])
     -- vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
     return ' '..mode_label[vim.fn.mode()]
+    -- return vim.fn.mode()
   end,
   separator = ' ',
   separator_highlight = {colors.yellow,function()
@@ -83,6 +85,7 @@ gls.left[2] = {
       [''] = '<>',
       V = '<>',
       c = ':',
+      t = '🗔 ',
     }
 
     local mode_color = {n = colors.yellow,
