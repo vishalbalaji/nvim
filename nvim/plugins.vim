@@ -2,12 +2,11 @@ call plug#begin()
 
 "" Colorscheme
 Plug 'morhetz/gruvbox'
-Plug 'shinchu/lightline-gruvbox.vim'
 
 "" Lightline
-Plug 'itchyny/lightline.vim'
 Plug 'romgrk/barbar.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
 "" Git
 Plug 'tpope/vim-fugitive'

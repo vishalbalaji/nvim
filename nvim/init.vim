@@ -45,7 +45,8 @@ autocmd VimEnter * if filereadable('.nvimrc') | so .nvimrc | endif
 augroup remember_folds
 	autocmd BufWinLeave * silent! mkview
 	autocmd!
-	autocmd BufWinEnter * silent! loadview | call lightline#update()
+	"autocmd BufWinEnter * silent! loadview | call lightline#update()
+	autocmd BufWinEnter * silent! loadview
 augroup END
 
 "Commands
@@ -61,7 +62,8 @@ endtry
 
 "Map
 
-map <M-r> <cmd>source $MYVIMRC<cr><cmd>call lightline#update()<cr><cmd>echo "Config reloaded"<cr>
+"map <M-r> <cmd>source $MYVIMRC<cr><cmd>call lightline#update()<cr><cmd>echo "Config reloaded"<cr>
+map <M-r> <cmd>source $MYVIMRC<cr><cmd>echo "Config reloaded"<cr>
 map <leader>d <cmd>cd %:p:h<cr><cmd>pwd<cr>
 map <leader>pi <cmd>PlugInstall<cr>
 map <leader>pc <cmd>PlugClean<cr>
