@@ -247,6 +247,17 @@ gls.right[1] ={
   },
 }
 gls.right[2] = {
+  FileTypeName = {
+    provider = function()
+      return vim.bo.filetype
+    end,
+    condition = buffer_not_empty,
+    separator = ' ',
+    separator_highlight = {colors.yellow,colors.bg, 'bold'},
+    highlight = {colors.yellow,colors.bg, 'bold'}
+  }
+}
+gls.right[3] = {
   FileSize = {
     provider = 'FileSize',
     condition = buffer_not_empty,
