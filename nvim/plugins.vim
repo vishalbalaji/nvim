@@ -45,5 +45,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'sheerun/vim-polyglot'
 Plug 'numirias/semshi'
+Plug 'andymass/vim-matchup'
 
 call plug#end()
