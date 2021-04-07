@@ -175,6 +175,7 @@ let g:dashboard_custom_shortcut={
 \ }
 
 autocmd FileType dashboard map <buffer> q :q!<CR>
+autocmd FileType dashboard set showtabline=0 | autocmd BufLeave <buffer> set showtabline=2
 
 "coc-explorer
 map <leader>e :CocCommand explorer<CR>
@@ -183,7 +184,6 @@ map <leader>e :CocCommand explorer<CR>
 
 let bufferline = get(g:, 'bufferline', {})
 let bufferline.animation = v:false
-let bufferline.auto_hide = v:true
 
 map <M-S-Right> <cmd>BufferNext<cr>
 map <M-S-Left> <cmd>BufferPrevious<cr>

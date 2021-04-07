@@ -1,4 +1,6 @@
 {
+  "prettier.useTabs": true,
+  "prettier.tabWidth": 2,
 	"explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
