@@ -51,8 +51,8 @@ map('n', '<Leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 map('n', '<Leader>gs', ':Git<CR>', { noremap = true, silent = true })
 map('n', '<Leader>gd', ':Git diff %<CR>', { noremap = true, silent = true })
 map('n', '<Leader>gc', ':Git commit<CR>', { noremap = true, silent = true })
-map('n', '<Leader>gp', ':cd:h %:p<CR>:15Term git push origin HEAD<CR>', { noremap = true, silent = true })
-
+map('n', '<Leader>gp', ':cd %:p:h<CR>:15Term git push origin HEAD<CR>', { noremap = true, silent = true })
+ 
 -- NvimComment
 map('n', '<C-_>', ':CommentToggle<CR>', { noremap = true, silent = true })
 map('v', '<C-_>', ':CommentToggle<CR>gv', { noremap = true, silent = true })
