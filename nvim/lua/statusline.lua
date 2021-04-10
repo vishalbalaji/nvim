@@ -1,4 +1,3 @@
-lua << EOF
 require'nvim-web-devicons'.setup()
 
 local gl = require('galaxyline')
@@ -351,4 +350,3 @@ gls.short_line_right[2] = {
     highlight = {colors.yellow,colors.purple}
   }
 }
-EOF
