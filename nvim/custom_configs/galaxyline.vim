@@ -87,6 +87,7 @@ gls.left[2] = {
       V = '<>',
       c = ':',
       t = '🗔 ',
+      s = '<||>',
     }
 
     local mode_color = {n = colors.yellow,

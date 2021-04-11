@@ -16,7 +16,7 @@ let g:netrw_browsex_viewer = "notify-send '  Opening link...' && setsid -f fi
 
 "Set
 
-set nu rnu
+set number rnu
 set noerrorbells
 set list listchars=nbsp:␣,tab:\│\ ,extends:›,precedes:‹,trail:·,space:·
 
@@ -40,11 +40,19 @@ set nobackup
 
 "Au
 
-autocmd VimResized * if (&columns <= 120) | set nowrap | else | set wrap | endif
-autocmd VimEnter * if filereadable('.nvimrc') | so .nvimrc | endif
-augroup remember_folds
-	autocmd BufWinLeave * silent! mkview
+augroup resize
 	autocmd!
+	autocmd VimResized * if (&columns <= 120) | set nowrap | else | set wrap | endif
+augroup END
+
+augroup resize
+	autocmd!
+	autocmd VimEnter * if filereadable('.nvimrc') | so .nvimrc | endif
+augroup END
+
+augroup remember_folds
+	autocmd!
+	autocmd BufWinLeave * silent! mkview
 	"autocmd BufWinEnter * silent! loadview | call lightline#update()
 	autocmd BufWinEnter * silent! loadview
 augroup END
@@ -57,7 +65,7 @@ try
 	command Wq wq
 	command WQ wq
 catch
-	echo ""
+	echo
 endtry
 
 "Map

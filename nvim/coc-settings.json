@@ -1,4 +1,5 @@
 {
+  "diagnostic.displayByAle": true,
   "prettier.useTabs": true,
   "prettier.tabWidth": 2,
 	"explorer.width": 30,

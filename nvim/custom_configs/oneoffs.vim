@@ -191,3 +191,14 @@ map <M-S-k> <cmd>BufferNext<cr>
 map <M-S-j> <cmd>BufferPrevious<cr>
 map <M-S-h> <cmd>BufferMovePrev<cr>
 map <M-S-l> <cmd>BufferMoveNext<cr>
+
+" ALE
+let g:ale_virtualtext_cursor = 1
+
+hi! link ALEVirtualTextError GruvboxRed
+hi! link ALEVirtualTextStyleError GruvboxRed
+hi! link ALEVirtualTextInfo GruvboxAqua
+hi! link ALEVirtualTextStyleWarning GruvboxYellowBold
+hi! link ALEVirtualTextWarning GruvboxYellow
+
+command ALEReload ALEDisable | ALEEnable
