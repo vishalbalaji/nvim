@@ -1,3 +1,4 @@
+lua << EOF
 require'nvim-web-devicons'.setup()
 
 local gl = require('galaxyline')
@@ -36,6 +37,7 @@ gls.left[1] = {
       V = ' VLINE ',
       c = ' CMD ',
       t = ' TERM ',
+      s = ' SEL ',
     }
 
     local mode_color = {n = colors.yellow,
@@ -61,7 +63,7 @@ gls.left[1] = {
     vim.api.nvim_command('hi GalaxyViMode guibg='..mode_color[vim.fn.mode()])
     -- vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
     return ' '..mode_label[vim.fn.mode()]
-    -- return vim.fn.mode()
+    --return vim.fn.mode()
   end,
   separator = ' ',
   separator_highlight = {colors.yellow,function()
@@ -350,3 +352,4 @@ gls.short_line_right[2] = {
     highlight = {colors.yellow,colors.purple}
   }
 }
+EOF
