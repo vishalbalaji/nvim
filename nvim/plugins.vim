@@ -29,7 +29,7 @@ Plug 'kovetskiy/sxhkd-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/vim-easy-align'
 Plug 'bkad/CamelCaseMotion'
-Plug 'glepnir/dashboard-nvim'
+"Plug 'glepnir/dashboard-nvim'
 
 "" Coding utils
 Plug 'scrooloose/nerdcommenter'

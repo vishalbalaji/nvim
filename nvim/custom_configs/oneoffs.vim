@@ -143,39 +143,39 @@ sunmap e
 sunmap ge
 
 "Dashboard
-let g:dashboard_custom_header = [
-\ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
-\ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
-\ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
-\ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
-\ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
-\ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
-\]
+"let g:dashboard_custom_header = [
+"\ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+"\ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+"\ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+"\ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+"\ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+"\ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+"\]
 
-let g:dashboard_custom_footer = ['press q to quit']
+"let g:dashboard_custom_footer = ['press q to quit']
 
-let g:dashboard_default_executive = 'telescope'
+"let g:dashboard_default_executive = 'telescope'
 
-nmap <Leader>ss :<C-u>SessionSave<CR>
-nmap <Leader>sl :<C-u>SessionLoad<CR>
-nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
-nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
-nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
-nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
-nnoremap <silent> e :DashboardNewFile<CR>
+"nmap <Leader>ss :<C-u>SessionSave<CR>
+"nmap <Leader>sl :<C-u>SessionLoad<CR>
+"nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
+"nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
+"nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
+"nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
+"nnoremap <silent> e :DashboardNewFile<CR>
 
-let g:dashboard_custom_shortcut={
-\ 'last_session'       : 'SPC s l',
-\ 'find_history'       : 'SPC f h',
-\ 'find_file'          : 'SPC f f',
-\ 'new_file'           : 'e      ',
-\ 'change_colorscheme' : 'SPC t c',
-\ 'find_word'          : 'SPC f a',
-\ 'book_marks'         : 'SPC f b',
-\ }
+"let g:dashboard_custom_shortcut={
+"\ 'last_session'       : 'SPC s l',
+"\ 'find_history'       : 'SPC f h',
+"\ 'find_file'          : 'SPC f f',
+"\ 'new_file'           : 'e      ',
+"\ 'change_colorscheme' : 'SPC t c',
+"\ 'find_word'          : 'SPC f a',
+"\ 'book_marks'         : 'SPC f b',
+"\ }
 
-autocmd FileType dashboard map <buffer> q :q!<CR>
-autocmd FileType dashboard set showtabline=0 | autocmd BufLeave <buffer> set showtabline=2
+"autocmd FileType dashboard map <buffer> q :q!<CR>
+"autocmd FileType dashboard set showtabline=0 | autocmd BufLeave <buffer> set showtabline=2
 
 "coc-explorer
 map <leader>e :CocCommand explorer<CR>
