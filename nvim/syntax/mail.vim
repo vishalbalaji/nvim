@@ -56,7 +56,7 @@ syn region	mailVerbatim	contains=@mailQuoteExps,@NoSpell keepend start="^\z(\(> 
 syn match mailURL contains=@NoSpell `\v<(((https?|ftp|gopher)://|(mailto|file|news):)[^' 	<>"]+|(www|web|w3)[a-z0-9_-]*\.[a-z0-9._-]+\.[^' 	<>"]+)[a-z0-9/]`
 syn match mailEmail contains=@NoSpell "\v[_=a-z\./+0-9-]+\@[a-z0-9._-]+\a{2}"
 
-" Make sure quote markers in regions (header / signature) have correct color
+" Make sure quote markes in regions (header / signature) have correct color
 syn match mailQuoteExp1	contained "\v^(\> ?)"
 syn match mailQuoteExp2	contained "\v^(\> ?){2}"
 syn match mailQuoteExp3	contained "\v^(\> ?){3}"

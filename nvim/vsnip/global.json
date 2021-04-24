@@ -1,0 +1,72 @@
+{
+  "box": {
+    "prefix": "box",
+    "body": "`!p\nbox = make_box(len(t[1]))\nsnip.rv = box[0]\nsnip += box[1]\n`${1:${VISUAL:content}}`!p\nbox = make_box(len(t[1]))\nsnip.rv = box[2]\nsnip += box[3]`\n$0",
+    "description": "A nice box with the current comment symbol"
+  },
+  "bbox": {
+    "prefix": "bbox",
+    "body": "`!p\nif not snip.c:\n\twidth = int(vim.eval(\"&textwidth - (virtcol('.') == 1 ? 0 : virtcol('.'))\")) or 71\nbox = make_box(len(t[1]), width)\nsnip.rv = box[0]\nsnip += box[1]\n`${1:${VISUAL:content}}`!p\nbox = make_box(len(t[1]), width)\nsnip.rv = box[2]\nsnip += box[3]`\n$0",
+    "description": "A nice box over the full width"
+  },
+  "fold": {
+    "prefix": "fold",
+    "body": "`!p snip.rv = get_comment_format()[0]` ${1:Fold description} `!p snip.rv = foldmarker()[0]`${2:1} `!p snip.rv = get_comment_format()[2]`",
+    "description": "Insert a vim fold marker"
+  },
+  "foldc": {
+    "prefix": "foldc",
+    "body": "`!p snip.rv = get_comment_format()[0]` ${2:1}`!p snip.rv = foldmarker()[1]` `!p snip.rv = get_comment_format()[2]`",
+    "description": "Insert a vim fold close marker"
+  },
+  "foldp": {
+    "prefix": "foldp",
+    "body": "`!p snip.rv = get_comment_format()[0]` ${1:Fold description} `!p snip.rv = foldmarker()[0]` `!p snip.rv = get_comment_format()[2]`\n${2:${VISUAL:Content}}\n`!p snip.rv = get_comment_format()[0]` `!p snip.rv = foldmarker()[1]` $1 `!p snip.rv = get_comment_format()[2]`",
+    "description": "Insert a vim fold marker pair"
+  },
+  "\"lorem(([1-4])?[0-9])?\"": {
+    "prefix": "\"lorem(([1-4])?[0-9])?\"",
+    "body": "`!p snip.rv = \" \".join(LOREM.split()[:int(match.group(1))]) if match.group(1) else LOREM`",
+    "description": "Lorem Ipsum"
+  },
+  "modeline": {
+    "prefix": "modeline",
+    "body": "vim`!v ':set '. (&expandtab ? printf('et sw=%i ts=%i', &sw, &ts) : printf('noet sts=%i sw=%i ts=%i', &sts, &sw, &ts)) . (&tw ? ' tw='. &tw : '') . ':'`",
+    "description": "Vim modeline"
+  },
+  "date": {
+    "prefix": "date",
+    "body": "`!v strftime(\"%Y-%m-%d\")`",
+    "description": "YYYY-MM-DD"
+  },
+  "ddate": {
+    "prefix": "ddate",
+    "body": "`!v strftime(\"%b %d, %Y\")`",
+    "description": "Month DD, YYYY"
+  },
+  "diso": {
+    "prefix": "diso",
+    "body": "`!v strftime(\"%Y-%m-%d %H:%M:%S%z\")`",
+    "description": "ISO format datetime"
+  },
+  "time": {
+    "prefix": "time",
+    "body": "`!v strftime(\"%H:%M\")`",
+    "description": "hh:mm"
+  },
+  "datetime": {
+    "prefix": "datetime",
+    "body": "`!v strftime(\"%Y-%m-%d %H:%M\")`",
+    "description": "YYYY-MM-DD hh:mm"
+  },
+  "todo": {
+    "prefix": "todo",
+    "body": "`!p snip.rv=get_comment_format()[0]` ${2:TODO}: $0${3: <${4:`!v strftime('%d-%m-%y')`}${5:, `!v g:snips_author`}>} `!p snip.rv=get_comment_format()[2]`",
+    "description": "TODO comment"
+  },
+  "uuid": {
+    "prefix": "uuid",
+    "body": "`!p if not snip.c: import uuid; snip.rv = str(uuid.uuid4())`",
+    "description": "Random UUID"
+  }
+}

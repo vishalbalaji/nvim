@@ -1,4 +1,3 @@
-lua << EOF
 require'nvim-web-devicons'.setup()
 
 local gl = require('galaxyline')
@@ -6,17 +5,17 @@ local gls = gl.section
 gl.short_line_list = {'LuaTree','vista','dbui'}
 
 local colors = {
-  bg = '#282828',
-  yellow = '#d8a657',
-  cyan = '#89b482',
-  darkblue = '#45707a',
-  green = '#a9b665',
-  orange = '#e78a4e',
+  bg = '#3c3836',
+  yellow = '#d79921',
+  cyan = '#8ec07c',
+  darkblue = '#458588',
+  green = '#b8bb26',
+  orange = '#fe8019',
   purple = '#d3869b',
-  magenta = '#c14a4a',
-  grey = '#a89984',
-  blue = '#7daea3',
-  red = '#ea6962'
+  magenta = '#b16286',
+  grey = '#928374',
+  blue = '#83a598',
+  red = '#fb4934'
 }
 
 local buffer_not_empty = function()
@@ -62,7 +61,8 @@ gls.left[1] = {
     t = colors.red}
     vim.api.nvim_command('hi GalaxyViMode guibg='..mode_color[vim.fn.mode()])
     -- vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
-    return ' '..mode_label[vim.fn.mode()]
+    -- return ' '..mode_label[vim.fn.mode()]
+    return ' '
     --return vim.fn.mode()
   end,
   separator = ' ',
@@ -114,6 +114,7 @@ gls.left[2] = {
     return mode_text[vim.fn.mode()]
   end,
   separator = ' ',
+	separator_highlight = {colors.gray,colors.bg},
   highlight = {colors.bg,colors.bg,'bold'},
 }
 }
@@ -179,7 +180,7 @@ gls.left[8] = {
   DiffRemove = {
     provider = 'DiffRemove',
     condition = checkwidth,
-    -- separator = ' ',
+    -- sparator = ' ',
     -- separator_highlight = {colors.purple,colors.bg},
     icon = '  ',
     highlight = {colors.red,colors.bg, 'bold'},
@@ -216,7 +217,8 @@ gls.left[13] = {
     provider = 'DiagnosticInfo',
     icon = '   ',
     highlight = {colors.orange,colors.bg, 'bold'},
-    separator = ' '
+    separator = ' ',
+    separator_highlight = {colors.orange,colors.bg},
   }
 }
 gls.left[14] = {
@@ -353,4 +355,3 @@ gls.short_line_right[2] = {
     highlight = {colors.yellow,colors.purple}
   }
 }
-EOF
