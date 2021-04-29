@@ -47,6 +47,8 @@ return require("packer").startup(
     use "kyazdani42/nvim-tree.lua"
     use "jremmen/vim-ripgrep"
     use "norcalli/nvim-colorizer.lua"
+    use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
+		use "mattn/emmet-vim"
 
     -- Bar/Statusline
     use "romgrk/barbar.nvim"
@@ -75,10 +77,18 @@ return require("packer").startup(
     use "glepnir/lspsaga.nvim"
     use "kabouzeid/nvim-lspinstall"
     use "onsails/lspkind-nvim"
+    use {
+      "folke/lsp-trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+        require("trouble").setup {}
+      end
+    }
 
     -- Completion
-		use "hrsh7th/nvim-compe"
+    use "hrsh7th/nvim-compe"
     use "hrsh7th/vim-vsnip"
-		use "rafamadriz/friendly-snippets"
+    use "rafamadriz/friendly-snippets"
+    use {"tzachar/compe-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-compe"}
   end
 )

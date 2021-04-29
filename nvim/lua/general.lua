@@ -6,6 +6,7 @@ cmd [[let g:netrw_browsex_viewer = "notify-send '  Opening link...' && setsid
 
 cmd("set number rnu")
 cmd("set noerrorbells")
+-- cmd [[set list listchars=nbsp:␣,tab:\│\ ,extends:›,precedes:‹,trail:·,space:·]]
 cmd [[set list listchars=nbsp:␣,tab:\│\ ,extends:›,precedes:‹,trail:·,space:·]]
 
 cmd("set tabstop=2 softtabstop=2")
@@ -25,6 +26,8 @@ cmd("set splitbelow splitright")
 cmd("set timeoutlen=200")
 cmd("set noswapfile")
 cmd("set nobackup")
+
+cmd("filetype plugin on")
 
 -- Restore Cursor
 cmd [[
@@ -74,7 +77,7 @@ autocmd VimEnter * syn match EmailId #\v[_=a-z\./+0-9-]+\@[a-z0-9._-]+\a{2}# con
 ]]
 
 ---- Mail
-cmd("autocmd FileType markdown.pandoc.mail source ~/.config/nvim/custom_configs/syntax/mail.vim")
+cmd("autocmd FileType markdown.pandoc.mail source ~/.config/nvim/syntax/mail.vim")
 
 cmd("augroup END")
 

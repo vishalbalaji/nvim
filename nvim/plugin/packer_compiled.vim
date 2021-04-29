@@ -83,6 +83,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/bullets.vim"
   },
+  ["compe-tabnine"] = {
+    loaded = true,
+    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/compe-tabnine"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/friendly-snippets"
@@ -102,6 +106,15 @@ _G.packer_plugins = {
   gruvbox = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/gruvbox"
+  },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim"
+  },
+  ["lsp-trouble.nvim"] = {
+    config = { "\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0" },
+    loaded = true,
+    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/lsp-trouble.nvim"
   },
   ["lspkind-nvim"] = {
     loaded = true,
@@ -199,6 +212,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/vim-easy-align"
   },
+  ["vim-emmet-autocompleter"] = {
+    loaded = true,
+    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/vim-emmet-autocompleter"
+  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/vim-fugitive"
@@ -242,6 +259,10 @@ _G.packer_plugins = {
 }
 
 time("Defining packer_plugins", false)
+-- Config for: lsp-trouble.nvim
+time("Config for lsp-trouble.nvim", true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "lsp-trouble.nvim")
+time("Config for lsp-trouble.nvim", false)
 if should_profile then save_profiles() end
 
 END

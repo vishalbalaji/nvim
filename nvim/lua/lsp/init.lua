@@ -18,10 +18,10 @@ cmd("command! LspDefinition lua vim.lsp.buf.definition()")
 -- Lspsaga
 saga.init_lsp_saga()
 
-map("n", "<F2>", ":Lspsaga rename<CR>", {noremap = true, silent = true})
 map("n", "<leader>lf", ":LspFormatting<CR>:echo 'Formatted'<CR>", {noremap = true, silent = true})
 map("n", "<leader>lr", ":LspReferences<CR>", {noremap = true, silent = true})
 map("n", "<leader>ld", ":LspDefinition<CR>:echo 'Jumped to Definition'<CR>", {noremap = true, silent = true})
+map("n", "<F2>", ":Lspsaga rename<CR>", {noremap = true, silent = true})
 map("n", "<leader>la", ":Lspsaga code_action<CR>", {noremap = true, silent = true})
 
 return lsp

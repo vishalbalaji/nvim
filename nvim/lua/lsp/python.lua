@@ -1,14 +1,15 @@
--- require'lspconfig'.pyright.setup{}
-require'lspconfig'.pyls.setup{}
+require "lspconfig".pyright.setup {
+  root_dir = vim.loop.cwd
+}
+-- require "lspconfig".pyls.setup {}
 
 -- EFM Config
 local python_arguments = {}
 
--- TODO replace with path argument
 local flake8 = {
-	LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
-	lintStdin = true,
-	lintFormats = {"%f:%l:%c: %m"}
+  -- LintCommand = "flake8 --ignore=E501 --stdin-display-name ${INPUT} -",
+  lintStdin = true,
+  lintFormats = {"%f:%l:%c: %m"}
 }
 
 local isort = {formatCommand = "isort --quiet -", formatStdin = true}
