@@ -22,6 +22,20 @@ function CustomComplete()
 	endif
 endfu
 
+let matches = split(system('notmuch address "*"'), "\n")
+let b:addresses = []
+for item in matches
+	try
+		let temp = split(item, '<')
+		let name = substitute(temp[0], '"', '', 'g')
+		let address = split(temp[1], '>')[0]
+		call add(b:addresses, {'word': item, 'abbr': name, 'info': address, 'kind': ' [Mail]'})
+	catch 
+		call add(b:addresses, {'word': item, 'info': '', 'kind': ' Mail'})
+	endtry
+endfor
+
+
 autocmd TextChangedI * call CustomComplete()
 
 hi Popup ctermbg=239 guibg=#504945 ctermfg=167 ctermfg=208 guifg=#fe8019 gui=bold

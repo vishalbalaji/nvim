@@ -26,12 +26,29 @@ autocmd TextChangedI * call CustomComplete()
 
 hi Popup ctermbg=239 guibg=#504945 ctermfg=167 guifg=#fb4934
 
-try
-	let metadata = split(join(readfile(expand('%')), '\n'), '---')[0]
-	let b:bib_file = split(matchstr(metadata, 'bibliography:[^\\n]*'), " ")[1]
-catch
-	let b:bib_file = 'refs.bib'
-endtry
+if index(keys(b:), 'bib_file') == -1
+	try
+		let metadata = split(join(readfile(expand('%')), '\n'), '---')[0]
+		let b:bib_file = split(matchstr(metadata, 'bibliography:[^\\n]*'), " ")[1]
+	catch
+		let b:bib_file = 'refs.bib'
+	endtry
+endif
+
+let b:references = []
+
+if filereadable(b:bib_file)
+	let raw = join(readfile(b:bib_file), "\n")
+	let entries = split(raw, "\n\n")
+
+	for entry in entries
+		let tag = substitute(split(matchstr(entry, '^@.[^\n]*'), '{')[1], ',', '', 'g')
+		let title = substitute(substitute(split(matchstr(entry, 'title\s*=[^\n]*'), '=')[1], '{', '', 'g'), '}', '', 'g')[:-2]
+		let item = {'word': tag, 'abbr': '@'.tag, 'info': title, 'kind': '🗎 [BibTex]'}
+		call add(b:references, item)
+	endfor
+endif
+
 
 let g:float_preview#docked = 0
 let g:float_preview#max_width = 80
