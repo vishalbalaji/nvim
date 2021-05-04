@@ -21,7 +21,7 @@ require "compe".setup {
     calc = true,
     nvim_lsp = true,
     nvim_lua = true,
-    vsnip = true,
+    ultisnips = true,
     tabnine = true,
 		emoji = true
   }
@@ -64,10 +64,13 @@ _G.s_tab_complete = function()
   end
 end
 
-vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<C-k>", "v:lua.s_tab_complete()", {expr = true})
+-- vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.tab_complete()", {expr = true})
+-- vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.tab_complete()", {expr = true})
+-- vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.s_tab_complete()", {expr = true})
+-- vim.api.nvim_set_keymap("s", "<C-k>", "v:lua.s_tab_complete()", {expr = true})
+
+cmd('inoremap <silent><expr> <C-j>     pumvisible() ? "\\<C-n>" : "\\<C-j>"')
+cmd('inoremap <silent><expr> <C-k>     pumvisible() ? "\\<C-p>" : "\\<C-k>"')
 
 cmd('inoremap <silent><expr> <Tab>     pumvisible() ? compe#confirm("<CR>") : "\\<Tab>"')
 cmd("inoremap <silent><expr> <C-Space> compe#complete()")

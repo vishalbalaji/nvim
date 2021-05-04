@@ -61,9 +61,9 @@ cmd("autocmd ColorScheme * hi! link Todo GruvboxYellowBold")
 cmd("autocmd ColorScheme * hi! link Done GruvboxGreenBold")
 cmd("autocmd ColorScheme * hi! link Credit GruvboxPurpleBold")
 
-cmd('autocmd VimEnter * call matchadd("Todo", "TODO:")')
-cmd('autocmd VimEnter * call matchadd("Done", "DONE:")')
-cmd('autocmd VimEnter * call matchadd("Credit", "CREDIT:")')
+cmd('autocmd VimEnter * call matchadd("Todo", "TODO")')
+cmd('autocmd VimEnter * call matchadd("Done", "DONE")')
+cmd('autocmd VimEnter * call matchadd("Credit", "CREDIT")')
 
 ---- Links/Email IDs
 cmd("autocmd ColorScheme * hi! link Link GruvboxBlueBold")
@@ -76,10 +76,12 @@ cmd [[
 autocmd VimEnter * syn match EmailId #\v[_=a-z\./+0-9-]+\@[a-z0-9._-]+\a{2}# contains=@NoSpell
 ]]
 
+cmd("augroup END")
+
 ---- Mail
 cmd("autocmd FileType markdown.pandoc.mail source ~/.config/nvim/syntax/mail.vim")
-
-cmd("augroup END")
+cmd("autocmd FileType mail set textwidth=0 wrapmargin=0")
+cmd("autocmd FileType mail set spell!")
 
 -- Commands
 local function define_commands()

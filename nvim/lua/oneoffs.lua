@@ -63,7 +63,7 @@ vim.g.indent_blankline_context_patterns = {
   "^for",
   "^object",
   "^table",
-	"^case",
+  "^case",
   "element",
   "block",
   "arguments"
@@ -73,10 +73,93 @@ cmd [[ autocmd ColorScheme * hi! link IndentBlanklineContextChar GruvboxAquaBold
 -- cmd [[ autocmd FileType markdown let g:indentLine_setConceal = 0 ]]
 
 -- Emmet
-vim.g.user_emmet_leader_key=','
+vim.g.user_emmet_leader_key = ","
 
 -- cmd [[ let emmet_semicolon = ['html'] ]]
 
 -- cmd [[
 -- autocmd BufEnter * if index(emmet_semicolon, &ft) >= 0 | inoremap <silent> ; <Esc>:exec 'norm l'<CR>:call emmet#expandAbbr(3,"")<CR>i
 -- ]]
+
+-- Ultisnips
+vim.g.UltiSnipsExpandTrigger = "<c-l>"
+vim.g.UltiSnipsJumpForwardTrigger = "<c-j>"
+vim.g.UltiSnipsJumpBackwardTrigger = "<c-k>"
+
+local function trim(s)
+   return s:match( "^%s*(.-)%s*$" )
+end
+
+local border_chars = {
+	TOP_LEFT = '┌',
+	TOP_RIGHT = '┐',
+	MID_HORIZONTAL = '─',
+	MID_VERTICAL = '│',
+	BOTTOM_LEFT = '└',
+	BOTTOM_RIGHT = '┘',
+}
+
+local function select_callback(index, line)
+	print(index)
+end
+
+local function close_callback(index, line)
+	-- function job here
+end
+
+local opts = {
+	mode = 'editor',
+	close_on_bufleave = true,
+	keymaps = {
+		i = {
+			['<Cr>'] = function(popup)
+				popup:close(select_callback)
+			end
+		},
+		n = {
+			['<Cr>'] = function(popup)
+				popup:close(select_callback)
+			end
+		}
+	},
+	callbacks = {
+		select = select_callback, -- automatically calls it when selection changes
+		close = close_callback, -- automatically calls it when window closes.
+	},
+	list = {
+		border = true,
+		numbering = true,
+		border_chars = border_chars,
+		highlight = 'Normal',
+		selection_highlight = 'Visual',
+		matching_highlight = 'Identifier',
+	},
+	prompt = {
+		border = true,
+		numbering = true,
+		title = 'Snippets',
+		border_chars = border_chars,
+		highlight = 'Normal',
+		prompt_highlight = 'Normal'
+	},
+	-- sorter = require'popfix.sorter'.new_fzy_native_sorter(true),
+	-- fuzzyEngine = require'popfix.fuzzy_engine'.new_SingleExecutionEngine()
+}
+
+_G.show_snippets = function()
+	local result = vim.api.nvim_exec([[ echo string(UltiSnips#SnippetsInCurrentScope()) ]], true)
+	result = result:gsub("'", ""):gsub("{", ""):gsub("}", "")
+	local data = {}
+	for word in string.gmatch(result, '([^,]+)') do
+		table.insert(data, trim(word))
+	end
+	opts.data = data
+	local popup = require'popfix':new(opts)
+	-- vim.b.snips = snips
+	-- cmd [[ silent cexpr b:snips | copen ]]
+	-- vim.lsp.util.set_qflist(snips)
+end
+
+map("n", "<leader>ls", ":lua show_snippets()<CR>", {noremap = true, silent = true})
+-- map('n', '<leader>ls', ':caddexpr split(substitute(string(UltiSnips#SnippetsInCurrentScope())[1:-2], "'", "", "g"), "",')', { noremap = true, silent = true })
+

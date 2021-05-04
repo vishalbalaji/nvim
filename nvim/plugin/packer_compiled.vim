@@ -87,9 +87,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/compe-tabnine"
   },
-  ["friendly-snippets"] = {
+  ["emmet-vim"] = {
     loaded = true,
-    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/friendly-snippets"
+    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/emmet-vim"
   },
   ["galaxyline.nvim"] = {
     loaded = true,
@@ -180,6 +180,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/plenary.nvim"
   },
+  popfix = {
+    loaded = true,
+    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/popfix"
+  },
   ["popup.nvim"] = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/popup.nvim"
@@ -204,6 +208,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/traces.vim"
   },
+  ultisnips = {
+    loaded = true,
+    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/ultisnips"
+  },
   undotree = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/undotree"
@@ -211,10 +219,6 @@ _G.packer_plugins = {
   ["vim-easy-align"] = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/vim-easy-align"
-  },
-  ["vim-emmet-autocompleter"] = {
-    loaded = true,
-    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/vim-emmet-autocompleter"
   },
   ["vim-fugitive"] = {
     loaded = true,
@@ -232,6 +236,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/vim-ripgrep"
   },
+  ["vim-snippets"] = {
+    loaded = true,
+    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/vim-snippets"
+  },
   ["vim-table-mode"] = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/vim-table-mode"
@@ -247,10 +255,6 @@ _G.packer_plugins = {
   ["vim-visual-multi"] = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/vim-visual-multi"
-  },
-  ["vim-vsnip"] = {
-    loaded = true,
-    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/vim-vsnip"
   },
   ["vim-which-key"] = {
     loaded = true,
