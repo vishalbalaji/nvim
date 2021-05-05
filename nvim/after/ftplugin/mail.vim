@@ -16,7 +16,7 @@ function! GetCurrentWord()
 endfunction
 
 
-function CustomComplete()
+function! CustomComplete()
 	if GetCurrentWord()[0] == '@'
 		let g:test = feedkeys(';;')
 	endif
