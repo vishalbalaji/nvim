@@ -22,7 +22,7 @@ require "compe".setup {
     nvim_lsp = true,
     nvim_lua = true,
     ultisnips = true,
-    tabnine = true,
+    tabnine = false,
 		emoji = true
   }
 }

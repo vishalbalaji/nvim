@@ -1,9 +1,9 @@
-function! markdowncomplete#CompleteAddress(findstart, base)
+function! markdowncomplete#CompleteBib(findstart, base)
 	" let g:current = substitute(split(string(a:base), ' ')[-1], "'", "", "g")
 	if a:findstart
 		" locate the start of the word
 		exec 'norm F@'
-		let start = col('.')
+		let start = col('.') - 1
 		return start
 	else
 		" find classes matching "a:base"

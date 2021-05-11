@@ -43,7 +43,11 @@ hi Popup ctermbg=239 guibg=#504945 ctermfg=167 ctermfg=208 guifg=#fe8019 gui=bol
 let g:float_preview#docked = 0
 let g:float_preview#max_width = 80
 let g:float_preview#winhl = 'Normal:Normal,NormalNC:Popup'
+let &spell=1
 
 setlocal iskeyword-=@
 setlocal completeopt=menuone,noinsert,noselect
 setlocal omnifunc=mailcomplete#CompleteAddress
+setlocal textwidth=0 wrapmargin=0
+
+autocmd FileType markdown.pandoc.mail source ~/.config/nvim/syntax/mail.vim

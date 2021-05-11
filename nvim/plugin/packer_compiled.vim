@@ -91,6 +91,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/emmet-vim"
   },
+  ["float-preview.nvim"] = {
+    loaded = true,
+    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/float-preview.nvim"
+  },
   ["galaxyline.nvim"] = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
@@ -179,10 +183,6 @@ _G.packer_plugins = {
   ["plenary.nvim"] = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/plenary.nvim"
-  },
-  popfix = {
-    loaded = true,
-    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/popfix"
   },
   ["popup.nvim"] = {
     loaded = true,

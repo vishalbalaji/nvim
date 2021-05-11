@@ -1,21 +1,22 @@
 -- Configs
 require("general")
 require("keymaps")
-require("plugins")
 require("oneoffs")
+require("plugins")
 
 -- LSP
 require("lsp")
 require("lsp.compe")
 require("lsp.efm")
+require("lsp.lua")
 require("lsp.python")
 require("lsp.tsserver")
-require("lsp.lua")
+require("lsp.vim")
 
 -- External Plugins
 require("v-autopairs")
-require("v-comment")
 require("v-barbar")
-require("v-treesitter")
-require("v-git")
+require("v-comment")
 require("v-galaxyline")
+require("v-git")
+require("v-treesitter")

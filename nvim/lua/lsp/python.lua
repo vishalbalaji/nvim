@@ -1,6 +1,6 @@
 require "lspconfig".pyright.setup {}
 -- require "lspconfig".pyls.setup {
--- 	cmd = {'/home/vishal/.local/bin//pyls'}
+-- 	cmd = {'/media/DATA/projects/radar/src/.venv/bin/pyls'}
 -- }
 
 -- EFM Config

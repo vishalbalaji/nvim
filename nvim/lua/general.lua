@@ -14,6 +14,7 @@ cmd("set shiftwidth=2")
 cmd("set noexpandtab")
 cmd("set smartindent")
 
+cmd("set guicursor=")
 cmd("set cursorline")
 cmd("set showtabline=2")
 cmd("set signcolumn=auto")
@@ -40,9 +41,8 @@ endfunction
 ]]
 
 cmd [[
-autocmd BufEnter * try | call ResCur() | catch | echo '' | endtry
+autocmd BufEnter * try | call ResCur() | catch | echo 'Cannot restore cursor position' | endtry
 ]]
-
 
 -- Colorscheme and highlighting
 cmd("colorscheme gruvbox")
@@ -77,11 +77,6 @@ autocmd VimEnter * syn match EmailId #\v[_=a-z\./+0-9-]+\@[a-z0-9._-]+\a{2}# con
 ]]
 
 cmd("augroup END")
-
----- Mail
-cmd("autocmd FileType markdown.pandoc.mail source ~/.config/nvim/syntax/mail.vim")
-cmd("autocmd FileType mail set textwidth=0 wrapmargin=0")
-cmd("autocmd FileType mail set spell!")
 
 -- Commands
 local function define_commands()

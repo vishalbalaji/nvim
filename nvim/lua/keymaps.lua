@@ -28,3 +28,6 @@ local plugins_file = '~/.config/nvim/lua/plugins.lua'
 
 map("n", "<leader>pi", ":luafile " .. plugins_file .. "<CR>:PackerInstall<CR>", {noremap=true, silent = true})
 map("n", "<leader>pc", ":luafile " .. plugins_file .. "<CR>:PackerClean<CR>", {noremap=true, silent = true})
+
+-- Folds
+map("n", "<Tab>", "za", {noremap=true, silent = true})

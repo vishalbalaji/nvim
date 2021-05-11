@@ -24,10 +24,6 @@ cmd [[
   endif
 ]]
 
--- Markdown
-cmd("autocmd BufEnter *.md set ft=markdown.pandoc")
-cmd("autocmd BufEnter *.md let &spell=1")
-
 -- Xresources
 cmd("autocmd BufWritePost ~/.config/xresources silent !xrdb ~/.config/xresources")
 
@@ -90,76 +86,16 @@ local function trim(s)
    return s:match( "^%s*(.-)%s*$" )
 end
 
-local border_chars = {
-	TOP_LEFT = '┌',
-	TOP_RIGHT = '┐',
-	MID_HORIZONTAL = '─',
-	MID_VERTICAL = '│',
-	BOTTOM_LEFT = '└',
-	BOTTOM_RIGHT = '┘',
-}
-
-local function select_callback(index, line)
-	print(index)
-end
-
-local function close_callback(index, line)
-	-- function job here
-end
-
-local opts = {
-	mode = 'editor',
-	close_on_bufleave = true,
-	keymaps = {
-		i = {
-			['<Cr>'] = function(popup)
-				popup:close(select_callback)
-			end
-		},
-		n = {
-			['<Cr>'] = function(popup)
-				popup:close(select_callback)
-			end
-		}
-	},
-	callbacks = {
-		select = select_callback, -- automatically calls it when selection changes
-		close = close_callback, -- automatically calls it when window closes.
-	},
-	list = {
-		border = true,
-		numbering = true,
-		border_chars = border_chars,
-		highlight = 'Normal',
-		selection_highlight = 'Visual',
-		matching_highlight = 'Identifier',
-	},
-	prompt = {
-		border = true,
-		numbering = true,
-		title = 'Snippets',
-		border_chars = border_chars,
-		highlight = 'Normal',
-		prompt_highlight = 'Normal'
-	},
-	-- sorter = require'popfix.sorter'.new_fzy_native_sorter(true),
-	-- fuzzyEngine = require'popfix.fuzzy_engine'.new_SingleExecutionEngine()
-}
-
 _G.show_snippets = function()
 	local result = vim.api.nvim_exec([[ echo string(UltiSnips#SnippetsInCurrentScope()) ]], true)
 	result = result:gsub("'", ""):gsub("{", ""):gsub("}", "")
-	local data = {}
+	local snips = {}
 	for word in string.gmatch(result, '([^,]+)') do
-		table.insert(data, trim(word))
+		table.insert(snips, trim(word))
 	end
-	opts.data = data
-	local popup = require'popfix':new(opts)
-	-- vim.b.snips = snips
-	-- cmd [[ silent cexpr b:snips | copen ]]
-	-- vim.lsp.util.set_qflist(snips)
+	vim.b.snips = snips
+	cmd [[ silent cexpr b:snips | copen ]]
 end
 
 map("n", "<leader>ls", ":lua show_snippets()<CR>", {noremap = true, silent = true})
--- map('n', '<leader>ls', ':caddexpr split(substitute(string(UltiSnips#SnippetsInCurrentScope())[1:-2], "'", "", "g"), "",')', { noremap = true, silent = true })
 

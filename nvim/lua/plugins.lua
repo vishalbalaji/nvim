@@ -49,7 +49,6 @@ return require("packer").startup(
     use "norcalli/nvim-colorizer.lua"
     use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
     use "mattn/emmet-vim"
-		use 'RishabhRD/popfix'
 		use 'ncm2/float-preview.nvim'
 
     -- Bar/Statusline
@@ -89,8 +88,6 @@ return require("packer").startup(
 
     -- Completion
     use "hrsh7th/nvim-compe"
-    -- use "hrsh7th/vim-vsnip"
-    -- use "rafamadriz/friendly-snippets"
     use "SirVer/ultisnips"
     use "honza/vim-snippets"
     use {"tzachar/compe-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-compe"}

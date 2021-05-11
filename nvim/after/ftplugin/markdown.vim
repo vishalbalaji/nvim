@@ -1,5 +1,3 @@
-inoremap <silent> ;; <Esc>a<C-e><C-x><C-o>
-
 function! GetCurrentWord()
   let c = col ('.')-1
   let l = line('.')
@@ -22,7 +20,6 @@ function! CustomComplete()
 	endif
 endfu
 
-autocmd TextChangedI * call CustomComplete()
 
 hi Popup ctermbg=239 guibg=#504945 ctermfg=167 guifg=#fb4934
 
@@ -44,7 +41,7 @@ if filereadable(b:bib_file)
 	for entry in entries
 		let tag = substitute(split(matchstr(entry, '^@.[^\n]*'), '{')[1], ',', '', 'g')
 		let title = substitute(substitute(split(matchstr(entry, 'title\s*=[^\n]*'), '=')[1], '{', '', 'g'), '}', '', 'g')[:-2]
-		let item = {'word': tag, 'abbr': '@'.tag, 'info': title, 'kind': '🗎 [BibTex]'}
+		let item = {'word': '@'.tag, 'info': title, 'kind': '🗎 [BibTex]'}
 		call add(b:references, item)
 	endfor
 endif
@@ -53,7 +50,19 @@ endif
 let g:float_preview#docked = 0
 let g:float_preview#max_width = 80
 let g:float_preview#winhl = 'Normal:Normal,NormalNC:Popup'
+let &spell=1
 
 setlocal iskeyword-=@
 setlocal completeopt=menuone,noinsert,noselect
-setlocal omnifunc=markdowncomplete#CompleteAddress
+setlocal foldmethod=marker
+
+if filereadable(b:bib_file)
+	setlocal omnifunc=markdowncomplete#CompleteBib
+	autocmd TextChangedI * call CustomComplete()
+	inoremap <silent> ;; <Esc>a<C-e><C-x><C-o>
+
+else
+	setlocal omnifunc=
+endif
+
+autocmd BufEnter * set ft=markdown.pandoc
