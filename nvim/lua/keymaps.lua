@@ -7,10 +7,14 @@ cmd('let maplocalleader = " "')
 
 -- General
 map("n", "<Esc>", ":noh<CR><ESC>", {noremap=true, silent = true})
+map("n", "Q", "<nop>", {noremap=true, silent = true})
 map("t", "<Esc>", "<C-\\><C-n>", {noremap=true, silent = true})
 map("n", "<leader>d", ":cd %:p:h<cr>:pwd<cr>", {noremap=true, silent = true})
 map("v", ">", ">gv", {noremap=true, silent = true})
 map("v", "<", "<gv", {noremap=true, silent = true})
+
+-- Quickfix
+cmd [[autocmd FileType qf map <buffer> Q :exec 'norm '.(get(getqflist({'idx': 0}), 'idx', 0) - 1).'j'<CR>]]
 
 -- Clipboard
 map("v", "<M-c>", "\"+y", {noremap=true, silent = true})

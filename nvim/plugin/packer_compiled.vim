@@ -75,6 +75,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/CamelCaseMotion"
   },
+  QuickFixCurrentNumber = {
+    loaded = true,
+    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/QuickFixCurrentNumber"
+  },
   ["barbar.nvim"] = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/barbar.nvim"
@@ -219,6 +223,10 @@ _G.packer_plugins = {
   ["vim-easy-align"] = {
     loaded = true,
     path = "/home/vishal/.local/share/nvim/site/pack/packer/start/vim-easy-align"
+  },
+  ["vim-foldtext"] = {
+    loaded = true,
+    path = "/home/vishal/.local/share/nvim/site/pack/packer/start/vim-foldtext"
   },
   ["vim-fugitive"] = {
     loaded = true,

@@ -36,6 +36,7 @@ saga.init_lsp_saga()
 map("n", "<leader>lf", ":LspFormatting<CR>:echo 'Formatted'<CR>", {noremap = true, silent = true})
 map("n", "<leader>lr", ":LspReferences<CR>", {noremap = true, silent = true})
 map("n", "<leader>ld", ":LspDefinition<CR>:echo 'Jumped to Definition'<CR>", {noremap = true, silent = true})
+map("n", "<leader>lh", ":Lspsaga hover_doc<CR>", {noremap = true, silent = true})
 map("n", "<F2>", ":Lspsaga rename<CR>", {noremap = true, silent = true})
 map("n", "<leader>la", ":Lspsaga code_action<CR>", {noremap = true, silent = true})
 

@@ -49,7 +49,8 @@ return require("packer").startup(
     use "norcalli/nvim-colorizer.lua"
     use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
     use "mattn/emmet-vim"
-		use 'ncm2/float-preview.nvim'
+    use "ncm2/float-preview.nvim"
+		use "jrudess/vim-foldtext"
 
     -- Bar/Statusline
     use "romgrk/barbar.nvim"

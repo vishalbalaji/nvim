@@ -18,7 +18,7 @@ endfunction
 
 function! CustomComplete()
 	if GetCurrentWord()[0] == '@'
-		let g:test = feedkeys(';;')
+		let g:test = feedkeys(";;")
 	endif
 endfu
 
@@ -31,7 +31,7 @@ for item in matches
 		let address = split(temp[1], '>')[0]
 		call add(b:addresses, {'word': item, 'abbr': name, 'info': address, 'kind': ' [Mail]'})
 	catch 
-		call add(b:addresses, {'word': item, 'info': '', 'kind': ' Mail'})
+		call add(b:addresses, {'word': item, 'info': '', 'kind': ' [Mail]'})
 	endtry
 endfor
 

@@ -54,15 +54,37 @@ let &spell=1
 
 setlocal iskeyword-=@
 setlocal completeopt=menuone,noinsert,noselect
-setlocal foldmethod=marker
 
 if filereadable(b:bib_file)
 	setlocal omnifunc=markdowncomplete#CompleteBib
 	autocmd TextChangedI * call CustomComplete()
 	inoremap <silent> ;; <Esc>a<C-e><C-x><C-o>
-
 else
 	setlocal omnifunc=
 endif
 
 autocmd BufEnter * set ft=markdown.pandoc
+
+" function! MarkdownLevel()
+"     if getline(v:lnum) =~ '^# .*$'
+"         return ">1"
+"     endif
+"     if getline(v:lnum) =~ '^## .*$'
+"         return ">2"
+"     endif
+"     if getline(v:lnum) =~ '^### .*$'
+"         return ">3"
+"     endif
+"     if getline(v:lnum) =~ '^#### .*$'
+"         return ">4"
+"     endif
+"     if getline(v:lnum) =~ '^##### .*$'
+"         return ">5"
+"     endif
+"     if getline(v:lnum) =~ '^###### .*$'
+"         return ">6"
+"     endif
+"     return "=" 
+" endfunction
+" au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
+" au BufEnter *.md setlocal foldmethod=expr     

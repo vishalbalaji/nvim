@@ -65,6 +65,8 @@ vim.g.indent_blankline_context_patterns = {
   "arguments"
 }
 cmd [[ autocmd ColorScheme * hi! link IndentBlanklineContextChar GruvboxAquaBold ]]
+cmd [[ autocmd FileType man execute 'IndentBlanklineDisable' ]]
+
 -- vim.g.indent_blankline_show_current_context = true
 -- cmd [[ autocmd FileType markdown let g:indentLine_setConceal = 0 ]]
 
@@ -98,4 +100,3 @@ _G.show_snippets = function()
 end
 
 map("n", "<leader>ls", ":lua show_snippets()<CR>", {noremap = true, silent = true})
-

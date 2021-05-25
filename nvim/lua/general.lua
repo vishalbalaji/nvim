@@ -6,13 +6,13 @@ cmd [[let g:netrw_browsex_viewer = "notify-send '  Opening link...' && setsid
 
 cmd("set number rnu")
 cmd("set noerrorbells")
--- cmd [[set list listchars=nbsp:␣,tab:\│\ ,extends:›,precedes:‹,trail:·,space:·]]
 cmd [[set list listchars=nbsp:␣,tab:\│\ ,extends:›,precedes:‹,trail:·,space:·]]
 
+cmd("filetype plugin on")
+cmd("set autoindent")
 cmd("set tabstop=2 softtabstop=2")
 cmd("set shiftwidth=2")
 cmd("set noexpandtab")
-cmd("set smartindent")
 
 cmd("set guicursor=")
 cmd("set cursorline")
@@ -28,7 +28,6 @@ cmd("set timeoutlen=200")
 cmd("set noswapfile")
 cmd("set nobackup")
 
-cmd("filetype plugin on")
 
 -- Restore Cursor
 cmd [[
