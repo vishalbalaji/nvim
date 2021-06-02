@@ -1,8 +1,8 @@
 -- Configs
+require("plugins")
 require("general")
 require("keymaps")
 require("oneoffs")
-require("plugins")
 
 -- LSP
 require("lsp")
