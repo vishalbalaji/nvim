@@ -22,8 +22,10 @@ return require("packer").startup(
 
     -- General utils
     use "morhetz/gruvbox"
+    use "romgrk/doom-one.vim"
     use "windwp/nvim-autopairs"
     use "terrortylor/nvim-comment"
+    use "JoosepAlviste/nvim-ts-context-commentstring"
     use "kyazdani42/nvim-web-devicons"
     use "markonm/traces.vim"
     use "matze/vim-move"
@@ -45,12 +47,16 @@ return require("packer").startup(
     use "vim-pandoc/vim-pandoc-syntax"
     use "kevinhwang91/nvim-bqf"
     use "kyazdani42/nvim-tree.lua"
-    use "jremmen/vim-ripgrep"
+    -- use "jremmen/vim-ripgrep"
     use "norcalli/nvim-colorizer.lua"
     use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
     use "mattn/emmet-vim"
     use "ncm2/float-preview.nvim"
     use "jrudess/vim-foldtext"
+    use "MaxMEllon/vim-jsx-pretty"
+    use "AndrewRadev/tagalong.vim"
+    use "mlaursen/vim-react-snippets"
+		use {'iamcco/markdown-preview.nvim', config = "vim.call('mkdp#util#install')"}
 
     -- Bar/Statusline
     use "romgrk/barbar.nvim"

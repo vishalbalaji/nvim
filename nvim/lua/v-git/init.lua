@@ -1,9 +1,9 @@
 local map = vim.api.nvim_set_keymap
 local cmd = vim.api.nvim_command
 
-cmd("autocmd VimEnter * hi! link GitSignsAdd GruvboxGreenBold")
-cmd("autocmd VimEnter * hi! link GitSignsChange GruvboxYellowBold")
-cmd("autocmd VimEnter * hi! link GitSignsDelete GruvboxRedBold")
+cmd("autocmd VimEnter * hi! link GitSignsAdd GitGutterAdd")
+cmd("autocmd VimEnter * hi! link GitSignsChange GitGutterChange")
+cmd("autocmd VimEnter * hi! link GitSignsDelete GitGutterDelete")
 
 require("gitsigns").setup {
   signs = {
@@ -18,6 +18,6 @@ require("gitsigns").setup {
 -- Fugitive Mappings
 
 map("n", "<leader>gs", ":Git<CR>", {noremap = true, silent = true})
-map("n", "<leader>gd", ":Git diff<CR>", {noremap = true, silent = true})
+map("n", "<leader>gd", ":Git diff %<CR>", {noremap = true, silent = true})
 map("n", "<leader>gc", ":Git commit<CR>", {noremap = true, silent = true})
 map("n", "<leader>gp", ":cd %:p:h<cr>:15Term git push origin HEAD<CR>", {noremap = true, silent = true})

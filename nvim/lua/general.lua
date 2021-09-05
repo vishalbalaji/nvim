@@ -28,7 +28,6 @@ cmd("set timeoutlen=200")
 cmd("set noswapfile")
 cmd("set nobackup")
 
-
 -- Restore Cursor
 cmd [[
 function! ResCur()
@@ -44,29 +43,37 @@ autocmd BufEnter * try | call ResCur() | catch | echo 'Cannot restore cursor pos
 ]]
 
 -- Colorscheme and highlighting
-cmd("colorscheme gruvbox")
+cmd("colorscheme doom-one")
 
 cmd("augroup COLORSCHEME")
 
 cmd("autocmd!")
 cmd("autocmd ColorScheme * hi Normal ctermbg=NONE guibg=NONE")
+cmd("autocmd ColorScheme * hi EndOfBuffer ctermbg=NONE guibg=NONE")
+-- cmd("autocmd ColorScheme * hi LineNr ctermbg=NONE guibg=NONE guifg=#5C6370")
 
 cmd("autocmd ColorScheme * hi Comment cterm=italic gui=italic")
 cmd("autocmd ColorScheme * hi clear FoldColumn")
 cmd("autocmd ColorScheme * hi clear SignColumn")
 
 ---- Tags
-cmd("autocmd ColorScheme * hi! link Todo GruvboxYellowBold")
-cmd("autocmd ColorScheme * hi! link Done GruvboxGreenBold")
-cmd("autocmd ColorScheme * hi! link Credit GruvboxPurpleBold")
+cmd("autocmd ColorScheme * hi! YellowBold gui=bold guifg=#ECBE7B")
+cmd("autocmd ColorScheme * hi! GreenBold gui=bold guifg=#98C379")
+cmd("autocmd ColorScheme * hi! OrangeBold gui=bold guifg=#DA8548")
+cmd("autocmd ColorScheme * hi! PurpleBold gui=bold guifg=#C678DD")
+cmd("autocmd ColorScheme * hi! BlueBold gui=bold guifg=#51AFEF")
+
+cmd("autocmd ColorScheme * hi! link Todo YellowBold")
+cmd("autocmd ColorScheme * hi! link Done GreenBold")
+cmd("autocmd ColorScheme * hi! link Credit PurpleBold")
 
 cmd('autocmd VimEnter * call matchadd("Todo", "TODO")')
 cmd('autocmd VimEnter * call matchadd("Done", "DONE")')
 cmd('autocmd VimEnter * call matchadd("Credit", "CREDIT")')
 
 ---- Links/Email IDs
-cmd("autocmd ColorScheme * hi! link Link GruvboxBlueBold")
-cmd("autocmd ColorScheme * hi! link EmailId GruvboxOrangeBold")
+cmd("autocmd ColorScheme * hi! link Link BlueBold")
+cmd("autocmd ColorScheme * hi! link EmailId OrangeBold")
 
 cmd [[
 autocmd VimEnter * syn match Link "\(https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(in\|uk\|us\|net\|org\|edu\|com\|cc\|br\|jp\|dk\|gs\|de\|xyz\)\(\/[^ ]*\)\?\>"

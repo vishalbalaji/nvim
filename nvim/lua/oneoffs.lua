@@ -40,6 +40,7 @@ cmd("autocmd VimResized * if (&columns <= 120) | set nowrap | else | set wrap | 
 map("n", "<leader>et", ":NvimTreeToggle<CR>", {noremap = true, silent = true})
 map("n", "<leader>ef", ":NvimTreeFindFile<CR>", {noremap = true, silent = true})
 map("n", "<leader>er", ":NvimTreeRefresh<CR>", {noremap = true, silent = true})
+vim.g.nvim_tree_tab_open = 1
 
 -- Colorizer
 require "colorizer".setup()
@@ -64,7 +65,6 @@ vim.g.indent_blankline_context_patterns = {
   "block",
   "arguments"
 }
-cmd [[ autocmd ColorScheme * hi! link IndentBlanklineContextChar GruvboxAquaBold ]]
 cmd [[ autocmd FileType man execute 'IndentBlanklineDisable' ]]
 
 -- vim.g.indent_blankline_show_current_context = true
@@ -100,3 +100,28 @@ _G.show_snippets = function()
 end
 
 map("n", "<leader>ls", ":lua show_snippets()<CR>", {noremap = true, silent = true})
+
+-- Markdown
+
+cmd [[ let g:pandoc#syntax#codeblocks#embeds#langs = ["python", "r", "c"] ]]
+cmd [[ autocmd BufEnter *.md setf markdown.pandoc ]]
+cmd [[ autocmd BufEnter *.rmd setf markdown.pandoc ]]
+
+_G.edit_code_block = function()
+	local current_pos = vim.api.nvim_win_get_cursor(0)
+	cmd('?```.\\+')
+	local start_pos = vim.api.nvim_win_get_cursor(0)
+	cmd('/```')
+	cmd('noh')
+	local end_pos = vim.api.nvim_win_get_cursor(0)
+	if current_pos[1] > start_pos[1] and current_pos[1] < end_pos[1] then
+		cmd('?```.\\+')
+		-- cmd('norm $F`l')
+		cmd('norm jV')
+		cmd('/```')
+		cmd('norm k"cy')
+	end
+	vim.api.nvim_win_set_cursor(0, current_pos)
+end
+
+map("n", "<leader>me", ":lua edit_code_block()<CR>", {noremap = true, silent = true})

@@ -1,4 +1,6 @@
-require "lspconfig".pyright.setup {}
+require "lspconfig".pyright.setup {
+	-- root_dir = vim.loop.cwd
+}
 -- require "lspconfig".pyls.setup {
 -- 	cmd = {'/media/DATA/projects/radar/src/.venv/bin/pyls'}
 -- }
@@ -13,11 +15,11 @@ local python_arguments = {}
 -- }
 -- table.insert(python_arguments, flake8)
 
+-- local yapf = {formatCommand = "yapf --quiet", formatStdin = true}
 local isort = {formatCommand = "isort --quiet -", formatStdin = true}
-local yapf = {formatCommand = "yapf --quiet", formatStdin = true}
--- local black = {formatCommand = "/home/vishal/.local/bin//black --quiet -", formatStdin = true}
+local black = {formatCommand = "black --quiet -", formatStdin = true}
 
-table.insert(python_arguments, yapf)
+table.insert(python_arguments, black)
 table.insert(python_arguments, isort)
 
 return python_arguments
