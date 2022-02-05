@@ -41,8 +41,8 @@ keymap("n", "<A-S-l>", ":BufferLineMoveNext<CR>", opts)
 keymap("n", "<A-S-x>", ":Bdelete!<CR>", opts)
 
 -- Move text up and down
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+keymap("n", "<A-j>", "<Esc>:m .+1<CR>", opts)
+keymap("n", "<A-k>", "<Esc>:m .-2<CR>", opts)
 
 -- Insert --
 -- Press jk fast to enter

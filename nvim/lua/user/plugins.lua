@@ -60,9 +60,11 @@ return packer.startup(function(use)
 	use("folke/which-key.nvim")
 	-- use "vim-pandoc/vim-pandoc"
 	use("vim-pandoc/vim-pandoc-syntax")
-  use "dkarter/bullets.vim"
+	use("dkarter/bullets.vim")
+	use("mg979/vim-visual-multi")
+  use("folke/trouble.nvim")
 
-  -- ORG
+	-- ORG
 	-- use({
 	-- 	"nvim-orgmode/orgmode",
 	-- 	ft = { "org" },
@@ -74,7 +76,7 @@ return packer.startup(function(use)
 
 	-- Colorschemes
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-	-- use "lunarvim/darkplus.nvim"
+	use "lunarvim/darkplus.nvim"
 	use("NTBBloodbath/doom-one.nvim")
 
 	-- cmp plugins

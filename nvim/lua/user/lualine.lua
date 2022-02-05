@@ -13,13 +13,15 @@ local diagnostics = {
 	sections = { "error", "warn" },
 	symbols = { error = " ", warn = " " },
 	colored = false,
-	update_in_insert = false, always_visible = true, }
+	update_in_insert = false,
+	always_visible = true,
+}
 
 local diff = {
 	"diff",
 	colored = false,
 	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
-  cond = hide_in_width
+	cond = hide_in_width,
 }
 
 local mode = {
@@ -52,9 +54,9 @@ local progress = function()
 	local total_lines = vim.fn.line("$")
 	local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
 	local line_ratio = current_line / total_lines
-	local index = math.ceil(line_ratio * #chars)
+	-- local index = math.ceil(line_ratio * #chars)
 	-- return chars[index]
-  return string.format("%d", line_ratio * 100) .. "%%"
+	return string.format("%d", line_ratio * 100) .. "%%"
 end
 
 local spaces = function()
