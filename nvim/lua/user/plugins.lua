@@ -1,6 +1,6 @@
 local fn = vim.fn
 
--- Automatically install packer
+--Install Automatically install packer
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
 	PACKER_BOOTSTRAP = fn.system({
@@ -19,7 +19,7 @@ end
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
   augroup end
 ]])
 
@@ -62,7 +62,19 @@ return packer.startup(function(use)
 	use("vim-pandoc/vim-pandoc-syntax")
 	use("dkarter/bullets.vim")
 	use("mg979/vim-visual-multi")
-  use("folke/trouble.nvim")
+	use("folke/trouble.nvim")
+	use("jubnzv/mdeval.nvim")
+	use("stevearc/dressing.nvim")
+	use({
+		"jakewvincent/mkdnflow.nvim",
+		config = function()
+			require("mkdnflow").setup({
+				default_mappings = true,
+				evaluate_prefix = false,
+				new_file_prefix = "",
+			})
+		end,
+	})
 
 	-- ORG
 	-- use({
@@ -76,7 +88,7 @@ return packer.startup(function(use)
 
 	-- Colorschemes
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-	use "lunarvim/darkplus.nvim"
+	use("lunarvim/darkplus.nvim")
 	use("NTBBloodbath/doom-one.nvim")
 
 	-- cmp plugins
@@ -88,6 +100,12 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-emoji")
 	use("jc-doyle/cmp-pandoc-references")
+	use({
+		"ethanholz/nvim-lastplace",
+		config = function()
+			require("nvim-lastplace").setup({})
+		end,
+	})
 	-- use "f3fora/cmp-spell"
 
 	-- snippets
@@ -99,16 +117,25 @@ return packer.startup(function(use)
 	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
 	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
+	use({
+		"ray-x/lsp_signature.nvim",
+		config = function()
+			require("lsp_signature").setup()
+		end,
+	})
 
 	-- Telescope
-	use("nvim-telescope/telescope.nvim")
 
+	use("nvim-telescope/telescope.nvim")
 	-- Treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
+	use("nvim-treesitter/playground")
 	use("JoosepAlviste/nvim-ts-context-commentstring")
+	use("haringsrob/nvim_context_vt")
+	use("romgrk/nvim-treesitter-context")
 
 	-- Git
 	use("lewis6991/gitsigns.nvim")

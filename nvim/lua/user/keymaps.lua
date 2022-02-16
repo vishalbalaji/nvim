@@ -28,16 +28,17 @@ keymap("n", "<Esc>", "<Esc>:noh<CR>", opts)
 keymap("n", "<Tab>", "za", opts)
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-A-Up>", ":resize -2<CR>", opts)
+keymap("n", "<C-A-Down>", ":resize +2<CR>", opts)
+keymap("n", "<C-A-Left>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-A-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<A-S-k>", ":BufferLineCycleNext<CR>", opts)
 keymap("n", "<A-S-j>", ":BufferLineCyclePrev<CR>", opts)
 keymap("n", "<A-S-h>", ":BufferLineMovePrev<CR>", opts)
 keymap("n", "<A-S-l>", ":BufferLineMoveNext<CR>", opts)
+keymap("n", "<A-S-t>", ":enew<CR>", opts)
 keymap("n", "<A-S-x>", ":Bdelete!<CR>", opts)
 
 -- Move text up and down
