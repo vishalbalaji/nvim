@@ -65,6 +65,7 @@ return packer.startup(function(use)
 	use("folke/trouble.nvim")
 	use("jubnzv/mdeval.nvim")
 	use("stevearc/dressing.nvim")
+  use("junegunn/vim-easy-align")
 	use({
 		"jakewvincent/mkdnflow.nvim",
 		config = function()
