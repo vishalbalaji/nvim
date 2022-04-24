@@ -5,6 +5,7 @@ vim.cmd [[
     autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'Visual', timeout = 200}) 
     autocmd BufWinEnter * :set formatoptions-=cro
     autocmd FileType qf set nobuflisted
+    autocmd VimEnter * set fileformat=unix
   augroup end
 
   augroup _git
@@ -16,6 +17,7 @@ vim.cmd [[
   augroup _markdown
     autocmd!
     autocmd FileType markdown setlocal wrap
+    autocmd FileType markdown setlocal spell
     autocmd FileType markdown setlocal spell
     autocmd BufEnter *.md setlocal syntax=markdown.pandoc
   augroup end
@@ -42,13 +44,22 @@ vim.cmd [[
     autocmd!
     autocmd VimEnter * syn match Todo "TODO"
     autocmd VimEnter * syn match Done "DONE"
+    autocmd VimEnter * syn match Credit "CREDIT"
     autocmd VimEnter * syn match Link "\(https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(in\|uk\|us\|net\|org\|edu\|com\|cc\|br\|jp\|dk\|gs\|de\|xyz\)\(\/[^ ]*\)\?\>"
     autocmd VimEnter * syn match Email #\v[_=a-z\./+0-9-]+\@[a-z0-9._-]+\a{2}# contains=@NoSpell
 
     autocmd ColorScheme * hi! link Done TextSuccessBold
+    autocmd ColorScheme * hi! link Credit TextMutedBold
     autocmd ColorScheme * hi! link Link TextInfoBold
     autocmd ColorScheme * hi! link Email TextSpecialBold
   augroup end
+
+  " augroup remember_folds
+  "   autocmd!
+  "   autocmd BufWinLeave * mkview
+  "   autocmd BufWinEnter * silent! loadview
+  " augroup END
+
 ]]
 
 -- Autoformat

@@ -60,22 +60,23 @@ return packer.startup(function(use)
 	use("folke/which-key.nvim")
 	-- use "vim-pandoc/vim-pandoc"
 	use("vim-pandoc/vim-pandoc-syntax")
+  -- use("masukomi/vim-markdown-folding")
 	use("dkarter/bullets.vim")
 	use("mg979/vim-visual-multi")
 	use("folke/trouble.nvim")
-	use("jubnzv/mdeval.nvim")
 	use("stevearc/dressing.nvim")
-  use("junegunn/vim-easy-align")
-	use({
-		"jakewvincent/mkdnflow.nvim",
-		config = function()
-			require("mkdnflow").setup({
-				default_mappings = true,
-				evaluate_prefix = false,
-				new_file_prefix = "",
-			})
-		end,
-	})
+	use("junegunn/vim-easy-align")
+	-- use({
+	-- 	"jakewvincent/mkdnflow.nvim",
+	-- 	config = function()
+	-- 		require("mkdnflow").setup({
+	-- 			default_mappings = true,
+	-- 			evaluate_prefix = false,
+	-- 			new_file_prefix = "",
+	-- 		})
+	-- 	end,
+	-- })
+  use("goerz/jupytext.vim")
 
 	-- ORG
 	-- use({
@@ -99,12 +100,19 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-cmdline") -- cmdline completions
 	use("saadparwaiz1/cmp_luasnip") -- snippet completions
 	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-nvim-lua")
 	use("hrsh7th/cmp-emoji")
 	use("jc-doyle/cmp-pandoc-references")
 	use({
 		"ethanholz/nvim-lastplace",
 		config = function()
 			require("nvim-lastplace").setup({})
+		end,
+	})
+	use({
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup({})
 		end,
 	})
 	-- use "f3fora/cmp-spell"
@@ -140,7 +148,7 @@ return packer.startup(function(use)
 
 	-- Git
 	use("lewis6991/gitsigns.nvim")
-	use("tpope/vim-fugitive")
+  use("windwp/nvim-ts-autotag")
 	-- use("TimUntersberger/neogit")
 
 	-- Automatically set up your configuration after cloning packer.nvim

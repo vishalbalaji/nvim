@@ -26,6 +26,7 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "<Esc>", "<Esc>:noh<CR>", opts)
 keymap("n", "<Tab>", "za", opts)
+keymap("n", "$", "$h", opts)
 
 -- Resize with arrows
 keymap("n", "<C-A-Up>", ":resize -2<CR>", opts)
@@ -53,6 +54,14 @@ keymap("n", "<A-k>", "<Esc>:m .-2<CR>", opts)
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
+keymap("v", "$", "$h", opts)
+
+-- Surround
+keymap("v", "\"", "c\"<Esc>pa\"<Esc>v2i\"", opts)
+keymap("v", "'", "c'<Esc>pa'<Esc>v2i'", opts)
+keymap("v", "`", "c`<Esc>pa`<Esc>v2i`", opts)
+keymap("v", "(", "c(<Esc>pa)<Esc>va(", opts)
+keymap("v", "[", "c[<Esc>pa]<Esc>va[", opts)
 
 -- Move text up and down
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)

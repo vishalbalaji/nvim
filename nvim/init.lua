@@ -1,5 +1,6 @@
 local profile = "user"
 
+require(profile .. ".impatient")
 require(profile .. ".autocommands")
 require(profile .. ".autopairs")
 require(profile .. ".bufferline")
@@ -7,7 +8,6 @@ require(profile .. ".cmp")
 require(profile .. ".colorscheme")
 require(profile .. ".comment")
 require(profile .. ".gitsigns")
-require(profile .. ".impatient")
 require(profile .. ".indentline")
 require(profile .. ".keymaps")
 require(profile .. ".lsp")
