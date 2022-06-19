@@ -19,6 +19,7 @@ vim.cmd [[
     autocmd FileType markdown setlocal wrap
     autocmd FileType markdown setlocal spell
     autocmd FileType markdown setlocal spell
+    autocmd FileType markdown setlocal foldmethod=marker
     autocmd BufEnter *.md setlocal syntax=markdown.pandoc
   augroup end
 

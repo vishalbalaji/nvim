@@ -60,7 +60,7 @@ return packer.startup(function(use)
 	use("folke/which-key.nvim")
 	-- use "vim-pandoc/vim-pandoc"
 	use("vim-pandoc/vim-pandoc-syntax")
-  -- use("masukomi/vim-markdown-folding")
+	-- use("masukomi/vim-markdown-folding")
 	use("dkarter/bullets.vim")
 	use("mg979/vim-visual-multi")
 	use("folke/trouble.nvim")
@@ -76,7 +76,7 @@ return packer.startup(function(use)
 	-- 		})
 	-- 	end,
 	-- })
-  use("goerz/jupytext.vim")
+	use("goerz/jupytext.vim")
 
 	-- ORG
 	-- use({
@@ -115,6 +115,8 @@ return packer.startup(function(use)
 			require("fidget").setup({})
 		end,
 	})
+	use("VebbNix/lf-vim")
+
 	-- use "f3fora/cmp-spell"
 
 	-- snippets
@@ -148,7 +150,7 @@ return packer.startup(function(use)
 
 	-- Git
 	use("lewis6991/gitsigns.nvim")
-  use("windwp/nvim-ts-autotag")
+	use("windwp/nvim-ts-autotag")
 	-- use("TimUntersberger/neogit")
 
 	-- Automatically set up your configuration after cloning packer.nvim
