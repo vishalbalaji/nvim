@@ -40,6 +40,7 @@ keymap("n", "<A-S-k>", ":BufferLineCycleNext<CR>", opts)
 keymap("n", "<A-S-j>", ":BufferLineCyclePrev<CR>", opts)
 keymap("n", "<A-S-h>", ":BufferLineMovePrev<CR>", opts)
 keymap("n", "<A-S-l>", ":BufferLineMoveNext<CR>", opts)
+keymap("n", "<A-S-p>", ":BufferLineTogglePin<CR>", opts)
 keymap("n", "<A-S-t>", ":enew<CR>", opts)
 keymap("n", "<A-S-x>", ":Bdelete!<CR>", opts)
 
@@ -83,5 +84,5 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Comments
-keymap("n", "<C-_>", "gcc", term_opts)
-keymap("v", "<C-_>", "gcgv", term_opts)
+keymap("n", "<C-/>", "gcc", term_opts)
+keymap("v", "<C-/>", "gcgv", term_opts)

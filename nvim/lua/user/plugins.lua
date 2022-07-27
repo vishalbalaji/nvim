@@ -46,12 +46,17 @@ return packer.startup(function(use)
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
 	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
 	use("numToStr/Comment.nvim") -- Easily comment stuff
-	use("kyazdani42/nvim-web-devicons")
 	use("kyazdani42/nvim-tree.lua")
-	use("akinsho/bufferline.nvim")
+	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
 	use("moll/vim-bbye")
 	use("nvim-lualine/lualine.nvim")
-	use("akinsho/toggleterm.nvim")
+	use({
+		"akinsho/toggleterm.nvim",
+		tag = "v1.*",
+		config = function()
+			require("toggleterm").setup()
+		end,
+	})
 	use("ahmedkhalf/project.nvim")
 	use("lewis6991/impatient.nvim")
 	use("lukas-reineke/indent-blankline.nvim")
@@ -66,6 +71,10 @@ return packer.startup(function(use)
 	use("folke/trouble.nvim")
 	use("stevearc/dressing.nvim")
 	use("junegunn/vim-easy-align")
+	use({
+		"jghauser/follow-md-links.nvim",
+	})
+
 	-- use({
 	-- 	"jakewvincent/mkdnflow.nvim",
 	-- 	config = function()
