@@ -74,6 +74,12 @@ return packer.startup(function(use)
 	use({
 		"jghauser/follow-md-links.nvim",
 	})
+	use({
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
+		end,
+	})
 
 	-- use({
 	-- 	"jakewvincent/mkdnflow.nvim",
