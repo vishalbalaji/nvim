@@ -5,29 +5,12 @@ end
 
 vim.cmd("hi! link TabLineFill Normal")
 
-function dump(o)
-   if type(o) == 'table' then
-      local s = '{ '
-      for k,v in pairs(o) do
-         if type(k) ~= 'number' then k = '"'..k..'"' end
-         s = s .. '['..k..'] = ' .. dump(v) .. ','
-      end
-      return s .. '} '
-   else
-      return tostring(o)
-   end
-end
-
-local is_picking_focus = require("cokeline/mappings").is_picking_focus
-local is_picking_close = require("cokeline/mappings").is_picking_close
 local get_hex = require("cokeline/utils").get_hex
 local mappings = require("cokeline/mappings")
 
 local red = vim.g.terminal_color_1
 local green = vim.g.terminal_color_2
 local yellow = vim.g.terminal_color_3
-local dark = get_hex("Normal", "bg")
-local light = get_hex("Comment", "fg")
 
 local comments_fg = get_hex("Comment", "fg")
 local errors_fg = red
