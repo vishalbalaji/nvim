@@ -47,7 +47,6 @@ return packer.startup(function(use)
 	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
 	use("numToStr/Comment.nvim") -- Easily comment stuff
 	use("kyazdani42/nvim-tree.lua")
-	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
 	use("moll/vim-bbye")
 	use("nvim-lualine/lualine.nvim")
 	use({
@@ -60,64 +59,21 @@ return packer.startup(function(use)
 	use("ahmedkhalf/project.nvim")
 	use("lewis6991/impatient.nvim")
 	use("lukas-reineke/indent-blankline.nvim")
-	-- use "goolord/alpha-nvim"
 	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
 	use("folke/which-key.nvim")
-	-- use "vim-pandoc/vim-pandoc"
-	use("vim-pandoc/vim-pandoc-syntax")
-	-- use("masukomi/vim-markdown-folding")
-	use("dkarter/bullets.vim")
 	use("mg979/vim-visual-multi")
-	use("folke/trouble.nvim")
-	use("stevearc/dressing.nvim")
 	use("junegunn/vim-easy-align")
-	use({
-		"jghauser/follow-md-links.nvim",
-	})
+	use("stevearc/dressing.nvim")
 	use({
 		"norcalli/nvim-colorizer.lua",
 		config = function()
 			require("colorizer").setup()
 		end,
 	})
-
-	-- use({
-	-- 	"jakewvincent/mkdnflow.nvim",
-	-- 	config = function()
-	-- 		require("mkdnflow").setup({
-	-- 			default_mappings = true,
-	-- 			evaluate_prefix = false,
-	-- 			new_file_prefix = "",
-	-- 		})
-	-- 	end,
-	-- })
-	use("goerz/jupytext.vim")
-
-	-- ORG
-	-- use({
-	-- 	"nvim-orgmode/orgmode",
-	-- 	ft = { "org" },
-	-- 	config = function()
-	-- 		require("orgmode").setup({})
-	-- 	end,
-	-- })
-	-- use("akinsho/org-bullets.nvim")
-
-	-- Colorschemes
-	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-	use("lunarvim/darkplus.nvim")
-	use("NTBBloodbath/doom-one.nvim")
-
-	-- cmp plugins
-	use("hrsh7th/nvim-cmp") -- The completion plugin
-	use("hrsh7th/cmp-buffer") -- buffer completions
-	use("hrsh7th/cmp-path") -- path completions
-	use("hrsh7th/cmp-cmdline") -- cmdline completions
-	use("saadparwaiz1/cmp_luasnip") -- snippet completions
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-nvim-lua")
-	use("hrsh7th/cmp-emoji")
-	use("jc-doyle/cmp-pandoc-references")
+	use({
+		"noib3/nvim-cokeline",
+		requires = "kyazdani42/nvim-web-devicons", -- If you want devicons
+	})
 	use({
 		"ethanholz/nvim-lastplace",
 		config = function()
@@ -132,7 +88,27 @@ return packer.startup(function(use)
 	})
 	use("VebbNix/lf-vim")
 
-	-- use "f3fora/cmp-spell"
+	-- Markdown
+	use("vim-pandoc/vim-pandoc-syntax")
+	use("dkarter/bullets.vim")
+	use({
+		"jghauser/follow-md-links.nvim",
+	})
+	use("goerz/jupytext.vim")
+
+	-- Colorschemes
+	use("NTBBloodbath/doom-one.nvim")
+
+	-- cmp plugins
+	use("hrsh7th/nvim-cmp") -- The completion plugin
+	use("hrsh7th/cmp-buffer") -- buffer completions
+	use("hrsh7th/cmp-path") -- path completions
+	use("hrsh7th/cmp-cmdline") -- cmdline completions
+	use("saadparwaiz1/cmp_luasnip") -- snippet completions
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-nvim-lua")
+	use("hrsh7th/cmp-emoji")
+	use("jc-doyle/cmp-pandoc-references")
 
 	-- snippets
 	use("L3MON4D3/LuaSnip") --snippet engine
@@ -149,10 +125,11 @@ return packer.startup(function(use)
 			require("lsp_signature").setup()
 		end,
 	})
+	use("folke/trouble.nvim")
 
 	-- Telescope
-
 	use("nvim-telescope/telescope.nvim")
+
 	-- Treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",

@@ -36,13 +36,20 @@ keymap("n", "<C-A-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-A-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-keymap("n", "<A-S-k>", ":BufferLineCycleNext<CR>", opts)
-keymap("n", "<A-S-j>", ":BufferLineCyclePrev<CR>", opts)
-keymap("n", "<A-S-h>", ":BufferLineMovePrev<CR>", opts)
-keymap("n", "<A-S-l>", ":BufferLineMoveNext<CR>", opts)
-keymap("n", "<A-S-p>", ":BufferLineTogglePin<CR>", opts)
-keymap("n", "<A-S-t>", ":enew<CR>", opts)
+keymap("n", "<A-S-k>", "<Plug>(cokeline-focus-next)", opts)
+keymap("n", "<A-S-j>", "<Plug>(cokeline-focus-prev)", opts)
+keymap("n", "<A-S-l>", "<Plug>(cokeline-switch-next)", opts)
+keymap("n", "<A-S-h>", "<Plug>(cokeline-switch-prev)", opts)
+keymap("n", "<A-S-f>", "<Plug>(cokeline-pick-focus)", opts)
+keymap("n", "<A-S-t>", ":tabnew<CR>", opts)
+keymap("n", "<A-S-r>", ":tabnew#<CR>", opts)
 keymap("n", "<A-S-x>", ":Bdelete!<CR>", opts)
+
+
+for i = 1,9 do
+  keymap('n', ('<A-S-%s>'):format(i),      ('<Plug>(cokeline-focus-%s)'):format(i),  opts)
+  -- keymap('n', ('<Leader>%s'):format(i), ('<Plug>(cokeline-switch-%s)'):format(i), { silent = true })
+end
 
 -- Move text up and down
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>", opts)
