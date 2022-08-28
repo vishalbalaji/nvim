@@ -24,3 +24,4 @@ configs.setup({
     enable = true,
   },
 })
+

@@ -28,13 +28,9 @@ local components = {
 					return "▎"
 				end
 			end
-			-- return buffer.is_focused and "▎" or "▏"
 		end,
 		fg = function(buffer)
 			return buffer.is_focused and green or nil
-		end,
-		style = function(buffer)
-			return buffer.is_focused and "bold" or nil
 		end,
 	},
 
@@ -63,6 +59,7 @@ local components = {
 		fg = function(buffer)
 			return (mappings.is_picking_focus() and yellow)
 				or (mappings.is_picking_close() and red)
+        or (not buffer.is_focused and comments_fg)
 				or buffer.devicon.color
 		end,
 		style = function(_)
@@ -148,10 +145,10 @@ local components = {
 
 	cap = {
 		text = function(buffer)
-			return buffer.is_last and " " or ""
+			return buffer.is_last and "▎" or ""
 		end,
 		truncation = { priority = 1 },
-    fg = get_hex("Comment", "fg"),
+    fg = comments_fg,
     bg = get_hex("Normal", "bg"),
 	},
 }
@@ -169,7 +166,7 @@ cokeline.setup({
 
 	default_hl = {
 		fg = function(buffer)
-			return buffer.is_focused and get_hex("Normal", "fg") or get_hex("Comment", "fg")
+			return buffer.is_focused and get_hex("Normal", "fg") or comments_fg
 		end,
 		bg = function(buffer)
 			return buffer.is_focused and get_hex("ColorColumn", "bg") or get_hex("TabLineFill", "bg")

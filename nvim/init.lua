@@ -1,23 +1,26 @@
-local profile = "user"
+-- impatient.nvim: https://github.com/lewis6991/impatient.nvim
+require('impatient')
 
-require(profile .. ".autocommands")
-require(profile .. ".colorscheme")
-require(profile .. ".keymaps")
-require(profile .. ".lsp")
-require(profile .. ".options")
+-- General
+require("user.autocommands")
+require("user.colorscheme")
+require("user.keymaps_commands")
+require("user.options")
+require("user.plugins")
 
-require(profile .. ".autopairs")
-require(profile .. ".cmp")
-require(profile .. ".cokeline")
-require(profile .. ".comment")
-require(profile .. ".gitsigns")
-require(profile .. ".impatient")
-require(profile .. ".indentline")
-require(profile .. ".lualine")
-require(profile .. ".nvim-tree")
-require(profile .. ".plugins")
-require(profile .. ".project")
-require(profile .. ".telescope")
-require(profile .. ".toggleterm")
-require(profile .. ".treesitter")
-require(profile .. ".whichkey")
+-- Plugins
+require("user.plugins.dressing")
+require("user.plugins.cokeline")
+require("user.plugins.impatient")
+require("user.plugins.lualine")
+require("user.plugins.mini")
+require("user.plugins.navic")
+require("user.plugins.nvim-tree")
+require("user.plugins.telescope")
+require("user.plugins.treesitter")
+require("user.plugins.ufo")
+require("user.plugins.winbar")
+
+-- LSP
+require("user.lsp")
+require("user.lsp.cmp")
