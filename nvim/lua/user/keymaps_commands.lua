@@ -110,6 +110,7 @@ local wk_mappings = {
     name = "Git",
     c = { "<cmd>G commit<CR>", "Commit" },
     g = { "<cmd>G<CR>", "Commit" },
+    p = { "<cmd>G push<CR>", "Commit" },
   },
   l = {
     name = "LSP",
