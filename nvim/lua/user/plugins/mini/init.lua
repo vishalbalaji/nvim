@@ -1,16 +1,11 @@
 require("user.plugins.mini.comment").setup({
-	-- Module mappings. Use `''` (empty string) to disable one.
-	mappings = {
-		-- Toggle comment (like `gcip` - comment inner paragraph) for both
-		-- Normal and Visual modes
-		comment = "gc",
-
-		-- Toggle comment on current line
-		comment_line = "gcc",
-
-		-- Define 'comment' textobject (like `dgc` - delete whole comment block)
-		textobject = "",
-	},
+  hooks = {
+    pre = function()
+      require("ts_context_commentstring.internal").update_commentstring()
+    end,
+  },
 })
-
 require("user.plugins.mini.pairs").setup({})
+
+vim.api.nvim_set_hl(0, "MiniCursorWord", { bg = "#3f444a" })
+require("user.plugins.mini.cursorword").setup({ delay = 300 })
