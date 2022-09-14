@@ -55,21 +55,30 @@ mason_lspconfig.setup({
 })
 
 local handlers = require("user.lsp.handlers")
+local luadev = require("lua-dev").setup()
 
+local opts = {}
+
+-- nvim_lsp.tsserver.setup{
+--   -- Omitting some options
+--   root_dir = nvim_lsp.util.root_pattern("package.json")
+-- }nvim_lsp.denols.setup {
+--   -- Omitting some options
+--   root_dir = nvim_lsp.util.root_pattern("deno.json"),
+--
+-- }
 mason_lspconfig.setup_handlers({
   function(server_name) -- default handler (optional)
-    local opts = {
-      on_attach = handlers.on_attach,
-      capabilities = handlers.capabilities,
-    }
-
     if server_name == "sumneko_lua" then
-      opts.settings = {
-        Lua = {
-          diagnostics = { globals = { "vim" } },
-        },
-      }
+      opts = luadev or {}
+    elseif server_name == "denols" then
+      opts.root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
+    elseif server_name == "tsserver" then
+      opts.root_dir = lspconfig.util.root_pattern("package.json")
     end
+
+    opts.on_attach = handlers.on_attach
+    opts.capabilities = handlers.capabilities
 
     lspconfig[server_name].setup(opts)
   end,

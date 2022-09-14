@@ -6,12 +6,13 @@ local options = {
 	concealcursor = "nc", -- for concealing in markdown and org files
 	conceallevel = 2, -- so that `` is visible in markdown files
 	cursorline = true, -- highlight the current line
-	expandtab = true, -- convert tabs to spaces
+	expandtab = false, -- convert tabs to spaces
 	fileencoding = "utf-8", -- the encoding written to a file
 	guifont = "JetBrainsMono Nerd Font:h7", -- the font used in graphical neovim applications
 	hlsearch = true, -- highlight all matches on previous search pattern
 	ignorecase = true, -- ignore case in search patterns
-  laststatus = 3,
+	laststatus = 3,
+	linebreak = true,
 	mouse = "a", -- allow the mouse to be used in neovim
 	number = true, -- set numbered lines
 	numberwidth = 4, -- set number column width to 2 {default 4}
@@ -34,7 +35,7 @@ local options = {
 	undofile = true, -- enable persistent undo
 	updatetime = 300, -- faster completion (4000ms default)
 	winbar = "", -- always show tabs
-	wrap = false, -- display lines as one long line
+	wrap = true, -- display lines as one long line
 	writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 }
 

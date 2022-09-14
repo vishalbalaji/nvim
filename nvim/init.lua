@@ -1,17 +1,15 @@
--- impatient.nvim: https://github.com/lewis6991/impatient.nvim
-require('impatient')
+-- CREDIT: impatient.nvim: https://github.com/lewis6991/impatient.nvim
+require("user.plugins.impatient")
 
 -- General
 require("user.autocommands")
 require("user.colorscheme")
 require("user.keymaps_commands")
 require("user.options")
-require("user.plugins")
 
 -- Plugins
-require("user.plugins.dressing")
+require("user.plugins")
 require("user.plugins.cokeline")
-require("user.plugins.impatient")
 require("user.plugins.lualine")
 require("user.plugins.mini")
 require("user.plugins.navic")
