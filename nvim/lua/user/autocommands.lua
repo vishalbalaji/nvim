@@ -44,6 +44,13 @@ autocmd({ "FileType" }, {
 	end,
 })
 
+autocmd({ "FileType" }, {
+	pattern = { "toggleterm" },
+	callback = function()
+		vim.opt_local.wrap = true
+	end,
+})
+
 vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
 
 autocmd({ "VimResized" }, {

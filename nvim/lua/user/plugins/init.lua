@@ -219,6 +219,24 @@ packer.startup(function(use)
 		tag = "*",
 		config = function()
 			require("toggleterm").setup({
+				on_open = function(term)
+					vim.api.nvim_buf_set_keymap(
+						term.bufnr,
+						"n",
+						"q",
+						"<cmd>Bdelete!<CR>",
+						{ noremap = true, silent = true }
+					)
+				end,
+				winbar = {
+					enabled = true,
+					name_formatter = function(term)
+						return ": " .. term.dir
+					end,
+				},
+				persist_mode = true,
+				autochdir = true,
+				start_in_insert = false,
 				shade_terminals = false,
 			})
 		end,

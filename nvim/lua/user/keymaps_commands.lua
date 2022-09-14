@@ -46,7 +46,7 @@ map("n", "<Tab>", "za", opts)
 
 -- -- Terminal
 -- Better terminal navigation
-map("t", "<leader><Esc>", "<C-\\><C-N><Esc>", term_opts)
+map("t", "<C-w>", "<C-\\><C-N><Esc>", term_opts)
 
 -- -- Splits
 local _, smart_splits = pcall(require, "smart-splits")
@@ -63,6 +63,7 @@ map("n", "<C-S-h>", smart_splits.resize_left, opts)
 map("n", "<C-S-l>", smart_splits.resize_right, opts)
 map("n", "<C-S-k>", smart_splits.resize_up, opts)
 map("n", "<C-S-j>", smart_splits.resize_down, opts)
+map("n", "<C-S-0>", "<C-w>=", opts)
 
 -- -- Buffers/Tabs
 local function closeBuf()
@@ -71,7 +72,7 @@ local function closeBuf()
 		min_splits = min_splits + 1
 	end
 
-	local troubleOpen = tonumber(vim.api.nvim_command_output([[echo bufwinid('Trouble')]]))
+	local troubleOpen = tonumber(vim.api.nvim_command_output([[ echo bufwinid('Trouble') ]]))
 
 	if troubleOpen ~= -1 then
 		min_splits = min_splits + 1
@@ -116,11 +117,12 @@ local lazygit = Terminal:new({
 	-- function to run on opening the terminal
 	on_open = function(term)
 		vim.cmd("startinsert!")
-		vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+		vim.opt_local.winbar = "LazyGit"
+		vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", opts)
 	end,
 	-- function to run on closing the terminal
 	on_close = function(_)
-		vim.cmd("echo 'Closing terminal'")
+		vim.cmd("echo 'Closing LazyGit'")
 	end,
 })
 
@@ -192,6 +194,18 @@ local wk_n_mappings = {
 		s = { "<cmd>PackerSync<CR>", "Sync" },
 		S = { "<cmd>PackerStatus<CR>", "Status" },
 		u = { "<cmd>PackerUpdate<CR>", "Update" },
+	},
+	t = {
+		function()
+			vim.cmd([[ ToggleTerm ]])
+			local termBuffer = vim.api.nvim_exec([[ echo win_getid(winnr('$')) ]], true)
+			if require("nvim-tree.view").is_visible() then
+				vim.cmd([[ NvimTreeClose ]])
+				vim.cmd([[ NvimTreeOpen ]])
+			end
+			vim.cmd("call win_gotoid(" .. termBuffer .. ")")
+		end,
+		"Toggle Terminal",
 	},
 }
 
