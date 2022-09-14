@@ -46,11 +46,7 @@ map("n", "<Tab>", "za", opts)
 
 -- -- Terminal
 -- Better terminal navigation
--- map("t", ":", "<C-\\><C-N>:", term_opts)
--- map("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
--- map("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
--- map("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
--- map("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+map("t", "<leader><Esc>", "<C-\\><C-N><Esc>", term_opts)
 
 -- -- Splits
 local _, smart_splits = pcall(require, "smart-splits")
@@ -104,8 +100,8 @@ vim.api.nvim_set_keymap("n", "<C-/>", "gcc", term_opts)
 vim.api.nvim_set_keymap("v", "<C-/>", "gcgv", term_opts)
 
 -- -- Git
-local _, _t = pcall(require, "toggleterm.terminal")
-if not _ then
+local _e, _ = pcall(require, "toggleterm.terminal")
+if not _e then
 	return
 end
 
@@ -123,8 +119,8 @@ local lazygit = Terminal:new({
 		vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
 	end,
 	-- function to run on closing the terminal
-	on_close = function(term)
-		vim.cmd("Closing terminal")
+	on_close = function(_)
+		vim.cmd("echo 'Closing terminal'")
 	end,
 })
 
