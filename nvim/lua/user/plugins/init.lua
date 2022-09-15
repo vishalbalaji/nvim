@@ -247,12 +247,12 @@ packer.startup(function(use)
 			require("aerial").setup({
 				manage_folds = true,
 				link_tree_to_folds = true,
-				link_folds_to_tree = true,
 				icons = {
 					atx_heading = "0"
 				},
 				layout = {
-					max_width = { 40, 0.25 },
+					width = 0.2,
+					max_width = { 30 },
 				}
 			})
 			vim.api.nvim_set_keymap("n", "<Tab>", "za", { noremap = false, silent = true })
