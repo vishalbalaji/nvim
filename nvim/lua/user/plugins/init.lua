@@ -241,6 +241,24 @@ packer.startup(function(use)
 			})
 		end,
 	})
+	use({
+		"stevearc/aerial.nvim",
+		config = function()
+			require("aerial").setup({
+				manage_folds = true,
+				link_tree_to_folds = true,
+				link_folds_to_tree = true,
+				icons = {
+					atx_heading = "0"
+				},
+				layout = {
+					max_width = { 40, 0.25 },
+				}
+			})
+			vim.api.nvim_set_keymap("n", "<Tab>", "za", { noremap = false, silent = true })
+			vim.api.nvim_set_keymap("n", "<S-Tab>", "zA", { noremap = false, silent = true })
+		end,
+	})
 
 	-- -- Git
 	use("tpope/vim-fugitive")
@@ -255,7 +273,8 @@ packer.startup(function(use)
 	use({
 		"dkarter/bullets.vim",
 		config = function()
-			vim.g.bullets_set_mappings = 0
+			vim.g.bullets_enabled_file_types = require("user.autocommands").bullets_enabled_file_types
+			vim.g.bullets_pad_right = 0
 		end,
 	})
 	use({

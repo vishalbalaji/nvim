@@ -1,4 +1,3 @@
--- CREDIT: impatient.nvim: https://github.com/lewis6991/impatient.nvim
 require("user.plugins.impatient")
 
 -- General
@@ -22,3 +21,6 @@ require("user.plugins.winbar")
 -- LSP
 require("user.lsp")
 require("user.lsp.cmp")
+
+-- Commands to be run last
+require("user.last")

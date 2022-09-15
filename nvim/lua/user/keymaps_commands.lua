@@ -43,6 +43,7 @@ map("v", "*", "c*<Esc>pa*<Esc>gvll", opts)
 -- -- General Purpose
 map("n", "<Esc>", "<Esc><cmd>noh<CR>", opts)
 map("n", "<Tab>", "za", opts)
+map("n", "<S-Tab>", "zA", opts)
 
 -- -- Terminal
 -- Better terminal navigation
@@ -117,7 +118,7 @@ local lazygit = Terminal:new({
 	-- function to run on opening the terminal
 	on_open = function(term)
 		vim.cmd("startinsert!")
-		vim.opt_local.winbar = "LazyGit"
+		vim.opt_local.winbar = "  LazyGit"
 		vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", opts)
 	end,
 	-- function to run on closing the terminal
@@ -139,6 +140,7 @@ end
 local wk_config = require("user.plugins.whichkey")
 
 local wk_n_mappings = {
+	a = { "<cmd>AerialToggle<CR>", "Toggle Aerial" },
 	d = { "<cmd>cd %:p:h<CR><cmd>pwd<CR>", "Switch CWD" },
 	e = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
 	f = {

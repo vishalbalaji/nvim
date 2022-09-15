@@ -1,3 +1,4 @@
+local M = {}
 local autocmd = vim.api.nvim_create_autocmd
 
 autocmd("VimEnter", {
@@ -89,10 +90,15 @@ autocmd({ "CursorHold" }, {
 	end,
 })
 
-autocmd({ "FileType" }, {
-	pattern = "markdown",
+M.bullets_enabled_file_types = { "markdown" }
+
+autocmd({ "BufEnter" }, {
+	pattern = "*",
 	callback = function()
-		vim.cmd([[ echo 'hello' ]])
-		vim.cmd([[ set foldtext=v:lua.require('pretty-fold').foldtext.global()]])
+		if not vim.tbl_contains(M.bullets_enabled_file_types, vim.bo.filetype) then
+			vim.g.bullets_set_mappings = 0
+		end
 	end,
 })
+
+return M
