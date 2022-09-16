@@ -110,6 +110,7 @@ end
 local Terminal = require("toggleterm.terminal").Terminal
 local lazygit = Terminal:new({
 	cmd = "lazygit",
+	hidden = true,
 	dir = "git_dir",
 	direction = "float",
 	float_opts = {
@@ -198,16 +199,22 @@ local wk_n_mappings = {
 		u = { "<cmd>PackerUpdate<CR>", "Update" },
 	},
 	t = {
-		function()
-			vim.cmd([[ ToggleTerm ]])
-			local termBuffer = vim.api.nvim_exec([[ echo win_getid(winnr('$')) ]], true)
-			if require("nvim-tree.view").is_visible() then
-				vim.cmd([[ NvimTreeClose ]])
-				vim.cmd([[ NvimTreeOpen ]])
-			end
-			vim.cmd("call win_gotoid(" .. termBuffer .. ")")
-		end,
-		"Toggle Terminal",
+		t = {
+			function()
+				vim.cmd("ToggleTerm")
+				local termBuffer = vim.api.nvim_exec([[ echo win_getid(winnr('$')) ]], true)
+				if require("nvim-tree.view").is_visible() then
+					vim.cmd([[ NvimTreeClose ]])
+					vim.cmd([[ NvimTreeOpen ]])
+				end
+				vim.cmd("call win_gotoid(" .. termBuffer .. ")")
+			end,
+			"Toggle Terminal",
+		},
+		d = {
+			"<cmd>TermExec cmd='cd %:p:h' go_back=0<CR>i",
+			"CD to directory in Terminal"
+		}
 	},
 }
 

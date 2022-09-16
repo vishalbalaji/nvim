@@ -228,14 +228,7 @@ packer.startup(function(use)
 						{ noremap = true, silent = true }
 					)
 				end,
-				winbar = {
-					enabled = true,
-					name_formatter = function(term)
-						return ": " .. term.dir
-					end,
-				},
 				persist_mode = true,
-				autochdir = true,
 				start_in_insert = false,
 				shade_terminals = false,
 			})
