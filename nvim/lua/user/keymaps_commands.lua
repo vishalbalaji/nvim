@@ -199,6 +199,7 @@ local wk_n_mappings = {
 		u = { "<cmd>PackerUpdate<CR>", "Update" },
 	},
 	t = {
+		name = "Terminal",
 		t = {
 			function()
 				vim.cmd("ToggleTerm")
