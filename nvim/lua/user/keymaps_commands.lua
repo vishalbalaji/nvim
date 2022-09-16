@@ -47,7 +47,7 @@ map("n", "<S-Tab>", "zA", opts)
 
 -- -- Terminal
 -- Better terminal navigation
-map("t", "<C-w>", "<C-\\><C-N><Esc>", term_opts)
+map("t", "<C-w>", "<Esc>i<C-\\><C-N><Esc>", term_opts)
 
 -- -- Splits
 local _, smart_splits = pcall(require, "smart-splits")
