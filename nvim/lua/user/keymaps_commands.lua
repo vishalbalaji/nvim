@@ -160,7 +160,7 @@ local wk_n_mappings = {
 		},
 		F = { "<cmd>Telescope live_grep theme=ivy<CR>", "Find Text" },
 		g = {
-			"<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown{previewer = false, results_title = vim.fn.getcwd()})<CR>",
+			[[<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown{previewer = false, cwd = vim.fn.expand('%:p:h'), results_title = vim.fn.system("cd " .. vim.fn.expand("%:p:h") .. " && git rev-parse --show-toplevel"):gsub("\n", "")})<CR>]],
 			"Find Git files",
 		},
 	},
@@ -217,9 +217,9 @@ local wk_n_mappings = {
 			"Toggle Terminal",
 		},
 		d = {
-			"<cmd>TermExec cmd='cd %:p:h' go_back=0<CR>i",
-			"CD to directory in Terminal"
-		}
+			[[<cmd>TermExec cmd='cd %:p:h' go_back=0<CR>i<CR>]],
+			"CD to directory in Terminal",
+		},
 	},
 }
 
