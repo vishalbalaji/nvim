@@ -241,12 +241,12 @@ packer.startup(function(use)
 				manage_folds = true,
 				link_tree_to_folds = true,
 				icons = {
-					atx_heading = "0"
+					atx_heading = "0",
 				},
 				layout = {
 					width = 0.2,
 					max_width = { 30 },
-				}
+				},
 			})
 			vim.api.nvim_set_keymap("n", "<Tab>", "za", { noremap = false, silent = true })
 			vim.api.nvim_set_keymap("n", "<S-Tab>", "zA", { noremap = false, silent = true })
@@ -290,6 +290,20 @@ packer.startup(function(use)
 					fat_headlines = false,
 				},
 			})
+		end,
+	})
+	use({
+		"akinsho/git-conflict.nvim",
+		tag = "*",
+		config = function()
+			require("git-conflict").setup()
+		end,
+	})
+	use({
+		"akinsho/git-conflict.nvim",
+		tag = "*",
+		config = function()
+			require("git-conflict").setup()
 		end,
 	})
 end)
