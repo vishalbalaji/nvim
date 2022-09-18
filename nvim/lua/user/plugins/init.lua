@@ -299,11 +299,5 @@ packer.startup(function(use)
 			require("git-conflict").setup()
 		end,
 	})
-	use({
-		"akinsho/git-conflict.nvim",
-		tag = "*",
-		config = function()
-			require("git-conflict").setup()
-		end,
-	})
+	use("benknoble/gitignore-vim")
 end)
