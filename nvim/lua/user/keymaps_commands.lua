@@ -159,6 +159,10 @@ local wk_n_mappings = {
 			"Find files",
 		},
 		F = { "<cmd>Telescope live_grep theme=ivy<CR>", "Find Text" },
+		g = {
+			"<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown{previewer = false, results_title = vim.fn.getcwd()})<CR>",
+			"Find Git files",
+		},
 	},
 	g = {
 		_lazygit_toggle,
