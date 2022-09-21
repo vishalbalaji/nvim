@@ -147,20 +147,20 @@ local wk_n_mappings = {
 	f = {
 		name = "Telescope",
 		b = {
-			"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<CR>",
+			"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false, prompt_prefix = ' > '})<CR>",
 			"Find Buffers",
 		},
 		d = {
-			"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, cwd = vim.fn.expand('%:p:h'), results_title = vim.fn.expand('%:p:h')})<CR>",
+			"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, cwd = vim.fn.expand('%:p:h'), prompt_prefix = ' > ', results_title = vim.fn.expand('%:p:h')})<CR>",
 			"Find in CWD",
 		},
 		f = {
-			"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, results_title = vim.fn.getcwd()})<CR>",
+			"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, prompt_prefix = ' > ', results_title = vim.fn.getcwd()})<CR>",
 			"Find files",
 		},
 		F = { "<cmd>Telescope live_grep theme=ivy<CR>", "Find Text" },
 		g = {
-			[[<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown{previewer = false, cwd = vim.fn.expand('%:p:h'), results_title = vim.fn.system("cd " .. vim.fn.expand("%:p:h") .. " && git rev-parse --show-toplevel"):gsub("\n", "")})<CR>]],
+			[[<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown{previewer = false, cwd = vim.fn.expand('%:p:h'), prompt_prefix = ' > ',results_title = vim.fn.system("cd " .. vim.fn.expand("%:p:h") .. " && git rev-parse --show-toplevel"):gsub("\n", "")})<CR>]],
 			"Find Git files",
 		},
 	},

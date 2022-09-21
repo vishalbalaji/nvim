@@ -44,7 +44,7 @@ config.rainbow = {
 	extended_mode = true,
 	colors = {
 		vim.g.terminal_color_1,
-		vim.g.terminal_color_2,
+		vim.g.terminal_color_6,
 		vim.g.terminal_color_3,
 		vim.g.terminal_color_4,
 		vim.g.terminal_color_5,
