@@ -3,6 +3,8 @@ if not status_ok then
 	return
 end
 
+
+local home_dir = os.getenv("HOME")
 local sources = {
 	-- General
 	-- null_ls.builtins.code_actions.refactoring,
@@ -10,6 +12,10 @@ local sources = {
 	null_ls.builtins.completion.spell.with({ filetypes = { "markdown", "latex" } }),
 	null_ls.builtins.formatting.cbfmt,
 	null_ls.builtins.formatting.yamlfmt,
+	null_ls.builtins.formatting.jq,
+	null_ls.builtins.diagnostics.commitlint.with({
+    extra_args = { "-g", home_dir .. "/.local/share/nvim/commitlint.config.js" }
+  }),
 
 	-- Lua
 	null_ls.builtins.formatting.stylua,
