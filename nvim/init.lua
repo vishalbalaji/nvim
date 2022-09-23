@@ -1,4 +1,4 @@
-require("user.plugins.impatient")
+-- require("user.plugins.impatient")
 
 -- General
 require("user.autocommands")
@@ -15,12 +15,8 @@ require("user.plugins.navic")
 require("user.plugins.nvim-tree")
 require("user.plugins.telescope")
 require("user.plugins.treesitter")
-require("user.plugins.ufo")
 require("user.plugins.winbar")
 
 -- LSP
 require("user.lsp")
 require("user.lsp.cmp")
-
--- Commands to be run last
-require("user.last")

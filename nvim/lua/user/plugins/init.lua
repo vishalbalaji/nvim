@@ -132,7 +132,7 @@ packer.startup(function(use)
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 	use("folke/which-key.nvim")
-	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
+	-- use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
 	use("famiu/bufdelete.nvim")
 	use({
 		"kwkarlwang/bufresize.nvim",
@@ -202,12 +202,7 @@ packer.startup(function(use)
 			vim.api.nvim_set_hl(0, "QuickScopeSecondary", { fg = "#ecbe7b", standout = true })
 		end,
 	})
-	use({
-		"anuvyklack/pretty-fold.nvim",
-		config = function()
-			require("pretty-fold").setup({})
-		end,
-	})
+	use("anuvyklack/pretty-fold.nvim")
 	use({
 		"booperlv/nvim-gomove",
 		config = function()
@@ -238,11 +233,8 @@ packer.startup(function(use)
 		"stevearc/aerial.nvim",
 		config = function()
 			require("aerial").setup({
-				manage_folds = true,
-				link_tree_to_folds = true,
-				icons = {
-					atx_heading = "0",
-				},
+				manage_folds = false,
+				link_tree_to_folds = false,
 				layout = {
 					width = 0.2,
 					max_width = { 30 },
@@ -278,7 +270,7 @@ packer.startup(function(use)
 		"lukas-reineke/headlines.nvim",
 		config = function()
 			vim.api.nvim_set_hl(0, "Headline1", { fg = "#98be65", bold = true, italic = true, standout = true })
-			vim.api.nvim_set_hl(0, "Headline2", { fg = "#ecbe7b", bold = true, italic = true, underdashed = true })
+			vim.api.nvim_set_hl(0, "Headline2", { fg = "#ecbe7b", bold = true, italic = true, underline = true })
 			vim.api.nvim_set_hl(0, "Headline3", { fg = "#46d9ff", italic = true })
 			vim.api.nvim_set_hl(0, "Headline4", { fg = "#a9a1e1" })
 			vim.api.nvim_set_hl(0, "Quote", { fg = "#51afef", bold = true })

@@ -59,8 +59,12 @@ config.rainbow = {
 }
 
 configs.setup(config)
+require("pretty-fold").setup({})
 
-require 'vim.treesitter.query'.set_query("markdown", "highlights", [[
+require("vim.treesitter.query").set_query(
+	"markdown",
+	"highlights",
+	[[
 ;From MDeiml/tree-sitter-markdown
 (atx_heading (inline) @text.title)
 (setext_heading (paragraph) @text.title)
@@ -104,4 +108,5 @@ require 'vim.treesitter.query'.set_query("markdown", "highlights", [[
 [
   (backslash_escape)
 ] @string.escape
-]])
+]]
+)

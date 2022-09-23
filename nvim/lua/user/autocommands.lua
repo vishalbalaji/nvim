@@ -1,7 +1,7 @@
 local M = {}
 local autocmd = vim.api.nvim_create_autocmd
 
-autocmd("VimEnter", {
+autocmd({ "VimEnter" }, {
 	pattern = "*",
 	command = "set formatoptions-=cro",
 })
@@ -26,6 +26,11 @@ autocmd({ "FileType" }, {
       set nobuflisted 
     ]])
 	end,
+})
+
+autocmd({ "BufCreate" }, {
+	pattern = "*",
+	command = "normal zR",
 })
 
 autocmd({ "BufEnter" }, {
