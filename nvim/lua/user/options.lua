@@ -8,13 +8,16 @@ local options = {
 	cursorline = true, -- highlight the current line
 	expandtab = true, -- convert tabs to spaces
 	fileencoding = "utf-8", -- the encoding written to a file
-  foldmethod = "expr",
-  foldexpr = "nvim_treesitter#foldexpr()",
+	foldexpr = "nvim_treesitter#foldexpr()",
+	foldlevel = 99,
+	foldmethod = "expr",
 	guifont = "JetBrainsMono Nerd Font:h7", -- the font used in graphical neovim applications
 	hlsearch = true, -- highlight all matches on previous search pattern
 	ignorecase = true, -- ignore case in search patterns
 	laststatus = 3,
 	linebreak = true,
+	list = true,
+	listchars = "eol:↲,trail:·,tab:» ,extends:>,precedes:<",
 	mouse = "a", -- allow the mouse to be used in neovim
 	number = true, -- set numbered lines
 	numberwidth = 4, -- set number column width to 2 {default 4}
@@ -48,3 +51,5 @@ end
 vim.opt.shortmess:append("c")
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
+
+vim.g.markdown_fenced_languages = { "python", "java", "javascript", "sh", "yaml", "json" }

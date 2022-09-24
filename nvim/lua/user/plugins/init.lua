@@ -292,4 +292,5 @@ packer.startup(function(use)
 		end,
 	})
 	use("benknoble/gitignore-vim")
+	use("davidgranstrom/nvim-markdown-preview")
 end)

@@ -24,6 +24,10 @@ local sources = {
 	null_ls.builtins.diagnostics.shellcheck,
 	null_ls.builtins.formatting.shfmt,
 
+	-- Python
+	null_ls.builtins.formatting.black,
+	null_ls.builtins.formatting.isort,
+
 	-- TS/JS
 	null_ls.builtins.code_actions.eslint_d.with({
 		condition = function(utils)

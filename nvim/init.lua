@@ -1,4 +1,4 @@
--- require("user.plugins.impatient")
+require("user.plugins.impatient")
 
 -- General
 require("user.autocommands")
@@ -9,6 +9,7 @@ require("user.options")
 -- Plugins
 require("user.plugins")
 require("user.plugins.cokeline")
+require("user.plugins.indentline")
 require("user.plugins.lualine")
 require("user.plugins.mini")
 require("user.plugins.navic")
