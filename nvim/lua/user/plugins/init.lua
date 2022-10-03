@@ -96,6 +96,7 @@ packer.startup(function(use)
 	})
 	use("stevearc/dressing.nvim")
 	use("lvimuser/lsp-inlayhints.nvim")
+	use("b0o/schemastore.nvim")
 
 	-- -- CMP
 	use("hrsh7th/cmp-buffer") -- buffer completions

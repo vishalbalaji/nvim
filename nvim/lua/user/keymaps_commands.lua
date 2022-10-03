@@ -142,6 +142,7 @@ local wk_config = require("user.plugins.whichkey")
 
 local wk_n_mappings = {
 	a = { "<cmd>AerialToggle<CR>", "Toggle Aerial" },
+	c = { "<cmd>ColorizerToggle<CR>", "Toggle Colorizer" },
 	d = { "<cmd>cd %:p:h<CR><cmd>pwd<CR>", "Switch CWD" },
 	e = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
 	f = {
@@ -174,7 +175,7 @@ local wk_n_mappings = {
 		d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
 		f = { "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", "Format" },
 		h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
-    H = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Open Float" },
+		H = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Open Float" },
 		i = { "<cmd>LspInfo<CR>", "Info" },
 		l = { "<cmd>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },

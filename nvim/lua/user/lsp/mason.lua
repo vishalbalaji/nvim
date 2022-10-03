@@ -55,30 +55,21 @@ mason_lspconfig.setup({
 })
 
 local handlers = require("user.lsp.handlers")
-local sumneko_settings = require("user.lsp.settings.sumneko_lua")
-
-local opts = {}
 
 mason_lspconfig.setup_handlers({
 	function(server_name) -- default handler (optional)
+		local opts = {}
+
+		local read_opts, _opts = pcall(require, "user.lsp.settings." .. server_name)
+		if read_opts then
+			opts = _opts
+		end
+
 		if server_name == "sumneko_lua" then
-			opts = sumneko_settings
+			opts.settings.Lua.diagnostics.workspaceDelay = -1
 		elseif server_name == "denols" then
 			opts.root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
 		elseif server_name == "tsserver" then
-			opts = {
-				settings = {
-					typescript = {
-						includeInlayEnumMemberValueHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-						includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayVariableTypeHints = true,
-					},
-				},
-			}
 			opts.root_dir = lspconfig.util.root_pattern("package.json")
 			opts.init_options = {
 				preferences = {
