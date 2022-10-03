@@ -79,6 +79,7 @@ hl(0, "TelescopeBorder", { link = "TelescopeNormal" })
 
 -- Popup
 hl(0, "Pmenu", { fg = "fg", bg = "NONE" })
+hl(0, "PmenuThumb", { bg = "fg" })
 hl(0, "SignColumn", { fg = "fg", bg = "NONE" })
 
 -- CursorWord

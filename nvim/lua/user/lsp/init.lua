@@ -4,12 +4,12 @@ if not status_ok then
 end
 
 require("user.lsp.handlers").setup()
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function()
-		vim.lsp.buf.format({ async = false })
-	end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	pattern = "*",
+-- 	callback = function()
+-- 		vim.lsp.buf.format({ async = false })
+-- 	end,
+-- })
 
 -- autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })
 require("user.lsp.mason")
