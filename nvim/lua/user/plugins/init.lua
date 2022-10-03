@@ -31,7 +31,6 @@ packer.startup(function(use)
 
 	-- ColorScheme
 	use({ "NTBBloodbath/doom-one.nvim" })
-	use({ "folke/tokyonight.nvim" })
 
 	-- Treesitter
 	use({

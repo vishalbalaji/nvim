@@ -47,9 +47,10 @@ endfun
 local hl = vim.api.nvim_set_hl
 local comment_fg = vim.api.nvim_get_hl_by_name("Comment", true).foreground
 local error_fg = colors.red
-local context = comment_fg
+local context = colors.gray or colors.grey
 
 -- General Highlights
+-- hl(0, "Normal", { fg = "fg", bg = "NONE" })
 hl(0, "Comment", { fg = comment_fg, bold = true, italic = true })
 hl(0, "NonText", { bg = "NONE", fg = comment_fg })
 hl(0, "SpellBad", { sp = error_fg, undercurl = true })
@@ -99,8 +100,6 @@ hl(0, "GitSignsDelete", { link = "DiffDelete" })
 
 -- Cokeline
 hl(0, "TablineFill", { link = "Normal" })
-
--- Lualine
 
 -- Navic
 hl(0, "NavicIconsFile", { link = "CmpItemKindFile" })

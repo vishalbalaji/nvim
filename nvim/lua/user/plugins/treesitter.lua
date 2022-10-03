@@ -47,7 +47,7 @@ config.rainbow = {
 		colors.red,
 		colors.yellow,
 		colors.green,
-		colors.teal,
+		colors.cyan,
 		colors.blue,
 		colors.magenta,
 	},
