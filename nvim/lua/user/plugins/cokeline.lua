@@ -3,18 +3,14 @@ if not status_ok then
 	return
 end
 
-vim.cmd("hi! link TabLineFill Normal")
-
 local get_hex = require("cokeline/utils").get_hex
 local mappings = require("cokeline/mappings")
 
-local red = vim.g.terminal_color_1
-local green = vim.g.terminal_color_2
-local yellow = vim.g.terminal_color_3
+local colors = require("user.colorscheme")
 
 local comments_fg = get_hex("Comment", "fg")
-local errors_fg = red
-local warnings_fg = yellow
+local errors_fg = colors.red
+local warnings_fg = colors.yellow
 
 local components = {
 	indicator = {
@@ -30,7 +26,7 @@ local components = {
 			end
 		end,
 		fg = function(buffer)
-			return buffer.is_focused and green or nil
+			return buffer.is_focused and colors.green or nil
 		end,
 	},
 
@@ -57,9 +53,9 @@ local components = {
 				or buffer.devicon.icon
 		end,
 		fg = function(buffer)
-			return (mappings.is_picking_focus() and yellow)
-				or (mappings.is_picking_close() and red)
-        or (not buffer.is_focused and comments_fg)
+			return (mappings.is_picking_focus() and colors.yellow)
+				or (mappings.is_picking_close() and colors.red)
+				or (not buffer.is_focused and comments_fg)
 				or buffer.devicon.color
 		end,
 		style = function(_)
@@ -137,7 +133,7 @@ local components = {
 			return buffer.is_modified and "●" or ""
 		end,
 		fg = function(buffer)
-			return buffer.is_modified and green or nil
+			return buffer.is_modified and colors.green or nil
 		end,
 		delete_buffer_on_left_click = true,
 		truncation = { priority = 1 },
@@ -148,8 +144,8 @@ local components = {
 			return buffer.is_last and "▎" or ""
 		end,
 		truncation = { priority = 1 },
-    fg = comments_fg,
-    bg = get_hex("Normal", "bg"),
+		fg = comments_fg,
+		bg = get_hex("Normal", "bg"),
 	},
 }
 
@@ -178,7 +174,7 @@ cokeline.setup({
 		components = {
 			{
 				text = "             FILES",
-				fg = yellow,
+				fg = colors.yellow,
 				bg = get_hex("NvimTreeNormal", "bg"),
 				style = "bold",
 			},

@@ -30,7 +30,8 @@ packer.startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	-- ColorScheme
-	use("NTBBloodbath/doom-one.nvim")
+	use({ "NTBBloodbath/doom-one.nvim" })
+	use({ "folke/tokyonight.nvim" })
 
 	-- Treesitter
 	use({
@@ -74,7 +75,11 @@ packer.startup(function(use)
 	use({
 		"j-hui/fidget.nvim",
 		config = function()
-			require("fidget").setup({})
+			require("fidget").setup({
+				window = {
+					blend = 0,
+				},
+			})
 		end,
 	})
 	use({
@@ -90,7 +95,6 @@ packer.startup(function(use)
 		end,
 	})
 	use("stevearc/dressing.nvim")
-	use("folke/lua-dev.nvim")
 	use("lvimuser/lsp-inlayhints.nvim")
 
 	-- -- CMP
@@ -253,6 +257,14 @@ packer.startup(function(use)
 			require("gitsigns").setup({})
 		end,
 	})
+	use({
+		"akinsho/git-conflict.nvim",
+		tag = "*",
+		config = function()
+			require("git-conflict").setup()
+		end,
+	})
+	use("benknoble/gitignore-vim")
 
 	-- -- Markdown
 	use({
@@ -266,31 +278,6 @@ packer.startup(function(use)
 		"AckslD/nvim-FeMaco.lua",
 		config = 'require("femaco").setup()',
 	})
-	use({
-		"lukas-reineke/headlines.nvim",
-		config = function()
-			vim.api.nvim_set_hl(0, "Headline1", { fg = "#98be65", bold = true, italic = true, standout = true })
-			vim.api.nvim_set_hl(0, "Headline2", { fg = "#ecbe7b", bold = true, italic = true, underline = true })
-			vim.api.nvim_set_hl(0, "Headline3", { fg = "#46d9ff", italic = true })
-			vim.api.nvim_set_hl(0, "Headline4", { fg = "#a9a1e1" })
-			vim.api.nvim_set_hl(0, "Quote", { fg = "#51afef", bold = true })
-			vim.api.nvim_set_hl(0, "Dash", { fg = "#51afef", bold = true })
-			require("headlines").setup({
-				markdown = {
-					headline_highlights = { "Headline1", "Headline2", "Headline3", "Headline4" },
-					dash_string = "—",
-					fat_headlines = false,
-				},
-			})
-		end,
-	})
-	use({
-		"akinsho/git-conflict.nvim",
-		tag = "*",
-		config = function()
-			require("git-conflict").setup()
-		end,
-	})
-	use("benknoble/gitignore-vim")
-	use("davidgranstrom/nvim-markdown-preview")
+	use({ "lukas-reineke/headlines.nvim" })
+	-- use("davidgranstrom/nvim-markdown-previw")
 end)

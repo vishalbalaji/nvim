@@ -128,8 +128,8 @@ cmp.setup({
 	},
 	sources = {
 		{ name = "nvim_lua" },
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
+		{ name = "nvim_lsp", priority = 9 },
+		{ name = "luasnip", priority = 10, max_item_count = 3 },
 		{ name = "buffer", keyword_length = 5 },
 		{ name = "path" },
 		{ name = "orgmode" },

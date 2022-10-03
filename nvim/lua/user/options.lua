@@ -9,7 +9,7 @@ local options = {
 	expandtab = true, -- convert tabs to spaces
 	fileencoding = "utf-8", -- the encoding written to a file
 	foldexpr = "nvim_treesitter#foldexpr()",
-	foldlevel = 99,
+	foldlevel = 9999,
 	foldmethod = "expr",
 	guifont = "JetBrainsMono Nerd Font:h7", -- the font used in graphical neovim applications
 	hlsearch = true, -- highlight all matches on previous search pattern
@@ -52,4 +52,4 @@ vim.opt.shortmess:append("c")
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
 
-vim.g.markdown_fenced_languages = { "python", "java", "javascript", "sh", "yaml", "json" }
+vim.g.markdown_fenced_languages = { "python", "javascript", "sh", "yaml", "json" }

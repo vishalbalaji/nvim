@@ -1,30 +1,108 @@
+vim.g.terminal_colors = false
+local colors = {
+	bg = "#282c34",
+	fg = "#bbc2cf",
+
+	bg_alt = "#21242b",
+	fg_alt = "#5b6268",
+
+	base0 = "#1b2229",
+	base1 = "#1c1e1e",
+	base2 = "#202328",
+	base3 = "#23272e",
+	base4 = "#3f444a",
+	base5 = "#5b6268",
+	base6 = "#73797e",
+	base7 = "#9ca0a4",
+	base8 = "#dfdfdf",
+
+	grey = "#3f444a",
+	red = "#ff6c6b",
+	orange = "#da8548",
+	green = "#98be65",
+	teal = "#4db5bd",
+	yellow = "#ecbe7b",
+	blue = "#51afef",
+	dark_blue = "#2257a0",
+	magenta = "#c678dd",
+	violet = "#a9a1e1",
+	cyan = "#46d9ff",
+	dark_cyan = "#5699af",
+}
+
 vim.cmd([[
-try 
+try
   colorscheme doom-one
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
   set background=dark
 endtry
-hi Comment gui=bold,italic
 
-function! SynGroup()                                                              
+function! SynGroup()
   let l:s = synID(line('.'), col('.'), 1)
-  echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')  
+  echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun
 ]])
 
 local hl = vim.api.nvim_set_hl
+local comment_fg = vim.api.nvim_get_hl_by_name("Comment", true).foreground
+local error_fg = colors.red
+local context = comment_fg
+
+-- General Highlights
+hl(0, "Comment", { fg = comment_fg, bold = true, italic = true })
+hl(0, "NonText", { bg = "NONE", fg = comment_fg })
+hl(0, "SpellBad", { sp = error_fg, undercurl = true })
+hl(0, "NormalFloat", { fg = "fg", bg = "NONE" })
+hl(0, "FloatBorder", { fg = comment_fg, bg = "NONE" })
+hl(0, "WinSeparator", { link = "FloatBorder" })
+
+-- Headlines
+require("headlines").setup({})
+hl(0, "Quote", { fg = colors.blue, bold = true })
+
+-- NvimTree
+hl(0, "NvimTreeNormal", { link = "Normal" })
+hl(0, "NvimTreeNormalNC", { link = "Normal" })
+hl(0, "NvimTreeWinSeparator", { link = "WinSeparator" })
+
+-- Trouble
+hl(0, "TroubleNormal", { link = "Normal" })
+
+-- WhichKey
+hl(0, "WhichKeyFloat", { link = "Normal" })
+
+-- Telescope
+hl(0, "TelescopeNormal", { link = "NormalFloat" })
+hl(0, "TelescopeBorder", { link = "TelescopeNormal" })
 
 -- Popup
-hl(0, "NormalFloat", { fg = "fg", bg = "NONE" })
-hl(0, "PmenuThumb", { bg = "#bbc2cf" })
+hl(0, "Pmenu", { fg = "fg", bg = "NONE" })
+hl(0, "SignColumn", { fg = "fg", bg = "NONE" })
+
+-- CursorWord
+hl(0, "MiniCursorWord", { underdotted = true })
+
+-- Diagnostics
+hl(0, "DiagnosticError", { fg = colors.red })
+hl(0, "DiagnosticWarn", { fg = colors.yellow })
+hl(0, "DiagnosticInfo", { fg = colors.blue })
+hl(0, "DiagnostiHint", { fg = colors.green })
+
+-- Diffs
+hl(0, "DiffAdd", { fg = colors.green })
+hl(0, "DiffChange", { fg = colors.yellow })
+hl(0, "DiffDelete", { fg = colors.red })
+hl(0, "GitSignsAdd", { link = "DiffAdd" })
+hl(0, "GitSignsChange", { link = "DiffChange" })
+hl(0, "GitSignsDelete", { link = "DiffDelete" })
+
+-- Cokeline
+hl(0, "TablineFill", { link = "Normal" })
+
+-- Lualine
 
 -- Navic
-local get_hex = require("cokeline/utils").get_hex
-local blue = vim.g.terminal_color_4
-local gray = get_hex("Comment", "fg")
-local context = vim.g.terminal_color_8
-
 hl(0, "NavicIconsFile", { link = "CmpItemKindFile" })
 hl(0, "NavicIconsModule", { link = "CmpItemKindModule" })
 hl(0, "NavicIconsNamespace", { link = "CmpItemKindModule" })
@@ -46,60 +124,15 @@ hl(0, "NavicIconsArray", { link = "CmpItemKindClass" })
 hl(0, "NavicIconsObject", { link = "CmpItemKindClass" })
 hl(0, "NavicIconsKey", { link = "CmpItemKindKeyword" })
 hl(0, "NavicIconsKeyword", { link = "CmpItemKindKeyword" })
-hl(0, "NavicIconsNull", { fg = blue, bg = "NONE" })
+hl(0, "NavicIconsNull", { fg = colors.blue, bg = "NONE" })
 hl(0, "NavicIconsEnumMember", { link = "CmpItemKindEnumMember" })
 hl(0, "NavicIconsStruct", { link = "CmpItemKindStruct" })
 hl(0, "NavicIconsEvent", { link = "CmpItemKindEvent" })
 hl(0, "NavicIconsOperator", { link = "CmpItemKindOperator" })
 hl(0, "NavicIconsTypeParameter", { link = "CmpItemKindTypeParameter" })
-hl(0, "NavicText", { fg = gray, bg = "NONE" })
+hl(0, "NavicText", { fg = comment_fg, bg = "NONE" })
+hl(0, "NavicSeparator", { fg = context, bg = "NONE" })
+hl(0, "NavicText", { fg = comment_fg, bg = "NONE" })
 hl(0, "NavicSeparator", { fg = context, bg = "NONE" })
 
--- -- Color Reference
--- terminal_color_0       #282c34
--- terminal_color_1       #ff6c6b
--- terminal_color_2       #98be65
--- terminal_color_3       #ecbe7b
--- terminal_color_4       #51afef
--- terminal_color_5       #a9a1e1
--- terminal_color_6       #46d9ff
--- terminal_color_7       #bbc2cf
--- terminal_color_8       #3f444a
--- terminal_color_9       #ff6c6b
--- terminal_color_10      #98be65
--- terminal_color_11      #da8548
--- terminal_color_12      #51afef
--- terminal_color_13      #a9a1e1
--- terminal_color_14      #46d9ff
--- terminal_color_background  #21242b
-
--- dark = {
--- 	bg = "#282c34",
--- 	fg = "#bbc2cf",
---
--- 	bg_alt = "#21242b",
--- 	fg_alt = "#5b6268",
---
--- 	base0 = "#1b2229",
--- 	base1 = "#1c1e1e",
--- 	base2 = "#202328",
--- 	base3 = "#23272e",
--- 	base4 = "#3f444a",
--- 	base5 = "#5b6268",
--- 	base6 = "#73797e",
--- 	base7 = "#9ca0a4",
--- 	base8 = "#dfdfdf",
---
--- 	grey = "#3f444a",
--- 	red = "#ff6c6b",
--- 	orange = "#da8548",
--- 	green = "#98be65",
--- 	teal = "#4db5bd",
--- 	yellow = "#ecbe7b",
--- 	blue = "#51afef",
--- 	dark_blue = "#2257a0",
--- 	magenta = "#c678dd",
--- 	violet = "#a9a1e1",
--- 	cyan = "#46d9ff",
--- 	dark_cyan = "#5699af",
--- },
+return colors

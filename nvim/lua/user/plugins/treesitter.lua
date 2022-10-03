@@ -39,20 +39,23 @@ config.autotag = {
 }
 
 -- -- Rainbow
+local colors = require("user.colorscheme")
 config.rainbow = {
 	enable = true,
 	extended_mode = true,
 	colors = {
-		vim.g.terminal_color_1,
-		vim.g.terminal_color_6,
-		vim.g.terminal_color_3,
-		vim.g.terminal_color_4,
-		vim.g.terminal_color_5,
+		colors.red,
+		colors.yellow,
+		colors.green,
+		colors.teal,
+		colors.blue,
+		colors.magenta,
 	},
 	termcolors = {
 		"Red",
-		"Green",
 		"Yellow",
+		"Green",
+		"Cyan",
 		"Blue",
 		"Magenta",
 	},

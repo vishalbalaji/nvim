@@ -3,7 +3,6 @@ if not status_ok then
 	return
 end
 
-
 local home_dir = os.getenv("HOME")
 local sources = {
 	-- General
@@ -14,15 +13,19 @@ local sources = {
 	null_ls.builtins.formatting.yamlfmt,
 	null_ls.builtins.formatting.jq,
 	null_ls.builtins.diagnostics.commitlint.with({
-    extra_args = { "-g", home_dir .. "/.local/share/nvim/commitlint.config.js" }
-  }),
+		extra_args = { "-g", home_dir .. "/.local/share/nvim/commitlint.config.js" },
+	}),
 
 	-- Lua
 	null_ls.builtins.formatting.stylua,
 
 	-- Shell
-	null_ls.builtins.diagnostics.shellcheck,
-	null_ls.builtins.formatting.shfmt,
+	null_ls.builtins.diagnostics.shellcheck.with({
+		extra_filetypes = { "zsh" },
+	}),
+	null_ls.builtins.formatting.shfmt.with({
+		extra_filetypes = { "zsh" },
+	}),
 
 	-- Python
 	null_ls.builtins.formatting.black,
