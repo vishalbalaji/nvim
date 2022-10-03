@@ -16,12 +16,14 @@ local components = {
 	indicator = {
 		text = function(buffer)
 			if buffer.is_focused then
-				return "▎"
+				return " "
+				-- return "▎"
 			else
 				if buffer.is_first then
 					return " "
 				else
-					return "▎"
+					-- return "▎"
+					return " "
 				end
 			end
 		end,
@@ -94,8 +96,8 @@ local components = {
 				or nil
 		end,
 		style = function(buffer)
-			return ((buffer.is_focused and buffer.diagnostics.errors ~= 0) and "bold,underline")
-				or (buffer.is_focused and "bold")
+			return ((buffer.is_focused and buffer.diagnostics.errors ~= 0) and "bold,underline,italic")
+				or (buffer.is_focused and "bold,italic")
 				or (buffer.diagnostics.errors ~= 0 and "underline")
 				or nil
 		end,
@@ -141,7 +143,8 @@ local components = {
 
 	cap = {
 		text = function(buffer)
-			return buffer.is_last and "▎" or ""
+			-- return buffer.is_last and "▎" or ""
+			return ""
 		end,
 		truncation = { priority = 1 },
 		fg = comments_fg,
@@ -167,6 +170,9 @@ cokeline.setup({
 		bg = function(buffer)
 			return buffer.is_focused and get_hex("ColorColumn", "bg") or get_hex("TabLineFill", "bg")
 		end,
+    style = function (buffer)
+			return buffer.is_focused and "italic" or nil
+    end
 	},
 
 	sidebar = {

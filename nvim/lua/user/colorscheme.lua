@@ -1,34 +1,5 @@
-vim.g.terminal_colors = false
-local colors = {
-	bg = "#282c34",
-	fg = "#bbc2cf",
-
-	bg_alt = "#21242b",
-	fg_alt = "#5b6268",
-
-	base0 = "#1b2229",
-	base1 = "#1c1e1e",
-	base2 = "#202328",
-	base3 = "#23272e",
-	base4 = "#3f444a",
-	base5 = "#5b6268",
-	base6 = "#73797e",
-	base7 = "#9ca0a4",
-	base8 = "#dfdfdf",
-
-	grey = "#3f444a",
-	red = "#ff6c6b",
-	orange = "#da8548",
-	green = "#98be65",
-	teal = "#4db5bd",
-	yellow = "#ecbe7b",
-	blue = "#51afef",
-	dark_blue = "#2257a0",
-	magenta = "#c678dd",
-	violet = "#a9a1e1",
-	cyan = "#46d9ff",
-	dark_cyan = "#5699af",
-}
+vim.g.doom_one_terminal_colors = false
+local colors = require("doom-one.colors")[vim.o.background]
 
 vim.cmd([[
 try
@@ -124,15 +95,13 @@ hl(0, "NavicIconsArray", { link = "CmpItemKindClass" })
 hl(0, "NavicIconsObject", { link = "CmpItemKindClass" })
 hl(0, "NavicIconsKey", { link = "CmpItemKindKeyword" })
 hl(0, "NavicIconsKeyword", { link = "CmpItemKindKeyword" })
-hl(0, "NavicIconsNull", { fg = colors.blue, bg = "NONE" })
+hl(0, "NavicIconsNull", { fg = colors.blue, bg = "bg" })
 hl(0, "NavicIconsEnumMember", { link = "CmpItemKindEnumMember" })
 hl(0, "NavicIconsStruct", { link = "CmpItemKindStruct" })
 hl(0, "NavicIconsEvent", { link = "CmpItemKindEvent" })
 hl(0, "NavicIconsOperator", { link = "CmpItemKindOperator" })
 hl(0, "NavicIconsTypeParameter", { link = "CmpItemKindTypeParameter" })
-hl(0, "NavicText", { fg = comment_fg, bg = "NONE" })
-hl(0, "NavicSeparator", { fg = context, bg = "NONE" })
-hl(0, "NavicText", { fg = comment_fg, bg = "NONE" })
-hl(0, "NavicSeparator", { fg = context, bg = "NONE" })
+hl(0, "NavicText", { fg = comment_fg, bg = "bg" })
+hl(0, "NavicSeparator", { fg = context, bg = "bg" })
 
 return colors
