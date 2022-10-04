@@ -17,20 +17,13 @@ autocmd({ "FileType" }, {
 		"lir",
 		"DressingSelect",
 		"tsplayground",
-		"Markdown",
 	},
 	callback = function()
 		vim.cmd([[
-      nnoremap <silent> <buffer> q :close<CR> 
-      nnoremap <silent> <buffer> <esc> :close<CR> 
+      nnoremap <silent> <buffer> q :q!<CR> 
       set nobuflisted 
     ]])
 	end,
-})
-
-autocmd({ "BufCreate" }, {
-	pattern = "*",
-	command = "normal zR",
 })
 
 autocmd({ "BufEnter" }, {

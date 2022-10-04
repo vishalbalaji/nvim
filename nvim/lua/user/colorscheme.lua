@@ -1,14 +1,14 @@
 vim.g.doom_one_terminal_colors = false
 local colors = require("doom-one.colors")[vim.o.background]
+local colorscheme = "doom-one"
+
+vim.cmd(
+	"try | colorscheme "
+		.. colorscheme
+		.. " | catch /^Vim%((\a+))=:E185/ | colorscheme default | set background=dark | endtry"
+)
 
 vim.cmd([[
-try
-  colorscheme doom-one
-catch /^Vim\%((\a\+)\)\=:E185/
-  colorscheme default
-  set background=dark
-endtry
-
 function! SynGroup()
   let l:s = synID(line('.'), col('.'), 1)
   echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
@@ -60,7 +60,7 @@ hl(0, "MiniCursorWord", { underdotted = true })
 hl(0, "DiagnosticError", { fg = colors.red })
 hl(0, "DiagnosticWarn", { fg = colors.yellow })
 hl(0, "DiagnosticInfo", { fg = colors.blue })
-hl(0, "DiagnostiHint", { fg = colors.green })
+hl(0, "DiagnosticHint", { fg = colors.green })
 
 -- Diffs
 hl(0, "DiffAdd", { fg = colors.green })
@@ -95,13 +95,13 @@ hl(0, "NavicIconsArray", { link = "CmpItemKindClass" })
 hl(0, "NavicIconsObject", { link = "CmpItemKindClass" })
 hl(0, "NavicIconsKey", { link = "CmpItemKindKeyword" })
 hl(0, "NavicIconsKeyword", { link = "CmpItemKindKeyword" })
-hl(0, "NavicIconsNull", { fg = colors.blue, bg = "bg" })
+hl(0, "NavicIconsNull", { fg = colors.blue })
 hl(0, "NavicIconsEnumMember", { link = "CmpItemKindEnumMember" })
 hl(0, "NavicIconsStruct", { link = "CmpItemKindStruct" })
 hl(0, "NavicIconsEvent", { link = "CmpItemKindEvent" })
 hl(0, "NavicIconsOperator", { link = "CmpItemKindOperator" })
 hl(0, "NavicIconsTypeParameter", { link = "CmpItemKindTypeParameter" })
-hl(0, "NavicText", { fg = comment_fg, bg = "bg" })
-hl(0, "NavicSeparator", { fg = context, bg = "bg" })
+hl(0, "NavicText", { fg = comment_fg })
+hl(0, "NavicSeparator", { fg = context })
 
 return colors

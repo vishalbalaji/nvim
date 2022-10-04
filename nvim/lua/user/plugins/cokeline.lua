@@ -16,14 +16,12 @@ local components = {
 	indicator = {
 		text = function(buffer)
 			if buffer.is_focused then
-				return " "
-				-- return "▎"
+				return "▎"
 			else
 				if buffer.is_first then
 					return " "
 				else
-					-- return "▎"
-					return " "
+					return "▎"
 				end
 			end
 		end,
@@ -143,8 +141,7 @@ local components = {
 
 	cap = {
 		text = function(buffer)
-			-- return buffer.is_last and "▎" or ""
-			return ""
+			return buffer.is_last and "▎" or ""
 		end,
 		truncation = { priority = 1 },
 		fg = comments_fg,
@@ -168,7 +165,7 @@ cokeline.setup({
 			return buffer.is_focused and get_hex("Normal", "fg") or comments_fg
 		end,
 		bg = function(buffer)
-			return buffer.is_focused and get_hex("ColorColumn", "bg") or get_hex("TabLineFill", "bg")
+			return buffer.is_focused and get_hex("CursorLine", "bg") or get_hex("TabLineFill", "bg")
 		end,
     style = function (buffer)
 			return buffer.is_focused and "italic" or nil
