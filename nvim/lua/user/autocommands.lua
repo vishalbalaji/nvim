@@ -6,6 +6,11 @@ autocmd({ "VimEnter" }, {
 	command = "set formatoptions-=cro",
 })
 
+autocmd({ "BufWritePost" }, {
+	pattern = "xresources",
+	command = "silent !xrdb %",
+})
+
 autocmd({ "FileType" }, {
 	pattern = {
 		"Jaq",
