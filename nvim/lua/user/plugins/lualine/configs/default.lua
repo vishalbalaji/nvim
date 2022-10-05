@@ -1,13 +1,8 @@
-local status_ok, lualine = pcall(require, "lualine")
-if not status_ok then
-	return
+local function hide_in_width()
+	return vim.fn.winwidth(0) > 80
 end
 
-local hide_in_width = function()
-	return vim.fn.winwidth(0) > 100
-end
-
-lualine.setup({
+return {
 	options = {
 		icons_enabled = true,
 		theme = "auto",
@@ -42,7 +37,7 @@ lualine.setup({
 				symbols = {
 					error = " ",
 					warn = " ",
-          info = " ",
+					info = " ",
 					hint = " ",
 				},
 			},
@@ -53,11 +48,11 @@ lualine.setup({
 			{
 				"diff",
 				symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
-        cond = hide_in_width
+				cond = hide_in_width,
 			},
 			"branch",
 			"filetype",
 		},
 		lualine_z = { "progress" },
 	},
-})
+}
