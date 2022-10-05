@@ -77,6 +77,7 @@ mason_lspconfig.setup_handlers({
 				},
 			}
 		elseif server_name == "pyright" then
+      opts.cmd = { "pyright-langserver", "--stdio" }
 			opts.root_pattern = vim.loop.cwd
 		end
 

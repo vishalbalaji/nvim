@@ -4,7 +4,7 @@ return {
     python = {
       analysis = {
         typeCheckingMode = "basic",
-        diagnosticMode = "workspace",
+        diagnosticMode = "openFilesOnly",
         inlayHints = {
           variableTypes = true,
           functionReturnTypes = true,
