@@ -61,6 +61,7 @@ hl(0, "DiagnosticError", { fg = colors.red })
 hl(0, "DiagnosticWarn", { fg = colors.yellow })
 hl(0, "DiagnosticInfo", { fg = colors.blue })
 hl(0, "DiagnosticHint", { fg = colors.green })
+hl(0, "DiagnosticUnderlineError", { undercurl = true, fg = colors.red })
 
 -- Diffs
 hl(0, "DiffAdd", { fg = colors.green })
