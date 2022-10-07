@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-parameter
 -- MIT License Copyright (c) 2021 Evgeni Chasnovski
 
 -- Documentation ==============================================================
