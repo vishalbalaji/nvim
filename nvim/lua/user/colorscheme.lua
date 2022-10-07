@@ -33,6 +33,11 @@ hl(0, "WinSeparator", { link = "FloatBorder" })
 require("headlines").setup({})
 hl(0, "Quote", { fg = colors.blue, bold = true })
 
+-- nvim-notify
+-- require("notify").setup({
+-- 	background_colour = "#000000",
+-- })
+
 -- NvimTree
 hl(0, "NvimTreeNormal", { link = "Normal" })
 hl(0, "NvimTreeNormalNC", { link = "Normal" })

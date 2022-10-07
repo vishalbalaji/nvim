@@ -1,10 +1,10 @@
 require("user.plugins.impatient")
 
 -- General
+require("user.options")
 require("user.autocommands")
 require("user.colorscheme")
 require("user.keymaps_commands")
-require("user.options")
 
 -- Plugins
 require("user.plugins")

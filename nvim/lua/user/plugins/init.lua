@@ -248,6 +248,28 @@ packer.startup(function(use)
 			vim.api.nvim_set_keymap("n", "<S-Tab>", "zA", { noremap = false, silent = true })
 		end,
 	})
+	use({
+		"folke/noice.nvim",
+		event = "VimEnter",
+		config = function()
+			require("noice").setup({
+				cmdline = {
+					view = "cmdline", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+				},
+				popupmenu = {
+					enabled = false, -- disable if you use something like cmp-cmdline
+				},
+				notify = {
+					enabled = true,
+				},
+			})
+		end,
+		requires = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
+	})
 
 	-- -- Git
 	use("tpope/vim-fugitive")
