@@ -45,6 +45,10 @@ hl(0, "NvimTreeWinSeparator", { link = "WinSeparator" })
 -- Trouble
 hl(0, "TroubleNormal", { link = "Normal" })
 
+-- QuickScope
+hl(0, "QuickScopePrimary", { fg = colors.green, standout = true })
+hl(0, "QuickScopeSecondary", { fg = colors.yellow, standout = true })
+
 -- WhichKey
 hl(0, "WhichKeyFloat", { link = "Normal" })
 

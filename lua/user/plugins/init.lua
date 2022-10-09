@@ -201,8 +201,6 @@ packer.startup(function(use)
 		"unblevable/quick-scope",
 		config = function()
 			vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
-			vim.api.nvim_set_hl(0, "QuickScopePrimary", { fg = "#98be6b", standout = true })
-			vim.api.nvim_set_hl(0, "QuickScopeSecondary", { fg = "#ecbe7b", standout = true })
 		end,
 	})
 	use("anuvyklack/pretty-fold.nvim")
