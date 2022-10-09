@@ -136,7 +136,6 @@ packer.startup(function(use)
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 	use("folke/which-key.nvim")
-	-- use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
 	use("famiu/bufdelete.nvim")
 	use({
 		"kwkarlwang/bufresize.nvim",
@@ -275,6 +274,9 @@ packer.startup(function(use)
 				"rcarriga/nvim-notify",
 				config = function()
 					require("notify").setup({
+						on_open = function(win)
+							vim.api.nvim_win_set_config(win, { focusable = false })
+						end,
 						background_color = "#000000",
 						max_width = 50,
 						timeout = 1000,

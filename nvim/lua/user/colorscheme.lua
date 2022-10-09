@@ -18,7 +18,7 @@ endfun
 local hl = vim.api.nvim_set_hl
 local comment_fg = vim.api.nvim_get_hl_by_name("Comment", true).foreground
 local error_fg = colors.red
-local context = colors.gray or colors.grey
+local navic_fg = colors.base7 or comment_fg
 
 -- General Highlights
 hl(0, "Comment", { fg = comment_fg, bold = true, italic = true })
@@ -106,7 +106,7 @@ hl(0, "NavicIconsStruct", { link = "CmpItemKindStruct" })
 hl(0, "NavicIconsEvent", { link = "CmpItemKindEvent" })
 hl(0, "NavicIconsOperator", { link = "CmpItemKindOperator" })
 hl(0, "NavicIconsTypeParameter", { link = "CmpItemKindTypeParameter" })
-hl(0, "NavicText", { fg = comment_fg })
-hl(0, "NavicSeparator", { fg = context })
+hl(0, "NavicText", { fg = navic_fg })
+hl(0, "NavicSeparator", { fg = navic_fg })
 
 return colors
