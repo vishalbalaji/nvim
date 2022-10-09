@@ -2,8 +2,18 @@ local M = {}
 local autocmd = vim.api.nvim_create_autocmd
 
 autocmd({ "VimEnter" }, {
+	once = true,
 	pattern = "*",
 	command = "set formatoptions-=cro",
+})
+
+autocmd("BufRead", {
+	callback = function()
+		autocmd("BufWinEnter", {
+			once = true,
+			command = "normal! zx",
+		})
+	end,
 })
 
 autocmd({ "BufWritePost" }, {
@@ -96,6 +106,7 @@ autocmd({ "CursorHold" }, {
 M.bullets_enabled_file_types = { "markdown" }
 
 autocmd({ "BufEnter" }, {
+	once = true,
 	pattern = "*",
 	callback = function()
 		if not vim.tbl_contains(M.bullets_enabled_file_types, vim.bo.filetype) then
