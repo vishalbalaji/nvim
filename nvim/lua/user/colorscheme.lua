@@ -21,7 +21,6 @@ local error_fg = colors.red
 local context = colors.gray or colors.grey
 
 -- General Highlights
--- hl(0, "Normal", { fg = "fg", bg = "NONE" })
 hl(0, "Comment", { fg = comment_fg, bold = true, italic = true })
 hl(0, "NonText", { bg = "NONE", fg = comment_fg })
 hl(0, "SpellBad", { sp = error_fg, undercurl = true })
@@ -30,7 +29,7 @@ hl(0, "FloatBorder", { fg = comment_fg, bg = "NONE" })
 hl(0, "WinSeparator", { link = "FloatBorder" })
 
 -- Headlines
-require("headlines").setup({})
+require("headlines").setup({ markdown = { fat_headlines = false } })
 hl(0, "Quote", { fg = colors.blue, bold = true })
 
 -- nvim-notify

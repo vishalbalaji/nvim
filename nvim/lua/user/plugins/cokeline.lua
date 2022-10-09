@@ -11,6 +11,7 @@ local colors = require("user.colorscheme")
 local comments_fg = get_hex("Comment", "fg")
 local errors_fg = colors.red
 local warnings_fg = colors.yellow
+local cursorline_bg = get_hex("CursorLine", "bg")
 
 local components = {
 	indicator = {
@@ -165,7 +166,7 @@ cokeline.setup({
 			return buffer.is_focused and get_hex("Normal", "fg") or comments_fg
 		end,
 		bg = function(buffer)
-			return buffer.is_focused and get_hex("CursorLine", "bg") or get_hex("TabLineFill", "bg")
+			return buffer.is_focused and cursorline_bg or get_hex("TabLineFill", "bg")
 		end,
     style = function (buffer)
 			return buffer.is_focused and "italic" or nil

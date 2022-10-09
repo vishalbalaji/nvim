@@ -5,6 +5,8 @@ end
 
 -- Now don't forget to initialize lualine
 local config = require("user.plugins.lualine.configs.evil_lualine")
+
 config.options.theme.normal.c.bg = "NONE"
 config.extensions = { "quickfix", "aerial", "nvim-tree", "toggleterm", "man" }
+
 lualine.setup(config)

@@ -43,11 +43,6 @@ map("v", "*", "c*<Esc>pa*<Esc>gvll", opts)
 -- -- General Purpose
 local escCommand = "<Esc><cmd>noh<CR>"
 
-local _, notify = pcall(require, "notify")
-if _ then
-  escCommand = escCommand .. "<cmd>lua require('notify').dismiss()<CR>"
-end
-
 map("n", "<Esc>", escCommand, opts)
 map("n", "<Tab>", "za", opts)
 map("n", "<S-Tab>", "zA", opts)

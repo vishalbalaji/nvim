@@ -46,7 +46,7 @@ vim.g.indent_blankline_context_patterns = {
 -- HACK: work-around for https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
 vim.wo.colorcolumn = "99999"
 
-vim.cmd [[highlight IndentBlanklineIndent1 gui=bold]]
+vim.cmd([[highlight IndentBlanklineIndent1 gui=bold]])
 -- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B]]
 -- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379]]
 -- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2]]
@@ -59,9 +59,10 @@ vim.cmd [[highlight IndentBlanklineIndent1 gui=bold]]
 
 indent_blankline.setup({
 	show_current_context = true,
+  show_current_context_start = true,
 	-- char_highlight_list = {
-	  -- "IndentBlanklineIndent1",
-	  -- "IndentBlanklineIndent2",
-	  -- "IndentBlanklineIndent3",
+	-- "IndentBlanklineIndent1",
+	-- "IndentBlanklineIndent2",
+	-- "IndentBlanklineIndent3",
 	-- },
 })

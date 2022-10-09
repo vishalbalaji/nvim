@@ -20,6 +20,9 @@ local sources = {
 	null_ls.builtins.formatting.stylua,
 
 	-- Shell
+	null_ls.builtins.code_actions.shellcheck.with({
+		extra_filetypes = { "zsh" },
+	}),
 	null_ls.builtins.diagnostics.shellcheck.with({
 		extra_filetypes = { "zsh" },
 	}),
