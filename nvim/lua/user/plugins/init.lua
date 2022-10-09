@@ -208,6 +208,12 @@ packer.startup(function(use)
 	})
 	use("anuvyklack/pretty-fold.nvim")
 	use({
+		"milisims/foldhue.nvim",
+		config = function()
+			require("foldhue").enable()
+		end,
+	})
+	use({
 		"booperlv/nvim-gomove",
 		config = function()
 			require("gomove").setup({ map_defaults = false })
@@ -237,8 +243,9 @@ packer.startup(function(use)
 		"stevearc/aerial.nvim",
 		config = function()
 			require("aerial").setup({
-				manage_folds = false,
 				link_tree_to_folds = false,
+				link_folds_to_tree = false,
+				manage_folds = false,
 				layout = {
 					width = 0.2,
 					max_width = { 30 },
@@ -254,20 +261,27 @@ packer.startup(function(use)
 		config = function()
 			require("noice").setup({
 				cmdline = {
-					view = "cmdline", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+					view = "cmdline",
 				},
 				popupmenu = {
 					enabled = false, -- disable if you use something like cmp-cmdline
-				},
-				notify = {
-					enabled = true,
 				},
 			})
 		end,
 		requires = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
+			{
+				"rcarriga/nvim-notify",
+				config = function()
+					require("notify").setup({
+						background_color = "#000000",
+						max_width = 40,
+						timeout = 1000,
+						stages = "fade",
+					})
+				end,
+			},
 		},
 	})
 
