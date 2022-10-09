@@ -47,7 +47,7 @@ return {
 		lualine_y = {
 			{
 				"diff",
-				symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+				symbols = { added = " ", modified = "柳", removed = " " },
 				cond = hide_in_width,
 			},
 			"branch",
