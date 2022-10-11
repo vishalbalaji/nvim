@@ -61,55 +61,19 @@ config.rainbow = {
 	},
 }
 
-configs.setup(config)
-require("pretty-fold").setup({})
+config.playground = {
+	enable = true,
+	keybindings = {
+		toggle_query_editor = "e",
+	},
+}
 
-require("vim.treesitter.query").set_query(
-	"markdown",
-	"highlights",
-	[[
-;From MDeiml/tree-sitter-markdown
-(atx_heading (inline) @text.title)
-(setext_heading (paragraph) @text.title)
-[
-  (atx_h1_marker)
-  (atx_h2_marker)
-  (atx_h3_marker)
-  (atx_h4_marker)
-  (atx_h5_marker)
-  (atx_h6_marker)
-  (setext_h1_underline)
-  (setext_h2_underline)
-] @punctuation.special
-[
-  (link_title)
-  (indented_code_block)
-  (fenced_code_block)
-] @text.literal
-[
-  (fenced_code_block_delimiter)
-] @punctuation.delimiter
-(code_fence_content) @none
-[
-  (link_destination)
-] @text.uri
-[
-  (link_label)
-] @text.reference
-[
-  (list_marker_plus)
-  (list_marker_minus)
-  (list_marker_star)
-  (list_marker_dot)
-  (list_marker_parenthesis)
-  (thematic_break)
-] @punctuation.special
-[
-  (block_continuation)
-  (block_quote_marker)
-] @punctuation.special
-[
-  (backslash_escape)
-] @string.escape
-]]
-)
+configs.query_linter = {
+	enable = true,
+	use_virtual_text = true,
+	lint_events = { "BufWrite", "CursorHold" },
+}
+
+configs.setup(config)
+
+require("pretty-fold").setup({})

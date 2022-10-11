@@ -110,6 +110,7 @@ cmp.setup({
 				emoji = "[Emoji]",
 				pandoc_references = "[BibTex]",
 				nvim_lsp_signature_help = "[Sign]",
+				plugins = "[Plugins]",
 			})[entry.source.name]
 			return vim_item
 		end,
@@ -136,6 +137,7 @@ cmp.setup({
 		{ name = "emoji", insert = false },
 		{ name = "pandoc_references" },
 		{ name = "nvim_lsp_signature_help" },
+		{ name = "plugins" },
 	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
@@ -177,3 +179,4 @@ cmp.setup.cmdline({ "/", "?" }, {
 		{ name = "buffer" },
 	},
 })
+

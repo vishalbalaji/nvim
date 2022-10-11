@@ -106,7 +106,6 @@ autocmd({ "CursorHold" }, {
 M.bullets_enabled_file_types = { "markdown" }
 
 autocmd({ "BufEnter" }, {
-	once = true,
 	pattern = "*",
 	callback = function()
 		if not vim.tbl_contains(M.bullets_enabled_file_types, vim.bo.filetype) then

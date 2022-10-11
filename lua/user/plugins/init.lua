@@ -109,6 +109,14 @@ packer.startup(function(use)
 	use("jc-doyle/cmp-pandoc-references")
 	use("saadparwaiz1/cmp_luasnip") -- snippet completions
 	use("lukas-reineke/cmp-under-comparator")
+	use({
+		"KadoBOT/cmp-plugins",
+		config = function()
+			require("cmp-plugins").setup({
+				files = { "plugins/init.lua" },
+			})
+		end,
+	})
 
 	-- -- -- Snippets
 	use("L3MON4D3/LuaSnip") --snippet engine
