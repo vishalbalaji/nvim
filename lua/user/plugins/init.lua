@@ -283,6 +283,7 @@ packer.startup(function(use)
 						on_open = function(win)
 							vim.api.nvim_win_set_config(win, { focusable = false })
 						end,
+            render = "minimal",
 						background_color = "#000000",
 						max_width = 50,
 						timeout = 1000,
