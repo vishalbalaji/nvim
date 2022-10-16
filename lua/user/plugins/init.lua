@@ -283,7 +283,7 @@ packer.startup(function(use)
 						on_open = function(win)
 							vim.api.nvim_win_set_config(win, { focusable = false })
 						end,
-            render = "minimal",
+						render = "minimal",
 						background_color = "#000000",
 						max_width = 50,
 						timeout = 1000,
@@ -297,6 +297,14 @@ packer.startup(function(use)
 		"axelvc/template-string.nvim",
 		config = function()
 			require("template-string").setup({})
+		end,
+	})
+	use({
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup({
+				ignore = "^$",
+			})
 		end,
 	})
 
