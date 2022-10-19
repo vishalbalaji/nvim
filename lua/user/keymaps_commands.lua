@@ -13,8 +13,18 @@ vim.g.maplocalleader = " "
 cmd("Q", "quitall!", {})
 
 -- General Keymaps
-map("n", "gx", "<cmd>silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>", opts)
-map("v", "gx", "<cmd>silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>", opts)
+map(
+	"n",
+	"gx",
+	"<cmd>silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1) . ' & disown'<CR><cmd>echo 'Opening in browser...'<CR>",
+	opts
+)
+map(
+	"v",
+	"gx",
+	"<cmd>silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1) . ' & disown'<CR><cmd>echo 'Opening in browser...'<CR>",
+	opts
+)
 
 -- -- Move text up and down
 map("n", "<A-h>", "<Plug>GoNSMLeft", opts)
