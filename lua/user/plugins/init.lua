@@ -72,16 +72,6 @@ packer.startup(function(use)
 	})
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 	use({
-		"j-hui/fidget.nvim",
-		config = function()
-			require("fidget").setup({
-				window = {
-					blend = 0,
-				},
-			})
-		end,
-	})
-	use({
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		config = function()
@@ -96,6 +86,10 @@ packer.startup(function(use)
 	use("stevearc/dressing.nvim")
 	use("lvimuser/lsp-inlayhints.nvim")
 	use("b0o/schemastore.nvim")
+	use({
+		"ThePrimeagen/harpoon",
+		requires = "nvim-lua/plenary.nvim",
+	})
 
 	-- -- CMP
 	use("hrsh7th/cmp-buffer") -- buffer completions
@@ -199,13 +193,6 @@ packer.startup(function(use)
 	use("lukas-reineke/indent-blankline.nvim")
 	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
 	use({
-		"ThePrimeagen/refactoring.nvim",
-		requires = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-treesitter/nvim-treesitter" },
-		},
-	})
-	use({
 		"unblevable/quick-scope",
 		config = function()
 			vim.g.qs_highlight_on_keys = { "f", "F", "t", "T" }
@@ -262,19 +249,13 @@ packer.startup(function(use)
 	})
 	use({
 		"folke/noice.nvim",
-		event = "VimEnter",
 		config = function()
 			require("noice").setup({
-				cmdline = {
-					view = "cmdline",
-				},
-				popupmenu = {
-					enabled = false, -- disable if you use something like cmp-cmdline
-				},
+				cmdline = { view = "cmdline", view_search = "cmdline" },
+				popupmenu = { enabled = false },
 			})
 		end,
 		requires = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 			"MunifTanjim/nui.nvim",
 			{
 				"rcarriga/nvim-notify",
@@ -304,12 +285,15 @@ packer.startup(function(use)
 		config = function()
 			require("Comment").setup({
 				ignore = "^$",
+				mappings = {
+					basic = false,
+					extra = false,
+				},
 			})
 		end,
 	})
 
 	-- -- Git
-	use("tpope/vim-fugitive")
 	use({
 		"lewis6991/gitsigns.nvim",
 		config = function()
@@ -338,5 +322,4 @@ packer.startup(function(use)
 		config = 'require("femaco").setup()',
 	})
 	use({ "lukas-reineke/headlines.nvim" })
-	-- use("davidgranstrom/nvim-markdown-previw")
 end)

@@ -11,9 +11,13 @@ local sources = {
 	null_ls.builtins.completion.spell.with({ filetypes = { "markdown", "latex" } }),
 	null_ls.builtins.formatting.cbfmt,
 	null_ls.builtins.formatting.yamlfmt,
-	null_ls.builtins.formatting.jq,
 	null_ls.builtins.diagnostics.commitlint.with({
 		extra_args = { "-g", home_dir .. "/.local/share/nvim/commitlint.config.js" },
+	}),
+
+	-- CSS
+	null_ls.builtins.formatting.prettierd.with({
+		filetypes = { "css", "json" },
 	}),
 
 	-- Lua
@@ -25,6 +29,9 @@ local sources = {
 	}),
 	null_ls.builtins.diagnostics.shellcheck.with({
 		extra_filetypes = { "zsh" },
+		diagnostic_config = {
+			update_in_insert = true,
+		},
 	}),
 	null_ls.builtins.formatting.shfmt.with({
 		extra_filetypes = { "zsh" },

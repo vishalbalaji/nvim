@@ -110,8 +110,8 @@ map("n", "<A-S-v>", "<cmd>vsplit<CR>", opts)
 map("n", "<A-S-x>", closeBuf, opts)
 
 -- -- Comments
-vim.api.nvim_set_keymap("n", "<C-/>", "gcc", term_opts)
-vim.api.nvim_set_keymap("v", "<C-/>", "gcgv", term_opts)
+map("n", "<C-/>", "<Plug>(comment_toggle_linewise_current)", opts)
+map("x", "<C-/>", "<Plug>(comment_toggle_linewise_visual)gv", opts)
 
 -- -- Git
 local _e, _ = pcall(require, "toggleterm.terminal")
@@ -181,6 +181,13 @@ local wk_n_mappings = {
 		_lazygit_toggle,
 		"LazyGit",
 	},
+	h = {
+		name = "Harpoon",
+		a = { "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'harpoon: Mark added'<CR>", "Add mark" },
+		h = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Toggle" },
+		n = { "<cmd>lua require('harpoon.ui').nav_next()<CR>", "Next" },
+		p = { "<cmd>lua require('harpoon.ui').nav_prev()<CR>", "Previous" },
+	},
 	l = {
 		name = "LSP",
 		a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
@@ -197,7 +204,7 @@ local wk_n_mappings = {
 		s = { "<cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
 		t = {
 			function()
-				vim.cmd([[ TroubleToggle ]])
+				vim.cmd([[ TroubleToggle workspace_diagnostics ]])
 				local troubleBuffer = vim.api.nvim_exec([[ echo win_getid(winnr('$')) ]], true)
 				if require("nvim-tree.view").is_visible() then
 					vim.cmd([[ NvimTreeClose ]])
@@ -247,6 +254,7 @@ local wk_v_mappings = {
 		l = { "<cmd>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
 		t = { "<cmd>TroubleToggle<CR>", "Toggle Trouble" },
 	},
+	y = { '"+y', "Copy to Clipboard" },
 }
 
 which_key.setup(wk_config.setup)

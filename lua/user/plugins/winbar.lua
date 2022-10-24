@@ -24,6 +24,7 @@ M.winbar_filetype_exclude = {
 	"lab",
 	"Markdown",
 	"toggleterm",
+  "noice",
 	"",
 }
 
@@ -44,11 +45,6 @@ M.get_filename = function()
 		vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
 		if f.isempty(file_icon) then
 			file_icon = ""
-			file_icon_color = ""
-		end
-
-		if filename == "Trouble" then
-			file_icon = "𝐓"
 			file_icon_color = ""
 		end
 
