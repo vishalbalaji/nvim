@@ -31,6 +31,10 @@ packer.startup(function(use)
 
 	-- ColorScheme
 	use({ "NTBBloodbath/doom-one.nvim" })
+	use({
+		"catppuccin/nvim",
+		as = "catppuccin",
+	})
 
 	-- Treesitter
 	use({
@@ -250,6 +254,9 @@ packer.startup(function(use)
 				cmdline = { view = "cmdline" },
 				views = {
 					mini = {
+						win_options = {
+							winblend = 0,
+						},
 						position = {
 							row = "97%",
 							col = "100%",
@@ -306,6 +313,7 @@ packer.startup(function(use)
 		"ThePrimeagen/harpoon",
 		requires = "nvim-lua/plenary.nvim",
 	})
+	use("fladson/vim-kitty")
 
 	-- -- Git
 	use({

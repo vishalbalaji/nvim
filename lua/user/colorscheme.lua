@@ -1,6 +1,17 @@
-vim.g.doom_one_terminal_colors = false
-local colors = require("doom-one.colors")[vim.o.background]
-local colorscheme = "doom-one"
+local flavour = "mocha"
+require("catppuccin").setup({
+	flavour = flavour, -- mocha, macchiato, frappe, latte
+  transparent_background = false,
+})
+local colors = require("catppuccin.palettes").get_palette()
+local colorscheme = "catppuccin"
+
+-- vim.g.doom_one_terminal_colors = false
+-- vim.g.doom_one_transparent_background = false
+-- local colors = require("doom-one.colors")[vim.o.background]
+-- local colorscheme = "doom-one"
+
+-- print(vim.inspect(colors))
 
 vim.cmd(
 	"try | colorscheme "
@@ -33,7 +44,7 @@ end
 
 -- Headlines
 local function headlines_hls()
-  require("headlines").setup({ markdown = { fat_headlines = false } })
+	require("headlines").setup({ markdown = { fat_headlines = false } })
 	hl(0, "Quote", { fg = colors.blue, bold = true })
 end
 
