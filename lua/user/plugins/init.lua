@@ -86,10 +86,6 @@ packer.startup(function(use)
 	use("stevearc/dressing.nvim")
 	use("lvimuser/lsp-inlayhints.nvim")
 	use("b0o/schemastore.nvim")
-	use({
-		"ThePrimeagen/harpoon",
-		requires = "nvim-lua/plenary.nvim",
-	})
 
 	-- -- CMP
 	use("hrsh7th/cmp-buffer") -- buffer completions
@@ -251,27 +247,34 @@ packer.startup(function(use)
 		"folke/noice.nvim",
 		config = function()
 			require("noice").setup({
-				cmdline = { view = "cmdline", view_search = "cmdline" },
-				popupmenu = { enabled = false },
+				cmdline = { view = "cmdline" },
+				views = {
+					mini = {
+						position = {
+							row = "97%",
+							col = "100%",
+						},
+					},
+				},
+				popupmenu = { enabled = true, backend = "cmp" },
+				routes = {
+					{
+						view = "mini",
+						filter = { event = "msg_showmode" },
+					},
+					{
+						filter = {
+							event = "msg_show",
+							kind = "",
+							find = "written",
+						},
+						opts = { skip = true },
+					},
+				},
 			})
 		end,
 		requires = {
 			"MunifTanjim/nui.nvim",
-			{
-				"rcarriga/nvim-notify",
-				config = function()
-					require("notify").setup({
-						on_open = function(win)
-							vim.api.nvim_win_set_config(win, { focusable = false })
-						end,
-						render = "minimal",
-						background_color = "#000000",
-						max_width = 50,
-						timeout = 1000,
-						stages = "fade",
-					})
-				end,
-			},
 		},
 	})
 	use({
@@ -291,6 +294,17 @@ packer.startup(function(use)
 				},
 			})
 		end,
+	})
+	use({
+		"kylechui/nvim-surround",
+		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+		config = function()
+			require("nvim-surround").setup({})
+		end,
+	})
+	use({
+		"ThePrimeagen/harpoon",
+		requires = "nvim-lua/plenary.nvim",
 	})
 
 	-- -- Git

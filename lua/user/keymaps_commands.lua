@@ -19,12 +19,15 @@ map(
 	"<cmd>silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1) . ' & disown'<CR><cmd>echo 'Opening in browser...'<CR>",
 	opts
 )
+
 map(
 	"v",
 	"gx",
 	"<cmd>silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1) . ' & disown'<CR><cmd>echo 'Opening in browser...'<CR>",
 	opts
 )
+
+map("n", "<F1>", "", opts)
 
 -- -- Move text up and down
 map("n", "<A-h>", "<Plug>GoNSMLeft", opts)
@@ -51,9 +54,7 @@ map("v", "{", "c{<Esc>pa}<Esc>va{", opts)
 map("v", "*", "c*<Esc>pa*<Esc>gvll", opts)
 
 -- -- General Purpose
-local escCommand = "<Esc><cmd>noh<CR>"
-
-map("n", "<Esc>", escCommand, opts)
+map("n", "<Esc>", "<Esc><cmd>noh<CR>", opts)
 map("n", "<Tab>", "za", opts)
 map("n", "<S-Tab>", "zA", opts)
 
@@ -80,7 +81,7 @@ map("n", "<C-S-0>", "<C-w>=", opts)
 
 -- -- Buffers/Tabs
 local function closeBuf()
-	local min_splits = 1
+	local min_splits = 3
 	if require("nvim-tree.view").is_visible() then
 		min_splits = min_splits + 1
 	end
@@ -91,7 +92,7 @@ local function closeBuf()
 		min_splits = min_splits + 1
 	end
 
-	if #vim.api.nvim_tabpage_list_wins(0) > min_splits then
+	if #vim.api.nvim_tabpage_list_wins(0) + 1 > min_splits then
 		vim.cmd([[ call feedkeys("\<C-w>q") ]])
 	else
 		vim.cmd([[ Bdelete! ]])
@@ -181,13 +182,6 @@ local wk_n_mappings = {
 		_lazygit_toggle,
 		"LazyGit",
 	},
-	h = {
-		name = "Harpoon",
-		a = { "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'harpoon: Mark added'<CR>", "Add mark" },
-		h = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Toggle" },
-		n = { "<cmd>lua require('harpoon.ui').nav_next()<CR>", "Next" },
-		p = { "<cmd>lua require('harpoon.ui').nav_prev()<CR>", "Previous" },
-	},
 	l = {
 		name = "LSP",
 		a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
@@ -256,6 +250,18 @@ local wk_v_mappings = {
 	},
 	y = { '"+y', "Copy to Clipboard" },
 }
+
+wk_n_mappings.h = {
+	name = "Harpoon",
+	a = { "<cmd>lua require('harpoon.mark').add_file()<CR><cmd>echo 'harpoon: Mark added'<CR>", "Add mark" },
+	h = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Toggle" },
+	n = { "<cmd>lua require('harpoon.ui').nav_next()<CR>", "Next" },
+	p = { "<cmd>lua require('harpoon.ui').nav_prev()<CR>", "Previous" },
+}
+
+for i = 1, 5 do
+	wk_n_mappings.h[tostring(i)] = { "<cmd>lua require('harpoon.ui').nav_file(" .. i .. ")<CR>", "Goto mark " .. i }
+end
 
 which_key.setup(wk_config.setup)
 which_key.register(wk_n_mappings, wk_config.nopts)

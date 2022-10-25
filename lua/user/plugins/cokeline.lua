@@ -168,9 +168,9 @@ cokeline.setup({
 		bg = function(buffer)
 			return buffer.is_focused and cursorline_bg or get_hex("TabLineFill", "bg")
 		end,
-    style = function (buffer)
+		style = function(buffer)
 			return buffer.is_focused and "italic" or nil
-    end
+		end,
 	},
 
 	sidebar = {

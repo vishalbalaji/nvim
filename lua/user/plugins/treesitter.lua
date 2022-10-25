@@ -24,7 +24,10 @@ config.highlight = {
 }
 
 -- -- Indent
-config.indent = { enable = true, disable = { "yaml", "python" } }
+config.indent = {
+	enable = true,
+	disable = { "yaml", "python" },
+}
 
 -- -- Context Commentstring
 config.context_commentstring = {

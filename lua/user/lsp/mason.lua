@@ -67,8 +67,10 @@ mason_lspconfig.setup_handlers({
 
 		if server_name == "sumneko_lua" then
 			opts.settings.Lua.diagnostics.workspaceDelay = -1
+
 		elseif server_name == "denols" then
 			opts.root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
+
 		elseif server_name == "tsserver" then
 			opts.root_dir = lspconfig.util.root_pattern("package.json")
 			opts.init_options = {
@@ -76,9 +78,11 @@ mason_lspconfig.setup_handlers({
 					importModuleSpecifierPreference = "non-relative",
 				},
 			}
+
 		elseif server_name == "pyright" then
 			opts.cmd = { "pyright-langserver", "--stdio" }
 			opts.root_pattern = vim.loop.cwd
+
 		end
 
 		opts.on_attach = handlers.on_attach

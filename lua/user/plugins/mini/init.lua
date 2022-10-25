@@ -32,3 +32,5 @@ require("user.plugins.mini.cursorword").setup({ delay = 300 })
 
 -- Pairs
 require("user.plugins.mini.pairs").setup({})
+
+-- require("user.plugins.mini.surround").setup({})

@@ -13,6 +13,10 @@ autocmd("BufRead", {
 			once = true,
 			command = "normal! zx",
 		})
+		-- autocmd("BufWinEnter", {
+		-- 	once = true,
+		-- 	command = "normal! zM",
+		-- })
 	end,
 })
 
