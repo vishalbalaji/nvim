@@ -44,17 +44,17 @@ local sources = {
 	-- TS/JS
 	null_ls.builtins.code_actions.eslint_d.with({
 		condition = function(utils)
-			return utils.root_has_file({ ".eslintrc", ".eslintrc.js", ".eslintrc.cjs" })
+			return utils.root_has_file({ ".eslintrc", ".eslintrc.json", ".eslintrc.js", ".eslintrc.cjs" })
 		end,
 	}),
 	null_ls.builtins.diagnostics.eslint_d.with({
 		condition = function(utils)
-			return utils.root_has_file({ ".eslintrc", ".eslintrc.js", ".eslintrc.cjs" })
+			return utils.root_has_file({ ".eslintrc", ".eslintrc.json", ".eslintrc.js", ".eslintrc.cjs" })
 		end,
 	}),
 	null_ls.builtins.formatting.eslint_d.with({
 		condition = function(utils)
-			return utils.root_has_file({ ".eslintrc", ".eslintrc.js", ".eslintrc.cjs" })
+			return utils.root_has_file({ ".eslintrc", ".eslintrc.json", ".eslintrc.js", ".eslintrc.cjs" })
 		end,
 	}),
 }

@@ -1,18 +1,18 @@
 -- Impatient
 require("user.plugins.impatient")
+require("user.plugins")
 
 -- General
 require("user.options")
+require("user.keymaps_commands")
 require("user.autocommands")
 require("user.colorscheme")
-require("user.keymaps_commands")
 
 -- LSP
 require("user.lsp")
 require("user.lsp.cmp")
 
 -- Plugins
-require("user.plugins")
 require("user.plugins.cokeline")
 require("user.plugins.indentline")
 require("user.plugins.lualine")
