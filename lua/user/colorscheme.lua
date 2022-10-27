@@ -108,7 +108,7 @@ end
 
 general_hls()
 headlines_hls()
-nvimtree_hls()
+-- nvimtree_hls()
 trouble_hls()
 quickscope_hls()
 whichkey_hls()
