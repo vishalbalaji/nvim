@@ -1,6 +1,25 @@
 local M = {}
 local autocmd = vim.api.nvim_create_autocmd
 
+-- Set kitty border to 0 when launching neovim
+local kitty_group = vim.api.nvim_create_augroup("kitty_mp", {
+	clear = true,
+})
+
+autocmd({ "VimEnter" }, {
+	once = true,
+	pattern = "*",
+	group = kitty_group,
+	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0 ]],
+})
+
+autocmd({ "VimLeave" }, {
+	once = true,
+	pattern = "*",
+	group = kitty_group,
+	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10 ]],
+})
+
 autocmd({ "VimEnter" }, {
 	once = true,
 	pattern = "*",
