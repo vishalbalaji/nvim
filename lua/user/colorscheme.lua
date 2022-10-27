@@ -1,7 +1,7 @@
 local flavour = "mocha"
 require("catppuccin").setup({
 	flavour = flavour, -- mocha, macchiato, frappe, latte
-  transparent_background = false,
+	transparent_background = false,
 })
 local colors = require("catppuccin.palettes").get_palette()
 local colorscheme = "catppuccin"
