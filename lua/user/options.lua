@@ -11,6 +11,7 @@ local options = {
 	foldexpr = "nvim_treesitter#foldexpr()",
 	foldlevel = 9999,
 	foldmethod = "expr",
+  guicursor="n-v-c-i:block",
 	guifont = "JetBrainsMono Nerd Font:h7", -- the font used in graphical neovim applications
 	hlsearch = true, -- highlight all matches on previous search pattern
 	ignorecase = true, -- ignore case in search patterns
