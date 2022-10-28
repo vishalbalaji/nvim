@@ -42,12 +42,6 @@ local function general_hls()
 	hl(0, "SignColumn", { fg = "fg", bg = "NONE" })
 end
 
--- Headlines
-local function headlines_hls()
-	require("headlines").setup({ markdown = { fat_headlines = false } })
-	hl(0, "Quote", { fg = colors.blue, bold = true })
-end
-
 -- NvimTree
 local function nvimtree_hls()
 	hl(0, "NvimTreeNormal", { link = "Normal" })
@@ -106,8 +100,13 @@ local function cokeline_hls()
 	hl(0, "TablineFill", { link = "Normal" })
 end
 
+-- IndentBlankline
+local function indentblankline_hls()
+	hl(0, "IndentBlanklineContextStart", { special = colors.yellow, underline = true })
+	hl(0, "IndentBlanklineContextChar", { fg = colors.yellow })
+end
+
 general_hls()
-headlines_hls()
 -- nvimtree_hls()
 trouble_hls()
 quickscope_hls()
@@ -117,5 +116,6 @@ cursorword_hls()
 lsp_hls()
 git_hls()
 cokeline_hls()
+indentblankline_hls()
 
 return colors

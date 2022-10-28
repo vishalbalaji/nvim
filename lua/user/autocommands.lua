@@ -10,14 +10,14 @@ autocmd({ "VimEnter" }, {
 	once = true,
 	pattern = "*",
 	group = kitty_group,
-	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0 ]],
+	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0 & ]],
 })
 
-autocmd({ "VimLeave" }, {
+autocmd({ "VimLeavePre" }, {
 	once = true,
 	pattern = "*",
 	group = kitty_group,
-	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10 ]],
+	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10 & ]],
 })
 
 autocmd({ "VimEnter" }, {

@@ -336,5 +336,4 @@ packer.startup(function(use)
 		"AckslD/nvim-FeMaco.lua",
 		config = 'require("femaco").setup()',
 	})
-	use({ "lukas-reineke/headlines.nvim" })
 end)
