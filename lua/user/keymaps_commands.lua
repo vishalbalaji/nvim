@@ -42,7 +42,6 @@ map("x", "<A-l>", "<Plug>GoVSMRight", opts)
 -- -- Indent
 map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
-map("v", "$", "$h", opts)
 
 -- -- Surround
 map("v", '"', 'c"<Esc>pa"<Esc>v2i"', opts)
@@ -60,7 +59,7 @@ map("n", "<S-Tab>", "zA", opts)
 
 -- -- Terminal
 -- Better terminal navigation
-map("t", "<C-w>", "<Esc>i<C-\\><C-N><Esc>", term_opts)
+map("t", "<C-Space>", "<Esc>i<C-\\><C-N><Esc>", term_opts)
 
 -- -- Splits
 local _, smart_splits = pcall(require, "smart-splits")
@@ -80,24 +79,24 @@ map("n", "<C-S-j>", smart_splits.resize_down, opts)
 map("n", "<C-S-0>", "<C-w>=", opts)
 
 -- -- Buffers/Tabs
-local function closeBuf()
-	local min_splits = 3
-	if require("nvim-tree.view").is_visible() then
-		min_splits = min_splits + 1
-	end
+-- local function closeBuf()
+-- 	local min_splits = 3
+-- 	if require("nvim-tree.view").is_visible() then
+-- 		min_splits = min_splits + 1
+-- 	end
 
-	local troubleOpen = tonumber(vim.api.nvim_command_output([[ echo bufwinid('Trouble') ]]))
+-- 	local troubleOpen = tonumber(vim.api.nvim_command_output([[ echo bufwinid('Trouble') ]]))
 
-	if troubleOpen ~= -1 then
-		min_splits = min_splits + 1
-	end
+-- 	if troubleOpen ~= -1 then
+-- 		min_splits = min_splits + 1
+-- 	end
 
-	if #vim.api.nvim_tabpage_list_wins(0) + 1 > min_splits then
-		vim.cmd([[ call feedkeys("\<C-w>q") ]])
-	else
-		vim.cmd([[ Bdelete! ]])
-	end
-end
+-- 	if #vim.api.nvim_tabpage_list_wins(0) + 1 > min_splits then
+-- 		vim.cmd([[ call feedkeys("\<C-w>q") ]])
+-- 	else
+-- 		vim.cmd([[ Bdelete! ]])
+-- 	end
+-- end
 
 map("n", "<A-S-k>", "<Plug>(cokeline-focus-next)", opts)
 map("n", "<A-S-j>", "<Plug>(cokeline-focus-prev)", opts)
@@ -108,7 +107,8 @@ map("n", "<A-S-t>", "<cmd>tabnew<CR>", opts)
 map("n", "<A-S-r>", "<cmd>tabnew#<CR>", opts)
 map("n", "<A-S-s>", "<cmd>split<CR>", opts)
 map("n", "<A-S-v>", "<cmd>vsplit<CR>", opts)
-map("n", "<A-S-x>", closeBuf, opts)
+map("n", "<A-S-x>", "<cmd>Bdelete!<CR>", opts)
+map("n", "<A-S-w>", "<C-w>q", opts)
 
 -- -- Comments
 map("n", "<C-/>", "<Plug>(comment_toggle_linewise_current)", opts)

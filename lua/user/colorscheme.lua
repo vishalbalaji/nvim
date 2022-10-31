@@ -1,15 +1,36 @@
-local flavour = "mocha"
-require("catppuccin").setup({
-	flavour = flavour, -- mocha, macchiato, frappe, latte
-	transparent_background = false,
-})
-local colors = require("catppuccin.palettes").get_palette()
-local colorscheme = "catppuccin"
+vim.g.material_style = "deep ocean"
 
--- vim.g.doom_one_terminal_colors = false
--- vim.g.doom_one_transparent_background = false
--- local colors = require("doom-one.colors")[vim.o.background]
--- local colorscheme = "doom-one"
+local colors = require("material.colors")
+local bg_alt = colors.editor.bg_alt
+colors = colors.main
+
+require("material").setup({
+	contrast = {
+		cursor_line = true,
+	},
+
+	disable = {
+		colored_cursor = true,
+		eob_lines = true,
+	},
+
+	high_visibility = {
+		darker = true, -- Enable higher contrast text for darker style
+	},
+
+	lualine_style = "stealth", -- Lualine style ( can be 'stealth' or 'default' )
+	async_loading = false, -- Load parts of the theme asyncronously for faster startup (turned on by default)
+})
+
+local colorscheme = "material"
+
+-- local flavour = "mocha"
+-- require("catppuccin").setup({
+-- 	flavour = flavour, -- mocha, macchiato, frappe, latte
+-- transparent_background = false,
+-- })
+-- local colors = require("catppuccin.palettes").get_palette()
+-- local colorscheme = "catppuccin"
 
 -- print(vim.inspect(colors))
 
@@ -40,13 +61,22 @@ local function general_hls()
 	hl(0, "Pmenu", { fg = "fg", bg = "NONE" })
 	hl(0, "PmenuThumb", { bg = "fg" })
 	hl(0, "SignColumn", { fg = "fg", bg = "NONE" })
+
 end
+
+-- Headlines
+hl(0, "Quote", { fg = colors.blue, bold = true })
+require("headlines").setup({
+	markdown = {
+		fat_headlines = false,
+	},
+})
 
 -- NvimTree
 local function nvimtree_hls()
-	hl(0, "NvimTreeNormal", { link = "Normal" })
-	hl(0, "NvimTreeNormalNC", { link = "Normal" })
-	hl(0, "NvimTreeWinSeparator", { link = "WinSeparator" })
+	hl(0, "NvimTreeNormal", { bg = bg_alt })
+	hl(0, "NvimTreeNormalNC", { link = "NvimTreeNormal" })
+	hl(0, "NvimTreeWinSeparator", { fg = "bg" })
 end
 
 -- Trouble
@@ -102,12 +132,12 @@ end
 
 -- IndentBlankline
 local function indentblankline_hls()
-	hl(0, "IndentBlanklineContextStart", { special = colors.yellow, underline = true })
-	hl(0, "IndentBlanklineContextChar", { fg = colors.yellow })
+	hl(0, "IndentBlanklineContextStart", { special = "fg", underline = true })
+	hl(0, "IndentBlanklineContextChar", { fg = "fg" })
 end
 
 general_hls()
--- nvimtree_hls()
+nvimtree_hls()
 trouble_hls()
 quickscope_hls()
 whichkey_hls()
@@ -116,6 +146,6 @@ cursorword_hls()
 lsp_hls()
 git_hls()
 cokeline_hls()
-indentblankline_hls()
+-- indentblankline_hls()
 
 return colors

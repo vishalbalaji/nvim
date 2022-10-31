@@ -68,11 +68,11 @@ M.setup = function()
 		-- height = 30,
 	})
 
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-		border = "rounded",
-		-- width = 60,
-		-- height = 30,
-	})
+	-- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+	-- 	border = "rounded",
+	-- 	-- width = 60,
+	-- 	-- height = 30,
+	-- })
 end
 
 local function attach_navic(client, bufnr)

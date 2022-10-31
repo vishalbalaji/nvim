@@ -109,7 +109,7 @@ cmp.setup({
 				orgmode = "[Org]",
 				emoji = "[Emoji]",
 				pandoc_references = "[BibTex]",
-				nvim_lsp_signature_help = "[Sign]",
+				-- nvim_lsp_signature_help = "[Sign]",
 				plugins = "[Plugins]",
 			})[entry.source.name]
 			return vim_item
@@ -136,7 +136,7 @@ cmp.setup({
 		{ name = "orgmode" },
 		{ name = "emoji", insert = false },
 		{ name = "pandoc_references" },
-		{ name = "nvim_lsp_signature_help" },
+		-- { name = "nvim_lsp_signature_help" },
 		{ name = "plugins" },
 	},
 	confirm_opts = {

@@ -68,6 +68,9 @@ mason_lspconfig.setup_handlers({
 		if server_name == "sumneko_lua" then
 			opts.settings.Lua.diagnostics.workspaceDelay = -1
 
+   --  elseif server_name == "bashls" then
+			-- opts.settings.Lua.diagbashlskspaceDelay = -1
+
 		elseif server_name == "denols" then
 			opts.root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
 

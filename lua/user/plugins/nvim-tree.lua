@@ -16,6 +16,9 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 nvim_tree.setup({
 	renderer = {
 		root_folder_modifier = ":t",
+    indent_markers = {
+      enable = true
+    },
 		highlight_git = true,
 		icons = {
 			show = {

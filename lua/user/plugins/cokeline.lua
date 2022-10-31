@@ -177,7 +177,7 @@ cokeline.setup({
 		filetype = "NvimTree",
 		components = {
 			{
-				text = "             FILES",
+				text = "",
 				fg = colors.yellow,
 				bg = get_hex("NvimTreeNormal", "bg"),
 				style = "bold",

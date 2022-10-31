@@ -13,5 +13,5 @@ require("user.lsp.handlers").setup()
 
 -- autocmd BufWritePre * lua vim.lsp.buf.format({ async = false })
 require("user.lsp.mason")
-require("user.lsp.lsp-signature")
+-- require("user.lsp.lsp-signature")
 require("user.lsp.null_ls")

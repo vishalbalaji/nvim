@@ -7,6 +7,6 @@ end
 local config = require("user.plugins.lualine.configs.default")
 
 -- config.options.theme.normal.c.bg = "NONE"
-config.extensions = { "quickfix", "aerial", "nvim-tree", "toggleterm", "man" }
+config.extensions = { "quickfix", "aerial", "nvim-tree", "man" }
 
 lualine.setup(config)

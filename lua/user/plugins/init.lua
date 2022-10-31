@@ -30,11 +30,11 @@ packer.startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	-- ColorScheme
-	use({ "NTBBloodbath/doom-one.nvim" })
 	use({
 		"catppuccin/nvim",
 		as = "catppuccin",
 	})
+	use("marko-cerovac/material.nvim")
 
 	-- Treesitter
 	use({
@@ -96,7 +96,6 @@ packer.startup(function(use)
 	use("hrsh7th/cmp-cmdline") -- cmdline completions
 	use("hrsh7th/cmp-emoji")
 	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-nvim-lsp-signature-help")
 	use("hrsh7th/cmp-nvim-lua")
 	use("hrsh7th/cmp-path") -- path completions
 	use("hrsh7th/nvim-cmp") -- The completion plugin
@@ -221,7 +220,7 @@ packer.startup(function(use)
 						term.bufnr,
 						"n",
 						"q",
-						"<cmd>Bdelete!<CR>",
+						"<cmd>bdelete!<CR>",
 						{ noremap = true, silent = true }
 					)
 				end,
@@ -235,6 +234,7 @@ packer.startup(function(use)
 		"stevearc/aerial.nvim",
 		config = function()
 			require("aerial").setup({
+				lazy_load = true,
 				link_tree_to_folds = false,
 				link_folds_to_tree = false,
 				manage_folds = false,
@@ -264,6 +264,32 @@ packer.startup(function(use)
 					},
 				},
 				popupmenu = { enabled = true, backend = "cmp" },
+				lsp = {
+					signature = { enabled = true },
+					hover = { enabled = true },
+					override = {
+						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+						["vim.lsp.util.stylize_markdown"] = true,
+						["cmp.entry.get_documentation"] = true,
+					},
+					documentation = {
+						opts = {
+							border = { style = "rounded" },
+							relative = "cursor",
+							position = {
+								row = 2,
+							},
+							win_options = {
+								concealcursor = "n",
+								conceallevel = 3,
+								winhighlight = {
+									Normal = "LspFloat",
+									FloatBorder = "LspFloatBorder",
+								},
+							},
+						},
+					},
+				},
 				routes = {
 					{
 						view = "mini",
@@ -294,6 +320,7 @@ packer.startup(function(use)
 		"numToStr/Comment.nvim",
 		config = function()
 			require("Comment").setup({
+				pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 				ignore = "^$",
 				mappings = {
 					basic = false,
@@ -307,6 +334,9 @@ packer.startup(function(use)
 		requires = "nvim-lua/plenary.nvim",
 	})
 	use("fladson/vim-kitty")
+
+	-- -- Mini
+	-- use("echasnovski/mini.bufremove")
 
 	-- -- Git
 	use({
@@ -335,5 +365,8 @@ packer.startup(function(use)
 	use({
 		"AckslD/nvim-FeMaco.lua",
 		config = 'require("femaco").setup()',
+	})
+	use({
+		"lukas-reineke/headlines.nvim",
 	})
 end)

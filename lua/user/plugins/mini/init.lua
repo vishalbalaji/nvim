@@ -1,12 +1,3 @@
--- Comment
--- require("user.plugins.mini.comment").setup({
---   hooks = {
---     pre = function()
---       require("ts_context_commentstring.internal").update_commentstring()
---     end,
---   },
--- })
-
 -- CursorWord
 _G.cursorword_blocklist = function()
 ---@diagnostic disable-next-line: missing-parameter
@@ -32,5 +23,8 @@ require("user.plugins.mini.cursorword").setup({ delay = 300 })
 
 -- Pairs
 require("user.plugins.mini.pairs").setup({})
+
+-- Bufremove
+-- require("mini.bufremove").setup()
 
 -- require("user.plugins.mini.surround").setup({})

@@ -33,7 +33,6 @@ config.indent = {
 config.context_commentstring = {
 	enable = true,
 	enable_autocmd = false,
-	config = {},
 }
 
 -- -- AutoTag

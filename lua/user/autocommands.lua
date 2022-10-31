@@ -10,14 +10,14 @@ autocmd({ "VimEnter" }, {
 	once = true,
 	pattern = "*",
 	group = kitty_group,
-	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0 & ]],
+	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0 ]],
 })
 
 autocmd({ "VimLeavePre" }, {
 	once = true,
 	pattern = "*",
 	group = kitty_group,
-	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10 & ]],
+	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10 ]],
 })
 
 autocmd({ "VimEnter" }, {
@@ -32,10 +32,6 @@ autocmd("BufRead", {
 			once = true,
 			command = "normal! zx",
 		})
-		-- autocmd("BufWinEnter", {
-		-- 	once = true,
-		-- 	command = "normal! zM",
-		-- })
 	end,
 })
 
