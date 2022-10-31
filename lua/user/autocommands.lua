@@ -8,6 +8,12 @@ local kitty_group = vim.api.nvim_create_augroup("kitty_mp", {
 
 autocmd({ "VimEnter" }, {
 	once = true,
+	pattern = vim.env.MYVIMRC,
+	command = [[ cd %:p:h ]],
+})
+
+autocmd({ "VimEnter" }, {
+	once = true,
 	pattern = "*",
 	group = kitty_group,
 	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0 ]],
