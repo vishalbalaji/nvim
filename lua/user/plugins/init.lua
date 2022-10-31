@@ -30,10 +30,6 @@ packer.startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	-- ColorScheme
-	use({
-		"catppuccin/nvim",
-		as = "catppuccin",
-	})
 	use("marko-cerovac/material.nvim")
 
 	-- Treesitter
