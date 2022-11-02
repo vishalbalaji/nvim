@@ -8,7 +8,7 @@ local kitty_group = vim.api.nvim_create_augroup("kitty_mp", {
 
 autocmd({ "VimEnter" }, {
 	once = true,
-	pattern = vim.env.MYVIMRC,
+	pattern = { vim.env.MYVIMRC, "zshrc" },
 	command = [[ cd %:p:h ]],
 })
 
@@ -37,6 +37,11 @@ autocmd("BufRead", {
 		autocmd("BufWinEnter", {
 			once = true,
 			command = "normal! zx",
+		})
+		autocmd("BufWinEnter", {
+			pattern = "*.postcss",
+			once = true,
+			command = "setf css",
 		})
 	end,
 })

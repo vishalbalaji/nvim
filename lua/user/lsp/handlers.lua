@@ -85,6 +85,7 @@ local function attach_navic(client, bufnr)
 	navic.attach(client, bufnr)
 end
 
+---@diagnostic disable-next-line: unused-function, unused-local
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
@@ -107,7 +108,6 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-	lsp_keymaps(bufnr)
 	attach_navic(client, bufnr)
 
 	if client.name == "tsserver" then
@@ -120,6 +120,11 @@ M.on_attach = function(client, bufnr)
 		-- 	require("jdtls").setup_dap({ hotcodereplace = "auto" })
 		-- 	require("jdtls.dap").setup_dap_main_class_configs()
 		-- end
+	end
+
+	if client.server_capabilities.colorProvider then
+		-- Attach document colour support
+		require("document-color").buf_attach(bufnr)
 	end
 end
 

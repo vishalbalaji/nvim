@@ -86,6 +86,15 @@ packer.startup(function(use)
 	use("stevearc/dressing.nvim")
 	use("lvimuser/lsp-inlayhints.nvim")
 	use("b0o/schemastore.nvim")
+	use({
+		"mrshmllow/document-color.nvim",
+		config = function()
+			require("document-color").setup({
+				-- Default options
+				mode = "background", -- "background" | "foreground" | "single"
+			})
+		end,
+	})
 
 	-- -- CMP
 	use("hrsh7th/cmp-buffer") -- buffer completions
@@ -245,63 +254,6 @@ packer.startup(function(use)
 	})
 	use({
 		"folke/noice.nvim",
-		config = function()
-			require("noice").setup({
-				cmdline = { view = "cmdline" },
-				views = {
-					mini = {
-						win_options = {
-							winblend = 0,
-						},
-						position = {
-							row = "97%",
-							col = "100%",
-						},
-					},
-				},
-				popupmenu = { enabled = true, backend = "cmp" },
-				lsp = {
-					signature = { enabled = true },
-					hover = { enabled = true },
-					override = {
-						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-						["vim.lsp.util.stylize_markdown"] = true,
-						["cmp.entry.get_documentation"] = true,
-					},
-					documentation = {
-						opts = {
-							border = { style = "rounded" },
-							relative = "cursor",
-							position = {
-								row = 2,
-							},
-							win_options = {
-								concealcursor = "n",
-								conceallevel = 3,
-								winhighlight = {
-									Normal = "LspFloat",
-									FloatBorder = "LspFloatBorder",
-								},
-							},
-						},
-					},
-				},
-				routes = {
-					{
-						view = "mini",
-						filter = { event = "msg_showmode" },
-					},
-					{
-						filter = {
-							event = "msg_show",
-							kind = "",
-							find = "written",
-						},
-						opts = { skip = true },
-					},
-				},
-			})
-		end,
 		requires = {
 			"MunifTanjim/nui.nvim",
 		},

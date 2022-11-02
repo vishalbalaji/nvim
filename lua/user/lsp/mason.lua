@@ -32,7 +32,7 @@ local servers = {
 	-- "taplo",
 	-- "terraformls",
 	-- "tflint",
-  -- "cssls",
+	-- "cssls",
 }
 
 local settings = {
@@ -54,7 +54,8 @@ mason_lspconfig.setup({
 	automatic_installation = true,
 })
 
-local handlers = require("user.lsp.handlers")
+local on_attach = require("user.lsp.handlers").on_attach
+local capabilities = require("user.lsp.handlers").capabilities
 
 mason_lspconfig.setup_handlers({
 	function(server_name) -- default handler (optional)
@@ -65,15 +66,15 @@ mason_lspconfig.setup_handlers({
 			opts = _opts
 		end
 
+		-- sumneko_lua
 		if server_name == "sumneko_lua" then
 			opts.settings.Lua.diagnostics.workspaceDelay = -1
 
-   --  elseif server_name == "bashls" then
-			-- opts.settings.Lua.diagbashlskspaceDelay = -1
-
+			-- denols
 		elseif server_name == "denols" then
 			opts.root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
 
+			-- tsserver
 		elseif server_name == "tsserver" then
 			opts.root_dir = lspconfig.util.root_pattern("package.json")
 			opts.init_options = {
@@ -82,14 +83,20 @@ mason_lspconfig.setup_handlers({
 				},
 			}
 
+			-- pyright
 		elseif server_name == "pyright" then
 			opts.cmd = { "pyright-langserver", "--stdio" }
 			opts.root_pattern = vim.loop.cwd
 
+			-- tailwindcss
+		elseif server_name == "tailwindcss" then
+			capabilities.textDocument.colorProvider = {
+				dynamicRegistration = true,
+			}
 		end
 
-		opts.on_attach = handlers.on_attach
-		opts.capabilities = handlers.capabilities
+		opts.on_attach = on_attach
+		opts.capabilities = capabilities
 
 		lspconfig[server_name].setup(opts)
 	end,
