@@ -3,6 +3,7 @@ if not status_ok then
 	return
 end
 
+require("lsp-inlayhints").setup()
 require("user.lsp.handlers").setup()
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 -- 	pattern = "*",

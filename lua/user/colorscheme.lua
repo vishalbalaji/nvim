@@ -95,6 +95,7 @@ end
 
 -- Diagnostics
 local function lsp_hls()
+	hl(0, "LspInlayHint", { fg = comment_fg, bg = "bg", bold = true })
 	hl(0, "DiagnosticError", { fg = colors.red })
 	hl(0, "DiagnosticWarn", { fg = colors.yellow })
 	hl(0, "DiagnosticInfo", { fg = colors.blue })
