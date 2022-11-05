@@ -38,6 +38,8 @@ local comment_fg = vim.api.nvim_get_hl_by_name("Comment", true).foreground
 
 -- General Highlights
 local function general_hls()
+	-- hl(0, "NormalAlt", { link = "Normal" })
+	hl(0, "NormalAlt", { bg = bg_alt })
 	hl(0, "Comment", { fg = comment_fg, bold = true, italic = true })
 	hl(0, "NonText", { bg = "NONE", fg = comment_fg })
 	hl(0, "SpellBad", { link = "DiagnosticUnderlineError" })
@@ -61,14 +63,15 @@ end
 
 -- NvimTree
 local function nvimtree_hls()
-	hl(0, "NvimTreeNormal", { bg = bg_alt })
+	-- hl(0, "NvimTreeNormal", { link = "Normal" })
+	hl(0, "NvimTreeNormal", { link = "NormalAlt" })
 	hl(0, "NvimTreeNormalNC", { link = "NvimTreeNormal" })
-	hl(0, "NvimTreeWinSeparator", { fg = "bg" })
+	hl(0, "NvimTreeWinSeparator", { link = "WinSeparator" })
 end
 
 -- Trouble
 local function trouble_hls()
-	hl(0, "TroubleNormal", { link = "Normal" })
+	hl(0, "TroubleNormal", { link = "NormalAlt" })
 end
 
 -- QuickScope

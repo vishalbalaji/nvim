@@ -25,6 +25,7 @@ M.winbar_filetype_exclude = {
 	"Markdown",
 	"toggleterm",
   "noice",
+  "Trouble",
 	"",
 }
 

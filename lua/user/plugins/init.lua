@@ -59,6 +59,7 @@ packer.startup(function(use)
 		requires = "kyazdani42/nvim-web-devicons",
 		config = function()
 			require("trouble").setup({
+        padding = false,
 				signs = {
 					-- icons / text used for a diagnostic
 					error = "",

@@ -11,6 +11,15 @@ config.popupmenu = { enabled = true, backend = "cmp" }
 
 config.views = {
 	mini = {
+		size = {
+			width = "auto",
+			height = "auto",
+			max_height = 10,
+			max_width = 120,
+		},
+		border = {
+			style = "rounded",
+		},
 		win_options = {
 			winblend = 0,
 		},
