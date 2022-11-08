@@ -210,10 +210,6 @@ local wk_n_mappings = {
 	},
 	f = {
 		name = "Telescope",
-		b = {
-			telescope_command("buffers"),
-			"Find Buffers",
-		},
 		d = {
 			telescope_command(
 				"find_files",

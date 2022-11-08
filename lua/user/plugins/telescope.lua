@@ -7,7 +7,7 @@ local actions = require("telescope.actions")
 
 telescope.setup({
 	defaults = {
-    -- prompt_prefix = " ",
+		-- prompt_prefix = " ",
 		prompt_prefix = " > ",
 		selection_caret = " ",
 		path_display = { "smart" },
@@ -78,6 +78,18 @@ telescope.setup({
 		},
 	},
 	pickers = {
+		find_files = {
+			mappings = {
+				i = { ["<CR>"] = actions.select_tab },
+				n = { ["<CR>"] = actions.select_tab },
+			},
+		},
+		git_files = {
+			mappings = {
+				i = { ["<CR>"] = actions.select_tab },
+				n = { ["<CR>"] = actions.select_tab },
+			},
+		},
 		-- Default configuration for builtin pickers goes here:
 		-- picker_name = {
 		--   picker_config_key = value,
@@ -95,5 +107,4 @@ telescope.setup({
 	},
 })
 
-require("telescope").load_extension("noice")
--- require("telescope").load_extension("notify")
+-- require("telescope").load_extension("noice")
