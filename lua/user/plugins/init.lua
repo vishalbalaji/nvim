@@ -59,7 +59,7 @@ packer.startup(function(use)
 		requires = "kyazdani42/nvim-web-devicons",
 		config = function()
 			require("trouble").setup({
-        padding = false,
+				padding = false,
 				signs = {
 					-- icons / text used for a diagnostic
 					error = "",
@@ -187,6 +187,11 @@ packer.startup(function(use)
 	use({
 		"noib3/nvim-cokeline",
 		requires = "kyazdani42/nvim-web-devicons", -- If you want devicons
+	})
+	use({
+		"akinsho/bufferline.nvim",
+		tag = "v3.*",
+		requires = "nvim-tree/nvim-web-devicons",
 	})
 	use("mg979/vim-visual-multi")
 	use({ "fgheng/winbar.nvim" })

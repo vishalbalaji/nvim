@@ -100,12 +100,19 @@ map("n", "<C-S-0>", "<C-w>=", opts)
 -- end
 
 -- Tabs
-map("n", "<M-S-k>", "<cmd>tabn<CR>", opts)
-map("n", "<M-S-j>", "<cmd>tabp<CR>", opts)
-map("n", "<M-S-h>", "<cmd>tabm -1<CR>", opts)
-map("n", "<M-S-l>", "<cmd>tabm +1<CR>", opts)
+-- map("n", "<M-S-k>", "<cmd>tabn<CR>", opts)
+-- map("n", "<M-S-j>", "<cmd>tabp<CR>", opts)
+-- map("n", "<M-S-h>", "<cmd>tabm -1<CR>", opts)
+-- map("n", "<M-S-l>", "<cmd>tabm +1<CR>", opts)
+-- map("n", "<M-S-t>", "<cmd>tabnew<CR>", opts)
+-- map("n", "<M-S-x>", "<cmd>tabclose!<CR>", opts)
+
 map("n", "<M-S-t>", "<cmd>tabnew<CR>", opts)
-map("n", "<M-S-x>", "<cmd>tabclose!<CR>", opts)
+map("n", "<M-S-x>", "<cmd>Bdelete!<CR>", opts)
+map("n", "<M-S-k>", "<Plug>(cokeline-focus-next)", opts)
+map("n", "<M-S-j>", "<Plug>(cokeline-focus-prev)", opts)
+map("n", "<M-S-l>", "<Plug>(cokeline-switch-next)", opts)
+map("n", "<M-S-h>", "<Plug>(cokeline-switch-prev)", opts)
 
 -- Splits
 map("n", "<C-q>", "<C-w>q", opts)
@@ -184,14 +191,6 @@ local telescope_command = function(action, options)
 	return command
 end
 
-vim.cmd([[
-function! NvimTreeCloseAll()
-	let current_tab = tabpagenr()
-	tabdo NvimTreeClose
-	execute 'tabnext' current_tab
-endfunction
-]])
-
 local wk_config = require("user.plugins.whichkey")
 
 local wk_n_mappings = {
@@ -199,13 +198,7 @@ local wk_n_mappings = {
 	c = { "<cmd>ColorizerToggle<CR>", "Toggle Colorizer" },
 	d = { "<cmd>cd %:p:h<CR><cmd>pwd<CR>", "Switch CWD" },
 	e = {
-		function()
-			if require("nvim-tree.view").is_visible() then
-				vim.cmd([[ call NvimTreeCloseAll() ]])
-			else
-				vim.cmd([[ NvimTreeOpen ]])
-			end
-		end,
+    "<cmd>NvimTreeToggle<CR>",
 		"Explorer",
 	},
 	f = {

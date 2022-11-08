@@ -71,7 +71,7 @@ nvim_tree.setup({
 		"alpha",
 	},
 	-- auto_close = true,
-	open_on_tab = false,
+	open_on_tab = true,
 	hijack_cursor = false,
 	update_cwd = true,
 	diagnostics = {
@@ -109,7 +109,7 @@ nvim_tree.setup({
 		mappings = {
 			custom_only = false,
 			list = {
-				{ key = { "l", "<CR>", "o" }, cb = tree_cb("edit") },
+				{ key = { "l", "<CR>" }, cb = tree_cb("tabnew") },
 				{ key = "h", cb = tree_cb("close_node") },
 				{ key = "v", cb = tree_cb("vsplit") },
 				{ key = "s", cb = tree_cb("split") },

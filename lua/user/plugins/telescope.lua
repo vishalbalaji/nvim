@@ -78,33 +78,20 @@ telescope.setup({
 		},
 	},
 	pickers = {
-		find_files = {
-			mappings = {
-				i = { ["<CR>"] = actions.select_tab },
-				n = { ["<CR>"] = actions.select_tab },
-			},
-		},
-		git_files = {
-			mappings = {
-				i = { ["<CR>"] = actions.select_tab },
-				n = { ["<CR>"] = actions.select_tab },
-			},
-		},
-		-- Default configuration for builtin pickers goes here:
-		-- picker_name = {
-		--   picker_config_key = value,
-		--   ...
-		-- }
-		-- Now the picker_config_key will be applied every time you call this
-		-- builtin picker
+		-- find_files = {
+		-- 	mappings = {
+		-- 		i = { ["<CR>"] = actions.select_tab },
+		-- 		n = { ["<CR>"] = actions.select_tab },
+		-- 	},
+		-- },
+		-- git_files = {
+		-- 	mappings = {
+		-- 		i = { ["<CR>"] = actions.select_tab },
+		-- 		n = { ["<CR>"] = actions.select_tab },
+		-- 	},
+		-- },
 	},
-	extensions = {
-		-- Your extension configuration goes here:
-		-- extension_name = {
-		--   extension_config_key = value,
-		-- }
-		-- please take a look at the readme of the extension you want to configure
-	},
+	extensions = {},
 })
 
--- require("telescope").load_extension("noice")
+require("telescope").load_extension("noice")

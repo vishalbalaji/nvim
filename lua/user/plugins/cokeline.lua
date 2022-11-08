@@ -11,23 +11,40 @@ local colors = require("user.colorscheme")
 local comments_fg = get_hex("Comment", "fg")
 local errors_fg = colors.red
 local warnings_fg = colors.yellow
-local cursorline_bg = get_hex("CursorLine", "bg")
+local bg_select = get_hex("NormalAlt", "bg")
+local bg_sidebar_sep = get_hex("NvimTreeWinSeparator", "bg")
 
 local components = {
 	indicator = {
 		text = function(buffer)
 			if buffer.is_focused then
-				return "▎"
+				if buffer.is_first then
+					if require("nvim-tree.view").is_visible() then
+						return " ▎"
+					else
+						return "▎"
+					end
+				else
+					return "▎"
+				end
 			else
 				if buffer.is_first then
-					return " "
+					if require("nvim-tree.view").is_visible() then
+						return "█ "
+					else
+						return " "
+					end
 				else
 					return "▎"
 				end
 			end
 		end,
 		fg = function(buffer)
-			return buffer.is_focused and colors.green or nil
+			if not buffer.is_focused then
+				return buffer.is_first and bg_sidebar_sep or nil
+			else
+				return colors.green
+			end
 		end,
 	},
 
@@ -166,7 +183,7 @@ cokeline.setup({
 			return buffer.is_focused and get_hex("Normal", "fg") or comments_fg
 		end,
 		bg = function(buffer)
-			return buffer.is_focused and cursorline_bg or get_hex("TabLineFill", "bg")
+			return buffer.is_focused and bg_select or get_hex("TabLineFill", "bg")
 		end,
 		style = function(buffer)
 			return buffer.is_focused and "italic" or nil
