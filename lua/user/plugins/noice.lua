@@ -15,13 +15,13 @@ config.views = {
 			width = "auto",
 			height = "auto",
 			max_height = 10,
-			max_width = 120,
+			max_width = 50,
 		},
 		border = {
 			style = "rounded",
 		},
 		win_options = {
-			winblend = 0,
+			winblend = 30,
 		},
 		position = {
 			row = "97%",
