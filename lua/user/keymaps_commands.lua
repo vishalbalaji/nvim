@@ -63,6 +63,7 @@ map("t", "<C-Space>", "<Esc>i<C-\\><C-N><Esc>", term_opts)
 
 -- -- Splits
 local _, smart_splits = pcall(require, "smart-splits")
+
 if not _ then
 	return
 end
@@ -98,17 +99,25 @@ map("n", "<C-S-0>", "<C-w>=", opts)
 -- 	end
 -- end
 
-map("n", "<A-S-k>", "<Plug>(cokeline-focus-next)", opts)
-map("n", "<A-S-j>", "<Plug>(cokeline-focus-prev)", opts)
-map("n", "<A-S-l>", "<Plug>(cokeline-switch-next)", opts)
-map("n", "<A-S-h>", "<Plug>(cokeline-switch-prev)", opts)
-map("n", "<A-S-f>", "<Plug>(cokeline-pick-focus)", opts)
-map("n", "<A-S-t>", "<cmd>tabnew<CR>", opts)
-map("n", "<A-S-r>", "<cmd>tabnew#<CR>", opts)
-map("n", "<A-S-s>", "<cmd>split<CR>", opts)
-map("n", "<A-S-v>", "<cmd>vsplit<CR>", opts)
-map("n", "<A-S-x>", "<cmd>Bdelete!<CR>", opts)
-map("n", "<A-S-w>", "<C-w>q", opts)
+-- Tabs
+map("n", "<M-S-k>", "<cmd>tabn<CR>", opts)
+map("n", "<M-S-j>", "<cmd>tabp<CR>", opts)
+map("n", "<M-S-h>", "<cmd>tabm -1<CR>", opts)
+map("n", "<M-S-l>", "<cmd>tabm +1<CR>", opts)
+map("n", "<M-S-t>", "<cmd>tabnew<CR>", opts)
+map("n", "<M-S-x>", "<cmd>tabclose!<CR>", opts)
+
+-- Splits
+map("n", "<C-q>", "<C-w>q", opts)
+map("n", "<C-j>", "<C-w>j", opts)
+map("n", "<C-k>", "<C-w>k", opts)
+map("n", "<C-h>", "<C-w>h", opts)
+map("n", "<C-l>", "<C-w>l", opts)
+map("n", "<C-S-h>", smart_splits.resize_left, opts)
+map("n", "<C-S-l>", smart_splits.resize_right, opts)
+map("n", "<C-S-k>", smart_splits.resize_up, opts)
+map("n", "<C-S-j>", smart_splits.resize_down, opts)
+map("n", "<C-S-0>", "<C-w>=", opts)
 
 -- -- Comments
 map("n", "<C-/>", "<Plug>(comment_toggle_linewise_current)", opts)
@@ -151,30 +160,77 @@ if not _ then
 	return
 end
 
+local _e1, _ = pcall(require, "telescope")
+
+if not _e1 then
+	return
+end
+
+local telescope_command = function(action, options)
+	options = options or {}
+	options.previewer = false
+
+	local options_str = " " .. vim.inspect(options)
+	options_str = options_str:gsub("\n", ""):gsub("\\s[1,]", " "):gsub("\\\\", "\\"):gsub("<Tab>", "'<Tab>'")
+
+	local command = "lua require('telescope.builtin')."
+		.. action
+		.. "(require('telescope.themes').get_dropdown("
+		.. options_str
+		.. "))"
+
+	command = "<cmd>" .. command:gsub('"', ""):gsub("\n", "") .. "<CR>"
+	-- print(command)
+	return command
+end
+
+vim.cmd([[
+function! NvimTreeCloseAll()
+	let current_tab = tabpagenr()
+	tabdo NvimTreeClose
+	execute 'tabnext' current_tab
+endfunction
+]])
+
 local wk_config = require("user.plugins.whichkey")
 
 local wk_n_mappings = {
 	a = { "<cmd>AerialToggle<CR>", "Toggle Aerial" },
 	c = { "<cmd>ColorizerToggle<CR>", "Toggle Colorizer" },
 	d = { "<cmd>cd %:p:h<CR><cmd>pwd<CR>", "Switch CWD" },
-	e = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
+	e = {
+		function()
+			if require("nvim-tree.view").is_visible() then
+				vim.cmd([[ call NvimTreeCloseAll() ]])
+			else
+				vim.cmd([[ NvimTreeOpen ]])
+			end
+		end,
+		"Explorer",
+	},
 	f = {
 		name = "Telescope",
 		b = {
-			"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<CR>",
+			telescope_command("buffers"),
 			"Find Buffers",
 		},
 		d = {
-			"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, cwd = vim.fn.expand('%:p:h'), results_title = vim.fn.expand('%:p:h')})<CR>",
+			telescope_command(
+				"find_files",
+				{ cwd = "vim.fn.expand('%:p:h')", results_title = "vim.fn.expand('%:p:h')" }
+			),
 			"Find in CWD",
 		},
 		f = {
-			"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false, results_title = vim.fn.getcwd()})<CR>",
+			telescope_command("find_files", { results_title = "vim.fn.expand('%:p:h')" }),
 			"Find files",
 		},
 		F = { "<cmd>Telescope live_grep theme=ivy<CR>", "Find Text" },
 		g = {
-			[[<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown{previewer = false, cwd = vim.fn.expand('%:p:h'), results_title = vim.fn.system("cd " .. vim.fn.expand("%:p:h") .. " && git rev-parse --show-toplevel"):gsub("\n", "")})<CR>]],
+			telescope_command("git_files", {
+				cwd = "vim.fn.expand('%:p:h')",
+				results_title = "vim.fn.system('cd ' .. vim.fn.expand('%:p:h') .. ' && git rev-parse --show-toplevel'):gsub('\n', '')",
+			}),
 			"Find Git files",
 		},
 	},
@@ -190,7 +246,6 @@ local wk_n_mappings = {
 		h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
 		H = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Open Float" },
 		i = { "<cmd>LspInfo<CR>", "Info" },
-		l = { "<cmd>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
 		m = { "<cmd>Mason<CR>", "Open Mason" },
 		n = { "<cmd>NullLsInfo<CR>", "NullLs Info" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
@@ -208,6 +263,11 @@ local wk_n_mappings = {
 			end,
 			"Toggle Trouble",
 		},
+	},
+	s = {
+		name = "Split",
+		s = { "<cmd>sp<CR>", "Horizontal" },
+		v = { "<cmd>vsp<CR>", "Vertical" },
 	},
 	p = {
 		name = "Packer",
