@@ -17,14 +17,27 @@ local null_ls_stop = function()
 	null_ls_client.stop()
 end
 
+local null_ls_restart = function()
+	local null_ls_client
+	for _, client in ipairs(vim.lsp.get_active_clients()) do
+		if client.name == "null-ls" then
+      vim.cmd [[ NullLsToggle ]]
+      vim.cmd [[ NullLsToggle ]]
+		end
+	end
+	if not null_ls_client then
+		return
+	end
+
+	null_ls_client.stop()
+end
+
 vim.api.nvim_create_user_command("NullLsStop", null_ls_stop, {})
 vim.api.nvim_create_user_command("NullLsToggle", function()
 	-- you can also create commands to disable or enable sources
 	require("null-ls").toggle({})
 end, {})
--- vim.api.nvim_create_user_command("NullLsRestart", function()
--- 	vim.cmd([[ NullLsStop | NullLsToggle ]])
--- end, {})
+vim.api.nvim_create_user_command("NullLsRestart", null_ls_restart, {})
 
 local home_dir = os.getenv("HOME")
 local sources = {
