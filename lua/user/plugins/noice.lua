@@ -32,7 +32,7 @@ config.views = {
 
 config.lsp = {
 	signature = { enabled = true },
-	hover = { enabled = false },
+	hover = { enabled = true },
 	documentation = {
 		opts = {
 			border = { style = "rounded" },

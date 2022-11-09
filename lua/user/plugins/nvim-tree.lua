@@ -16,9 +16,7 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 nvim_tree.setup({
 	renderer = {
 		root_folder_modifier = ":t",
-    indent_markers = {
-      enable = true
-    },
+    indent_markers = true,
 		highlight_git = true,
 		icons = {
 			show = {
@@ -109,7 +107,7 @@ nvim_tree.setup({
 		mappings = {
 			custom_only = false,
 			list = {
-				{ key = { "l", "<CR>" }, cb = tree_cb("tabnew") },
+				{ key = { "l", "<CR>", "o" }, cb = tree_cb("edit") },
 				{ key = "h", cb = tree_cb("close_node") },
 				{ key = "v", cb = tree_cb("vsplit") },
 				{ key = "s", cb = tree_cb("split") },
