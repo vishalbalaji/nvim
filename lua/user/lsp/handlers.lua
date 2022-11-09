@@ -122,10 +122,6 @@ M.on_attach = function(client, bufnr)
 		-- end
 	end
 
-	if client.server_capabilities.colorProvider then
-		-- Attach document colour support
-		require("document-color").buf_attach(bufnr)
-	end
 end
 
 function M.enable_format_on_save()

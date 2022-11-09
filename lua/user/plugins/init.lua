@@ -46,7 +46,23 @@ packer.startup(function(use)
 			require("nvim-ts-autotag").setup()
 		end,
 	})
-	use("NvChad/nvim-colorizer.lua")
+	use({
+		"NvChad/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup({
+				filetypes = { nil },
+				user_default_options = {
+					tailwind = true,
+					RRGGBBAA = true, -- #RRGGBBAA hex codes
+					AARRGGBB = true, -- 0xAARRGGBB hex codes
+					rgb_fn = true, -- CSS rgb() and rgba() functions
+					hsl_fn = true, -- CSS hsl() and hsla() functions
+					css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+					css_fn = true,
+				},
+			})
+		end,
+	})
 	use("p00f/nvim-ts-rainbow")
 
 	-- LSP and Diagnostics
@@ -87,15 +103,6 @@ packer.startup(function(use)
 	use("stevearc/dressing.nvim")
 	use("lvimuser/lsp-inlayhints.nvim")
 	use("b0o/schemastore.nvim")
-	use({
-		"mrshmllow/document-color.nvim",
-		config = function()
-			require("document-color").setup({
-				-- Default options
-				mode = "background", -- "background" | "foreground" | "single"
-			})
-		end,
-	})
 
 	-- -- CMP
 	use("hrsh7th/cmp-buffer") -- buffer completions

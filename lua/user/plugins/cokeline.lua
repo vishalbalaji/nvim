@@ -8,9 +8,10 @@ local mappings = require("cokeline/mappings")
 
 local colors = require("user.colorscheme")
 
-local comments_fg = get_hex("Comment", "fg")
 local errors_fg = colors.red
 local warnings_fg = colors.yellow
+local fg_inactive = get_hex("Comment", "fg")
+local bg_sep = get_hex("WinSeparator", "fg")
 local bg_select = get_hex("NormalAlt", "bg")
 local bg_sidebar_sep = get_hex("NvimTreeWinSeparator", "bg")
 
@@ -41,7 +42,7 @@ local components = {
 		end,
 		fg = function(buffer)
 			if not buffer.is_focused then
-				return buffer.is_first and bg_sidebar_sep or nil
+				return buffer.is_first and bg_sidebar_sep or bg_sep
 			else
 				return colors.green
 			end
@@ -73,7 +74,7 @@ local components = {
 		fg = function(buffer)
 			return (mappings.is_picking_focus() and colors.yellow)
 				or (mappings.is_picking_close() and colors.red)
-				or (not buffer.is_focused and comments_fg)
+				or (not buffer.is_focused and fg_inactive)
 				or buffer.devicon.color
 		end,
 		style = function(_)
@@ -86,7 +87,7 @@ local components = {
 		text = function(buffer)
 			return buffer.unique_prefix
 		end,
-		fg = comments_fg,
+		fg = fg_inactive,
 		style = "italic",
 		truncation = {
 			priority = 3,
@@ -108,7 +109,7 @@ local components = {
 		fg = function(buffer)
 			return (buffer.diagnostics.errors ~= 0 and errors_fg)
 				or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
-				or (buffer.is_readonly and comments_fg)
+				or (buffer.is_readonly and fg_inactive)
 				or nil
 		end,
 		style = function(buffer)
@@ -162,7 +163,7 @@ local components = {
 			return buffer.is_last and "▎" or ""
 		end,
 		truncation = { priority = 1 },
-		fg = comments_fg,
+		fg = bg_sep,
 		bg = get_hex("Normal", "bg"),
 	},
 }
@@ -180,7 +181,7 @@ cokeline.setup({
 
 	default_hl = {
 		fg = function(buffer)
-			return buffer.is_focused and get_hex("Normal", "fg") or comments_fg
+			return buffer.is_focused and get_hex("Normal", "fg") or fg_inactive
 		end,
 		bg = function(buffer)
 			return buffer.is_focused and bg_select or get_hex("TabLineFill", "bg")
