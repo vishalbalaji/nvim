@@ -14,38 +14,39 @@ local fg_inactive = get_hex("Comment", "fg")
 local bg_sep = get_hex("WinSeparator", "fg")
 local bg_select = get_hex("NormalAlt", "bg")
 local bg_sidebar_sep = get_hex("NvimTreeWinSeparator", "bg")
+local fg_sidebar_sep = get_hex("NvimTreeWinSeparator", "fg")
+
+-- if fg_sidebar_sep == "NONE" then
+-- 	fg_sidebar_sep = get_hex("FloatBorder", "fg")
+-- end
 
 local components = {
+	sidebar_separator = {
+		text = function(buffer)
+      if buffer.is_first and require("nvim-tree.view").is_visible() and fg_sidebar_sep ~= "NONE" then
+        return " "
+      else
+        return ""
+      end
+		end,
+		bg = bg_sidebar_sep,
+		fg = fg_sidebar_sep,
+	},
+
 	indicator = {
 		text = function(buffer)
 			if buffer.is_focused then
-				if buffer.is_first then
-					if require("nvim-tree.view").is_visible() then
-						return " ▎"
-					else
-						return "▎"
-					end
-				else
-					return "▎"
-				end
+				return "▎"
 			else
 				if buffer.is_first then
-					if require("nvim-tree.view").is_visible() then
-						return "█ "
-					else
-						return " "
-					end
+					return " "
 				else
 					return "▎"
 				end
 			end
 		end,
 		fg = function(buffer)
-			if not buffer.is_focused then
-				return buffer.is_first and bg_sidebar_sep or bg_sep
-			else
-				return colors.green
-			end
+			return buffer.is_focused and colors.green or nil
 		end,
 	},
 
@@ -204,6 +205,7 @@ cokeline.setup({
 	},
 
 	components = {
+		components.sidebar_separator,
 		components.indicator,
 		components.space,
 		components.devicon,
