@@ -26,12 +26,6 @@ autocmd({ "VimLeavePre" }, {
 	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10 ]],
 })
 
-autocmd({ "VimEnter" }, {
-	once = true,
-	pattern = "*",
-	command = "set formatoptions-=cro",
-})
-
 autocmd("BufRead", {
 	callback = function()
 		autocmd("BufWinEnter", {
@@ -141,20 +135,6 @@ autocmd({ "BufEnter" }, {
 		if not vim.tbl_contains(M.bullets_enabled_file_types, vim.bo.filetype) then
 			vim.g.bullets_set_mappings = 0
 		end
-	end,
-})
-
-vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
-vim.api.nvim_create_autocmd("LspAttach", {
-	group = "LspAttach_inlayhints",
-	callback = function(args)
-		if not (args.data and args.data.client_id) then
-			return
-		end
-
-		local bufnr = args.buf
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		require("lsp-inlayhints").on_attach(client, bufnr)
 	end,
 })
 

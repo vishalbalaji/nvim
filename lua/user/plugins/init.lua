@@ -34,17 +34,19 @@ packer.startup(function(use)
 
 	-- Treesitter
 	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-	})
-	use("nvim-treesitter/playground")
-	use("JoosepAlviste/nvim-ts-context-commentstring")
-	use("haringsrob/nvim_context_vt")
-	use({
-		"windwp/nvim-ts-autotag",
-		config = function()
-			require("nvim-ts-autotag").setup()
-		end,
+		{
+			"nvim-treesitter/nvim-treesitter",
+			run = ":TSUpdate",
+		},
+		"nvim-treesitter/playground",
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		"haringsrob/nvim_context_vt",
+		{
+			"windwp/nvim-ts-autotag",
+			config = function()
+				require("nvim-ts-autotag").setup()
+			end,
+		},
 	})
 	use({
 		"NvChad/nvim-colorizer.lua",
@@ -65,68 +67,31 @@ packer.startup(function(use)
 	})
 	use("p00f/nvim-ts-rainbow")
 
-	-- LSP and Diagnostics
-	use("neovim/nvim-lspconfig")
-	use("williamboman/mason.nvim")
-	use("williamboman/mason-lspconfig.nvim")
-	use("ray-x/lsp_signature.nvim")
+	-- LSP
 	use({
-		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("trouble").setup({
-				padding = false,
-				signs = {
-					-- icons / text used for a diagnostic
-					error = "",
-					warning = "",
-					hint = "",
-					information = "",
-					other = "",
-				},
-			})
-		end,
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
+    "jose-elias-alvarez/null-ls.nvim",
+    "folke/trouble.nvim"
 	})
-	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
-	use({
-		"folke/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
-		config = function()
-			require("todo-comments").setup({
-				keywords = {
-					CREDIT = { icon = "☺ ", color = "info", alt = { "THANKS" } },
-					TODO = { color = "warning" },
-				},
-			})
-		end,
-	})
-	use("stevearc/dressing.nvim")
-	use("lvimuser/lsp-inlayhints.nvim")
-	use("b0o/schemastore.nvim")
 
 	-- -- CMP
-	use("hrsh7th/cmp-buffer") -- buffer completions
-	use("hrsh7th/cmp-cmdline") -- cmdline completions
-	use("hrsh7th/cmp-emoji")
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-nvim-lua")
-	use("hrsh7th/cmp-path") -- path completions
-	use("hrsh7th/nvim-cmp") -- The completion plugin
-	use("jc-doyle/cmp-pandoc-references")
-	use("saadparwaiz1/cmp_luasnip") -- snippet completions
-	use("lukas-reineke/cmp-under-comparator")
 	use({
-		"KadoBOT/cmp-plugins",
-		config = function()
-			require("cmp-plugins").setup({
-				files = { "plugins/init.lua" },
-			})
-		end,
-	})
+		"hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-nvim-lua",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-cmdline",
+		"hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-emoji",
+    "jc-doyle/cmp-pandoc-references",
 
-	-- -- -- Snippets
-	use("L3MON4D3/LuaSnip") --snippet engine
-	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+		-- Snippets
+		"L3MON4D3/LuaSnip",
+		"saadparwaiz1/cmp_luasnip",
+		"rafamadriz/friendly-snippets",
+	})
 
 	-- General
 	use({
@@ -194,11 +159,6 @@ packer.startup(function(use)
 	use({
 		"noib3/nvim-cokeline",
 		requires = "kyazdani42/nvim-web-devicons", -- If you want devicons
-	})
-	use({
-		"akinsho/bufferline.nvim",
-		tag = "v3.*",
-		requires = "nvim-tree/nvim-web-devicons",
 	})
 	use("mg979/vim-visual-multi")
 	use({ "fgheng/winbar.nvim" })
@@ -326,8 +286,5 @@ packer.startup(function(use)
 	use({
 		"AckslD/nvim-FeMaco.lua",
 		config = 'require("femaco").setup()',
-	})
-	use({
-		"lukas-reineke/headlines.nvim",
 	})
 end)

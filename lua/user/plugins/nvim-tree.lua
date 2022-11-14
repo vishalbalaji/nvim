@@ -16,7 +16,7 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 nvim_tree.setup({
 	renderer = {
 		root_folder_modifier = ":t",
-    indent_markers = true,
+		indent_markers = { enable = true },
 		highlight_git = true,
 		icons = {
 			show = {
@@ -53,7 +53,7 @@ nvim_tree.setup({
 	},
 	actions = {
 		open_file = {
-      resize_window = true,
+			resize_window = true,
 			quit_on_open = false,
 			window_picker = {
 				enable = true,

@@ -68,6 +68,8 @@ if not _ then
 	return
 end
 
+map("n", "<C-s>", "<C-w>s", opts)
+map("n", "<C-S-s>", "<C-w>v", opts)
 map("n", "<C-h>", "<C-w>h", opts)
 map("n", "<C-j>", "<C-w>j", opts)
 map("n", "<C-k>", "<C-w>k", opts)
@@ -79,34 +81,7 @@ map("n", "<C-S-k>", smart_splits.resize_up, opts)
 map("n", "<C-S-j>", smart_splits.resize_down, opts)
 map("n", "<C-S-0>", "<C-w>=", opts)
 
--- -- Buffers/Tabs
--- local function closeBuf()
--- 	local min_splits = 3
--- 	if require("nvim-tree.view").is_visible() then
--- 		min_splits = min_splits + 1
--- 	end
-
--- 	local troubleOpen = tonumber(vim.api.nvim_command_output([[ echo bufwinid('Trouble') ]]))
-
--- 	if troubleOpen ~= -1 then
--- 		min_splits = min_splits + 1
--- 	end
-
--- 	if #vim.api.nvim_tabpage_list_wins(0) + 1 > min_splits then
--- 		vim.cmd([[ call feedkeys("\<C-w>q") ]])
--- 	else
--- 		vim.cmd([[ Bdelete! ]])
--- 	end
--- end
-
--- Tabs
--- map("n", "<M-S-k>", "<cmd>tabn<CR>", opts)
--- map("n", "<M-S-j>", "<cmd>tabp<CR>", opts)
--- map("n", "<M-S-h>", "<cmd>tabm -1<CR>", opts)
--- map("n", "<M-S-l>", "<cmd>tabm +1<CR>", opts)
--- map("n", "<M-S-t>", "<cmd>tabnew<CR>", opts)
--- map("n", "<M-S-x>", "<cmd>tabclose!<CR>", opts)
-
+-- -- Tabs
 map("n", "<M-S-t>", "<cmd>tabnew<CR>", opts)
 map("n", "<M-S-x>", "<cmd>Bdelete!<CR>", opts)
 map("n", "<M-S-k>", "<Plug>(cokeline-focus-next)", opts)
@@ -114,7 +89,7 @@ map("n", "<M-S-j>", "<Plug>(cokeline-focus-prev)", opts)
 map("n", "<M-S-l>", "<Plug>(cokeline-switch-next)", opts)
 map("n", "<M-S-h>", "<Plug>(cokeline-switch-prev)", opts)
 
--- Splits
+-- -- Splits
 map("n", "<C-q>", "<C-w>q", opts)
 map("n", "<C-j>", "<C-w>j", opts)
 map("n", "<C-k>", "<C-w>k", opts)
@@ -129,6 +104,11 @@ map("n", "<C-S-0>", "<C-w>=", opts)
 -- -- Comments
 map("n", "<C-/>", "<Plug>(comment_toggle_linewise_current)", opts)
 map("x", "<C-/>", "<Plug>(comment_toggle_linewise_visual)gv", opts)
+
+-- LSP
+map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 
 -- -- Git
 local _e, _ = pcall(require, "toggleterm.terminal")
@@ -198,7 +178,7 @@ local wk_n_mappings = {
 	c = { "<cmd>ColorizerToggle<CR>", "Toggle Colorizer" },
 	d = { "<cmd>cd %:p:h<CR><cmd>pwd<CR>", "Switch CWD" },
 	e = {
-    "<cmd>NvimTreeToggle<CR>",
+		"<cmd>NvimTreeToggle<CR>",
 		"Explorer",
 	},
 	f = {
@@ -232,14 +212,12 @@ local wk_n_mappings = {
 		a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
 		d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
 		f = { "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", "Format" },
-		h = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
-		H = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Open Float" },
+		h = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Open Float" },
 		i = { "<cmd>LspInfo<CR>", "Info" },
 		m = { "<cmd>Mason<CR>", "Open Mason" },
 		n = { "<cmd>NullLsInfo<CR>", "NullLs Info" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
 		R = { "<cmd>lua vim.lsp.buf.references()<CR>", "References" },
-		s = { "<cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
 		t = {
 			function()
 				vim.cmd([[ TroubleToggle workspace_diagnostics ]])
@@ -252,11 +230,6 @@ local wk_n_mappings = {
 			end,
 			"Toggle Trouble",
 		},
-	},
-	s = {
-		name = "Split",
-		s = { "<cmd>sp<CR>", "Horizontal" },
-		v = { "<cmd>vsp<CR>", "Vertical" },
 	},
 	p = {
 		name = "Packer",
@@ -286,6 +259,7 @@ local wk_n_mappings = {
 			"CD to directory in Terminal",
 		},
 	},
+	v = { '""p', "Paste from Default Register" },
 }
 
 local wk_v_mappings = {
@@ -297,7 +271,7 @@ local wk_v_mappings = {
 		l = { "<cmd>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
 		t = { "<cmd>TroubleToggle<CR>", "Toggle Trouble" },
 	},
-	y = { '"+y', "Copy to Clipboard" },
+	y = { '""y', "Copy to Default Register" },
 }
 
 wk_n_mappings.h = {

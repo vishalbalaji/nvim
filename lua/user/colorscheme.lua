@@ -52,16 +52,6 @@ local function general_hls()
 	hl(0, "SignColumn", { fg = "fg", bg = "NONE" })
 end
 
--- Headlines
-local function headline_highlights()
-	hl(0, "Quote", { fg = colors.blue, bold = true })
-	require("headlines").setup({
-		markdown = {
-			fat_headlines = false,
-		},
-	})
-end
-
 -- NvimTree
 local function nvimtree_hls()
 	-- hl(0, "NvimTreeNormal", { link = "Normal" })
@@ -140,6 +130,5 @@ lsp_hls()
 git_hls()
 cokeline_hls()
 indentblankline_hls()
-headline_highlights()
 
 return colors

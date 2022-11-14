@@ -34,39 +34,46 @@ end
 
 vim.api.nvim_create_user_command("NullLsStop", null_ls_stop, {})
 vim.api.nvim_create_user_command("NullLsToggle", function()
+
 	-- you can also create commands to disable or enable sources
 	require("null-ls").toggle({})
 end, {})
 vim.api.nvim_create_user_command("NullLsRestart", null_ls_restart, {})
 
 local home_dir = os.getenv("HOME")
+
+local code_actions = null_ls.builtins.code_actions
+local completion = null_ls.builtins.completion
+local formatting = null_ls.builtins.formatting
+local diagnostics = null_ls.builtins.diagnostics
+
 local sources = {
 	-- General
-	-- null_ls.builtins.code_actions.refactoring,
-	null_ls.builtins.code_actions.gitsigns,
-	null_ls.builtins.completion.spell.with({ filetypes = { "markdown", "latex" } }),
-	null_ls.builtins.formatting.cbfmt,
-	null_ls.builtins.formatting.yamlfmt,
-	null_ls.builtins.diagnostics.commitlint.with({
+	-- code_actions.refactoring,
+	code_actions.gitsigns,
+	completion.spell.with({ filetypes = { "markdown", "latex" } }),
+	formatting.cbfmt,
+	formatting.yamlfmt,
+	diagnostics.commitlint.with({
 		extra_args = { "-g", home_dir .. "/.local/share/nvim/commitlint.config.js" },
 	}),
 
 	-- CSS
-	null_ls.builtins.formatting.prettierd.with({
+	formatting.prettierd.with({
 		filetypes = { "css", "json" },
 	}),
 
 	-- Lua
-	null_ls.builtins.formatting.stylua,
+	formatting.stylua,
 
 	-- Shell
-	null_ls.builtins.code_actions.shellcheck.with({
+	code_actions.shellcheck.with({
 		extra_filetypes = { "zsh" },
 		condition = function()
 			return vim.fn.expand("%:t") ~= ".env"
 		end,
 	}),
-	null_ls.builtins.diagnostics.shellcheck.with({
+	diagnostics.shellcheck.with({
 		extra_filetypes = { "zsh" },
 		condition = function()
 			return vim.fn.expand("%:t") ~= ".env"
@@ -75,28 +82,28 @@ local sources = {
 			update_in_insert = true,
 		},
 	}),
-	null_ls.builtins.formatting.shfmt.with({
+	formatting.shfmt.with({
 		extra_filetypes = { "zsh" },
 	}),
 
 	-- Python
-	null_ls.builtins.formatting.black,
-	null_ls.builtins.formatting.isort,
+	formatting.black,
+	formatting.isort,
 
 	-- TS/JS
-	null_ls.builtins.code_actions.eslint_d.with({
+	code_actions.eslint_d.with({
 		extra_filetypes = { "svelte" },
 		condition = function(utils)
 			return utils.root_has_file({ ".eslintrc", ".eslintrc.json", ".eslintrc.js", ".eslintrc.cjs" })
 		end,
 	}),
-	null_ls.builtins.diagnostics.eslint_d.with({
+	diagnostics.eslint_d.with({
 		extra_filetypes = { "svelte" },
 		condition = function(utils)
 			return utils.root_has_file({ ".eslintrc", ".eslintrc.json", ".eslintrc.js", ".eslintrc.cjs" })
 		end,
 	}),
-	null_ls.builtins.formatting.eslint_d.with({
+	formatting.eslint_d.with({
 		extra_filetypes = { "svelte" },
 		condition = function(utils)
 			return utils.root_has_file({ ".eslintrc", ".eslintrc.json", ".eslintrc.js", ".eslintrc.cjs" })

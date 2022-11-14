@@ -15,7 +15,7 @@ config.views = {
 			width = "auto",
 			height = "auto",
 			max_height = 10,
-			max_width = 50,
+			max_width = 100,
 		},
 		border = {
 			style = "rounded",
@@ -31,7 +31,7 @@ config.views = {
 }
 
 config.lsp = {
-	signature = { enabled = true },
+	signature = { enabled = false },
 	hover = { enabled = true },
 	documentation = {
 		opts = {

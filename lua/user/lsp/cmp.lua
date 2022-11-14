@@ -1,21 +1,11 @@
-local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-	return
-end
-
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-	return
-end
-
-require("luasnip/loaders/from_vscode").lazy_load()
+local cmp = require("cmp")
+local luasnip = require("luasnip")
 
 local check_backspace = function()
 	local col = vim.fn.col(".") - 1
 	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 end
 
---   פּ ﯟ   some other good icons
 local kind_icons = {
 	Text = "",
 	Method = "m",
@@ -43,14 +33,9 @@ local kind_icons = {
 	Operator = "",
 	TypeParameter = "",
 }
--- find more here: https://www.nerdfonts.com/cheat-sheet
 
+require("luasnip/loaders/from_vscode").lazy_load()
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body) -- For `luasnip` users.
-		end,
-	},
 	mapping = {
 		["<C-k>"] = cmp.mapping.select_prev_item(),
 		["<C-j>"] = cmp.mapping.select_next_item(),
@@ -94,12 +79,19 @@ cmp.setup({
 			"s",
 		}),
 	},
+	window = {
+		completion = {
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+		},
+		documentation = {
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+		},
+	},
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
 		format = function(entry, vim_item)
 			-- Kind icons
 			vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
 			vim_item.menu = ({
 				nvim_lua = "[Nvim]",
 				nvim_lsp = "[LSP]",
@@ -109,51 +101,19 @@ cmp.setup({
 				orgmode = "[Org]",
 				emoji = "[Emoji]",
 				pandoc_references = "[BibTex]",
-				-- nvim_lsp_signature_help = "[Sign]",
-				plugins = "[Plugins]",
 			})[entry.source.name]
 			return vim_item
 		end,
 	},
-	sorting = {
-		comparators = {
-			cmp.config.compare.offset,
-			cmp.config.compare.exact,
-			cmp.config.compare.score,
-			require("cmp-under-comparator").under,
-			cmp.config.compare.kind,
-			cmp.config.compare.sort_text,
-			cmp.config.compare.length,
-			cmp.config.compare.order,
-		},
-	},
 	sources = {
+		{ name = "nvim_lsp" },
 		{ name = "nvim_lua" },
-		{ name = "nvim_lsp", priority = 9 },
-		{ name = "luasnip", priority = 10, max_item_count = 3 },
-		{ name = "buffer", keyword_length = 5 },
+		{ name = "vsnip" },
+		{ name = "buffer" },
 		{ name = "path" },
-		{ name = "orgmode" },
-		{ name = "emoji", insert = false },
+		{ name = "luasnip" },
+		{ name = "emoji" },
 		{ name = "pandoc_references" },
-		-- { name = "nvim_lsp_signature_help" },
-		{ name = "plugins" },
-	},
-	confirm_opts = {
-		behavior = cmp.ConfirmBehavior.Replace,
-		select = false,
-	},
-	experimental = {
-		ghost_text = false,
-		native_menu = false,
-	},
-	window = {
-		completion = {
-			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-		},
-		documentation = {
-			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-		},
 	},
 })
 
@@ -162,9 +122,9 @@ cmp.setup.cmdline(":", {
 	mapping = {
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
 		["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-		["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+		-- ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
 		["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-		["<Down>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+		-- ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
 		["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
 		["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
 	},
@@ -177,9 +137,9 @@ cmp.setup.cmdline({ "/", "?" }, {
 	mapping = {
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
 		["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-		["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+		-- ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
 		["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-		["<Down>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+		-- ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
 		["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
 		["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
 	},
@@ -187,4 +147,3 @@ cmp.setup.cmdline({ "/", "?" }, {
 		{ name = "buffer" },
 	},
 })
-

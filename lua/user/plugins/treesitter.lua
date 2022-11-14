@@ -6,7 +6,7 @@ end
 local config = {}
 
 -- Base-Level Settings
-config.ensure_installed = "all" -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+config.ensure_installed = {} -- one of "all", "maintained" (parsers with maintainers), or a list of languages
 config.ignore_install = { "phpdoc" }
 config.sync_install = false -- install languages synchronously (only applied to `ensure_installed`)
 

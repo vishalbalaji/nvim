@@ -10,7 +10,6 @@ require("user.colorscheme")
 
 -- LSP
 require("user.lsp")
-require("user.lsp.cmp")
 
 -- Plugins
 require("user.plugins.cokeline")
