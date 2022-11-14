@@ -1,5 +1,6 @@
 local lspconfig = require("lspconfig")
 
+local icons = require("user.utils.icons")
 local handlers = require("user.lsp.handlers")
 local on_attach = handlers.on_attach
 local capabilities = handlers.capabilities
@@ -8,6 +9,17 @@ handlers.setup()
 require("mason").setup()
 require("user.lsp.cmp")
 require("user.lsp.null_ls")
+
+require("trouble").setup({
+	padding = false,
+	signs = {
+		error = icons.diagnostics.Error,
+		warning = icons.diagnostics.Warning,
+		hint = icons.diagnostics.Hint,
+		information = icons.diagnostics.Information,
+		other = icons.diagnostics.Question,
+	},
+})
 
 require("mason-lspconfig").setup_handlers({
 	function(server_name) -- default handler (optional)

@@ -31,7 +31,6 @@ config.views = {
 }
 
 config.lsp = {
-	signature = { enabled = false },
 	hover = { enabled = true },
 	documentation = {
 		opts = {

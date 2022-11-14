@@ -72,20 +72,22 @@ packer.startup(function(use)
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		"neovim/nvim-lspconfig",
-    "jose-elias-alvarez/null-ls.nvim",
-    "folke/trouble.nvim"
+		"folke/trouble.nvim",
+		"jose-elias-alvarez/null-ls.nvim",
+		"b0o/schemastore.nvim",
 	})
 
 	-- -- CMP
 	use({
 		"hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-nvim-lua",
+		"hrsh7th/cmp-nvim-lua",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-emoji",
-    "jc-doyle/cmp-pandoc-references",
+		"hrsh7th/cmp-emoji",
+		"jc-doyle/cmp-pandoc-references",
+		"lukas-reineke/cmp-under-comparator",
 
 		-- Snippets
 		"L3MON4D3/LuaSnip",

@@ -1,5 +1,6 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
+local compare = require("cmp.config.compare")
 
 local check_backspace = function()
 	local col = vim.fn.col(".") - 1
@@ -35,6 +36,7 @@ local kind_icons = {
 }
 
 require("luasnip/loaders/from_vscode").lazy_load()
+
 cmp.setup({
 	mapping = {
 		["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -78,6 +80,25 @@ cmp.setup({
 			"i",
 			"s",
 		}),
+	},
+	sorting = {
+		priority_weight = 2,
+		comparators = {
+			-- require("copilot_cmp.comparators").prioritize,
+			-- require("copilot_cmp.comparators").score,
+			compare.offset,
+			compare.exact,
+			-- compare.scopes,
+			compare.score,
+			compare.recently_used,
+			compare.locality,
+			-- compare.kind,
+			compare.sort_text,
+			compare.length,
+			compare.order,
+			-- require("copilot_cmp.comparators").prioritize,
+			-- require("copilot_cmp.comparators").score,
+		},
 	},
 	window = {
 		completion = {
