@@ -31,7 +31,20 @@ config.views = {
 }
 
 config.lsp = {
-	hover = { enabled = true },
+	hover = {
+		enabled = true,
+	},
+	signature = {
+		enabled = true,
+	},
+	message = {
+		enabled = true,
+	},
+	override = {
+		["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+		["vim.lsp.util.stylize_markdown"] = true,
+		["cmp.entry.get_documentation"] = true,
+	},
 	documentation = {
 		opts = {
 			border = { style = "rounded" },

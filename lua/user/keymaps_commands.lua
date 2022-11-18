@@ -11,6 +11,7 @@ vim.g.maplocalleader = " "
 
 -- Commands
 cmd("Q", "quitall!", {})
+cmd("E", "w! | e!", {})
 
 -- General Keymaps
 map(
@@ -50,6 +51,7 @@ map("v", "`", "c`<Esc>pa`<Esc>v2i`", opts)
 map("v", "(", "c(<Esc>pa)<Esc>va(", opts)
 map("v", "[", "c[<Esc>pa]<Esc>va[", opts)
 map("v", "{", "c{<Esc>pa}<Esc>va{", opts)
+map("v", "<", "c<<Esc>pa><Esc>va<", opts)
 map("v", "*", "c*<Esc>pa*<Esc>gvll", opts)
 
 -- -- General Purpose
@@ -218,6 +220,7 @@ local wk_n_mappings = {
 		n = { "<cmd>NullLsInfo<CR>", "NullLs Info" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
 		R = { "<cmd>lua vim.lsp.buf.references()<CR>", "References" },
+		s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "References" },
 		t = {
 			function()
 				vim.cmd([[ TroubleToggle workspace_diagnostics ]])
