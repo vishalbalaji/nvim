@@ -51,7 +51,7 @@ map("v", "`", "c`<Esc>pa`<Esc>v2i`", opts)
 map("v", "(", "c(<Esc>pa)<Esc>va(", opts)
 map("v", "[", "c[<Esc>pa]<Esc>va[", opts)
 map("v", "{", "c{<Esc>pa}<Esc>va{", opts)
-map("v", "<", "c<<Esc>pa><Esc>va<", opts)
+-- map("x", "<", "c<<Esc>pa><Esc>va<", opts)
 map("v", "*", "c*<Esc>pa*<Esc>gvll", opts)
 
 -- -- General Purpose
