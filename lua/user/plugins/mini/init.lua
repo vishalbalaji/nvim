@@ -19,12 +19,7 @@ _G.cursorword_blocklist = function()
 end
 -- -- Make sure to add this autocommand *before* calling module's `setup()`.
 vim.cmd([[au CursorMoved * lua _G.cursorword_blocklist()]])
-require("user.plugins.mini.cursorword").setup({ delay = 300 })
+require("mini.cursorword").setup({ delay = 300 })
 
 -- Pairs
-require("user.plugins.mini.pairs").setup({})
-
--- Bufremove
--- require("mini.bufremove").setup()
-
--- require("user.plugins.mini.surround").setup({})
+require("mini.pairs").setup({})

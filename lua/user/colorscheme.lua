@@ -36,7 +36,6 @@ endfun
 local hl = vim.api.nvim_set_hl
 local comment_fg = vim.api.nvim_get_hl_by_name("Comment", true).foreground
 
-
 -- General Highlights
 local function general_hls()
 	-- hl(0, "NormalAlt", { link = "Normal" })
@@ -55,7 +54,7 @@ end
 -- NvimTree
 local function nvimtree_hls()
 	-- hl(0, "NvimTreeNormal", { link = "Normal" })
-  -- hl(0, "NvimTreeWinSeparator", { link = "WinSeparator" })
+	-- hl(0, "NvimTreeWinSeparator", { link = "WinSeparator" })
 	hl(0, "NvimTreeNormal", { link = "NormalAlt" })
 	hl(0, "NvimTreeNormalNC", { link = "NvimTreeNormal" })
 	hl(0, "NvimTreeWinSeparator", { bg = bg_alt, fg = bg_alt })
@@ -96,6 +95,7 @@ local function lsp_hls()
 	hl(0, "DiagnosticInfo", { fg = colors.blue })
 	hl(0, "DiagnosticHint", { fg = colors.green })
 	hl(0, "DiagnosticUnderlineError", { undercurl = true, fg = colors.red })
+	hl(0, "LightBulbVirtualText", { bg = vim.api.nvim_get_hl_by_name("CursorLine", true).background, fg = colors.green })
 end
 
 -- Diffs

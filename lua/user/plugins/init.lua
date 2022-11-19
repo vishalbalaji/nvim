@@ -75,6 +75,27 @@ packer.startup(function(use)
 		"folke/trouble.nvim",
 		"jose-elias-alvarez/null-ls.nvim",
 		"b0o/schemastore.nvim",
+		{
+			"stevearc/dressing.nvim",
+			config = function()
+				require("dressing").setup({
+					input = {
+						insert_only = false,
+						winblend = 0,
+					},
+				})
+			end,
+		},
+		{
+			"kosayoda/nvim-lightbulb",
+			config = function()
+				require("nvim-lightbulb").setup({
+					sign = { enabled = false },
+					virtual_text = { enabled = true, text = "" },
+					autocmd = { enabled = true },
+				})
+			end,
+		},
 	})
 
 	-- -- CMP
@@ -257,15 +278,30 @@ packer.startup(function(use)
 		requires = "nvim-lua/plenary.nvim",
 	})
 	use("fladson/vim-kitty")
+	use({
+		"folke/todo-comments.nvim",
+		config = function()
+			require("todo-comments").setup({
+				keywords = {
+					CREDIT = { icon = " ", color = "info", alt = { "THANKS" } },
+				},
+			})
+		end,
+	})
 
 	-- -- Mini
-	-- use("echasnovski/mini.bufremove")
+	use({
+		{ "echasnovski/mini.cursorword", branch = "stable" },
+		{ "echasnovski/mini.pairs", branch = "stable" },
+	})
 
 	-- -- Git
 	use({
 		"lewis6991/gitsigns.nvim",
 		config = function()
-			require("gitsigns").setup({})
+			require("gitsigns").setup({
+				preview_config = { border = "rounded" },
+			})
 		end,
 	})
 	use({

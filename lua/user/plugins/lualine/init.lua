@@ -18,7 +18,7 @@ local custom_names = {
 			end,
 		},
 	},
-	filetypes = { "Trouble", "aerial" },
+	filetypes = { "Trouble", "aerial", "toggleterm" },
 }
 config.extensions = { "quickfix", "nvim-tree", "man", custom_names }
 
