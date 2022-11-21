@@ -57,8 +57,8 @@ local function nvimtree_hls()
 	-- hl(0, "NvimTreeNormal", { link = "Normal" })
 	-- hl(0, "NvimTreeWinSeparator", { link = "WinSeparator" })
 	hl(0, "NvimTreeNormal", { link = "NormalAlt" })
-	hl(0, "NvimTreeNormalNC", { link = "NvimTreeNormal" })
 	hl(0, "NvimTreeWinSeparator", { bg = bg_alt, fg = bg_alt })
+  hl(0, "NvimTreeNormalNC", { link = "NvimTreeNormal" })
 end
 
 -- Trouble

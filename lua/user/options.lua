@@ -11,8 +11,8 @@ local options = {
 	foldexpr = "nvim_treesitter#foldexpr()",
 	foldlevel = 9999,
 	foldmethod = "expr",
-  guicursor="n-v-c-i:block",
-	guifont = "JetBrainsMono Nerd Font:h7", -- the font used in graphical neovim applications
+	guicursor = "n-v-c-i:block",
+	guifont = "JetBrainsMono Nerd Font:h12", -- the font used in graphical neovim applications
 	hlsearch = true, -- highlight all matches on previous search pattern
 	ignorecase = true, -- ignore case in search patterns
 	laststatus = 3,
@@ -54,3 +54,21 @@ vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
 
 vim.g.markdown_fenced_languages = { "python", "javascript", "sh", "yaml", "json" }
+
+-- Firenvim stuff
+vim.cmd([[ 
+let g:firenvim_config = { 
+    \ 'globalSettings': {
+        \ 'alt': 'all',
+    \  },
+    \ 'localSettings': {
+        \ '.*': {
+            \ 'cmdline': 'none',
+            \ 'content': 'text',
+            \ 'priority': 0,
+            \ 'selector': 'textarea',
+            \ 'takeover': 'always',
+        \ },
+    \ }
+\ }
+]])
