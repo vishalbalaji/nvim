@@ -1,3 +1,7 @@
+if vim.g.started_by_firenvim then
+  return
+end
+
 local status_ok, noice = pcall(require, "noice")
 if not status_ok then
 	return

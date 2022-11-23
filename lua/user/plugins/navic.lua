@@ -1,3 +1,7 @@
+if vim.g.started_by_firenvim then
+  return
+end
+
 local status_ok, navic = pcall(require, "nvim-navic")
 if not status_ok then
 	return

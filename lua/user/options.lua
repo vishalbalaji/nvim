@@ -56,19 +56,15 @@ vim.opt.iskeyword:append("-")
 vim.g.markdown_fenced_languages = { "python", "javascript", "sh", "yaml", "json" }
 
 -- Firenvim stuff
-vim.cmd([[ 
-let g:firenvim_config = { 
-    \ 'globalSettings': {
-        \ 'alt': 'all',
-    \  },
-    \ 'localSettings': {
-        \ '.*': {
-            \ 'cmdline': 'none',
-            \ 'content': 'text',
-            \ 'priority': 0,
-            \ 'selector': 'textarea',
-            \ 'takeover': 'always',
-        \ },
-    \ }
-\ }
-]])
+if vim.g.started_by_firenvim then
+	vim.opt.showtabline = 0
+	vim.opt.cmdheight = 0
+  vim.opt.statusline='[%{toupper(mode())}]%=%m%y'
+end
+
+vim.g.firenvim_config = {
+	localSettings = {
+		[".*"] = { cmdline = "neovim", takeover = "never" },
+		-- ["https://[^/]*github\\.com/.*"] = { cmdline = "neovim", priority = 1, takeover = "always" },
+	},
+}

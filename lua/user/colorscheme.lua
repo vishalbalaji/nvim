@@ -50,6 +50,8 @@ local function general_hls()
 	hl(0, "Pmenu", { fg = "fg", bg = "NONE" })
 	hl(0, "PmenuThumb", { bg = "fg" })
 	hl(0, "SignColumn", { fg = "fg", bg = "NONE" })
+	hl(0, "TreesitterContext", { link = "CursorLine" })
+	hl(0, "TreesitterContextBottom", { underline = true, fg = comment_fg })
 end
 
 -- NvimTree
@@ -58,7 +60,7 @@ local function nvimtree_hls()
 	-- hl(0, "NvimTreeWinSeparator", { link = "WinSeparator" })
 	hl(0, "NvimTreeNormal", { link = "NormalAlt" })
 	hl(0, "NvimTreeWinSeparator", { bg = bg_alt, fg = bg_alt })
-  hl(0, "NvimTreeNormalNC", { link = "NvimTreeNormal" })
+	hl(0, "NvimTreeNormalNC", { link = "NvimTreeNormal" })
 end
 
 -- Trouble
@@ -96,7 +98,11 @@ local function lsp_hls()
 	hl(0, "DiagnosticInfo", { fg = colors.blue })
 	hl(0, "DiagnosticHint", { fg = colors.green })
 	hl(0, "DiagnosticUnderlineError", { undercurl = true, fg = colors.red })
-	hl(0, "LightBulbVirtualText", { bg = vim.api.nvim_get_hl_by_name("CursorLine", true).background, fg = colors.green })
+	hl(
+		0,
+		"LightBulbVirtualText",
+		{ bg = vim.api.nvim_get_hl_by_name("CursorLine", true).background, fg = colors.green }
+	)
 end
 
 -- Diffs

@@ -40,7 +40,8 @@ packer.startup(function(use)
 		},
 		"nvim-treesitter/playground",
 		"JoosepAlviste/nvim-ts-context-commentstring",
-		"haringsrob/nvim_context_vt",
+		"nvim-treesitter/nvim-treesitter-context",
+		-- "haringsrob/nvim_context_vt",
 		{
 			"windwp/nvim-ts-autotag",
 			config = function()
@@ -276,6 +277,12 @@ packer.startup(function(use)
 					CREDIT = { icon = " ", color = "info", alt = { "THANKS" } },
 				},
 			})
+		end,
+	})
+	use({
+		"glacambre/firenvim",
+		run = function()
+			vim.fn["firenvim#install"](0)
 		end,
 	})
 

@@ -1,3 +1,7 @@
+if vim.g.started_by_firenvim then
+  return
+end
+
 -- following options are the default
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 

@@ -1,3 +1,7 @@
+if vim.g.started_by_firenvim then
+  return
+end
+
 local status_ok, lualine = pcall(require, "lualine")
 if not status_ok then
 	return
