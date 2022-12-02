@@ -127,6 +127,15 @@ autocmd({ "CursorHold" }, {
 	end,
 })
 
+autocmd({ "FileType" }, {
+	pattern = "python",
+	callback = function()
+		vim.opt.expandtab = false
+		vim.opt.shiftwidth = 2
+		vim.opt.tabstop = 2
+	end,
+})
+
 M.bullets_enabled_file_types = { "markdown" }
 
 autocmd({ "BufEnter" }, {

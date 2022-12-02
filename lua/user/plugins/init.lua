@@ -322,4 +322,19 @@ packer.startup(function(use)
 		"AckslD/nvim-FeMaco.lua",
 		config = 'require("femaco").setup()',
 	})
+	use({
+		"lukas-reineke/headlines.nvim",
+		config = function()
+			require("headlines").setup({
+				markdown = {
+					query = vim.treesitter.parse_query(
+						"markdown",
+						[[
+                (fenced_code_block) @codeblock
+            ]]
+					),
+				},
+			})
+		end,
+	})
 end)

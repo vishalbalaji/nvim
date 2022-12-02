@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local status_ok, null_ls = pcall(require, "null-ls")
 if not status_ok then
 	return
@@ -21,8 +22,8 @@ local null_ls_restart = function()
 	local null_ls_client
 	for _, client in ipairs(vim.lsp.get_active_clients()) do
 		if client.name == "null-ls" then
-      vim.cmd [[ NullLsToggle ]]
-      vim.cmd [[ NullLsToggle ]]
+			vim.cmd([[ NullLsToggle ]])
+			vim.cmd([[ NullLsToggle ]])
 		end
 	end
 	if not null_ls_client then
@@ -34,7 +35,6 @@ end
 
 vim.api.nvim_create_user_command("NullLsStop", null_ls_stop, {})
 vim.api.nvim_create_user_command("NullLsToggle", function()
-
 	-- you can also create commands to disable or enable sources
 	require("null-ls").toggle({})
 end, {})
@@ -60,7 +60,7 @@ local sources = {
 
 	-- CSS
 	formatting.prettierd.with({
-		filetypes = { "css", "json" },
+		filetypes = { "css", "json", "html" },
 	}),
 
 	-- Lua
@@ -87,8 +87,12 @@ local sources = {
 	}),
 
 	-- Python
-	formatting.black,
-	formatting.isort,
+	-- formatting.black,
+	-- formatting.isort,
+	formatting.reorder_python_imports,
+	formatting.yapf.with({
+		extra_args = { "--style", "{ use_tabs: true }" },
+	}),
 
 	-- TS/JS
 	code_actions.eslint_d.with({

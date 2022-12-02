@@ -50,8 +50,13 @@ local function general_hls()
 	hl(0, "Pmenu", { fg = "fg", bg = "NONE" })
 	hl(0, "PmenuThumb", { bg = "fg" })
 	hl(0, "SignColumn", { fg = "fg", bg = "NONE" })
-	hl(0, "TreesitterContext", { link = "CursorLine" })
+	hl(0, "TreesitterContext", { bg = bg_alt })
 	hl(0, "TreesitterContextBottom", { underline = true, fg = comment_fg })
+end
+
+-- Headlines
+local function headlines_hls()
+  hl(0, "CodeBlock", { bg = bg_alt })
 end
 
 -- NvimTree
@@ -127,6 +132,7 @@ local function indentblankline_hls()
 end
 
 general_hls()
+headlines_hls()
 nvimtree_hls()
 trouble_hls()
 quickscope_hls()

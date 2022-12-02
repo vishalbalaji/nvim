@@ -180,7 +180,7 @@ local wk_n_mappings = {
 	c = { "<cmd>ColorizerToggle<CR>", "Toggle Colorizer" },
 	d = { "<cmd>cd %:p:h<CR><cmd>pwd<CR>", "Switch CWD" },
 	e = {
-		"<cmd>NvimTreeToggle<CR>",
+		"<cmd>silent! NvimTreeToggle<CR>",
 		"Explorer",
 	},
 	f = {
