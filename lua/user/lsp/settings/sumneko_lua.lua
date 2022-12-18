@@ -26,6 +26,7 @@ return {
 				},
 			},
 			diagnostics = {
+				workspaceDelay = -1,
 				globals = { "vim" },
 			},
 			workspace = {

@@ -179,10 +179,14 @@ local wk_n_mappings = {
 	a = { "<cmd>AerialToggle<CR>", "Toggle Aerial" },
 	c = { "<cmd>ColorizerToggle<CR>", "Toggle Colorizer" },
 	d = { "<cmd>cd %:p:h<CR><cmd>pwd<CR>", "Switch CWD" },
-	e = {
-		"<cmd>silent! NvimTreeToggle<CR>",
-		"Explorer",
-	},
+	-- e = {
+	-- 	"<cmd>silent! NvimTreeToggle<CR>",
+	-- 	"Explorer",
+	-- },
+	-- e = {
+	-- 	"<cmd>silent! Neotree toggle<CR>",
+	-- 	"Explorer",
+	-- },
 	f = {
 		name = "Telescope",
 		d = {

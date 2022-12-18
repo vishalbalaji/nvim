@@ -68,6 +68,14 @@ local function nvimtree_hls()
 	hl(0, "NvimTreeNormalNC", { link = "NvimTreeNormal" })
 end
 
+local function neotree_hls()
+	-- hl(0, "NvimTreeNormal", { link = "Normal" })
+	-- hl(0, "NvimTreeWinSeparator", { link = "WinSeparator" })
+	hl(0, "NeoTreeNormal", { link = "NormalAlt" })
+	hl(0, "NeoTreeWinSeparator", { bg = bg_alt, fg = bg_alt })
+	hl(0, "NeoTreeNormalNC", { link = "NvimTreeNormal" })
+end
+
 -- Trouble
 local function trouble_hls()
 	hl(0, "TroubleNormal", { link = "NormalAlt" })
@@ -134,6 +142,7 @@ end
 general_hls()
 headlines_hls()
 nvimtree_hls()
+neotree_hls()
 trouble_hls()
 quickscope_hls()
 whichkey_hls()

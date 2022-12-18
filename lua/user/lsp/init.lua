@@ -59,3 +59,5 @@ require("mason-lspconfig").setup_handlers({
 		lspconfig[server_name].setup(opts)
 	end,
 })
+
+lspconfig.emmet_ls.setup({})

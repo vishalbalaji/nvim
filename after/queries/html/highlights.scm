@@ -1,4 +1,4 @@
-; extends
+; extends(disable)
 
 ((attribute
   (attribute_name) @name (#eq? @name "class")
