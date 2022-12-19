@@ -1,5 +1,5 @@
 if vim.g.started_by_firenvim then
-  return
+	return
 end
 
 local noice = require("noice")
@@ -80,10 +80,6 @@ config.markdown = {
 }
 
 config.routes = {
-	{
-		view = "mini",
-		filter = { event = "msg_showmode" },
-	},
 	{
 		filter = {
 			event = "msg_show",
