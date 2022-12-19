@@ -23,12 +23,56 @@ map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
 -- Clipboard Stuff
-map("x", "p", "\"_dP")
+-- -- Function to delete in range, such as di(, da{, etc. without overwriting clipboard
+-- -- CREDIT: https://stackoverflow.com/a/72197874
+function _G.range_delete(startinsert)
+	startinsert = startinsert or false
+	local old_func = vim.go.operatorfunc -- backup previous reference
+	-- set a globally callable object/function
+	_G.op_func_delete = function()
+		-- the content covered by the motion is between the [ and ] marks, so get those
+		local start = vim.api.nvim_buf_get_mark(0, "[")
+		local finish = vim.api.nvim_buf_get_mark(0, "]")
 
-map("x", "c", "\"_c")
-map("x", "d", "\"_d")
-map("x", "s", "\"_s")
-map("x", "r", "\"_r")
+		vim.api.nvim_buf_set_text(0, start[1] - 1, start[2], finish[1] - 1, finish[2] + 1, {})
+		if startinsert then
+			vim.api.nvim_feedkeys("i", "n", false)
+		end
+
+		vim.go.operatorfunc = old_func
+		_G.op_func_delete = nil -- deletes itself from global namespace
+	end
+	vim.go.operatorfunc = "v:lua.op_func_delete"
+	vim.api.nvim_feedkeys("g@", "n", false)
+end
+
+local function delete_func(key, startinsert)
+	startinsert = startinsert or false
+	local operator = vim.fn.nr2char(vim.fn.getchar())
+
+	if operator == key then
+		vim.api.nvim_feedkeys('"_' .. key .. key, "n", false)
+	else
+		range_delete(startinsert)
+		vim.api.nvim_feedkeys(operator, "n", false)
+	end
+end
+
+map("v", "p", '"_dP')
+map("v", "d", '"_d')
+map("v", "c", '"_c')
+
+map("x", "s", '"_s')
+map("x", "r", '"_r')
+
+map("n", "xx", "Vd")
+
+map("n", "d", function()
+	delete_func("d")
+end)
+map("n", "c", function()
+	delete_func("c", true)
+end)
 
 -- Move
 map("n", "<A-h>", "<Plug>GoNSMLeft")
@@ -45,7 +89,7 @@ map("v", "<", "<gv")
 -- Surround
 map("v", '"', 'c"<Esc>pa"<Esc>v2i"')
 map("v", "'", "c'<Esc>pa'<Esc>v2i'")
-map("v", "`", "c`<Esc>pa`<Esc>v2i`")
+-- map("v", "`", "c`<Esc>pa`<Esc>v2i`")
 map("v", "(", "c(<Esc>pa)<Esc>va(")
 map("v", "[", "c[<Esc>pa]<Esc>va[")
 map("v", "{", "c{<Esc>pa}<Esc>va{")
