@@ -27,6 +27,7 @@ local function plugins(use)
 			{ "neovim/nvim-lspconfig" },
 			{ "williamboman/mason.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
+			{ "folke/neodev.nvim" },
 
 			-- Autocompletion
 			{ "hrsh7th/nvim-cmp" },
@@ -72,8 +73,12 @@ local function plugins(use)
 	})
 
 	-- General
+	use("lewis6991/impatient.nvim")
 	use("mbbill/undotree")
 	use("mrjones2014/smart-splits.nvim")
+	use({ "mg979/vim-visual-multi", branch = "master" })
+	use({ "lukas-reineke/indent-blankline.nvim" })
+	use("famiu/bufdelete.nvim")
 	use({
 		"milisims/foldhue.nvim",
 		config = function()
@@ -101,7 +106,6 @@ local function plugins(use)
 			"MunifTanjim/nui.nvim",
 		},
 	})
-	use({ "lukas-reineke/indent-blankline.nvim" })
 	use({
 		"numToStr/Comment.nvim",
 		config = function()

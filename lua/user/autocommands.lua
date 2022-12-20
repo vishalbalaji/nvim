@@ -3,6 +3,11 @@ local kitty_group = vim.api.nvim_create_augroup("kitty_mp", {
 	clear = true,
 })
 
+autocmd("VimEnter", {
+	once = true,
+	command = "set formatoptions-=cro"
+})
+
 autocmd("FileType", {
 	once = true,
 	pattern = { "help", "qf" },

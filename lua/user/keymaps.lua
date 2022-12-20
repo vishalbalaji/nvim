@@ -114,7 +114,7 @@ map("n", "<C-S-0>", "<C-w>=")
 
 -- -- Tabs
 map("n", "<M-S-t>", "<cmd>tabnew<CR>")
-map("n", "<M-S-x>", "<cmd>bdelete!<CR>")
+map("n", "<M-S-x>", "<cmd>Bdelete!<CR>")
 map("n", "<M-S-k>", "<Plug>(cokeline-focus-next)")
 map("n", "<M-S-j>", "<Plug>(cokeline-focus-prev)")
 map("n", "<M-S-l>", "<Plug>(cokeline-switch-next)")
