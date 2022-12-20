@@ -11,14 +11,22 @@ end
 vim.keymap.set("n", "<leader>e", M.toggle, { silent = true, noremap = true })
 
 require("neo-tree").setup({
-	window = {
-		width = 30,
-		mappings = {
-			["/"] = "none",
-			["<Tab>"] = "open",
-		},
-	},
 	filesystem = {
+		window = {
+			width = 30,
+			mappings = {
+				["/"] = "none",
+				["<Tab>"] = "open",
+				["o"] = "system_open",
+			},
+		},
+		commands = {
+			system_open = function(state)
+				local node = state.tree:get_node()
+				local path = node:get_id()
+				vim.api.nvim_command(string.format("silent !xdg-open '%s' & disown", path))
+			end,
+		},
 		filtered_items = {
 			hide_dotfiles = false,
 			hide_gitignored = false,

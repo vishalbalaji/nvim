@@ -7,7 +7,7 @@ local cokeline = require("cokeline")
 local get_hex = require("cokeline/utils").get_hex
 local mappings = require("cokeline/mappings")
 
-local colors = require("colors")
+local colors = require("user.colors")
 
 local errors_fg = colors.red
 local warnings_fg = colors.yellow

@@ -26,7 +26,7 @@ config.incremental_selection = {
 	},
 }
 
-local colors = require("colors")
+local colors = require("user.colors")
 config.rainbow = {
 	enable = true,
 	extended_mode = true,
