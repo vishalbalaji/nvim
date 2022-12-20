@@ -1,8 +1,9 @@
 local lsp = require("lsp-zero")
-lsp.preset("lsp-compe")
 
+lsp.preset("lsp-compe")
 lsp.set_preferences({
 	set_lsp_keymaps = false,
+	sign_icons = _G.lsp_sign_icons,
 })
 
 lsp.ensure_installed({
@@ -13,13 +14,16 @@ lsp.ensure_installed({
 -- Trouble
 require("trouble").setup({
 	padding = false,
+	signs = {
+		error = _G.lsp_sign_icons.error,
+		warning = _G.lsp_sign_icons.warn,
+		hint = _G.lsp_sign_icons.hint,
+		information = _G.lsp_sign_icons.info,
+		other = _G.lsp_sign_icons.other,
+	},
 })
 
 -- Diagnostics
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
 require("lspconfig.ui.windows").default_options.border = "rounded"
 
 vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "FloatBorder" })
@@ -46,16 +50,19 @@ map("n", "gr", function()
 end)
 
 -- -- Diagnostics
+vim.diagnostic.config({
+	update_in_insert = true,
+})
+
 map("n", "gl", vim.diagnostic.open_float)
 map("n", "[d", vim.diagnostic.goto_prev)
 map("n", "]d", vim.diagnostic.goto_next)
 
 -- LSP
-vim.diagnostic.config({
-	update_in_insert = true,
-})
-
 local settings = require("lsp.settings").get_settings()
+
+-- local neodev = require("neodev").setup()
+-- print(vim.inspect(neodev))
 
 lsp.configure("sumneko_lua", settings.sumneko_lua)
 lsp.configure("tsserver", settings.tsserver)

@@ -138,8 +138,8 @@ local components = {
 
 	diagnostics = {
 		text = function(buffer)
-			return (buffer.diagnostics.errors ~= 0 and "  " .. buffer.diagnostics.errors)
-				or (buffer.diagnostics.warnings ~= 0 and "  " .. buffer.diagnostics.warnings)
+			return (buffer.diagnostics.errors ~= 0 and string.format(" %s %s", _G.lsp_sign_icons.error, buffer.diagnostics.errors))
+				or (buffer.diagnostics.warnings ~= 0 and string.format(" %s %s", _G.lsp_sign_icons.warn, buffer.diagnostics.warnings))
 				or ""
 		end,
 		fg = function(buffer)

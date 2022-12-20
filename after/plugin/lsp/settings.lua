@@ -8,9 +8,9 @@ M.get_settings = function ()
 		settings = {
 			Lua = {
 				type = {
-					-- weakUnionCheck = true,
-					-- weakNilCheck = true,
-					-- castNumberToInteger = true,
+					weakUnionCheck = true,
+					weakNilCheck = true,
+					castNumberToInteger = true,
 				},
 				format = {
 					enable = false,
@@ -24,7 +24,6 @@ M.get_settings = function ()
 					semicolon = "Disable", -- "All", "SameLine", "Disable"
 					setType = true,
 				},
-				-- spell = {"the"}
 				runtime = {
 					version = "LuaJIT",
 					special = {
@@ -33,7 +32,6 @@ M.get_settings = function ()
 				},
 				diagnostics = {
 					workspaceDelay = -1,
-					globals = { "vim" },
 				},
 				workspace = {
 					library = {
