@@ -1,17 +1,23 @@
 local M = {}
 
-local check_backspace = function()
-	local col = vim.fn.col(".") - 1
-	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+local has_words_before = function()
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-M.setup = function ()
-	local lsp = require("lsp-zero")
-	local cmp        = require("cmp")
-	local luasnip    = require("luasnip")
+M.setup = function(lsp)
+	local cmp = require("cmp")
+	local luasnip = require("luasnip")
 	local cmp_select = { behavior = cmp.SelectBehavior.Insert }
 	local cmp_config = lsp.defaults.cmp_config()
 
+	-- Basic
+	if not string.match(cmp_config.completion.completeopt, ",noselect") then
+		cmp_config.completion.completeopt = cmp_config.completion.completeopt .. ",noselect"
+	end
+	cmp_config.window.completion = cmp.config.window.bordered()
+
+	-- Mapping
 	cmp_config.mapping = lsp.defaults.cmp_mappings({
 		["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
 		["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
@@ -19,19 +25,15 @@ M.setup = function ()
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif luasnip.expandable() then
-				luasnip.expand({})
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
-			elseif check_backspace() then
-				fallback()
+			elseif has_words_before() then
+				cmp.complete()
 			else
 				fallback()
 			end
-		end, {
-				"i",
-				"s",
-		}),
+		end, { "i", "s" }),
+
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
@@ -40,15 +42,13 @@ M.setup = function ()
 			else
 				fallback()
 			end
-		end, {
-				"i",
-				"s",
-		}),
+		end, { "i", "s" }),
 	})
-	cmp_config.window.completion = cmp.config.window.bordered()
-	table.insert(cmp_config.sources, { name = 'emoji', insert = false })
 
-	---@diagnostic disable-next-line: redundant-parameter
+	-- Sources
+	table.insert(cmp_config.sources, { name = "emoji" })
+
+	-- Setup
 	cmp.setup(cmp_config)
 
 	cmp.setup.cmdline(":", {

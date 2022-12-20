@@ -61,5 +61,5 @@ lsp.configure("sumneko_lua", settings.sumneko_lua)
 lsp.configure("tsserver", settings.tsserver)
 
 lsp.setup()
-require("lsp.cmp").setup()
-require("lsp.null-ls").setup()
+require("lsp.cmp").setup(lsp)
+require("lsp.null-ls").setup(lsp)

@@ -29,9 +29,7 @@ local null_ls_restart = function()
 	null_ls_client.stop()
 end
 
-M.setup = function ()
-	local lsp = require('lsp-zero')
-
+M.setup = function (lsp)
 	local null_ls = require('null-ls')
 	local null_opts = lsp.build_options('null-ls', {})
 
