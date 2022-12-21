@@ -11,6 +11,34 @@ M.setup = function(lsp)
 	local cmp_select = { behavior = cmp.SelectBehavior.Insert }
 	local cmp_config = lsp.defaults.cmp_config()
 
+	local kind_icons = {
+		Text = "",
+		Method = "m",
+		Function = "",
+		Constructor = "",
+		Field = "",
+		Variable = "",
+		Class = "",
+		Interface = "",
+		Module = "",
+		Property = "",
+		Unit = "",
+		Value = "",
+		Enum = "",
+		Keyword = "",
+		Snippet = "",
+		Color = "",
+		File = "",
+		Reference = "",
+		Folder = "",
+		EnumMember = "",
+		Constant = "",
+		Struct = "",
+		Event = "",
+		Operator = "",
+		TypeParameter = "",
+	}
+
 	-- Basic
 	if not string.match(cmp_config.completion.completeopt, ",noselect") then
 		cmp_config.completion.completeopt = cmp_config.completion.completeopt .. ",noselect"
@@ -44,6 +72,22 @@ M.setup = function(lsp)
 			end
 		end, { "i", "s" }),
 	})
+
+	-- Formatting/Kind
+	cmp_config.formatting.fields = { "kind", "abbr", "menu" }
+	cmp_config.formatting.format = function(entry, vim_item)
+		-- Kind icons
+		vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+		vim_item.menu = ({
+			nvim_lsp = "[LSP]",
+			luasnip = "[Snippet]",
+			buffer = "[Buffer]",
+			path = "[Path]",
+			emoji = "[Emoji]",
+			cmdline = "[CMD]",
+		})[entry.source.name]
+		return vim_item
+	end
 
 	-- Sources
 	table.insert(cmp_config.sources, { name = "emoji" })

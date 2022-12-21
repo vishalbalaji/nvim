@@ -29,9 +29,9 @@ local null_ls_restart = function()
 	null_ls_client.stop()
 end
 
-M.setup = function (lsp)
-	local null_ls = require('null-ls')
-	local null_opts = lsp.build_options('null-ls', {})
+M.setup = function(lsp)
+	local null_ls = require("null-ls")
+	local null_opts = lsp.build_options("null-ls", {})
 
 	local code_actions = null_ls.builtins.code_actions
 	local completion = null_ls.builtins.completion
@@ -59,7 +59,9 @@ M.setup = function (lsp)
 			formatting.stylua,
 
 			-- Web Dev
-			formatting.prettierd,
+			formatting.prettierd.with({
+				filetypes = { "json", "html", "css" },
+			}),
 			code_actions.eslint_d.with(eslint_opts),
 			diagnostics.eslint_d.with(eslint_opts),
 			formatting.eslint_d.with(eslint_opts),
@@ -69,7 +71,6 @@ M.setup = function (lsp)
 			formatting.yapf.with({
 				extra_args = { "--style", "{ use_tabs: true }" },
 			}),
-
 
 			-- Shell
 			code_actions.shellcheck.with({
@@ -90,7 +91,7 @@ M.setup = function (lsp)
 			formatting.shfmt.with({
 				extra_filetypes = { "zsh" },
 			}),
-		}
+		},
 	})
 
 	vim.api.nvim_create_user_command("NullLsStop", null_ls_stop, {})
