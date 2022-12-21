@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 local lsp = require("lsp-zero")
 
 lsp.preset("lsp-compe")
@@ -35,6 +36,7 @@ lsp.on_attach(function()
 		local opts = { noremap = true, silent = true }
 		vim.keymap.set(mode, key, mapping, opts)
 	end
+
 	map("n", "<leader>la", vim.lsp.buf.code_action)
 	map("n", "<leader>lr", vim.lsp.buf.rename)
 	map("n", "<leader>lf", vim.cmd.LspZeroFormat)
@@ -67,7 +69,18 @@ lsp.configure("sumneko_lua", {
 lsp.configure("tsserver", {
 	settings = settings.tsserver,
 })
+lsp.configure("pyright", {
+	settings = settings.pyright,
+})
+lsp.configure("denols", {
+	settings = settings.denols,
+})
 
+require("neodev").setup({
+	library = {
+		plugins = false,
+	},
+})
 lsp.setup()
 require("lsp.cmp").setup(lsp)
 require("lsp.null-ls").setup(lsp)

@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 if vim.g.started_by_firenvim then
   return
 end
@@ -12,7 +13,7 @@ local fg_warnings = _G.colors.yellow
 local fg_indicator = _G.colors.green
 local fg_picking_focus = _G.colors.yellow
 local fg_picking_closed = _G.colors.red
-local fg_is_modified = _G.colors.yellow
+local fg_is_modified = _G.colors.green
 local fg_sidebar = _G.colors.yellow
 local fg_inactive = _G.colors.comment_fg
 
