@@ -1,125 +1,118 @@
-local colorscheme = "material"
-vim.g.material_style = "deep ocean"
+local function set_colorscheme()
+	local colorscheme = "material"
+	vim.g.material_style = "deep ocean"
 
-local colors = require("material.colors")
-local bg_alt = colors.editor.bg_alt
-colors = colors.main
+	local colors = require("material.colors")
+	local bg_alt = colors.editor.bg_alt
+	local comment_fg = colors.syntax.comments
+	colors = colors.main
 
-require("material").setup({
-	disable = {
-		colored_cursor = true,
-		eob_lines = true,
-	},
+	require("material").setup({
+		disable = {
+			colored_cursor = true,
+			eob_lines = true,
+		},
 
-	high_visibility = {
-		darker = true, -- Enable higher contrast text for darker style
-	},
+		high_visibility = {
+			darker = true, -- Enable higher contrast text for darker style
+		},
 
-	lualine_style = "stealth", -- Lualine style ( can be 'stealth' or 'default' )
-	async_loading = false, -- Load parts of the theme asyncronously for faster startup (turned on by default)
-})
+		lualine_style = "stealth", -- Lualine style ( can be 'stealth' or 'default' )
+		async_loading = false, -- Load parts of the theme asyncronously for faster startup (turned on by default)
+	})
 
-vim.cmd(
-	"try | colorscheme "
-		.. colorscheme
-		.. " | catch /^Vim%((\a+))=:E185/ | colorscheme default | set background=dark | endtry"
-)
+	-- Setting colorscheme and _G.colors
+	local ok, _ = pcall(vim.cmd, string.format("colorscheme %s", colorscheme))
+	if not ok then
+		vim.cmd("colorscheme default")
+		vim.cmd("set background=dark")
+		return
+	end
 
-vim.cmd([[
-function! SynGroup()
-  let l:s = synID(line('.'), col('.'), 1)
-  echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
-endfun
-]])
+	colors.bg_alt = bg_alt
+	colors.comment_fg = comment_fg
+	_G.colors = colors
+end
 
-local hl = vim.api.nvim_set_hl
-local comment_fg = vim.api.nvim_get_hl_by_name("Comment", true).foreground
+local function hl(code, options)
+	pcall(vim.api.nvim_set_hl, 0, code, options)
+end
 
 -- General Highlights
 local function general_hls()
-	-- hl(0, "NormalAlt", { link = "Normal" })
-	hl(0, "NormalAlt", { bg = bg_alt })
-	hl(0, "Comment", { fg = comment_fg, bold = true, italic = true })
-	hl(0, "NonText", { bg = "NONE", fg = comment_fg })
-	-- hl(0, "SpellBad", { link = "DiagnosticUnderlineError" })
-	hl(0, "SpellBad", { undercurl = true, special = colors.red })
-	hl(0, "NormalFloat", { fg = "fg", bg = "NONE" })
-	hl(0, "FloatBorder", { fg = comment_fg, bg = "NONE" })
-	hl(0, "WinSeparator", { link = "FloatBorder" })
-	hl(0, "Pmenu", { fg = "fg", bg = "NONE" })
-	hl(0, "PmenuThumb", { bg = "fg" })
-	hl(0, "SignColumn", { fg = "fg", bg = "NONE" })
-	hl(0, "TreesitterContext", { bg = bg_alt })
-	hl(0, "TreesitterContextBottom", { underline = true, fg = comment_fg })
+	-- hl("NormalAlt", { link = "Normal" })
+	hl("NormalAlt", { bg = colors.bg_alt })
+	hl("Comment", { fg = colors.comment_fg, bold = true, italic = true })
+	hl("NonText", { bg = "NONE", fg = colors.comment_fg })
+	hl("SpellBad", { link = "DiagnosticUnderlineError" })
+	hl("SpellBad", { undercurl = true, special = colors.red })
+	hl("NormalFloat", { fg = "fg", bg = "NONE" })
+	hl("FloatBorder", { fg = colors.comment_fg, bg = "NONE" })
+	hl("WinSeparator", { link = "FloatBorder" })
+	hl("Pmenu", { fg = "fg", bg = "NONE" })
+	hl("PmenuThumb", { bg = "fg" })
+	hl("SignColumn", { fg = "fg", bg = "NONE" })
+	hl("TreesitterContext", { bg = colors.bg_alt })
+	hl("TreesitterContextBottom", { underline = true, fg = colors.comment_fg })
 end
 
 -- Headlines
 local function headlines_hls()
-  hl(0, "CodeBlock", { bg = bg_alt })
+	hl("CodeBlock", { bg = colors.bg_alt })
 end
 
 -- Trouble
 local function trouble_hls()
-	hl(0, "TroubleNormal", { link = "NormalAlt" })
+	hl("TroubleNormal", { link = "NormalAlt" })
 end
 
 -- QuickScope
 local function quickscope_hls()
-	hl(0, "QuickScopePrimary", { fg = colors.green, standout = true })
-	hl(0, "QuickScopeSecondary", { fg = colors.yellow, standout = true })
+	hl("QuickScopePrimary", { fg = colors.green, standout = true })
+	hl("QuickScopeSecondary", { fg = colors.yellow, standout = true })
 end
 
 -- Telescope
 local function telescope_hls()
-	hl(0, "TelescopeNormal", { link = "NormalFloat" })
-	hl(0, "TelescopeBorder", { link = "TelescopeNormal" })
+	hl("TelescopeNormal", { link = "NormalFloat" })
+	hl("TelescopeBorder", { link = "TelescopeNormal" })
 end
 
 -- Diagnostics
 local function lsp_hls()
-	hl(0, "LspInlayHint", { fg = comment_fg, bg = "bg", bold = true })
-	hl(0, "DiagnosticError", { fg = colors.red })
-	hl(0, "DiagnosticWarn", { fg = colors.yellow })
-	hl(0, "DiagnosticInfo", { fg = colors.blue })
-	hl(0, "DiagnosticHint", { fg = colors.green })
-	hl(0, "DiagnosticUnderlineError", { undercurl = true, fg = colors.red })
-	hl(
-		0,
-		"LightBulbVirtualText",
-		{ bg = vim.api.nvim_get_hl_by_name("CursorLine", true).background, fg = colors.green }
-	)
+	hl("LspInlayHint", { fg = colors.comment_fg, bg = "bg", bold = true })
+	hl("DiagnosticError", { fg = colors.red })
+	hl("DiagnosticWarn", { fg = colors.yellow })
+	hl("DiagnosticInfo", { fg = colors.blue })
+	hl("DiagnosticHint", { fg = colors.green })
+	hl("DiagnosticUnderlineError", { undercurl = true, fg = colors.red })
 end
 
 -- Diffs
 local function git_hls()
-	hl(0, "DiffAdd", { fg = colors.green })
-	hl(0, "DiffChange", { fg = colors.yellow })
-	hl(0, "DiffDelete", { fg = colors.red })
-	hl(0, "GitSignsAdd", { link = "DiffAdd" })
-	hl(0, "GitSignsChange", { link = "DiffChange" })
-	hl(0, "GitSignsDelete", { link = "DiffDelete" })
+	hl("DiffAdd", { fg = colors.green })
+	hl("DiffChange", { fg = colors.yellow })
+	hl("DiffDelete", { fg = colors.red })
+	hl("GitSignsAdd", { link = "DiffAdd" })
+	hl("GitSignsChange", { link = "DiffChange" })
+	hl("GitSignsDelete", { link = "DiffDelete" })
 end
 
 -- Cokeline
 local function cokeline_hls()
-	hl(0, "TablineFill", { link = "Normal" })
-end
-
--- IndentBlankline
-local function indentblankline_hls()
-	-- hl(0, "IndentBlanklineContextStart", { special = "fg", underline = true })
-	-- hl(0, "IndentBlanklineContextChar", { fg = "fg" })
+	hl("TablineFill", { link = "Normal" })
 end
 
 -- Neotree
 local function neotree_hls()
-	-- hl(0, "NvimTreeNormal", { link = "Normal" })
-	-- hl(0, "NvimTreeWinSeparator", { link = "WinSeparator" })
-	hl(0, "NeoTreeNormal", { link = "NormalAlt" })
-	hl(0, "NeoTreeWinSeparator", { bg = bg_alt, fg = bg_alt })
-	hl(0, "NeoTreeNormalNC", { link = "NvimTreeNormal" })
+	-- hl("NeoTreeNormal", { link = "Normal" })
+	-- hl("NeoTreeWinSeparator", { link = "WinSeparator" })
+	hl("NeoTreeNormal", { link = "NormalAlt" })
+	hl("NeoTreeWinSeparator", { bg = colors.bg_alt, fg = colors.bg_alt })
+	hl("NeoTreeNormalNC", { link = "NvimTreeNormal" })
 end
 
+set_colorscheme()
 general_hls()
 headlines_hls()
 trouble_hls()
@@ -128,7 +121,4 @@ telescope_hls()
 lsp_hls()
 git_hls()
 cokeline_hls()
-indentblankline_hls()
 neotree_hls()
-
-return colors

@@ -7,16 +7,19 @@ local cokeline = require("cokeline")
 local get_hex = require("cokeline/utils").get_hex
 local mappings = require("cokeline/mappings")
 
-local colors = require("user.colors")
+local fg_errors = _G.colors.red
+local fg_warnings = _G.colors.yellow
+local fg_indicator = _G.colors.green
+local fg_picking_focus = _G.colors.yellow
+local fg_picking_closed = _G.colors.red
+local fg_is_modified = _G.colors.yellow
+local fg_sidebar = _G.colors.yellow
+local fg_inactive = _G.colors.comment_fg
 
-local errors_fg = colors.red
-local warnings_fg = colors.yellow
-local fg_inactive = get_hex("Comment", "fg")
+local fg_sidebar_sep = get_hex("NeoTreeWinSeparator", "fg")
+local bg_sidebar = get_hex("NeoTreeWinSeparator", "bg")
 local bg_sep = get_hex("WinSeparator", "fg")
 local bg_select = get_hex("NormalAlt", "bg")
-
-local bg_sidebar = get_hex("NeoTreeWinSeparator", "bg")
-local fg_sidebar_sep = get_hex("NeoTreeWinSeparator", "fg")
 
 if fg_sidebar_sep == "NONE" then
 	fg_sidebar_sep = get_hex("FloatBorder", "fg")
@@ -48,7 +51,7 @@ local components = {
 			end
 		end,
 		fg = function(buffer)
-			return buffer.is_focused and colors.green or nil
+			return buffer.is_focused and fg_indicator or nil
 		end,
 	},
 
@@ -75,8 +78,8 @@ local components = {
 				or buffer.devicon.icon
 		end,
 		fg = function(buffer)
-			return (mappings.is_picking_focus() and colors.yellow)
-				or (mappings.is_picking_close() and colors.red)
+			return (mappings.is_picking_focus() and fg_picking_focus)
+				or (mappings.is_picking_close() and fg_picking_closed)
 				or (not buffer.is_focused and fg_inactive)
 				or buffer.devicon.color
 		end,
@@ -110,8 +113,8 @@ local components = {
 			return buffer.filename
 		end,
 		fg = function(buffer)
-			return (buffer.diagnostics.errors ~= 0 and errors_fg)
-				or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
+			return (buffer.diagnostics.errors ~= 0 and fg_errors)
+				or (buffer.diagnostics.warnings ~= 0 and fg_warnings)
 				or (buffer.is_readonly and fg_inactive)
 				or nil
 		end,
@@ -143,8 +146,8 @@ local components = {
 				or ""
 		end,
 		fg = function(buffer)
-			return (buffer.diagnostics.errors ~= 0 and errors_fg)
-				or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
+			return (buffer.diagnostics.errors ~= 0 and fg_errors)
+				or (buffer.diagnostics.warnings ~= 0 and fg_warnings)
 				or nil
 		end,
 		truncation = { priority = 1 },
@@ -155,7 +158,7 @@ local components = {
 			return buffer.is_modified and "●" or ""
 		end,
 		fg = function(buffer)
-			return buffer.is_modified and colors.green or nil
+			return buffer.is_modified and fg_is_modified or nil
 		end,
 		delete_buffer_on_left_click = true,
 		truncation = { priority = 1 },
@@ -199,7 +202,7 @@ cokeline.setup({
 		components = {
 			{
 				text = "",
-				fg = colors.yellow,
+				fg = fg_sidebar,
 				bg = bg_sidebar,
 				style = "bold",
 			},

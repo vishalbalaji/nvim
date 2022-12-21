@@ -26,17 +26,16 @@ config.incremental_selection = {
 	},
 }
 
-local colors = require("user.colors")
 config.rainbow = {
 	enable = true,
 	extended_mode = true,
 	colors = {
-		colors.red,
-		colors.yellow,
-		colors.green,
-		colors.cyan,
-		colors.blue,
-		colors.magenta,
+		_G.colors.red,
+		_G.colors.yellow,
+		_G.colors.green,
+		_G.colors.cyan,
+		_G.colors.blue,
+		_G.colors.magenta or _G.colors.purple,
 	},
 	termcolors = {
 		"Red",
