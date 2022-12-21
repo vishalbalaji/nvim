@@ -5,7 +5,7 @@ local kitty_group = vim.api.nvim_create_augroup("kitty_mp", {
 
 autocmd("VimEnter", {
 	once = true,
-	command = "set formatoptions-=cro"
+	command = "set formatoptions-=cro",
 })
 
 autocmd("FileType", {
@@ -41,4 +41,14 @@ autocmd({ "VimLeavePre" }, {
 	pattern = "*",
 	group = kitty_group,
 	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10 ]],
+})
+
+autocmd("Filetype", {
+	pattern = "python",
+	callback = function()
+		vim.opt.tabstop = 2
+		vim.opt.softtabstop = 2
+		vim.opt.shiftwidth = 2
+		vim.opt.expandtab = false
+	end,
 })
