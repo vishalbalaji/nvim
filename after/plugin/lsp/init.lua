@@ -30,23 +30,27 @@ vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "FloatBorder" })
 
 -- Keymaps
 -- -- LSP Actions
-local function map(mode, key, mapping)
-	local opts = { noremap = true, silent = true }
-	vim.keymap.set(mode, key, mapping, opts)
-end
-
-map("n", "<leader>la", vim.lsp.buf.code_action)
-map("n", "<leader>lr", vim.lsp.buf.rename)
-map("n", "<leader>lf", vim.cmd.LspZeroFormat)
-map("n", "<leader>li", vim.cmd.LspInfo)
-map("n", "<leader>lm", vim.cmd.Mason)
-map("n", "<leader>lt", vim.cmd.TroubleToggle)
-map("n", "<leader>lr", vim.lsp.buf.rename)
-map("n", "<leader>ls", vim.lsp.buf.signature_help)
-map("n", "K", vim.lsp.buf.hover)
-map("n", "gd", vim.lsp.buf.definition)
-map("n", "gr", function()
-	vim.cmd.TroubleToggle("lsp_references")
+lsp.on_attach(function()
+	local function map(mode, key, mapping)
+		local opts = { noremap = true, silent = true }
+		vim.keymap.set(mode, key, mapping, opts)
+	end
+	map("n", "<leader>la", vim.lsp.buf.code_action)
+	map("n", "<leader>lr", vim.lsp.buf.rename)
+	map("n", "<leader>lf", vim.cmd.LspZeroFormat)
+	map("n", "<leader>li", vim.cmd.LspInfo)
+	map("n", "<leader>lm", vim.cmd.Mason)
+	map("n", "<leader>lt", vim.cmd.TroubleToggle)
+	map("n", "<leader>lr", vim.lsp.buf.rename)
+	map("n", "<leader>ls", vim.lsp.buf.signature_help)
+	map("n", "K", vim.lsp.buf.hover)
+	map("n", "gd", vim.lsp.buf.definition)
+	map("n", "gr", function()
+		vim.cmd.TroubleToggle("lsp_references")
+	end)
+	map("n", "gl", vim.diagnostic.open_float)
+	map("n", "[d", vim.diagnostic.goto_prev)
+	map("n", "]d", vim.diagnostic.goto_next)
 end)
 
 -- -- Diagnostics
@@ -54,18 +58,15 @@ vim.diagnostic.config({
 	update_in_insert = true,
 })
 
-map("n", "gl", vim.diagnostic.open_float)
-map("n", "[d", vim.diagnostic.goto_prev)
-map("n", "]d", vim.diagnostic.goto_next)
-
 -- LSP
 local settings = require("lsp.settings").get_settings()
 
--- local neodev = require("neodev").setup()
--- print(vim.inspect(neodev))
-
-lsp.configure("sumneko_lua", settings.sumneko_lua)
-lsp.configure("tsserver", settings.tsserver)
+lsp.configure("sumneko_lua", {
+	settings = settings.sumneko_lua,
+})
+lsp.configure("tsserver", {
+	settings = settings.tsserver,
+})
 
 lsp.setup()
 require("lsp.cmp").setup(lsp)

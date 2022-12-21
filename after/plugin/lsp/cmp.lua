@@ -40,9 +40,9 @@ M.setup = function(lsp)
 	}
 
 	-- Basic
-	if not string.match(cmp_config.completion.completeopt, ",noselect") then
-		cmp_config.completion.completeopt = cmp_config.completion.completeopt .. ",noselect"
-	end
+	cmp_config.completion = {
+		completeopt = "menu,menuone,noinsert,noselect",
+	}
 	cmp_config.window.completion = cmp.config.window.bordered()
 
 	-- Mapping
