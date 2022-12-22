@@ -1,7 +1,4 @@
-_G.getPath = function(str, sep)
-	sep = sep or "/"
-	return str:match("(.*" .. sep .. ")")
-end
-package.path = getPath(vim.env.MYVIMRC) .. "/after/plugin/?.lua;" .. package.path
-
-require("user")
+require("config.autocommands")
+require("config.set")
+require("config.keymaps")
+require("config.lazy")

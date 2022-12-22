@@ -1,10 +1,8 @@
+local root_pattern = require("lspconfig.util").root_pattern
 local M = {}
 
-M.get_settings = function()
-	local lspconfig = require("lspconfig")
-	local N = {}
-
-	N.sumneko_lua = {
+M.sumneko_lua = {
+	settings = {
 		Lua = {
 			completion = {
 				callSnippet = "Replace",
@@ -39,34 +37,35 @@ M.get_settings = function()
 				library = {
 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 					[vim.fn.stdpath("config") .. "/lua"] = true,
-					-- [vim.fn.datapath "config" .. "/lua"] = true,
 				},
 			},
 			telemetry = {
 				enable = false,
 			},
 		},
-	}
+	},
+}
 
-	N.tsserver = {
-		root_dir = lspconfig.util.root_pattern("package.json"),
-		init_options = {
-			preferences = {
-				importModuleSpecifierPreference = "non-relative",
-			},
+M.pyright = {
+	cmd = { "pyright-langserver", "--stdio" },
+	root_pattern = vim.loop.cwd,
+}
+
+M.tsserver = {
+	root_dir = root_pattern("package.json"),
+	init_options = {
+		preferences = {
+			importModuleSpecifierPreference = "non-relative",
 		},
-	}
+	},
+}
 
-	N.pyright = {
-		cmd = { "pyright-langserver", "--stdio" },
-		root_pattern = vim.loop.cwd,
-	}
+M.denols = {
+	root_dir = root_pattern("deno.json", "deno.jsonc"),
+}
 
-	N.denols = {
-		root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-	}
-
-	return N
-end
+M.tailwindcss = {
+	root_dir = root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts')
+}
 
 return M

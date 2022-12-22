@@ -3,8 +3,14 @@ vim.api.nvim_create_user_command("Q", "quitall!", {})
 vim.api.nvim_create_user_command("E", "w! | e!", {})
 
 -- General Mappings
-local function map(mode, key, mapping)
-	local opts = { noremap = true, silent = true }
+local function map(mode, key, mapping, opts)
+	opts = opts or {}
+	if opts.noremap == nil then
+		opts.noremap = true
+	end
+	if opts.silent == nil then
+		opts.silent = true
+	end
 	vim.keymap.set(mode, key, mapping, opts)
 end
 
@@ -89,16 +95,14 @@ map("v", "<", "<gv")
 -- Surround
 map("v", '"', 'c"<Esc>pa"<Esc>v2i"')
 map("v", "'", "c'<Esc>pa'<Esc>v2i'")
--- map("v", "`", "c`<Esc>pa`<Esc>v2i`")
 map("v", "(", "c(<Esc>pa)<Esc>va(")
 map("v", "[", "c[<Esc>pa]<Esc>va[")
 map("v", "{", "c{<Esc>pa}<Esc>va{")
 map("v", "*", "c*<Esc>pa*<Esc>gvll")
+-- map("v", "`", "c`<Esc>pa`<Esc>v2i`")
 -- map("x", "<", "c<<Esc>pa><Esc>va<")
 
 -- Splits and Tabs
-local smart_splits = require("smart-splits")
-
 map("n", "<C-s>", "<C-w>s")
 map("n", "<C-S-s>", "<C-w>v")
 map("n", "<C-h>", "<C-w>h")
@@ -106,19 +110,11 @@ map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 
-map("n", "<C-S-h>", smart_splits.resize_left)
-map("n", "<C-S-l>", smart_splits.resize_right)
-map("n", "<C-S-k>", smart_splits.resize_up)
-map("n", "<C-S-j>", smart_splits.resize_down)
 map("n", "<C-S-0>", "<C-w>=")
 
 -- -- Tabs
 map("n", "<M-S-t>", "<cmd>tabnew<CR>")
 map("n", "<M-S-x>", "<cmd>Bdelete!<CR>")
-map("n", "<M-S-k>", "<Plug>(cokeline-focus-next)")
-map("n", "<M-S-j>", "<Plug>(cokeline-focus-prev)")
-map("n", "<M-S-l>", "<Plug>(cokeline-switch-next)")
-map("n", "<M-S-h>", "<Plug>(cokeline-switch-prev)")
 
 -- -- Splits
 map("n", "<C-q>", "<C-w>q")
@@ -127,10 +123,8 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
 map("n", "<C-S-0>", "<C-w>=")
-map("n", "<C-S-h>", smart_splits.resize_left)
-map("n", "<C-S-l>", smart_splits.resize_right)
-map("n", "<C-S-k>", smart_splits.resize_up)
-map("n", "<C-S-j>", smart_splits.resize_down)
 
 -- Other
 map("n", "<leader>x", "!chmod +x %")
+
+return map

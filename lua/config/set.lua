@@ -2,6 +2,7 @@ vim.opt.guicursor = ""
 vim.opt.cursorline = true
 
 vim.opt.laststatus = 3
+vim.opt.cmdheight = 0
 
 vim.opt.list = true
 vim.opt.listchars = "trail:·,tab:│ "
