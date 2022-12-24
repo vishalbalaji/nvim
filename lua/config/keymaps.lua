@@ -120,7 +120,7 @@ map("n", "<C-l>", "<C-w>l")
 map("n", "<C-S-0>", "<C-w>=")
 
 -- -- Tabs
-map("n", "<M-S-t>", "<cmd>tabnew<CR>")
+map("n", "<M-S-t>", "<cmd>enew!<CR>")
 map("n", "<M-S-x>", "<cmd>Bdelete!<CR>")
 
 -- -- Splits
