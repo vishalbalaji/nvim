@@ -1,11 +1,27 @@
 local M = {
 	"marko-cerovac/material.nvim",
+	event = "VeryLazy",
 	enabled = true,
 }
 
 -- General Highlights
 M.hl = function(code, options)
 	pcall(vim.api.nvim_set_hl, 0, code, options)
+end
+
+M.get_colors = function()
+	if M.colors then
+		return M.colors
+	end
+
+	local colors = require("material.colors")
+	local bg_alt = colors.editor.bg_alt
+	local comment_fg = colors.syntax.comments
+	colors = colors.main
+	colors.bg_alt = bg_alt
+	colors.comment_fg = comment_fg
+	M.colors = colors
+	return colors
 end
 
 local function general_hls()
@@ -56,17 +72,6 @@ M.init = function()
 	end
 
 	general_hls()
-end
-
-
-M.get_colors = function ()
-	local colors = require("material.colors")
-	local bg_alt = colors.editor.bg_alt
-	local comment_fg = colors.syntax.comments
-	colors = colors.main
-	colors.bg_alt = bg_alt
-	colors.comment_fg = comment_fg
-	return colors
 end
 
 return M

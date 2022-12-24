@@ -101,7 +101,7 @@ M.config = function()
 	lsp.configure("pyright", settings.pyright)
 	lsp.configure("tailwindcss", settings.tailwindcss)
 
-	-- require("config.plugins.lsp.neodev").setup()
+	require("config.plugins.lsp.neodev").setup()
 	lsp.setup()
 	require("config.plugins.lsp.cmp").setup(lsp)
 	require("config.plugins.lsp.null-ls").setup(lsp)

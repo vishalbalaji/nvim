@@ -65,7 +65,7 @@ M.denols = {
 }
 
 M.tailwindcss = {
-	root_dir = root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts')
+	root_dir = root_pattern('tailwind.config.*js', 'tailwind.config.*ts', 'postcss.config.*js', 'postcss.config.*ts')
 }
 
 return M

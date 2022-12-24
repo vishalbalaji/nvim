@@ -40,7 +40,14 @@ function _G.range_delete(startinsert)
 		local start = vim.api.nvim_buf_get_mark(0, "[")
 		local finish = vim.api.nvim_buf_get_mark(0, "]")
 
-		vim.api.nvim_buf_set_text(0, start[1] - 1, start[2], finish[1] - 1, finish[2] + 1, {})
+		if finish[1] == start[1] then
+			finish[1] = finish[1] - 1
+			finish[2] = finish[2] + 1
+		end
+
+		start[1] = start[1] - 1
+
+		vim.api.nvim_buf_set_text(0, start[1], start[2], finish[1], finish[2], {})
 		if startinsert then
 			vim.api.nvim_feedkeys("i", "n", false)
 		end
