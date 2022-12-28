@@ -1,3 +1,13 @@
+local get_hex = function(hlgroup_name, attr)
+	local vim_fn = vim.fn
+
+	local hlgroup_ID = vim_fn.synIDtrans(vim_fn.hlID(hlgroup_name))
+	local hex = vim_fn.synIDattr(hlgroup_ID, attr)
+	return hex ~= "" and hex or "NONE"
+end
+
+local hl = require("config.plugins.colors").hl
+
 local M = {
 	"nvim-neo-tree/neo-tree.nvim",
 	enabled = true,
@@ -14,6 +24,18 @@ M.init = function()
 	vim.keymap.set("n", "<leader>e", function()
 		vim.cmd.Neotree("toggle")
 	end, { desc = "Neotree" })
+
+	hl("NeoTreeNormal", { link = "NormalAlt" })
+	hl("NeoTreeNormalNC", { link = "NvimTreeNormal" })
+end
+
+M.is_neotree_open = function()
+	for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+		if vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(win), "ft") == "neo-tree" then
+			return true
+		end
+	end
+	return false
 end
 
 M.config = function()
@@ -46,13 +68,8 @@ M.config = function()
 		},
 	})
 
-	local c = require("config.plugins.colors")
-	local colors = c.get_colors()
-	local hl = c.hl
-
-	hl("NeoTreeNormal", { link = "NormalAlt" })
-	hl("NeoTreeNormalNC", { link = "NvimTreeNormal" })
-	hl("NeoTreeWinSeparator", { bg = colors.bg_alt, fg = colors.bg_alt })
+	local neotree_bg = get_hex("NeoTreeNormal", "bg")
+	hl("NeoTreeWinSeparator", { fg = neotree_bg, bg = neotree_bg })
 end
 
 return M

@@ -11,7 +11,9 @@ autocmd("VimEnter", {
 autocmd("FileType", {
 	once = true,
 	pattern = { "help", "qf" },
-	command = [[ map q :quit<CR> ]],
+	callback = function()
+		vim.keymap.set("n", "q", vim.cmd.quit, { noremap = true, silent = true })
+	end,
 })
 
 autocmd("BufRead", {

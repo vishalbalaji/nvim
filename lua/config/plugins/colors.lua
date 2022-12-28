@@ -1,6 +1,6 @@
 local M = {
 	"marko-cerovac/material.nvim",
-	event = "VeryLazy",
+	event = "VimEnter",
 	enabled = true,
 }
 
@@ -25,7 +25,13 @@ M.get_colors = function()
 end
 
 local function general_hls()
-	local colors = M.get_colors()
+	local colors = require("material.colors")
+	local bg_alt = colors.editor.bg_alt
+	local comment_fg = colors.syntax.comments
+	colors = colors.main
+	colors.bg_alt = bg_alt
+	colors.comment_fg = comment_fg
+
 	local hl = M.hl
 
 	-- hl("NormalAlt", { link = "Normal" })

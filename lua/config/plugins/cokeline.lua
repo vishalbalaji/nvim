@@ -5,15 +5,6 @@ local M = {
 	event = "VimEnter",
 }
 
-local function is_neotree_open()
-	for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-		if vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(win), "ft") == "neo-tree" then
-			return true
-		end
-	end
-	return false
-end
-
 M.init = function()
 	local map = require("config.keymaps")
 	map("n", "<M-S-k>", "<Plug>(cokeline-focus-next)")
@@ -38,12 +29,19 @@ M.config = function()
 	local fg_picking_closed = colors.red
 	local fg_is_modified = colors.green
 	local fg_sidebar = colors.yellow
-	local fg_inactive = colors.comment_fg
-	local bg_sidebar = colors.bg_alt
 
+	local fg_inactive = get_hex("Comment", "fg")
+	local bg_sidebar = get_hex("NeoTreeNormal", "bg")
 	local fg_sidebar_sep = get_hex("NeoTreeWinSeparator", "fg")
 	local bg_sep = get_hex("WinSeparator", "fg")
 	local bg_select = get_hex("NormalAlt", "bg")
+
+	local is_neotree_open = nil
+	if not is_neotree_open then
+		is_neotree_open = require("config.plugins.neo-tree").is_neotree_open or function()
+			return false
+		end
+	end
 
 	if fg_sidebar_sep == "NONE" then
 		fg_sidebar_sep = get_hex("FloatBorder", "fg")
