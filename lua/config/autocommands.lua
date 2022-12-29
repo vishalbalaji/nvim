@@ -46,7 +46,7 @@ autocmd({ "VimLeavePre" }, {
 })
 
 autocmd("Filetype", {
-	pattern = "python",
+	pattern = { "python", "markdown" },
 	callback = function()
 		vim.opt.tabstop = 2
 		vim.opt.softtabstop = 2
