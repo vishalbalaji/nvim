@@ -68,6 +68,7 @@ local function lsp_hls()
 	local colors = c.get_colors()
 	local hl = c.hl
 
+	hl("LspInfoBorder", { link = "FloatBorder" })
 	hl("LspInlayHint", { fg = colors.comment_fg, bg = "bg", bold = true })
 	hl("DiagnosticError", { fg = colors.red })
 	hl("DiagnosticWarn", { fg = colors.yellow })
@@ -77,6 +78,13 @@ local function lsp_hls()
 end
 
 M.init = function()
+	local lsp = require("lsp-zero")
+
+	lsp.on_attach(on_attach)
+	lsp_hls()
+end
+
+M.config = function()
 	local lsp = require("lsp-zero")
 
 	lsp.preset("lsp-compe")
@@ -89,9 +97,6 @@ M.init = function()
 	})
 
 	require("lspconfig.ui.windows").default_options.border = "rounded"
-	vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "FloatBorder" })
-
-	lsp.on_attach(on_attach)
 
 	local settings = require("config.plugins.lsp.lsp-settings")
 	lsp.configure("sumneko_lua", settings.sumneko_lua)
@@ -105,8 +110,6 @@ M.init = function()
 	require("config.plugins.lsp.cmp").setup(lsp)
 	require("config.plugins.lsp.null-ls").setup(lsp)
 	require("config.plugins.lsp.trouble").setup()
-
-	lsp_hls()
 end
 
 return M
