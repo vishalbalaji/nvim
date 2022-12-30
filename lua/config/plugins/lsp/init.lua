@@ -76,7 +76,7 @@ local function lsp_hls()
 	hl("DiagnosticUnderlineError", { undercurl = true, fg = colors.red })
 end
 
-M.config = function()
+M.init = function()
 	local lsp = require("lsp-zero")
 
 	lsp.preset("lsp-compe")
