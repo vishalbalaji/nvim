@@ -80,13 +80,6 @@ end
 M.init = function()
 	local lsp = require("lsp-zero")
 
-	lsp.on_attach(on_attach)
-	lsp_hls()
-end
-
-M.config = function()
-	local lsp = require("lsp-zero")
-
 	lsp.preset("lsp-compe")
 	lsp.set_preferences({
 		set_lsp_keymaps = false,
@@ -105,11 +98,15 @@ M.config = function()
 	lsp.configure("pyright", settings.pyright)
 	lsp.configure("tailwindcss", settings.tailwindcss)
 
+	lsp.on_attach(on_attach)
+
 	require("config.plugins.lsp.neodev").setup()
 	lsp.setup()
 	require("config.plugins.lsp.cmp").setup(lsp)
 	require("config.plugins.lsp.null-ls").setup(lsp)
 	require("config.plugins.lsp.trouble").setup()
+
+	lsp_hls()
 end
 
 return M
