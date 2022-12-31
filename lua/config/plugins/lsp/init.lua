@@ -1,7 +1,7 @@
 local M = {
 	"VonHeikemen/lsp-zero.nvim",
 	enabled = true,
-	event = "VeryLazy",
+	event = "BufReadPre",
 	dependencies = {
 		-- LSP Support
 		{ "neovim/nvim-lspconfig", event = "BufReadPre" },
@@ -77,7 +77,7 @@ local function lsp_hls()
 	hl("DiagnosticUnderlineError", { undercurl = true, fg = colors.red })
 end
 
-M.init = function()
+M.config = function()
 	local lsp = require("lsp-zero")
 
 	lsp.preset("lsp-compe")
@@ -85,10 +85,10 @@ M.init = function()
 		set_lsp_keymaps = false,
 		sign_icons = M.lsp_sign_icons,
 	})
+
 	vim.diagnostic.config({
 		update_in_insert = true,
 	})
-
 	require("lspconfig.ui.windows").default_options.border = "rounded"
 
 	local settings = require("config.plugins.lsp.lsp-settings")
