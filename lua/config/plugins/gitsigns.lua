@@ -7,7 +7,7 @@ local M = {
 function M.config()
 	local c = require("config.plugins.colors")
 	local colors = c.get_colors()
-	local hl = c.hl
+	local hl = c.safe_hl
 
 	require("gitsigns").setup({
 		preview_config = { border = "rounded" },

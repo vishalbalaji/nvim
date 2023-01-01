@@ -11,7 +11,7 @@ end
 M.config = function()
 	local c = require("config.plugins.colors")
 	local colors = c.get_colors()
-	local hl = c.hl
+	local hl = c.safe_hl
 
 	hl("QuickScopePrimary", { fg = colors.green, standout = true })
 	hl("QuickScopeSecondary", { fg = colors.yellow, standout = true })

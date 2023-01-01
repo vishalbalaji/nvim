@@ -42,4 +42,6 @@ vim.opt.splitright = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes:2"
 
+vim.opt.conceallevel = 2
+
 vim.opt.updatetime = 50

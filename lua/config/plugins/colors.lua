@@ -1,53 +1,64 @@
 local M = {
 	"marko-cerovac/material.nvim",
-	event = "VimEnter",
 	enabled = true,
+	lazy = true,
+	priority = 1000,
 }
 
+_G.print_colors = function()
+	print(vim.inspect(M.get_colors()))
+end
+
 -- General Highlights
-M.hl = function(code, options)
+M.safe_hl = function(code, options)
 	pcall(vim.api.nvim_set_hl, 0, code, options)
 end
 
+-- Same as 'require("cokeline/utils").get_hex'
+M.get_hex = function(hlgroup_name, attr)
+	local vim_fn = vim.fn
+
+	local hlgroup_ID = vim_fn.synIDtrans(vim_fn.hlID(hlgroup_name))
+	local hex = vim_fn.synIDattr(hlgroup_ID, attr)
+	return hex ~= "" and hex or "NONE"
+end
+
 M.get_colors = function()
-	if M.colors then
-		return M.colors
+	if not M.colors then
+		M.colors = require("material.colors").main
 	end
 
-	local colors = require("material.colors")
-	local bg_alt = colors.editor.bg_alt
-	local comment_fg = colors.syntax.comments
-	colors = colors.main
-	colors.bg_alt = bg_alt
-	colors.comment_fg = comment_fg
-	M.colors = colors
-	return colors
+	return M.colors
 end
 
 local function general_hls()
-	local colors = require("material.colors")
-	local bg_alt = colors.editor.bg_alt
-	local comment_fg = colors.syntax.comments
-	colors = colors.main
-	colors.bg_alt = bg_alt
-	colors.comment_fg = comment_fg
+	local colors = M.get_colors()
+	local hl = M.safe_hl
 
-	local hl = M.hl
+	local c = require("material.colors")
 
 	-- hl("NormalAlt", { link = "Normal" })
-	hl("NormalAlt", { bg = colors.bg_alt })
-	hl("Comment", { fg = colors.comment_fg, bold = true, italic = true })
-	hl("NonText", { bg = "NONE", fg = colors.comment_fg })
+	hl("NormalAlt", { bg = c.editor.bg_alt })
+	hl("Comment", { fg = c.syntax.comments, bold = true, italic = true })
+
+	local comment_fg = M.get_hex("Comment", "fg")
+
+	hl("NonText", { bg = "NONE", fg = comment_fg })
 	hl("SpellBad", { link = "DiagnosticUnderlineError" })
 	hl("SpellBad", { undercurl = true, special = colors.red })
 	hl("NormalFloat", { fg = "fg", bg = "NONE" })
-	hl("FloatBorder", { fg = colors.comment_fg, bg = "NONE" })
+	hl("FloatBorder", { fg = comment_fg, bg = "NONE" })
 	hl("WinSeparator", { link = "FloatBorder" })
+
+	-- -- LSP and completion
 	hl("Pmenu", { fg = "fg", bg = "NONE" })
 	hl("PmenuThumb", { bg = "fg" })
 	hl("SignColumn", { fg = "fg", bg = "NONE" })
-	hl("TreesitterContext", { bg = colors.bg_alt })
-	hl("TreesitterContextBottom", { underline = true, fg = colors.comment_fg })
+
+	-- -- Markdown
+	hl("markdownBold", { fg = colors.blue, bold = true })
+	hl("markdownItalic", { fg = colors.green, italic = true })
+	hl("markdownBoldItalic", { fg = colors.yellow, bold = true, italic = true })
 end
 
 M.init = function()

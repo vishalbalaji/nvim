@@ -4,6 +4,8 @@ local M = {
 	build = ":TSUpdate",
 	event = "BufReadPost",
 	dependencies = {
+		{ "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
+		{ "nvim-treesitter/nvim-treesitter-context", event = "VeryLazy" },
 		{ "p00f/nvim-ts-rainbow", event = "VeryLazy" },
 		{ "nvim-treesitter/nvim-treesitter-textobjects", event = "VeryLazy" },
 		{ "windwp/nvim-ts-autotag", event = "VeryLazy" },
@@ -16,6 +18,16 @@ local M = {
 		},
 	},
 }
+
+M.init = function()
+	local c = require("config.plugins.colors")
+	local hl = c.safe_hl
+	local bg_alt = c.get_hex("NormalAlt", "bg")
+	local comment_fg = c.get_hex("Comment", "fg")
+
+	hl("TreesitterContext", { bg = bg_alt })
+	hl("TreesitterContextBottom", { underline = true, fg = comment_fg })
+end
 
 M.config = function()
 	local config = {}
@@ -119,7 +131,7 @@ M.config = function()
 
 	config.matchup = {
 		enable = true, -- mandatory, false will disable the whole extension
-		disable_virtual_text = true
+		disable_virtual_text = true,
 	}
 
 	require("nvim-treesitter.configs").setup(config)

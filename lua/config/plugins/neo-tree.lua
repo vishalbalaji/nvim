@@ -1,12 +1,6 @@
-local get_hex = function(hlgroup_name, attr)
-	local vim_fn = vim.fn
-
-	local hlgroup_ID = vim_fn.synIDtrans(vim_fn.hlID(hlgroup_name))
-	local hex = vim_fn.synIDattr(hlgroup_ID, attr)
-	return hex ~= "" and hex or "NONE"
-end
-
-local hl = require("config.plugins.colors").hl
+local c = require("config.plugins.colors")
+local hl = c.safe_hl
+local get_hex = c.get_hex
 
 local M = {
 	"nvim-neo-tree/neo-tree.nvim",

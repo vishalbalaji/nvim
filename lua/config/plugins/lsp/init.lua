@@ -66,7 +66,7 @@ end
 local function lsp_hls()
 	local c = require("config.plugins.colors")
 	local colors = c.get_colors()
-	local hl = c.hl
+	local hl = c.safe_hl
 
 	hl("LspInfoBorder", { link = "FloatBorder" })
 	hl("LspInlayHint", { fg = colors.comment_fg, bg = "bg", bold = true })
