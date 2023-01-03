@@ -25,10 +25,10 @@ function M.config()
 		debug = false,
 		lsp = {
 			hover = {
-				enabled = true,
+				enabled = false,
 			},
 			signature = {
-				enabled = true,
+				enabled = false,
 			},
 			message = {
 				enabled = true,

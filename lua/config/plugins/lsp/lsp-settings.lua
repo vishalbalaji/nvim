@@ -68,4 +68,8 @@ M.tailwindcss = {
 	root_dir = root_pattern('tailwind.config.*js', 'tailwind.config.*ts', 'postcss.config.*js', 'postcss.config.*ts')
 }
 
+M.emmet_ls = {
+	filetypes = { "svelte" }
+}
+
 return M

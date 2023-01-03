@@ -97,6 +97,7 @@ M.config = function()
 	lsp.configure("denols", settings.denols)
 	lsp.configure("pyright", settings.pyright)
 	lsp.configure("tailwindcss", settings.tailwindcss)
+	lsp.configure("emmet_ls", settings.emmet_ls)
 
 	lsp.on_attach(on_attach)
 
@@ -106,7 +107,7 @@ M.config = function()
 	require("config.plugins.lsp.null-ls").setup(lsp)
 	require("config.plugins.lsp.trouble").setup()
 
-	lsp_hls()
+	-- lsp_hls()
 end
 
 return M
