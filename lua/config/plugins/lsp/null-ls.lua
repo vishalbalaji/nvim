@@ -68,7 +68,7 @@ M.setup = function(lsp)
 
 			-- Python
 			formatting.reorder_python_imports,
-			formatting.black, -- install black-with-tabs(pip install black-with-tabs)
+			formatting.black, -- for tabs instead of spaces, install black-with-tabs(pip install black-with-tabs)
 
 			-- Shell
 			code_actions.shellcheck.with({

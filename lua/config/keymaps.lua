@@ -74,6 +74,17 @@ local function delete_func(key, startinsert)
 	end
 end
 
+-- local function better_delete_func(key)
+-- 	local operator = vim.fn.nr2char(vim.fn.getchar())
+
+-- 	if operator == key then
+-- 		vim.api.nvim_feedkeys('"_' .. key .. key, "n", false)
+-- 	else
+-- 		vim.api.nvim_feedkeys(vim.fn.nr2char(vim.fn.getchar()), "n", false)
+-- 		vim.api.nvim_feedkeys(vim.fn.nr2char(vim.fn.getchar()), "n", false)
+-- 	end
+-- end
+
 map("v", "p", '"_dP')
 map("v", "d", '"_d')
 map("v", "c", '"_c')
@@ -83,12 +94,12 @@ map("x", "r", '"_r')
 
 map("n", "xx", "Vd")
 
-map("n", "d", function()
-	delete_func("d")
-end)
-map("n", "c", function()
-	delete_func("c", true)
-end)
+-- map("n", "d", function()
+-- 	better_delete_func("d")
+-- end)
+-- map("n", "c", function()
+-- 	better_delete_func("c")
+-- end)
 
 -- Move
 map("n", "<A-h>", "<Plug>GoNSMLeft")

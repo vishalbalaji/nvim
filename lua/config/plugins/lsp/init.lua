@@ -1,7 +1,8 @@
 local M = {
 	"VonHeikemen/lsp-zero.nvim",
 	enabled = true,
-	event = "BufReadPre",
+	priority = 999,
+	event = "VeryLazy",
 	dependencies = {
 		-- LSP Support
 		{ "neovim/nvim-lspconfig", event = "BufReadPre" },
@@ -95,9 +96,9 @@ M.config = function()
 	lsp.configure("sumneko_lua", settings.sumneko_lua)
 	lsp.configure("tsserver", settings.tsserver)
 	lsp.configure("denols", settings.denols)
-	lsp.configure("pyright", settings.pyright)
 	lsp.configure("tailwindcss", settings.tailwindcss)
 	lsp.configure("emmet_ls", settings.emmet_ls)
+	-- lsp.configure("pyright", settings.pyright)
 
 	lsp.on_attach(on_attach)
 

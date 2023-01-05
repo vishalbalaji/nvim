@@ -46,7 +46,7 @@ M.sumneko_lua = {
 	},
 }
 
-M.pyright = {
+M.pyright = { -- Not User Currently
 	cmd = { "pyright-langserver", "--stdio" },
 	root_pattern = vim.loop.cwd,
 }

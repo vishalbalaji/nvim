@@ -45,12 +45,19 @@ autocmd({ "VimLeavePre" }, {
 	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10 ]],
 })
 
-autocmd("Filetype", {
-	pattern = { "python", "markdown" },
-	callback = function()
-		vim.opt.tabstop = 2
-		vim.opt.softtabstop = 2
-		vim.opt.shiftwidth = 2
-		vim.opt.expandtab = false
-	end,
+autocmd({ "Filetype" }, {
+	once = true,
+	pattern = "gitcommit",
+	command = "startinsert",
 })
+
+-- To enforce tabs instead of spaces in
+-- autocmd("Filetype", {
+-- 	pattern = { "python", "markdown" },
+-- 	callback = function()
+-- 		vim.opt.tabstop = 2
+-- 		vim.opt.softtabstop = 2
+-- 		vim.opt.shiftwidth = 2
+-- 		vim.opt.expandtab = false
+-- 	end,
+-- })

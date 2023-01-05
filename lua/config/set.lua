@@ -31,6 +31,7 @@ vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvim/undodir"
 vim.opt.undofile = true
 
 vim.opt.ignorecase = true
+vim.opt.smartcase = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 

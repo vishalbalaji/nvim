@@ -1,6 +1,7 @@
 local M = {
 	"folke/noice.nvim",
 	enabled = true,
+	priority = 998,
 	event = "VeryLazy",
 	dependencies = {
 		"MunifTanjim/nui.nvim",
@@ -11,6 +12,9 @@ function M.config()
 	require("noice").setup({
 		cmdline = {
 			view = "cmdline",
+		},
+		popupmenu = {
+			enabled = false,
 		},
 		routes = {
 			{
@@ -25,10 +29,10 @@ function M.config()
 		debug = false,
 		lsp = {
 			hover = {
-				enabled = false,
+				enabled = true,
 			},
 			signature = {
-				enabled = false,
+				enabled = true,
 			},
 			message = {
 				enabled = true,

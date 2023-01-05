@@ -1,0 +1,31 @@
+gui:
+  theme:
+    selectedLineBgColor:
+      - reverse # set to `default` to have no background colour
+promptToReturnFromSubprocess: false
+keybinding:
+  universal:
+    goInto: '<tab>'
+    select: 'a'
+  main:
+    toggleSelectHunk: 'b'
+  files:
+    toggleStagedAll: 'A'
+    amendLastCommit: 'b'
+customCommands:
+  - key: 'c'
+    command: "EDITOR='nvim' git commit"
+    context: 'files'
+    subprocess: true
+  - key: '<enter>'
+    command: '[ -f {{.SelectedPath}} ] && nvr -s -l {{.SelectedPath}} || exit 0'
+    context: 'files'
+    subprocess: true
+  - key: 'O'
+    command: "gh browse --branch $(git branch --show-current)"
+    context: 'global'
+    stream: true
+  - key: 'o'
+    command: "gh browse --branch {{.SelectedLocalBranch.Name}}"
+    context: 'localBranches'
+    stream: true

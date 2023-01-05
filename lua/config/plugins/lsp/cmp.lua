@@ -49,7 +49,7 @@ M.setup = function(lsp)
 	cmp_config.mapping = lsp.defaults.cmp_mappings({
 		["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
 		["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
-		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+		["<C-Space>"] = cmp.mapping.complete(),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
@@ -60,7 +60,7 @@ M.setup = function(lsp)
 			else
 				fallback()
 			end
-		end, { "i", "s" }),
+		end, { "i", "s", "c" }),
 
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
