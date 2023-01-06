@@ -32,30 +32,18 @@ map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
 -- Clipboard Stuff
-local function better_delete_func(key)
-	local action = vim.fn.nr2char(vim.fn.getchar())
-	local operator = ""
-	if action ~= key then
-		operator = vim.fn.nr2char(vim.fn.getchar())
-	end
-	vim.api.nvim_feedkeys('"_' .. key .. action .. operator, "n", false)
-end
-
 map("v", "p", '"_dP')
 map("v", "d", '"_d')
 map("v", "c", '"_c')
 
-map("x", "s", '"_s')
-map("x", "r", '"_r')
+map("n", "d", '"_d')
+map("n", "c", '"_c')
 
 map("n", "xx", "Vd")
+map("n", "x", "d")
 
-map("n", "d", function()
-	better_delete_func("d")
-end)
-map("n", "c", function()
-	better_delete_func("c")
-end)
+map("x", "s", '"_s')
+map("x", "r", '"_r')
 
 -- Move
 map("n", "<A-h>", "<Plug>GoNSMLeft")
