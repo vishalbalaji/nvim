@@ -6,7 +6,7 @@ local M = {
 	dependencies = {
 		{ "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
 		{ "nvim-treesitter/nvim-treesitter-context", event = "VeryLazy" },
-		{ "p00f/nvim-ts-rainbow", event = "VeryLazy" },
+		{ "mrjones2014/nvim-ts-rainbow", event = "VeryLazy" },
 		{ "nvim-treesitter/nvim-treesitter-textobjects", event = "VeryLazy" },
 		{ "windwp/nvim-ts-autotag", event = "VeryLazy" },
 		{
