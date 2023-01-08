@@ -19,7 +19,7 @@ local M = {
 	},
 }
 
-M.init = function()
+function treesitter_hls()
 	local c = require("config.plugins.colors")
 	local hl = c.safe_hl
 	local bg_alt = c.get_hex("NormalAlt", "bg")
@@ -135,6 +135,7 @@ M.config = function()
 	}
 
 	require("nvim-treesitter.configs").setup(config)
+	treesitter_hls()
 end
 
 return M
