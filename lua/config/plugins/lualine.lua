@@ -1,7 +1,16 @@
+
 local M = {
 	"nvim-lualine/lualine.nvim",
 	enabled = true,
 	event = "VimEnter",
+	cond = function ()
+		local exclude_filetypes = { "man" }
+		if vim.tbl_contains(exclude_filetypes, vim.bo.filetype) then
+			vim.opt.laststatus = 0
+			return false
+		end
+		return true
+	end
 }
 
 local lsp_module = {

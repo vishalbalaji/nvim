@@ -2,9 +2,15 @@ local M = {
 	"mbbill/undotree",
 	enabled = true,
 	cmd = "UndotreeToggle",
+	cond = function()
+		local exclude_filetypes = { "man" }
+		return not vim.tbl_contains(exclude_filetypes, vim.bo.filetype)
+	end,
 }
 M.init = function()
-	vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { silent = true, noremap = true })
+	vim.keymap.set("n", "<leader>u", function()
+		pcall(vim.cmd.UndotreeToggle)
+	end, { desc = "Undotree", silent = true, noremap = true })
 end
 
 M.config = function()

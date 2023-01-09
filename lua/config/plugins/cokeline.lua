@@ -3,6 +3,10 @@ local M = {
 	enabled = true,
 	requires = "kyazdani42/nvim-web-devicons", -- If you want devicons
 	event = "VimEnter",
+	cond = function()
+		local exclude_filetypes = { "man" }
+		return not vim.tbl_contains(exclude_filetypes, vim.bo.filetype)
+	end,
 }
 
 M.init = function()
