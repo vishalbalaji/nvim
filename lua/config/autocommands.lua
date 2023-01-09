@@ -1,7 +1,4 @@
 local autocmd = vim.api.nvim_create_autocmd
-local kitty_group = vim.api.nvim_create_augroup("kitty_mp", {
-	clear = true,
-})
 
 autocmd("VimEnter", {
 	once = true,
@@ -31,19 +28,20 @@ autocmd({ "VimEnter" }, {
 	command = [[ cd %:p:h ]],
 })
 
-autocmd({ "VimEnter" }, {
-	once = true,
-	pattern = "*",
-	group = kitty_group,
-	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0 ]],
-})
+if vim.env.TERM == "xterm-kitty" then
+	autocmd({ "VimEnter" }, {
+		once = true,
+		callback = function()
+			vim.cmd("silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0")
+		end,
+	})
 
-autocmd({ "VimLeavePre" }, {
-	once = true,
-	pattern = "*",
-	group = kitty_group,
-	command = [[ silent ![ "$TERM" = "xterm-kitty" ] &&  kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10 ]],
-})
+	autocmd({ "VimLeave" }, {
+		callback = function()
+			vim.cmd("!kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10")
+		end,
+	})
+end
 
 autocmd({ "Filetype" }, {
 	once = true,

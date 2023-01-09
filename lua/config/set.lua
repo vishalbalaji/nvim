@@ -1,6 +1,8 @@
 vim.opt.guicursor = ""
 vim.opt.cursorline = true
 
+vim.opt.visualbell = false
+
 vim.opt.laststatus = 3
 vim.opt.cmdheight = 0
 
