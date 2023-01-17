@@ -6,13 +6,15 @@ local M = {
 		{
 			"folke/neodev.nvim",
 			opts = {
-				library = { plugins = { "nvim-cmp" } },
+				library = { plugins = false },
 				experimental = { pathStrict = true },
 			},
 		},
 		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
+		{ "williamboman/mason-lspconfig.nvim", event = "VeryLazy" },
+
 		require("config.plugins.lsp.cmp"),
+		require("config.plugins.lsp.null-ls"),
 	},
 }
 
@@ -60,7 +62,9 @@ end
 local function on_attach()
 	map("n", "<leader>la", vim.lsp.buf.code_action)
 	map("n", "<leader>lr", vim.lsp.buf.rename)
-	map("n", "<leader>lf", function () vim.lsp.buf.format({ async = true }) end)
+	map("n", "<leader>lf", function()
+		vim.lsp.buf.format({ async = true })
+	end)
 	map("n", "<leader>li", vim.cmd.LspInfo)
 	map("n", "<leader>lm", vim.cmd.Mason)
 	map("n", "<leader>lr", vim.lsp.buf.rename)

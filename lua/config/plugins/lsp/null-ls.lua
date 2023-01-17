@@ -1,4 +1,8 @@
-local M = {}
+local M = {
+	"jose-elias-alvarez/null-ls.nvim",
+	enabled = true,
+	event = "VeryLazy"
+}
 
 local null_ls_stop = function()
 	local null_ls_client
@@ -29,9 +33,8 @@ local null_ls_restart = function()
 	null_ls_client.stop()
 end
 
-M.setup = function(lsp)
+M.config = function()
 	local null_ls = require("null-ls")
-	local null_opts = lsp.build_options("null-ls", {})
 
 	local code_actions = null_ls.builtins.code_actions
 	local completion = null_ls.builtins.completion
@@ -46,9 +49,6 @@ M.setup = function(lsp)
 	}
 
 	null_ls.setup({
-		on_attach = function(client, bufnr)
-			null_opts.on_attach(client, bufnr)
-		end,
 		sources = {
 			-- General
 			completion.spell.with({ filetypes = { "markdown", "latex" } }),
