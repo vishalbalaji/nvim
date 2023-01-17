@@ -1,4 +1,11 @@
-return function()
+local M = {
+	"echasnovski/mini.pairs",
+	enabled = true,
+	branch = "stable",
+	event = "VeryLazy",
+}
+
+M.config = function()
 	require("mini.pairs").setup({})
 	vim.api.nvim_set_keymap(
 		"i",
@@ -7,3 +14,5 @@ return function()
 		{ silent = true, expr = true, noremap = true }
 	)
 end
+
+return M

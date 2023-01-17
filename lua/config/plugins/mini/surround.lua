@@ -1,4 +1,11 @@
-return function()
+local M = {
+	"echasnovski/mini.surround",
+	enabled = true,
+	branch = "stable",
+	event = "VeryLazy",
+}
+
+M.config = function()
 	require("mini.surround").setup({
 		mappings = {
 			add = "<leader>sa", -- Add surrounding in Normal and Visual modes
@@ -11,3 +18,5 @@ return function()
 		},
 	})
 end
+
+return M

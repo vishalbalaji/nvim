@@ -1,4 +1,11 @@
-return function()
+local M = {
+	"echasnovski/mini.cursorword",
+	enabled = true,
+	branch = "stable",
+	event = "VeryLazy",
+}
+
+M.config = function()
 	_G.cursorword_blocklist = function()
 		---@diagnostic disable-next-line: missing-parameter
 		local curword = vim.fn.expand("<cword>")
@@ -23,3 +30,5 @@ return function()
 	vim.api.nvim_set_hl(0, "MiniCursorWord", { underdotted = true })
 	require("mini.cursorword").setup({ delay = 300 })
 end
+
+return M
