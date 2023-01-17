@@ -64,7 +64,7 @@ map("v", "(", "c(<Esc>pa)<Esc>va(")
 map("v", "[", "c[<Esc>pa]<Esc>va[")
 map("v", "{", "c{<Esc>pa}<Esc>va{")
 map("v", "*", "c*<Esc>pa*<Esc>gvll")
--- map("v", "`", "c`<Esc>pa`<Esc>v2i`")
+map("v", "`", "c`<Esc>pa`<Esc>v2i`")
 -- map("x", "<", "c<<Esc>pa><Esc>va<")
 
 -- Splits and Tabs

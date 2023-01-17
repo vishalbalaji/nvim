@@ -2,6 +2,12 @@ local M = {
 	"nvim-telescope/telescope.nvim",
 	enabled = true,
 	cmd = { "Telescope" },
+	dependencies = {
+		{
+			"danielfalk/smart-open.nvim",
+			dependencies = { "kkharji/sqlite.lua" },
+		},
+	},
 }
 
 function M.config()
@@ -16,6 +22,7 @@ function M.config()
 
 			mappings = {
 				i = {
+					["<esc>"] = actions.close,
 					["<C-n>"] = actions.cycle_history_next,
 					["<C-p>"] = actions.cycle_history_prev,
 
@@ -82,38 +89,64 @@ function M.config()
 		pickers = {},
 		extensions = {},
 	})
+
+	telescope.load_extension("smart_open")
 end
 
 function M.init()
 	local builtin = require("telescope.builtin")
+	local telescope = require("telescope")
+	local dropdown_opts = require("telescope.themes").get_dropdown()
+
+	local opts = vim.tbl_extend("force", dropdown_opts, {
+		previewer = false,
+		shorten_path = true,
+	})
+
+	local help_opts = vim.tbl_extend("force", opts, { results_title = false })
+
 	local function find_files(current_dir)
 		current_dir = current_dir or false
-		local opts = { results_title = vim.fn.expand("%:p:h") }
 		if current_dir then
 			opts.cwd = vim.fn.expand("%:p:h")
+			opts.results_title = vim.fn.expand("%:p:h")
+		else
+			opts.results_title = vim.fn.getcwd()
 		end
+
 		builtin.find_files(opts)
 	end
 
+	local function smart_open()
+		opts.results_title = vim.fn.getcwd()
+		telescope.extensions.smart_open.smart_open(opts)
+	end
+
 	local function git_files()
-		local ok, _ = pcall(builtin.git_files, {
-			results_title = vim.fn
-				.system("cd " .. vim.fn.expand("%:p:h") .. " && git rev-parse --show-toplevel")
-				:gsub("\n", ""),
-		})
+		opts.results_title =
+			vim.fn.system("cd " .. vim.fn.expand("%:p:h") .. " && git rev-parse --show-toplevel"):gsub("\n", "")
+
+		local ok, _ = pcall(builtin.git_files, opts)
 		if not ok then
-			print('Not in a git repository.')
+			print("Not in a git repository.")
 		end
 	end
 
 	vim.keymap.set("n", "<leader>fd", function()
 		find_files(true)
 	end, {})
-	vim.keymap.set("n", "<leader>ff", find_files, {})
+	-- vim.keymap.set("n", "<leader>ff", find_files, {})
+	vim.keymap.set("n", "<leader>ff", smart_open, {})
 	vim.keymap.set("n", "<leader>fg", git_files, {})
-	vim.keymap.set("n", "<leader>fF", builtin.live_grep, {})
-	vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-	vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+	vim.keymap.set("n", "<leader>fF", function()
+		builtin.live_grep(dropdown_opts)
+	end, {})
+	vim.keymap.set("n", "<leader>fb", function()
+		builtin.buffers(opts)
+	end, {})
+	vim.keymap.set("n", "<leader>fh", function()
+		builtin.help_tags(help_opts)
+	end, {})
 end
 
 return M
