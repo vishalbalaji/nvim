@@ -1,100 +1,121 @@
-local M = {}
+local M = {
+	"hrsh7th/nvim-cmp",
+	enabled = true,
+	event = "VeryLazy",
 
-local has_words_before = function()
-	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
+	dependencies = {
+		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-cmdline",
+		"hrsh7th/cmp-emoji",
+		'saadparwaiz1/cmp_luasnip',
 
-M.setup = function(lsp)
+		require("config.plugins.lsp.luasnip"),
+	},
+}
+
+local kind_icons = {
+	Text = "",
+	Method = "m",
+	Function = "",
+	Constructor = "",
+	Field = "",
+	Variable = "",
+	Class = "",
+	Interface = "",
+	Module = "",
+	Property = "",
+	Unit = "",
+	Value = "",
+	Enum = "",
+	Keyword = "",
+	Snippet = "",
+	Color = "",
+	File = "",
+	Reference = "",
+	Folder = "",
+	EnumMember = "",
+	Constant = "",
+	Struct = "",
+	Event = "",
+	Operator = "",
+	TypeParameter = "",
+}
+
+M.config = function()
 	local cmp = require("cmp")
 	local luasnip = require("luasnip")
-	local cmp_select = { behavior = cmp.SelectBehavior.Insert }
-	local cmp_config = lsp.defaults.cmp_config()
+	local compare = cmp.config.compare
 
-	local kind_icons = {
-		Text = "",
-		Method = "m",
-		Function = "",
-		Constructor = "",
-		Field = "",
-		Variable = "",
-		Class = "",
-		Interface = "",
-		Module = "",
-		Property = "",
-		Unit = "",
-		Value = "",
-		Enum = "",
-		Keyword = "",
-		Snippet = "",
-		Color = "",
-		File = "",
-		Reference = "",
-		Folder = "",
-		EnumMember = "",
-		Constant = "",
-		Struct = "",
-		Event = "",
-		Operator = "",
-		TypeParameter = "",
+	vim.opt.completeopt = "menu,menuone"
+
+	local config = {}
+	local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
+	config.snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body) -- For `luasnip` users.
+		end,
 	}
 
-	-- Basic
-	cmp_config.completion = {
-		completeopt = "menu,menuone,noinsert,noselect",
+	config.mapping = {
+		["<C-Space>"] = cmp.mapping.complete({ reason = 'manual' }),
+		["<C-e>"]     = cmp.mapping.abort(),
+		["<C-k>"]     = cmp.mapping.select_prev_item(cmp_select),
+		["<C-j>"]     = cmp.mapping.select_next_item(cmp_select),
+		["<C-p>"]     = cmp.mapping.select_prev_item(),
+		["<C-n>"]     = cmp.mapping.select_next_item(),
+		["<CR>"]      = cmp.mapping.confirm(),
 	}
-	cmp_config.window.completion = cmp.config.window.bordered()
 
-	-- Mapping
-	cmp_config.mapping = lsp.defaults.cmp_mappings({
-		["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
-		["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			elseif has_words_before() then
-				cmp.complete()
-			else
-				fallback()
-			end
-		end, { "i", "s", "c" }),
+	config.sorting =  {
+    comparators = {
+      compare.offset,
+      compare.exact,
+      compare.score,
+      compare.recently_used,
+      compare.locality,
+      compare.kind,
+      compare.sort_text,
+      compare.length,
+      compare.order,
+    },
+  }
 
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
+	config.window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	}
+
+	config.formatting = {
+		fields = { "kind", "abbr", "menu" },
+		format = function(entry, vim_item)
+			-- Kind icons
+			vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+			vim_item.menu = ({
+				nvim_lsp = "[LSP]",
+				luasnip = "[Snippet]",
+				buffer = "[Buffer]",
+				path = "[Path]",
+				emoji = "[Emoji]",
+				cmdline = "[CMD]",
+			})[entry.source.name]
+			return vim_item
+		end,
+	}
+
+	config.sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
+		{ name = "buffer" },
+		{ name = "path" },
+		{ name = "luasnip" },
+		{ name = "emoji", insert = false },
 	})
 
-	-- Formatting/Kind
-	cmp_config.formatting.fields = { "kind", "abbr", "menu" }
-	cmp_config.formatting.format = function(entry, vim_item)
-		-- Kind icons
-		vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-		vim_item.menu = ({
-			nvim_lsp = "[LSP]",
-			luasnip = "[Snippet]",
-			buffer = "[Buffer]",
-			path = "[Path]",
-			emoji = "[Emoji]",
-			cmdline = "[CMD]",
-		})[entry.source.name]
-		return vim_item
-	end
-
-	-- Sources
-	table.insert(cmp_config.sources, { name = "emoji" })
 
 	-- Setup
-	cmp.setup(cmp_config)
-
+	cmp.setup(config)
 	cmp.setup.cmdline(":", {
 		mapping = {
 			["<Tab>"] = cmp.mapping(cmp.mapping.confirm(), { "i", "c" }),
@@ -103,6 +124,7 @@ M.setup = function(lsp)
 		},
 		sources = {
 			{ name = "cmdline" },
+			{ name = "path" },
 		},
 	})
 

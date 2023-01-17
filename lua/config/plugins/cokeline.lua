@@ -169,11 +169,11 @@ M.config = function()
 			text = function(buffer)
 				return (
 					buffer.diagnostics.errors ~= 0
-					and string.format(" %s %s", lsp_sign_icons.error, buffer.diagnostics.errors)
+					and string.format(" %s %s", lsp_sign_icons.Error, buffer.diagnostics.errors)
 				)
 					or (buffer.diagnostics.warnings ~= 0 and string.format(
 						" %s %s",
-						lsp_sign_icons.warn,
+						lsp_sign_icons.Warn,
 						buffer.diagnostics.warnings
 					))
 					or ""
