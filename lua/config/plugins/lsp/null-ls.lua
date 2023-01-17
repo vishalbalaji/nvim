@@ -33,6 +33,11 @@ local null_ls_restart = function()
 	null_ls_client.stop()
 end
 
+M.init = function ()
+	local map = require("config.keymaps")
+	map("n", "<leader>ln", vim.cmd.NullLsInfo)
+end
+
 M.config = function()
 	local null_ls = require("null-ls")
 
@@ -48,7 +53,10 @@ M.config = function()
 		end,
 	}
 
+
+	require("config.plugins.colors").safe_hl("NullLsInfoBorder", { link = "FloatBorder" })
 	null_ls.setup({
+		border = "rounded",
 		sources = {
 			-- General
 			completion.spell.with({ filetypes = { "markdown", "latex" } }),

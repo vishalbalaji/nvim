@@ -54,6 +54,7 @@ autocmd({ "BufReadPost" }, {
 	command = 'silent! normal! g`"zv',
 })
 
+
 -- To enforce tabs instead of spaces in
 -- autocmd("Filetype", {
 -- 	pattern = { "python", "markdown" },

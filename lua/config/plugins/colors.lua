@@ -11,7 +11,10 @@ end
 
 -- General Highlights
 M.safe_hl = function(code, options)
-	pcall(vim.api.nvim_set_hl, 0, code, options)
+	local ok, _ = pcall(vim.api.nvim_set_hl, 0, code, options)
+	if not ok then
+		print("[DEBUG] Could not highlight: '" .. code .. "'", vim.inspect(options))
+	end
 end
 
 -- Same as 'require("cokeline/utils").get_hex'

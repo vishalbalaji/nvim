@@ -54,12 +54,9 @@ M.lsp_sign_icons = {
 	Other = "",
 }
 
-local function map(mode, key, mapping)
-	local opts = { noremap = true, silent = true }
-	vim.keymap.set(mode, key, mapping, opts)
-end
-
 local function on_attach()
+	local map = require("config.keymaps")
+
 	map("n", "<leader>la", vim.lsp.buf.code_action)
 	map("n", "<leader>lr", vim.lsp.buf.rename)
 	map("n", "<leader>lf", function()
@@ -91,7 +88,10 @@ M.config = function(_, opts)
 	local servers = require("config.plugins.lsp.lsp-settings")
 	local lspconfig = require("lspconfig")
 
-	require("mason").setup()
+	require("lspconfig.ui.windows").default_options.border = "rounded"
+	require("config.plugins.colors").safe_hl("LspInfoBorder", { link = "FloatBorder" })
+
+	require("mason").setup({ ui = { border = "rounded", height = 0.7 } })
 	require("mason-lspconfig").setup()
 	require("mason-lspconfig").setup_handlers({
 		function(server)
