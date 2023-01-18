@@ -15,6 +15,7 @@ local M = {
 
 		require("config.plugins.lsp.cmp"),
 		require("config.plugins.lsp.null-ls"),
+		require("config.plugins.lsp.trouble"),
 	},
 }
 

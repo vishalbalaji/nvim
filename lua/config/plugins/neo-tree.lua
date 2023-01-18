@@ -5,7 +5,7 @@ local M = {
 	branch = "v2.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+		"kyazdani42/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
 	},
 	cond = function()
