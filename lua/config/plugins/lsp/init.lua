@@ -54,17 +54,15 @@ M.lsp_sign_icons = {
 	Info = "",
 	Other = "",
 }
+local map = require("config.keymaps")
 
 local function on_attach()
-	local map = require("config.keymaps")
 
 	map("n", "<leader>la", vim.lsp.buf.code_action)
 	map("n", "<leader>lr", vim.lsp.buf.rename)
 	map("n", "<leader>lf", function()
 		vim.lsp.buf.format({ async = true })
 	end)
-	map("n", "<leader>li", vim.cmd.LspInfo)
-	map("n", "<leader>lm", vim.cmd.Mason)
 	map("n", "<leader>lr", vim.lsp.buf.rename)
 	map("n", "<leader>ls", vim.lsp.buf.signature_help)
 	map("n", "K", vim.lsp.buf.hover)
@@ -75,6 +73,11 @@ local function on_attach()
 	map("n", "gl", vim.diagnostic.open_float)
 	map("n", "[d", vim.diagnostic.goto_prev)
 	map("n", "]d", vim.diagnostic.goto_next)
+end
+
+M.init = function ()
+	map("n", "<leader>li", vim.cmd.LspInfo)
+	map("n", "<leader>lm", vim.cmd.Mason)
 end
 
 M.config = function(_, opts)
