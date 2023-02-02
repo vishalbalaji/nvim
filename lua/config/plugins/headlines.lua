@@ -6,7 +6,9 @@ local M = {
 }
 
 M.config = function()
-	require("headlines").setup()
+	require("headlines").setup({
+		markdown = { fat_headlines = false },
+	})
 
 	local c = require("config.plugins.colors")
 	local hl = c.safe_hl

@@ -13,6 +13,12 @@ autocmd("FileType", {
 	end,
 })
 
+autocmd("FileType", {
+	once = true,
+	pattern = { "markdown", "gitcommit" },
+	command = "set spell"
+})
+
 autocmd("BufRead", {
 	callback = function()
 		autocmd("BufWinEnter", {
