@@ -4,12 +4,13 @@ local M = {
 	event = "VeryLazy",
 }
 
-function M.config()
+M.config = function()
 	local c = require("config.plugins.colors")
 	local colors = c.get_colors()
 	local hl = c.safe_hl
+	local gs = require("gitsigns")
 
-	require("gitsigns").setup({
+	gs.setup({
 		preview_config = { border = "rounded" },
 	})
 
@@ -19,6 +20,11 @@ function M.config()
 	hl("GitSignsAdd", { link = "DiffAdd" })
 	hl("GitSignsChange", { link = "DiffChange" })
 	hl("GitSignsDelete", { link = "DiffDelete" })
+
+	local map = require("config.keymaps")
+
+	map("n", "]g", gs.next_hunk)
+	map("n", "[g", gs.prev_hunk)
 end
 
 return M
