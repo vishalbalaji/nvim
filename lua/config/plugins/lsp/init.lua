@@ -57,7 +57,6 @@ M.lsp_sign_icons = {
 local map = require("config.keymaps")
 
 local function on_attach()
-
 	map("n", "<leader>la", vim.lsp.buf.code_action)
 	map("n", "<leader>lr", vim.lsp.buf.rename)
 	map("n", "<leader>lf", function()
@@ -76,7 +75,7 @@ local function on_attach()
 	map("n", "]d", vim.diagnostic.goto_next)
 end
 
-M.init = function ()
+M.init = function()
 	map("n", "<leader>li", vim.cmd.LspInfo)
 	map("n", "<leader>lm", vim.cmd.Mason)
 end
