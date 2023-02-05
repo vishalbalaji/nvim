@@ -16,7 +16,7 @@ autocmd("FileType", {
 autocmd("FileType", {
 	once = true,
 	pattern = { "markdown", "gitcommit" },
-	command = "set spell"
+	command = "setlocal spell"
 })
 
 autocmd("BufRead", {
