@@ -62,7 +62,6 @@ local function on_attach()
 	map("n", "<leader>lf", function()
 		vim.lsp.buf.format({ async = true })
 	end)
-	map("n", "<leader>lr", vim.lsp.buf.rename)
 	map("n", "<leader>ls", vim.lsp.buf.signature_help)
 	map("n", "K", vim.lsp.buf.hover)
 	map("n", "gd", vim.lsp.buf.definition)
@@ -99,6 +98,9 @@ M.config = function(_, opts)
 	require("mason-lspconfig").setup()
 	require("mason-lspconfig").setup_handlers({
 		function(server)
+			-- if server == "tsserver" then
+			-- 	return
+			-- end
 			local settings = servers[server] or {}
 			settings.capabilities = capabilities
 			settings.on_attach = on_attach

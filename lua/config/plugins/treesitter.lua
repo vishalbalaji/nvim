@@ -4,11 +4,12 @@ local M = {
 	build = ":TSUpdate",
 	event = "BufReadPost",
 	dependencies = {
-		{ "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
-		{ "nvim-treesitter/nvim-treesitter-context", event = "VeryLazy" },
-		{ "mrjones2014/nvim-ts-rainbow", event = "VeryLazy" },
+		{ "nvim-treesitter/playground",                  cmd = "TSPlaygroundToggle" },
+		{ "nvim-treesitter/nvim-treesitter-context",     event = "VeryLazy" },
+		-- { "mrjones2014/nvim-ts-rainbow", event = "VeryLazy" },
+		{ "HiPhish/nvim-ts-rainbow2",                    event = "VeryLazy" },
 		{ "nvim-treesitter/nvim-treesitter-textobjects", event = "VeryLazy" },
-		{ "windwp/nvim-ts-autotag", event = "VeryLazy" },
+		{ "windwp/nvim-ts-autotag",                      event = "VeryLazy" },
 		{
 			"andymass/vim-matchup",
 			event = "VeryLazy",
@@ -41,7 +42,7 @@ M.config = function()
 	-- TS Plugins
 	config.highlight = {
 		enable = true,
-		additional_vim_regex_highlighting = true,
+		additional_vim_regex_highlighting = { "markdown" },
 	}
 
 	config.indent = {
@@ -104,29 +105,28 @@ M.config = function()
 		},
 	}
 
+	vim.api.nvim_set_hl(0, "TSRainbowRed", { fg = colors.red })
+	vim.api.nvim_set_hl(0, "TSRainbowBlue", { fg = colors.blue })
+	vim.api.nvim_set_hl(0, "TSRainbowCyan", { fg = colors.cyan })
+	vim.api.nvim_set_hl(0, "TSRainbowGreen", { fg = colors.green })
+	vim.api.nvim_set_hl(0, "TSRainbowOrange", { fg = colors.orange })
+	vim.api.nvim_set_hl(0, "TSRainbowViolet", { fg = colors.magenta })
+	vim.api.nvim_set_hl(0, "TSRainbowYellow", { fg = colors.yellow })
 	config.rainbow = {
 		enable = true,
-		extended_mode = true,
-		colors = {
-			colors.red,
-			colors.yellow,
-			colors.green,
-			colors.cyan,
-			colors.blue,
-			colors.magenta or colors.purple,
-		},
-		termcolors = {
-			"Red",
-			"Yellow",
-			"Green",
-			"Cyan",
-			"Blue",
-			"Magenta",
-		},
 	}
 
 	config.autotag = {
 		enable = true,
+		hlgroups = {
+			"TSRainbowRed",
+			"TSRainbowBlue",
+			"TSRainbowCyan",
+			"TSRainbowGreen",
+			"TSRainbowOrange",
+			"TSRainbowViolet",
+			"TSRainbowYellow",
+		},
 	}
 
 	config.matchup = {

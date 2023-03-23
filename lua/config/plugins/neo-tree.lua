@@ -24,7 +24,7 @@ M.init = function()
 	end, { desc = "Neotree" })
 
 	hl("NeoTreeNormal", { link = "NormalAlt" })
-	hl("NeoTreeNormalNC", { link = "NvimTreeNormal" })
+	hl("NeoTreeNormalNC", { link = "NormalAlt" })
 end
 
 M.is_neotree_open = function()

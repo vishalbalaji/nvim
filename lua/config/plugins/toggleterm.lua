@@ -1,11 +1,20 @@
 local M = {
 	"akinsho/toggleterm.nvim",
 	enabled = true,
-	event = "VeryLazy"
+	event = "VeryLazy",
 }
 
 M.config = function()
-	require("toggleterm").setup()
+	local toggleterm = require("toggleterm")
+
+	toggleterm.setup({
+		shell = "EMACS_BINDING=true /usr/bin/zsh",
+		start_in_insert = false,
+		auto_scroll = false,
+		on_open = function(term)
+			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+		end,
+	})
 
 	local Terminal = require("toggleterm.terminal").Terminal
 	local lazygit = Terminal:new({
@@ -30,7 +39,9 @@ M.config = function()
 		lazygit:toggle()
 	end
 
-	vim.keymap.set("n", "<leader>g", _lazygit_toggle, { noremap = true, silent = true })
-end
+	local map = require("config.keymaps")
 
+	map("n", "<leader>g", _lazygit_toggle)
+	map("n", "<leader>t", "<cmd>ToggleTerm<CR><C-\\><C-n>")
+end
 return M

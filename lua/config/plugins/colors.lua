@@ -1,5 +1,13 @@
+-- local M = {
+-- 	"marko-cerovac/material.nvim",
+-- 	enabled = true,
+-- 	lazy = true,
+-- 	priority = 1000,
+-- }
+
 local M = {
-	"marko-cerovac/material.nvim",
+	"Everblush/nvim",
+	name = "everblush",
 	enabled = true,
 	lazy = true,
 	priority = 1000,
@@ -8,6 +16,8 @@ local M = {
 _G.print_colors = function()
 	print(vim.inspect(M.get_colors()))
 end
+
+vim.api.nvim_create_user_command("PrintColors", print_colors, {})
 
 -- General Highlights
 M.safe_hl = function(code, options)
@@ -26,9 +36,35 @@ M.get_hex = function(hlgroup_name, attr)
 	return hex ~= "" and hex or "NONE"
 end
 
+-- M.get_colors = function()
+-- 	if not M.colors then
+-- 		local palette = require("everblush/palette")
+-- 		M.colors = {
+-- 			red = palette.color1,
+-- 			blue = palette.color4,
+-- 			cyan = palette.color6,
+-- 			green = palette.color2,
+-- 			orange = palette.color11,
+-- 			magenta = palette.color5,
+-- 			yellow = palette.color3,
+-- 		}
+-- 	end
+
+-- 	return M.colors
+-- end
+
 M.get_colors = function()
 	if not M.colors then
-		M.colors = require("material.colors").main
+		local palette = require("everblush/palette")
+		M.colors = {
+			red = palette.color1,
+			blue = palette.color4,
+			cyan = palette.color6,
+			green = palette.color2,
+			orange = palette.color11,
+			magenta = palette.color5,
+			yellow = palette.color3,
+		}
 	end
 
 	return M.colors
@@ -38,11 +74,11 @@ local function general_hls()
 	local colors = M.get_colors()
 	local hl = M.safe_hl
 
-	local c = require("material.colors")
+	local c = require("everblush.palette")
 
 	-- hl("NormalAlt", { link = "Normal" })
-	hl("NormalAlt", { bg = c.editor.bg_alt })
-	hl("Comment", { fg = c.syntax.comments, bold = true, italic = true })
+	hl("NormalAlt", { bg = c.contrast })
+	hl("Comment", { fg = c.comment, bold = true, italic = true })
 
 	local comment_fg = M.get_hex("Comment", "fg")
 
@@ -50,8 +86,10 @@ local function general_hls()
 	hl("SpellBad", { link = "DiagnosticUnderlineError" })
 	hl("SpellBad", { undercurl = true, special = colors.red })
 	hl("NormalFloat", { fg = "fg", bg = "NONE" })
-	hl("FloatBorder", { fg = comment_fg, bg = "NONE" })
-	hl("WinSeparator", { link = "FloatBorder" })
+	hl("TelescopeBorder", { link = "FloatBorder" })
+
+	-- hl("FloatBorder", { fg = comment_fg, bg = "NONE" })
+	-- hl("WinSeparator", { link = "FloatBorder" })
 
 	-- -- LSP and completion
 	hl("Pmenu", { fg = "fg", bg = "NONE" })
@@ -65,25 +103,25 @@ local function general_hls()
 end
 
 M.init = function()
-	local colorscheme = "material"
-	vim.g.material_style = "deep ocean"
+	local colorscheme = "everblush"
+	-- vim.g.material_style = "deep ocean"
 
-	require("material").setup({
-		disable = {
-			colored_cursor = true,
-			eob_lines = true,
-		},
+	-- require("material").setup({
+	-- 	disable = {
+	-- 		colored_cursor = true,
+	-- 		eob_lines = true,
+	-- 	},
 
-		high_visibility = {
-			darker = true, -- Enable higher contrast text for darker style
-		},
+	-- 	high_visibility = {
+	-- 		darker = true, -- Enable higher contrast text for darker style
+	-- 	},
 
-		lualine_style = "stealth", -- Lualine style ( can be 'stealth' or 'default' )
-		async_loading = false, -- Load parts of the theme asyncronously for faster startup (turned on by default)
-	})
+	-- 	lualine_style = "stealth", -- Lualine style ( can be 'stealth' or 'default' )
+	-- 	async_loading = false, -- Load parts of the theme asyncronously for faster startup (turned on by default)
+	-- })
 
 	-- Setting colorscheme and _G.colors
-	local ok, _ = pcall(vim.cmd, string.format("colorscheme %s", colorscheme))
+	local ok, _ = pcall(function (cmd) vim.cmd(cmd) end, string.format("colorscheme %s", colorscheme))
 	if not ok then
 		print("Colorscheme not applied")
 		vim.cmd("colorscheme default")

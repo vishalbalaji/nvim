@@ -1,6 +1,6 @@
 local M = {
 	"echasnovski/mini.cursorword",
-	enabled = true,
+	enabled = false,
 	branch = "stable",
 	event = "VeryLazy",
 }

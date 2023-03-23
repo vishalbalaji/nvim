@@ -83,6 +83,7 @@ map("n", "<C-S-0>", "<C-w>=")
 -- -- Tabs
 map("n", "<M-S-t>", "<cmd>enew!<CR>")
 map("n", "<M-S-x>", "<cmd>Bdelete!<CR>")
+map("n", "<M-S-w>", "<cmd>Bdelete!<CR>")
 
 -- -- Splits
 map("n", "<C-q>", "<C-w>q")
@@ -91,6 +92,12 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
 map("n", "<C-S-0>", "<C-w>=")
+
+map("t", "<C-Space>", "<C-\\><C-n>")
+map("t", "<C-j>", "<C-\\><C-n><C-w>j")
+map("t", "<C-k>", "<C-\\><C-n><C-w>k")
+map("t", "<C-h>", "<C-\\><C-n><C-w>h")
+map("t", "<C-l>", "<C-\\><C-n><C-w>l")
 
 -- Other
 map("n", "<leader>x", "!chmod +x %")

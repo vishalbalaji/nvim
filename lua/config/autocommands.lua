@@ -16,7 +16,14 @@ autocmd("FileType", {
 autocmd("FileType", {
 	once = true,
 	pattern = { "markdown", "gitcommit" },
-	command = "setlocal spell"
+	callback = function()
+		if vim.bo.filetype == "gitcommit" then
+			vim.cmd("setlocal colorcolumn=80")
+		elseif vim.bo.filetype == "markdown" then
+			vim.cmd("setlocal wrap")
+		end
+		vim.cmd("setlocal spell")
+	end,
 })
 
 autocmd("BufRead", {
@@ -59,7 +66,6 @@ autocmd({ "BufReadPost" }, {
 	pattern = "*",
 	command = 'silent! normal! g`"zv',
 })
-
 
 -- To enforce tabs instead of spaces in
 -- autocmd("Filetype", {

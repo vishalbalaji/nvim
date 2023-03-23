@@ -1,6 +1,6 @@
 local M = {
 	"utilyre/barbecue.nvim",
-	enabled = true,
+	enabled = false,
 	name = "barbecue",
 	version = "*",
 	event = "BufReadPost",

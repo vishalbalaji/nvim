@@ -2,14 +2,13 @@ local M = {
 	"hrsh7th/nvim-cmp",
 	enabled = true,
 	event = "VeryLazy",
-
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-emoji",
-		'saadparwaiz1/cmp_luasnip',
+		"saadparwaiz1/cmp_luasnip",
 
 		require("config.plugins.lsp.luasnip"),
 	},
@@ -60,28 +59,28 @@ M.config = function()
 	}
 
 	config.mapping = {
-		["<C-Space>"] = cmp.mapping.complete({ reason = 'manual' }),
-		["<C-e>"]     = cmp.mapping.abort(),
-		["<C-k>"]     = cmp.mapping.select_prev_item(cmp_select),
-		["<C-j>"]     = cmp.mapping.select_next_item(cmp_select),
-		["<C-p>"]     = cmp.mapping.select_prev_item(),
-		["<C-n>"]     = cmp.mapping.select_next_item(),
-		["<CR>"]      = cmp.mapping.confirm(),
+		["<C-Space>"] = cmp.mapping.complete({ reason = "manual" }),
+		["<C-e>"] = cmp.mapping.abort(),
+		["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
+		["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
+		["<C-p>"] = cmp.mapping.select_prev_item(),
+		["<C-n>"] = cmp.mapping.select_next_item(),
+		["<CR>"] = cmp.mapping.confirm(),
 	}
 
-	config.sorting =  {
-    comparators = {
-      compare.offset,
-      compare.exact,
-      compare.score,
-      compare.recently_used,
-      compare.locality,
-      compare.kind,
-      compare.sort_text,
-      compare.length,
-      compare.order,
-    },
-  }
+	config.sorting = {
+		comparators = {
+			compare.offset,
+			compare.exact,
+			compare.score,
+			compare.recently_used,
+			compare.locality,
+			compare.kind,
+			compare.sort_text,
+			compare.length,
+			compare.order,
+		},
+	}
 
 	config.window = {
 		completion = cmp.config.window.bordered(),
@@ -110,9 +109,8 @@ M.config = function()
 		{ name = "buffer" },
 		{ name = "path" },
 		{ name = "luasnip" },
-		{ name = "emoji", insert = false },
+		{ name = "emoji",   insert = false },
 	})
-
 
 	-- Setup
 	cmp.setup(config)

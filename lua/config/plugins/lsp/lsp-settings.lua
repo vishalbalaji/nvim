@@ -46,7 +46,7 @@ M.sumneko_lua = {
 	},
 }
 
-M.pyright = { -- Not User Currently
+M.pyright = {
 	cmd = { "pyright-langserver", "--stdio" },
 	root_pattern = vim.loop.cwd,
 }
@@ -65,11 +65,11 @@ M.denols = {
 }
 
 M.tailwindcss = {
-	root_dir = root_pattern('tailwind.config.*js', 'tailwind.config.*ts', 'postcss.config.*js', 'postcss.config.*ts')
+	root_dir = root_pattern("tailwind.config.*js", "tailwind.config.*ts", "postcss.config.*js", "postcss.config.*ts"),
 }
 
 M.emmet_ls = {
-	filetypes = { "svelte" }
+	extra_filetypes = { "svelte" },
 }
 
 return M
