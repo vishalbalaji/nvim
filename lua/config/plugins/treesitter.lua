@@ -20,7 +20,7 @@ local M = {
 	},
 }
 
-function treesitter_hls()
+local function treesitter_hls()
 	local c = require("config.plugins.colors")
 	local hl = c.safe_hl
 	local bg_alt = c.get_hex("NormalAlt", "bg")

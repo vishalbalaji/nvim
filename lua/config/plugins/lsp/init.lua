@@ -98,9 +98,6 @@ M.config = function(_, opts)
 	require("mason-lspconfig").setup()
 	require("mason-lspconfig").setup_handlers({
 		function(server)
-			-- if server == "tsserver" then
-			-- 	return
-			-- end
 			local settings = servers[server] or {}
 			settings.capabilities = capabilities
 			settings.on_attach = on_attach
