@@ -61,6 +61,7 @@ map("v", ">", ">gv")
 map("v", "<", "<gv")
 
 -- Surround
+-- -- NOTE: Doesn't work with muti-line selections
 map("v", '"', '"xc"<Esc>"xpa"<Esc>v2i"')
 map("v", "'", "\"xc'<Esc>\"xpa'<Esc>v2i'")
 map("v", "(", '"xc(<Esc>"xpa)<Esc>va(')
@@ -69,6 +70,20 @@ map("v", "{", '"xc{<Esc>"xpa}<Esc>va{')
 map("v", "*", '"xc*<Esc>"xpa*<Esc>gvll')
 map("v", "`", '"xc`<Esc>"xpa`<Esc>v2i`')
 -- map("x", "<", "c<<Esc>pa><Esc>va<")
+
+-- Visual Search
+local cr_termcode = vim.api.nvim_replace_termcodes("<CR>", true, false, true)
+map("v", "/", function()
+	vim.opt.lazyredraw = true
+
+	vim.fn.execute('normal! "sy')
+	local pattern = vim.inspect(vim.fn.getreg("s"))
+	pattern = string.sub(pattern, 2, string.len(pattern) - 1)
+	pattern = string.gsub(pattern, "/", "\\/")
+	vim.api.nvim_feedkeys("/" .. pattern .. cr_termcode .. "N", "n", false)
+
+	vim.opt.lazyredraw = false
+end)
 
 -- Splits and Tabs
 map("n", "<C-s>", "<C-w>s")
