@@ -12,7 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
-vim.g.material_style = "deep ocean"
 -- load lazy
 require("lazy").setup("config.plugins", {
 	ui = {
@@ -21,7 +20,7 @@ require("lazy").setup("config.plugins", {
 	defaults = { lazy = true },
 	checker = { enabled = true, notify = false },
 	install = {
-		colorscheme = { "material" },
+		colorscheme = { "everblush" },
 	},
 	performance = {
 		rtp = {

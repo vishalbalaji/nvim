@@ -45,13 +45,15 @@ if vim.env.TERM == "xterm-kitty" then
 	autocmd({ "VimEnter" }, {
 		once = true,
 		callback = function()
-			vim.cmd("silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0")
+			vim.fn.jobstart("kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0", { detach = true })
+			-- vim.cmd("silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0")
 		end,
 	})
 
 	autocmd({ "VimLeave" }, {
 		callback = function()
-			vim.cmd("silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10")
+			vim.fn.jobstart("kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10", { detach = true })
+			-- vim.cmd("silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10")
 		end,
 	})
 end

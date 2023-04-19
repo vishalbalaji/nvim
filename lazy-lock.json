@@ -48,6 +48,7 @@
   "smart-open.nvim": { "branch": "main", "commit": "f9d51ad69b0ab3a01b61d3d5176367e540407f6e" },
   "smart-splits.nvim": { "branch": "master", "commit": "d0111ef84fc82c9a31f4b000ff99190eaf18e790" },
   "sqlite.lua": { "branch": "master", "commit": "376e4735c48e07dade3e6ff5f09a654a04f5d4ba" },
+  "statuscol.nvim": { "branch": "main", "commit": "d9ee308565de96fd950b55e514fb5eb0f8583c0d" },
   "telescope.nvim": { "branch": "master", "commit": "942fe5faef47b21241e970551eba407bc10d9547" },
   "toggleterm.nvim": { "branch": "main", "commit": "b86982429325112d2b20c6d0cc7a5c4b182ab705" },
   "trouble.nvim": { "branch": "main", "commit": "2ae7237c2917d661f458443c9a88680f8ca2d7b2" },
