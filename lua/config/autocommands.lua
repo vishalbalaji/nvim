@@ -51,7 +51,7 @@ if vim.env.TERM == "xterm-kitty" then
 
 	autocmd({ "VimLeave" }, {
 		callback = function()
-			vim.cmd("!kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10")
+			vim.cmd("silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10")
 		end,
 	})
 end
@@ -65,6 +65,16 @@ autocmd({ "Filetype" }, {
 autocmd({ "BufReadPost" }, {
 	pattern = "*",
 	command = 'silent! normal! g`"zv',
+})
+
+autocmd({ "VimEnter" }, {
+	pattern = "*",
+	callback = function()
+		if vim.fn.system("pwd"):gsub("\n", ""):sub(1, #(vim.env.HOME .. "/work")) == vim.env.HOME .. "/work" then
+      vim.opt.expandtab = true
+      vim.opt.colorcolumn = "120"
+		end
+	end,
 })
 
 -- To enforce tabs instead of spaces in

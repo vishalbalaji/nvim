@@ -81,6 +81,8 @@ local function general_hls()
 	hl("NormalAlt", { bg = c.contrast })
 	hl("Comment", { fg = c.comment, bold = true, italic = true })
 	hl("CursorLine", { bg = c.color0 })
+	hl("QuickFixLine", { fg = "fg" })
+	hl("@float", { link = "@number" })
 
 	local comment_fg = M.get_hex("Comment", "fg")
 
@@ -88,6 +90,7 @@ local function general_hls()
 	hl("SpellBad", { link = "DiagnosticUnderlineError" })
 	hl("SpellBad", { undercurl = true, special = colors.red })
 	hl("NormalFloat", { fg = "fg", bg = "NONE" })
+	hl("ColorColumn", { link = "CursorLine" })
 	hl("TelescopeBorder", { link = "FloatBorder" })
 
 	-- hl("FloatBorder", { fg = comment_fg, bg = "NONE" })
