@@ -16,6 +16,7 @@ local M = {
 		require("config.plugins.lsp.cmp"),
 		require("config.plugins.lsp.null-ls"),
 		require("config.plugins.lsp.trouble"),
+		require("config.plugins.lsp.ccls"),
 	},
 }
 
@@ -56,7 +57,7 @@ M.lsp_sign_icons = {
 }
 local map = require("config.keymaps")
 
-local function on_attach()
+M.on_attach = function()
 	map("n", "<leader>la", vim.lsp.buf.code_action)
 	map("n", "<leader>lr", vim.lsp.buf.rename)
 	map("n", "<leader>lf", function()
@@ -79,6 +80,10 @@ M.init = function()
 	map("n", "<leader>lm", vim.cmd.Mason)
 end
 
+M.disabled_servers = {
+	"clangd", -- disable clangd in favor of ccls
+}
+
 M.config = function(_, opts)
 	-- diagnostics
 	for name, icon in pairs(M.lsp_sign_icons) do
@@ -98,9 +103,12 @@ M.config = function(_, opts)
 	require("mason-lspconfig").setup()
 	require("mason-lspconfig").setup_handlers({
 		function(server)
+			-- skip disabled servers
+			if vim.tbl_contains(M.disabled_servers, server) then return end
+
 			local settings = servers[server] or {}
 			settings.capabilities = capabilities
-			settings.on_attach = on_attach
+			settings.on_attach = M.on_attach
 
 			lspconfig[server].setup(settings)
 		end,
