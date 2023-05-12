@@ -15,8 +15,13 @@ autocmd("FileType", {
 
 autocmd("FileType", {
 	once = true,
-	pattern = { "markdown", "gitcommit" },
+	pattern = { "markdown", "gitcommit", "diff" },
 	callback = function()
+		if vim.bo.filetype == "diff" then
+			vim.cmd("TSBufDisable highlight")
+			vim.cmd("hi! link diffAdded DiffAdd")
+			return
+		end
 		if vim.bo.filetype == "gitcommit" then
 			vim.cmd("setlocal colorcolumn=80")
 		elseif vim.bo.filetype == "markdown" then

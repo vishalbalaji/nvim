@@ -13,11 +13,12 @@ local M = {
 function M.config()
 	local telescope = require("telescope")
 	local actions = require("telescope.actions")
+	local ui_icons = require("config.icons").ui
 
 	telescope.setup({
 		defaults = {
-			prompt_prefix = " > ",
-			selection_caret = " ",
+			prompt_prefix = " " .. ui_icons.Search .. " ",
+			selection_caret = ui_icons.Forward .. " ",
 			path_display = { "smart" },
 			mappings = {
 				i = {

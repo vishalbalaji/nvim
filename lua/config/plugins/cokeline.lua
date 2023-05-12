@@ -24,6 +24,7 @@ M.config = function()
 	local mappings = require("cokeline/mappings")
 
 	local colors = require("config.plugins.colors").get_colors()
+	local ui_icons = require("config.icons").ui
 	local lsp_sign_icons = require("config.plugins.lsp").lsp_sign_icons
 
 	local fg_errors = colors.red
@@ -67,12 +68,12 @@ M.config = function()
 		indicator = {
 			text = function(buffer)
 				if buffer.is_focused then
-					return "▎"
+					return ui_icons.BoldLineLeft
 				else
 					if buffer.is_first then
 						return " "
 					else
-						return "▎"
+						return ui_icons.LineLeft
 					end
 				end
 			end,
@@ -93,7 +94,7 @@ M.config = function()
 
 		separator = {
 			text = function(buffer)
-				return buffer.is_first and "▎" or ""
+				return buffer.is_first and ui_icons.LineLeft or ""
 			end,
 			truncation = { priority = 1 },
 		},
@@ -188,7 +189,7 @@ M.config = function()
 
 		close_or_unsaved = {
 			text = function(buffer)
-				return buffer.is_modified and "●" or ""
+				return buffer.is_modified and ui_icons.Circle or ui_icons.Close
 			end,
 			fg = function(buffer)
 				return buffer.is_modified and fg_is_modified or nil
@@ -199,7 +200,7 @@ M.config = function()
 
 		cap = {
 			text = function(buffer)
-				return buffer.is_last and "▎" or ""
+				return buffer.is_last and ui_icons.LineLeft or ""
 			end,
 			truncation = { priority = 1 },
 			fg = bg_sep,

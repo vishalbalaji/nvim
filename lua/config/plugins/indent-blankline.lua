@@ -6,6 +6,7 @@ local M = {
 
 function M.config()
   local indent = require("indent_blankline")
+	local ui_icons = require("config.icons").ui
 
   -- PERF: debounce indent-blankline refresh
   -- Disable, throttle, since it was caused by comment TS
@@ -24,7 +25,7 @@ function M.config()
       "neo-tree",
       "Trouble",
     },
-    char = "│",
+    char = ui_icons.LineMiddle,
     use_treesitter_scope = false,
     show_trailing_blankline_indent = false,
     show_current_context = true,

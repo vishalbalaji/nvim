@@ -48,12 +48,14 @@ M.opts = {
 	},
 }
 
+local diagnostic_icons = require("config.icons").diagnostics
+
 M.lsp_sign_icons = {
-	Error = "✘",
-	Warn = "▲",
-	Hint = "⚑",
-	Info = "",
-	Other = "",
+	Error = diagnostic_icons.BoldError,
+	Warn = diagnostic_icons.BoldWarning,
+	Hint = diagnostic_icons.BoldHint,
+	Info = diagnostic_icons.BoldInformation,
+	Other = diagnostic_icons.BoldQuestion,
 }
 local map = require("config.keymaps")
 

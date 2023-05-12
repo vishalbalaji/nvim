@@ -1,16 +1,15 @@
-
 local M = {
 	"nvim-lualine/lualine.nvim",
 	enabled = true,
 	event = "VimEnter",
-	cond = function ()
+	cond = function()
 		local exclude_filetypes = { "man" }
 		if vim.tbl_contains(exclude_filetypes, vim.bo.filetype) then
 			vim.opt.laststatus = 0
 			return false
 		end
 		return true
-	end
+	end,
 }
 
 local lsp_module = {
@@ -39,23 +38,42 @@ function M.config()
 	end
 
 	local colors = require("config.plugins.colors").get_colors()
+	local ui_icons = require("config.icons").ui
+
+	local lsp_sign_icons = require("config.plugins.lsp").lsp_sign_icons
+	local diagnostic_icons = {}
+	for k, v in pairs(lsp_sign_icons) do
+		diagnostic_icons[k:lower()] = v .. " "
+	end
 
 	require("lualine").setup({
 		options = {
 			theme = "auto",
-			section_separators = { left = "", right = "" },
-			component_separators = { left = "", right = "" },
+			section_separators = { left = ui_icons.BoldRoundedDividerRight, right = ui_icons.BoldRoundedDividerLeft },
+			component_separators = { left = ui_icons.DividerRight, right = ui_icons.DividerLeft },
 			icons_enabled = true,
 			globalstatus = true,
 			disabled_filetypes = { statusline = { "dashboard" } },
 		},
 		sections = {
-			lualine_a = { { "mode", separator = { right = "" } } },
+			lualine_a = { { "mode", separator = { right = ui_icons.BoldRoundedDividerRight } } },
 			lualine_b = { "branch" },
 			lualine_c = {
-				{ "diagnostics", sources = { "nvim_diagnostic" } },
-				{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-				{ "filename", path = 1, symbols = { modified = "●", color = { fg = colors.green } } },
+				{
+					"diagnostics",
+					sources = { "nvim_diagnostic" },
+					symbols = diagnostic_icons,
+				},
+				{
+					"filetype",
+					icon_only = true,
+					separator = "",
+					padding = {
+						left = 1,
+						right = 0,
+					},
+				},
+				{ "filename", path = 1, symbols = { modified = ui_icons.Circle, color = { fg = colors.green } } },
 			},
 			lualine_x = {
 				{

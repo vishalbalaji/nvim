@@ -44,4 +44,5 @@ M.config = function()
 	map("n", "<leader>g", _lazygit_toggle)
 	map("n", "<leader>t", "<cmd>ToggleTerm<CR><C-\\><C-n>")
 end
+
 return M

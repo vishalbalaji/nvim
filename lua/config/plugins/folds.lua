@@ -9,6 +9,7 @@ local foldhue = {
 
 local pretty_fold = {
 	"anuvyklack/pretty-fold.nvim",
+	enabled = true,
 	event = "VeryLazy",
 	config = function()
 		require("pretty-fold").setup({})

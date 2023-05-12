@@ -15,6 +15,7 @@ local function map(mode, key, mapping, opts)
 end
 
 vim.g.mapleader = " "
+map("n", "<C-S-o>", "<Tab>")
 map("n", "<Tab>", "za")
 map("n", "<Esc>", "<Esc><cmd>noh<CR>")
 map("n", "Q", "<nop>")
@@ -101,7 +102,7 @@ map("n", "<M-S-x>", "<cmd>Bdelete!<CR>")
 map("n", "<M-S-w>", "<cmd>Bdelete!<CR>")
 
 -- -- Splits
-map("n", "<C-q>", "<C-w>q")
+map("n", "<C-w>", "<C-w>q")
 map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-h>", "<C-w>h")

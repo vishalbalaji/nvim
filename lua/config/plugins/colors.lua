@@ -1,10 +1,3 @@
--- local M = {
--- 	"marko-cerovac/material.nvim",
--- 	enabled = true,
--- 	lazy = true,
--- 	priority = 1000,
--- }
-
 local M = {
 	"Everblush/nvim",
 	name = "everblush",
@@ -14,8 +7,8 @@ local M = {
 }
 
 _G.print_colors = function()
-	print(vim.inspect(require("everblush/palette")))
-	-- print(vim.inspect(M.get_colors()))
+	-- print(vim.inspect(require("everblush/palette")))
+	print(vim.inspect(M.get_colors()))
 end
 
 vim.api.nvim_create_user_command("PrintColors", print_colors, {})
@@ -36,23 +29,6 @@ M.get_hex = function(hlgroup_name, attr)
 	local hex = vim_fn.synIDattr(hlgroup_ID, attr)
 	return hex ~= "" and hex or "NONE"
 end
-
--- M.get_colors = function()
--- 	if not M.colors then
--- 		local palette = require("everblush/palette")
--- 		M.colors = {
--- 			red = palette.color1,
--- 			blue = palette.color4,
--- 			cyan = palette.color6,
--- 			green = palette.color2,
--- 			orange = palette.color11,
--- 			magenta = palette.color5,
--- 			yellow = palette.color3,
--- 		}
--- 	end
-
--- 	return M.colors
--- end
 
 M.get_colors = function()
 	if not M.colors then
@@ -82,7 +58,14 @@ local function general_hls()
 	hl("Comment", { fg = c.comment, bold = true, italic = true })
 	hl("CursorLine", { bg = c.color0 })
 	hl("QuickFixLine", { fg = "fg" })
+	hl("TelescopeSelection", { link = "CursorLine" })
+	-- hl("LineNr", { link = "Special" })
+	hl("CursorLineNr", { link = "SpecialComment" })
+	hl("LineNr", { link = "NonText" })
+	hl("FoldColumn", { link = "NonText" })
 	hl("@float", { link = "@number" })
+	hl("@exception", { link = "@debug" })
+	hl("WinSeparator", { link = "NonText" })
 
 	local comment_fg = M.get_hex("Comment", "fg")
 
@@ -126,7 +109,9 @@ M.init = function()
 	-- })
 
 	-- Setting colorscheme and _G.colors
-	local ok, _ = pcall(function (cmd) vim.cmd(cmd) end, string.format("colorscheme %s", colorscheme))
+	local ok, _ = pcall(function(cmd)
+		vim.cmd(cmd)
+	end, string.format("colorscheme %s", colorscheme))
 	if not ok then
 		print("Colorscheme not applied")
 		vim.cmd("colorscheme default")

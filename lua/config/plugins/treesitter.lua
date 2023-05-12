@@ -42,6 +42,7 @@ M.config = function()
 	-- TS Plugins
 	config.highlight = {
 		enable = true,
+		disable = { "diff" },
 		additional_vim_regex_highlighting = { "markdown" },
 	}
 
@@ -135,6 +136,7 @@ M.config = function()
 	}
 
 	require("nvim-treesitter.configs").setup(config)
+	require("treesitter-context").setup({ enable = true })
 	treesitter_hls()
 end
 
