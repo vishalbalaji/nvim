@@ -1,28 +1,38 @@
 local M = {
 	"nvim-neo-tree/neo-tree.nvim",
 	enabled = true,
-	cmd = "Neotree",
 	branch = "v2.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
 	},
-	cond = function()
-		local exclude_filetypes = { "man" }
-		return not vim.tbl_contains(exclude_filetypes, vim.bo.filetype)
-	end,
+	lazy = false,
 }
+
+M.keys = {
+	{
+		"<leader>e",
+		function()
+			if vim.bo.filetype == "neo-tree" then
+				pcall(vim.cmd.Neotree, "close")
+				return
+			end
+			pcall(vim.cmd.Neotree, "toggle")
+		end,
+	},
+}
+
+M.cond = function()
+	local exclude_filetypes = { "man" }
+	return not vim.tbl_contains(exclude_filetypes, vim.bo.filetype)
+end
 
 local c = require("config.plugins.colors")
 local hl = c.safe_hl
 local get_hex = c.get_hex
 
 M.init = function()
-	vim.keymap.set("n", "<leader>e", function()
-		pcall(vim.cmd.Neotree, "toggle")
-	end, { desc = "Neotree" })
-
 	hl("NeoTreeNormal", { link = "NormalAlt" })
 	hl("NeoTreeNormalNC", { link = "NormalAlt" })
 end
@@ -41,6 +51,7 @@ M.config = function()
 
 	require("neo-tree").setup({
 		filesystem = {
+			-- hijack_netrw_behavior = "open_default",
 			hijack_netrw_behavior = "open_current",
 			window = {
 				width = 30,

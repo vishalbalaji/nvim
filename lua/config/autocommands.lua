@@ -78,8 +78,8 @@ autocmd({ "VimEnter" }, {
 	pattern = "*",
 	callback = function()
 		if vim.fn.system("pwd"):gsub("\n", ""):sub(1, #(vim.env.HOME .. "/work")) == vim.env.HOME .. "/work" then
-      vim.opt.expandtab = true
-      vim.opt.colorcolumn = "120"
+			vim.opt.expandtab = true
+			vim.opt.colorcolumn = "120"
 		end
 	end,
 })

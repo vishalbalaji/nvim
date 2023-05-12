@@ -1,8 +1,8 @@
 local M = {
 	"noib3/cokeline.nvim",
 	enabled = true,
+	lazy = false,
 	requires = "kyazdani42/nvim-web-devicons", -- If you want devicons
-	event = "VimEnter",
 	cond = function()
 		local exclude_filetypes = { "man" }
 		return not vim.tbl_contains(exclude_filetypes, vim.bo.filetype)

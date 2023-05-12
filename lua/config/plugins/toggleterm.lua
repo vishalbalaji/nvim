@@ -9,6 +9,7 @@ M.config = function()
 
 	toggleterm.setup({
 		shell = "EMACS_BINDING=true /usr/bin/zsh",
+		shade_terminals = false,
 		start_in_insert = false,
 		auto_scroll = false,
 		on_open = function(term)
