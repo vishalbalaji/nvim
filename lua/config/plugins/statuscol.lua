@@ -1,26 +1,40 @@
 local M = {
 	"luukvbaal/statuscol.nvim",
+	lazy = false,
 	enabled = true,
 	event = "VeryLazy",
 }
 
+local padding = { text = { " " } }
+
 M.config = function()
-	-- local builtin = require("statuscol.builtin")
+	local builtin = require("statuscol.builtin")
+	-- print(builtin.lnumfunc())
 	require("statuscol").setup({
+		ft_ignore = { "neo-tree", "undotree", "Trouble" },
+		relculright = false,
 		-- configuration goes here, for example:
-		-- segments = {
-		-- relculright = true,
-		--   { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-		--   {
-		--     sign = { name = { "Diagnostic" }, maxwidth = 2, auto = true },
-		--     click = "v:lua.ScSa"
-		--   },
-		--   { text = { builtin.lnumfunc }, click = "v:lua.ScLa", },
-		--   {
-		--     sign = { name = { ".*" }, maxwidth = 2, colwidth = 1, auto = true },
-		--     click = "v:lua.ScSa"
-		--   },
-		-- }
+		segments = {
+			{
+				sign = { name = { "GitSigns" } },
+				click = "v:lua.ScSa",
+				maxwidth = 1,
+			},
+			{
+				sign = { name = { "Diagnostic" } },
+				click = "v:lua.ScSa",
+				maxwidth = 1,
+				auto = false,
+			},
+			{
+				text = { builtin.lnumfunc },
+				click = "v:lua.ScLa",
+				auto = true,
+			},
+			padding,
+			{ text = { builtin.foldfunc }, click = "v:lua.ScFa", hl = "IndentBlanklineChar" },
+			padding,
+		},
 	})
 end
 
