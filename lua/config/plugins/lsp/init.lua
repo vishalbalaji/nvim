@@ -68,6 +68,7 @@ M.on_attach = function()
 	map("n", "<leader>ls", vim.lsp.buf.signature_help)
 	map("n", "K", vim.lsp.buf.hover)
 	map("n", "gd", vim.lsp.buf.definition)
+	map("n", "gt", vim.lsp.buf.type_definition)
 	map("n", "gi", vim.lsp.buf.implementation)
 	map("n", "gr", function()
 		vim.cmd.TroubleToggle("lsp_references")
@@ -106,7 +107,9 @@ M.config = function(_, opts)
 	require("mason-lspconfig").setup_handlers({
 		function(server)
 			-- skip disabled servers
-			if vim.tbl_contains(M.disabled_servers, server) then return end
+			if vim.tbl_contains(M.disabled_servers, server) then
+				return
+			end
 
 			local settings = servers[server] or {}
 			settings.capabilities = capabilities
