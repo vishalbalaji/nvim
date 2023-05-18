@@ -74,10 +74,15 @@ autocmd({ "BufReadPost" }, {
 	command = 'silent! normal! g`"zv',
 })
 
+local function starts_with(str, start)
+   return str:sub(1, #start) == start
+end
+
 autocmd({ "VimEnter" }, {
 	pattern = "*",
 	callback = function()
-		if vim.fn.system("pwd"):gsub("\n", ""):sub(1, #(vim.env.HOME .. "/work")) == vim.env.HOME .. "/work" then
+		local current_dir = vim.fn.system("pwd")
+		if starts_with(current_dir, vim.env.HOME .. '/work') or starts_with(current_dir, '/media/DATA/work') then
 			vim.opt.expandtab = true
 			vim.opt.colorcolumn = "120"
 		end
