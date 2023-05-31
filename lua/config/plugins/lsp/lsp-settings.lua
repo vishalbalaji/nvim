@@ -72,4 +72,8 @@ M.emmet_ls = {
 	extra_filetypes = { "svelte" },
 }
 
+M.bashls = {
+	disabled = vim.fn.expand("%:t") == ".env",
+}
+
 return M

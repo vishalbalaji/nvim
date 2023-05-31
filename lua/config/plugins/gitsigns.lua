@@ -17,9 +17,18 @@ M.config = function()
 	hl("DiffAdd", { fg = colors.green })
 	hl("DiffChange", { fg = colors.yellow })
 	hl("DiffDelete", { fg = colors.red })
+
 	hl("GitSignsAdd", { link = "DiffAdd" })
 	hl("GitSignsChange", { link = "DiffChange" })
 	hl("GitSignsDelete", { link = "DiffDelete" })
+
+	hl("GitSignsAddInline", { link = "CursorLine" })
+	hl("GitSignsAddLnInline", { link = "CursorLine" })
+	hl("GitSignsChangeInline", { link = "CursorLine" })
+	hl("GitSignsDeleteInline", { link = "CursorLine" })
+	hl("GitSignsChangeLnInline", { link = "CursorLine" })
+	hl("GitSignsDeleteLnInline", { link = "CursorLine" })
+	hl("GitSignsDeleteVirtLnInLine", { link = "CursorLine" })
 
 	local map = require("config.keymaps")
 

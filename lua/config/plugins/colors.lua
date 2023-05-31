@@ -7,8 +7,8 @@ local M = {
 }
 
 _G.print_colors = function()
-	-- print(vim.inspect(require("everblush/palette")))
-	print(vim.inspect(M.get_colors()))
+	print(vim.inspect(require("everblush/palette")))
+	-- print(vim.inspect(M.get_colors()))
 end
 
 vim.api.nvim_create_user_command("PrintColors", print_colors, {})

@@ -61,6 +61,7 @@ local map = require("config.keymaps")
 
 M.on_attach = function()
 	map("n", "<leader>la", vim.lsp.buf.code_action)
+	map("x", "<leader>la", vim.lsp.buf.code_action)
 	map("n", "<leader>lr", vim.lsp.buf.rename)
 	map("n", "<leader>lf", function()
 		vim.lsp.buf.format({ async = true })

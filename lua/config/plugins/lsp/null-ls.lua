@@ -1,7 +1,7 @@
 local M = {
 	"jose-elias-alvarez/null-ls.nvim",
 	enabled = true,
-	event = "VeryLazy"
+	event = "VeryLazy",
 }
 
 local null_ls_stop = function()
@@ -33,9 +33,10 @@ local null_ls_restart = function()
 	null_ls_client.stop()
 end
 
-M.init = function ()
+M.init = function()
 	local map = require("config.keymaps")
 	map("n", "<leader>ln", vim.cmd.NullLsInfo)
+	map("n", "<leader>lf", vim.lsp.buf.format)
 end
 
 M.config = function()
@@ -53,7 +54,6 @@ M.config = function()
 		end,
 	}
 
-
 	require("config.plugins.colors").safe_hl("NullLsInfoBorder", { link = "FloatBorder" })
 	null_ls.setup({
 		border = "rounded",
@@ -62,6 +62,9 @@ M.config = function()
 			completion.spell.with({ filetypes = { "markdown", "latex" } }),
 			formatting.cbfmt,
 			formatting.yamlfmt,
+
+			-- Git
+			code_actions.gitsigns,
 
 			-- Lua
 			formatting.stylua,
