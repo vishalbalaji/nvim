@@ -88,15 +88,15 @@ M.config = function()
 					return vim.fn.expand("%:t") ~= ".env"
 				end,
 			}),
-			diagnostics.shellcheck.with({
-				extra_filetypes = { "zsh" },
-				condition = function()
-					return vim.fn.expand("%:t") ~= ".env"
-				end,
-				diagnostic_config = {
-					update_in_insert = true,
-				},
-			}),
+			-- diagnostics.shellcheck.with({
+			-- 	extra_filetypes = { "zsh" },
+			-- 	condition = function()
+			-- 		return vim.fn.expand("%:t") ~= ".env"
+			-- 	end,
+			-- 	diagnostic_config = {
+			-- 		update_in_insert = true,
+			-- 	},
+			-- }),
 			formatting.shfmt.with({
 				extra_filetypes = { "zsh" },
 			}),

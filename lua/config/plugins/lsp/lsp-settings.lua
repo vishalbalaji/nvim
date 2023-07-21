@@ -55,6 +55,13 @@ M.tsserver = {
 	root_dir = root_pattern("package.json"),
 	init_options = {
 		preferences = {
+			includeInlayParameterNameHints = "all",
+			includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+			includeInlayFunctionParameterTypeHints = true,
+			includeInlayVariableTypeHints = true,
+			includeInlayPropertyDeclarationTypeHints = true,
+			includeInlayFunctionLikeReturnTypeHints = false,
+			includeInlayEnumMemberValueHints = true,
 			importModuleSpecifierPreference = "non-relative",
 		},
 	},
@@ -74,6 +81,22 @@ M.emmet_ls = {
 
 M.bashls = {
 	disabled = vim.fn.expand("%:t") == ".env",
+}
+
+M.gopls = {
+	settings = {
+		gopls = {
+			hints = {
+				assignVariableTypes = true,
+				compositeLiteralFields = true,
+				compositeLiteralTypes = true,
+				constantValues = true,
+				functionTypeParameters = true,
+				parameterNames = true,
+				rangeVariableTypes = true,
+			},
+		},
+	},
 }
 
 return M

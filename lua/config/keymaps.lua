@@ -42,6 +42,8 @@ map("v", "c", '"_c')
 
 map("n", "d", '"_d')
 map("n", "c", '"_c')
+map("n", "s", '"_s')
+map("n", "r", '"_r')
 
 map("n", "xx", "Vd")
 map("n", "x", "d")
@@ -58,19 +60,23 @@ map("x", "<A-h>", "<Plug>GoVSMLeft")
 map("x", "<A-j>", "<Plug>GoVSMDown")
 map("x", "<A-k>", "<Plug>GoVSMUp")
 map("x", "<A-l>", "<Plug>GoVSMRight")
-map("v", ">", ">gv")
-map("v", "<", "<gv")
+
+map("v", ">", "<nop>")
 
 -- Surround
--- -- NOTE: Doesn't work with muti-line selections
-map("v", '"', '"xc"<Esc>"xpa"<Esc>v2i"')
-map("v", "'", "\"xc'<Esc>\"xpa'<Esc>v2i'")
-map("v", "(", '"xc(<Esc>"xpa)<Esc>va(')
-map("v", "[", '"xc[<Esc>"xpa]<Esc>va[')
-map("v", "{", '"xc{<Esc>"xpa}<Esc>va{')
-map("v", "*", '"xc*<Esc>"xpa*<Esc>gvll')
-map("v", "`", '"xc`<Esc>"xpa`<Esc>v2i`')
--- map("x", "<", "c<<Esc>pa><Esc>va<")
+local function visual_surround(char)
+	return [[:<C-u>lua MiniSurround.add('visual')<CR>]] .. char .. [[gvll]]
+end
+
+map("v", '"', visual_surround('"'))
+map("v", "'", visual_surround("'"))
+map("v", "`", visual_surround("`"))
+map("v", "(", visual_surround(")"))
+map("v", "[", visual_surround("]"))
+map("v", "{", visual_surround("}"))
+map("x", "<", visual_surround(">"))
+map("v", "*", visual_surround("*"))
+map("v", "_", visual_surround("_"))
 
 -- Visual Search
 local cr_termcode = vim.api.nvim_replace_termcodes("<CR>", true, false, true)

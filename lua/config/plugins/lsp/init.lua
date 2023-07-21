@@ -16,7 +16,8 @@ local M = {
 		require("config.plugins.lsp.cmp"),
 		require("config.plugins.lsp.null-ls"),
 		require("config.plugins.lsp.trouble"),
-		require("config.plugins.lsp.ccls"),
+		require("config.plugins.lsp.custom.ccls"),
+		-- require("config.plugins.lsp.custom.typescript-tools"),
 	},
 }
 
@@ -57,9 +58,19 @@ M.lsp_sign_icons = {
 	Info = diagnostic_icons.BoldInformation,
 	Other = diagnostic_icons.BoldQuestion,
 }
-local map = require("config.keymaps")
 
-M.on_attach = function()
+M.inlay_hints_enabled = { "rust", "go", "typescript", "javascript", "typescriptreact", "javascriptreact" }
+
+local map = require("config.keymaps")
+M.on_attach = function(_, buffer)
+	-- inlay hints
+	if vim.tbl_contains(M.inlay_hints_enabled, vim.bo.filetype) then
+		-- vim.lsp.buf.inlay_hint(buffer, true)
+		map("n", "<leader>lh", function()
+			vim.lsp.buf.inlay_hint(buffer)
+		end)
+	end
+
 	map("n", "<leader>la", vim.lsp.buf.code_action)
 	map("x", "<leader>la", vim.lsp.buf.code_action)
 	map("n", "<leader>lr", vim.lsp.buf.rename)
@@ -85,7 +96,8 @@ M.init = function()
 end
 
 M.disabled_servers = {
-	"clangd", -- disable clangd in favor of ccls
+	"clangd",  -- disable in favour of ccls
+	-- "tsserver", -- disable in favour of typescript-tools
 }
 
 M.config = function(_, opts)
@@ -100,8 +112,12 @@ M.config = function(_, opts)
 	local servers = require("config.plugins.lsp.lsp-settings")
 	local lspconfig = require("lspconfig")
 
+	local c = require("config.plugins.colors")
+	local non_text_fg = c.get_hex("NonText", "fg")
+
 	require("lspconfig.ui.windows").default_options.border = "rounded"
-	require("config.plugins.colors").safe_hl("LspInfoBorder", { link = "FloatBorder" })
+	c.safe_hl("LspInfoBorder", { link = "FloatBorder" })
+	c.safe_hl("LspInlayHint", { fg = non_text_fg, bold = true })
 
 	require("mason").setup({ ui = { border = "rounded", height = 0.7 } })
 	require("mason-lspconfig").setup()

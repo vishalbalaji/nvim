@@ -115,6 +115,7 @@ M.config = function()
 	vim.api.nvim_set_hl(0, "TSRainbowYellow", { fg = colors.yellow })
 	config.rainbow = {
 		enable = true,
+		disable = { "html" },
 	}
 
 	config.autotag = {

@@ -5,8 +5,13 @@ local M = {
 }
 
 M.config = function()
+	local c = require("config.plugins.colors")
+	local visual_bg =  c.get_hex("Visual", "bg")
+
+	c.safe_hl("LocalHighlight", { bg = visual_bg })
+
 	require("local-highlight").setup({
-		hlgroup = "Visual",
+		hlgroup = "LocalHighlight",
 		cw_hlgroup = nil,
 	})
 

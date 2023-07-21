@@ -1,7 +1,7 @@
 local M = {
 	"nvim-lualine/lualine.nvim",
 	enabled = true,
-	lazy = false,
+	event = "UIEnter",
 	cond = function()
 		local exclude_filetypes = { "man" }
 		if vim.tbl_contains(exclude_filetypes, vim.bo.filetype) then
@@ -15,7 +15,7 @@ local M = {
 local lsp_module = {
 	function()
 		local msg = "No Active Lsp"
-		local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+		local buf_ft = vim.bo.filetype
 		local clients = vim.lsp.get_active_clients()
 		if next(clients) == nil then
 			return msg
@@ -64,26 +64,31 @@ function M.config()
 					sources = { "nvim_diagnostic" },
 					symbols = diagnostic_icons,
 				},
+			},
+			lualine_x = {
+				{
+					"filename",
+					path = 1,
+					icon = ui_icons.File,
+					symbols = {
+						modified = ui_icons.Circle,
+						color = { fg = colors.green },
+					},
+				},
 				{
 					"filetype",
-					icon_only = true,
 					separator = "",
 					padding = {
 						left = 1,
 						right = 0,
 					},
 				},
-				{ "filename", path = 1, symbols = { modified = ui_icons.Circle, color = { fg = colors.green } } },
-			},
-			lualine_x = {
+				lsp_module,
 				{
 					require("lazy.status").updates,
 					cond = require("lazy.status").has_updates,
 					color = { fg = colors.blue },
 				},
-			},
-			lualine_y = {
-				lsp_module,
 			},
 			lualine_z = { "location" },
 		},

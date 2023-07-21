@@ -1,7 +1,7 @@
 local M = {
 	"noib3/cokeline.nvim",
 	enabled = true,
-	lazy = false,
+	event = "UIEnter",
 	requires = "kyazdani42/nvim-web-devicons", -- If you want devicons
 	cond = function()
 		local exclude_filetypes = { "man" }

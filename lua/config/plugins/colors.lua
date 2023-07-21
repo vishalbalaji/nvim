@@ -92,23 +92,7 @@ end
 
 M.init = function()
 	local colorscheme = "everblush"
-	-- vim.g.material_style = "deep ocean"
 
-	-- require("material").setup({
-	-- 	disable = {
-	-- 		colored_cursor = true,
-	-- 		eob_lines = true,
-	-- 	},
-
-	-- 	high_visibility = {
-	-- 		darker = true, -- Enable higher contrast text for darker style
-	-- 	},
-
-	-- 	lualine_style = "stealth", -- Lualine style ( can be 'stealth' or 'default' )
-	-- 	async_loading = false, -- Load parts of the theme asyncronously for faster startup (turned on by default)
-	-- })
-
-	-- Setting colorscheme and _G.colors
 	local ok, _ = pcall(function(cmd)
 		vim.cmd(cmd)
 	end, string.format("colorscheme %s", colorscheme))

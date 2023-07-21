@@ -11,7 +11,7 @@ M.config = function()
 	local builtin = require("statuscol.builtin")
 	-- print(builtin.lnumfunc())
 	require("statuscol").setup({
-		ft_ignore = { "neo-tree", "undotree", "Trouble" },
+		ft_ignore = { "neo-tree", "undotree", "Trouble", "man" },
 		relculright = false,
 		-- configuration goes here, for example:
 		segments = {
