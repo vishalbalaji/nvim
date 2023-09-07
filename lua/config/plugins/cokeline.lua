@@ -1,15 +1,19 @@
+local exclude_filetypes = { "man" }
+local function exclude()
+	return vim.tbl_contains(exclude_filetypes, vim.bo.filetype)
+end
+
 local M = {
 	"noib3/cokeline.nvim",
-	enabled = true,
-	event = "UIEnter",
 	requires = "kyazdani42/nvim-web-devicons", -- If you want devicons
-	cond = function()
-		local exclude_filetypes = { "man" }
-		return not vim.tbl_contains(exclude_filetypes, vim.bo.filetype)
-	end,
+	event = "UIEnter",
 }
 
 M.init = function()
+	-- `cond` stopped working with `event` for lazy
+	if exclude() then
+		return
+	end
 	local map = require("config.keymaps")
 	map("n", "<M-S-k>", "<Plug>(cokeline-focus-next)")
 	map("n", "<M-S-j>", "<Plug>(cokeline-focus-prev)")
@@ -18,6 +22,10 @@ M.init = function()
 end
 
 M.config = function()
+	-- `cond` stopped working with `event` for lazy
+	if exclude() then
+		return
+	end
 	local cokeline = require("cokeline")
 
 	local get_hex = require("cokeline/utils").get_hex
@@ -102,13 +110,13 @@ M.config = function()
 		devicon = {
 			text = function(buffer)
 				return (mappings.is_picking_focus() or mappings.is_picking_close()) and buffer.pick_letter .. " "
-					or buffer.devicon.icon
+						or buffer.devicon.icon
 			end,
 			fg = function(buffer)
 				return (mappings.is_picking_focus() and fg_picking_focus)
-					or (mappings.is_picking_close() and fg_picking_closed)
-					or (not buffer.is_focused and fg_inactive)
-					or buffer.devicon.color
+						or (mappings.is_picking_close() and fg_picking_closed)
+						or (not buffer.is_focused and fg_inactive)
+						or buffer.devicon.color
 			end,
 			style = function(_)
 				return (mappings.is_picking_focus() or mappings.is_picking_close()) and "italic,bold" or nil
@@ -141,15 +149,15 @@ M.config = function()
 			end,
 			fg = function(buffer)
 				return (buffer.diagnostics.errors ~= 0 and fg_errors)
-					or (buffer.diagnostics.warnings ~= 0 and fg_warnings)
-					or (buffer.is_readonly and fg_inactive)
-					or nil
+						or (buffer.diagnostics.warnings ~= 0 and fg_warnings)
+						or (buffer.is_readonly and fg_inactive)
+						or nil
 			end,
 			style = function(buffer)
 				return ((buffer.is_focused and buffer.diagnostics.errors ~= 0) and "bold,underline,italic")
-					or (buffer.is_focused and "bold,italic")
-					or (buffer.diagnostics.errors ~= 0 and "underline")
-					or nil
+						or (buffer.is_focused and "bold,italic")
+						or (buffer.diagnostics.errors ~= 0 and "underline")
+						or nil
 			end,
 			truncation = {
 				priority = 2,
@@ -169,20 +177,20 @@ M.config = function()
 		diagnostics = {
 			text = function(buffer)
 				return (
-					buffer.diagnostics.errors ~= 0
-					and string.format(" %s %s", lsp_sign_icons.Error, buffer.diagnostics.errors)
-				)
-					or (buffer.diagnostics.warnings ~= 0 and string.format(
-						" %s %s",
-						lsp_sign_icons.Warn,
-						buffer.diagnostics.warnings
-					))
-					or ""
+							buffer.diagnostics.errors ~= 0
+							and string.format(" %s %s", lsp_sign_icons.Error, buffer.diagnostics.errors)
+						)
+						or (buffer.diagnostics.warnings ~= 0 and string.format(
+							" %s %s",
+							lsp_sign_icons.Warn,
+							buffer.diagnostics.warnings
+						))
+						or ""
 			end,
 			fg = function(buffer)
 				return (buffer.diagnostics.errors ~= 0 and fg_errors)
-					or (buffer.diagnostics.warnings ~= 0 and fg_warnings)
-					or nil
+						or (buffer.diagnostics.warnings ~= 0 and fg_warnings)
+						or nil
 			end,
 			truncation = { priority = 1 },
 		},

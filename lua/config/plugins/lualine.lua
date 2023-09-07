@@ -1,15 +1,12 @@
+local exclude_filetypes = { "man" }
+local function exclude()
+	return vim.tbl_contains(exclude_filetypes, vim.bo.filetype)
+end
+
 local M = {
 	"nvim-lualine/lualine.nvim",
 	enabled = true,
 	event = "UIEnter",
-	cond = function()
-		local exclude_filetypes = { "man" }
-		if vim.tbl_contains(exclude_filetypes, vim.bo.filetype) then
-			vim.opt.laststatus = 0
-			return false
-		end
-		return true
-	end,
 }
 
 local lsp_module = {
@@ -34,6 +31,12 @@ local lsp_module = {
 
 function M.config()
 	if vim.g.started_by_firenvim then
+		return
+	end
+
+	-- `cond` stopped working with `event` for lazy
+	if exclude() then
+		vim.opt.laststatus = 0
 		return
 	end
 

@@ -2,7 +2,7 @@ local M = {
 	"mg979/vim-visual-multi",
 	enabled = true,
 	branch = "master",
-	event = "VeryLazy",
+	keys = { { "<C-n>", mode = { "v", "n" } } },
 }
 
 return M

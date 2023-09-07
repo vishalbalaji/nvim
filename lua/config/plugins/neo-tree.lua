@@ -1,7 +1,7 @@
 local M = {
 	"nvim-neo-tree/neo-tree.nvim",
 	enabled = true,
-	branch = "v2.x",
+	branch = "v3.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"kyazdani42/nvim-web-devicons",
@@ -107,7 +107,9 @@ M.config = function()
 				hide_gitignored = false,
 				hide_hidden = false,
 			},
-			follow_current_file = true, -- This will find and focus the file in the active buffer every
+			follow_current_file = {
+				enabled = true
+			}, -- This will find and focus the file in the active buffer every
 		},
 	})
 
