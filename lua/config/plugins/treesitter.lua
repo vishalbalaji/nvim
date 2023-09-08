@@ -136,6 +136,8 @@ M.config = function()
 		disable_virtual_text = true,
 	}
 
+	config.ignore_install = { "help" }
+
 	require("nvim-treesitter.configs").setup(config)
 	require("treesitter-context").setup({ enable = true })
 	treesitter_hls()

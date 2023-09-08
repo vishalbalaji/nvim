@@ -11,6 +11,7 @@ local M = {
 			-- end)
 		end,
 		settings = {
+			tsserver_path = "~/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/lib/tsserver.js",
 			tsserver_file_preferences = {
 				includeInlayParameterNameHints = "all",
 				includeInlayParameterNameHintsWhenArgumentMatchesName = true,

@@ -71,7 +71,7 @@ M.config = function()
 
 			-- Web Dev
 			formatting.prettierd.with({
-				filetypes = { "json", "html", "css" },
+				filetypes = { "json", "html", "css", "yaml" },
 			}),
 			code_actions.eslint_d.with(eslint_opts),
 			diagnostics.eslint_d.with(eslint_opts),
