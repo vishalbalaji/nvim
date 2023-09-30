@@ -1,58 +1,67 @@
 local M = {
-  "lukas-reineke/indent-blankline.nvim",
+	"lukas-reineke/indent-blankline.nvim",
 	enabled = true,
-	event = "BufReadPre"
+	event = "BufReadPre",
 }
 
 function M.config()
-  local indent = require("indent_blankline")
+	local indent = require("ibl")
 	local ui_icons = require("config.icons").ui
+	local hooks = require("ibl.hooks")
+	local colors = require("config.plugins.colors").get_colors()
 
-  -- PERF: debounce indent-blankline refresh
-  -- Disable, throttle, since it was caused by comment TS
-  -- local refresh = indent.refresh
-  -- indent.refresh = require("util").debounce(100, refresh)
+	local highlight = {
+		"RainbowRed",
+		"RainbowYellow",
+		"RainbowBlue",
+		"RainbowOrange",
+		"RainbowGreen",
+		"RainbowViolet",
+		"RainbowCyan",
+	}
 
-  indent.setup({
-    buftype_exclude = { "terminal", "nofile" },
-    filetype_exclude = {
-      "help",
-      "startify",
-      "dashboard",
-      "packer",
-      "neogitstatus",
-      "NvimTree",
-      "neo-tree",
-      "Trouble",
-    },
-    char = ui_icons.LineMiddle,
-    use_treesitter_scope = false,
-    show_trailing_blankline_indent = false,
-    show_current_context = true,
-    show_current_context_start = true,
-    context_patterns = {
-      "class",
-      "return",
-      "function",
-      "method",
-      "^if",
-      "^while",
-      "jsx_element",
-      "^for",
-      "^object",
-      "^table",
-      "block",
-      "arguments",
-      "if_statement",
-      "else_clause",
-      "jsx_element",
-      "jsx_self_closing_element",
-      "try_statement",
-      "catch_clause",
-      "import_statement",
-      "operation_type",
-    },
-  })
+	hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+		vim.api.nvim_set_hl(0, "RainbowRed", { fg = colors.red })
+		vim.api.nvim_set_hl(0, "RainbowYellow", { fg = colors.yellow })
+		vim.api.nvim_set_hl(0, "RainbowBlue", { fg = colors.blue })
+		vim.api.nvim_set_hl(0, "RainbowOrange", { fg = colors.orange })
+		vim.api.nvim_set_hl(0, "RainbowGreen", { fg = colors.green })
+		vim.api.nvim_set_hl(0, "RainbowViolet", { fg = colors.magenta })
+		vim.api.nvim_set_hl(0, "RainbowCyan", { fg = colors.cyan })
+	end)
+	vim.g.rainbow_delimiters = { highlight = highlight }
+
+	indent.setup({
+		indent = { highlight = "NonText", char = ui_icons.LineMiddle },
+		scope = {
+			highlight = highlight,
+			char = ui_icons.LineMiddle,
+			include = {
+				node_type = {
+					["*"] = { "return_statement", "ternary_expression" },
+					lua = { "table_constructor" },
+					javascript = { "object", "object_pattern" },
+					javascriptreact = { "object", "object_pattern" },
+					typescript = { "object", "object_pattern" },
+					typescriptreact = { "object", "object_pattern" },
+				},
+			},
+		},
+		buftype_exclude = { "terminal", "nofile" },
+		filetype_exclude = {
+			"help",
+			"startify",
+			"dashboard",
+			"lazy",
+			"neogitstatus",
+			"NvimTree",
+			"Trouble",
+			"text",
+		},
+		show_first_indent_level = true,
+		use_treesitter = true,
+		show_current_context = true,
+	})
 end
 
 return M

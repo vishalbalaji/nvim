@@ -38,7 +38,7 @@ M.get_colors = function()
 			blue = palette.color4,
 			cyan = palette.color6,
 			green = palette.color2,
-			orange = palette.color11,
+			orange = palette.color9,
 			magenta = palette.color5,
 			yellow = palette.color3,
 		}

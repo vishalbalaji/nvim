@@ -14,9 +14,11 @@ local M = {
 		{ "williamboman/mason-lspconfig.nvim", event = "VeryLazy" },
 
 		require("config.plugins.lsp.cmp"),
-		require("config.plugins.lsp.null-ls"),
+		require("config.plugins.lsp.conform"),
+		require("config.plugins.lsp.nvim-lint"),
 		require("config.plugins.lsp.trouble"),
-		require("config.plugins.lsp.custom.ccls"),
+		-- require("config.plugins.lsp.null-ls"),
+		-- require("config.plugins.lsp.custom.ccls"),
 		-- require("config.plugins.lsp.custom.typescript-tools"),
 	},
 }
@@ -74,9 +76,9 @@ M.on_attach = function(_, buffer)
 	map("n", "<leader>la", vim.lsp.buf.code_action)
 	map("x", "<leader>la", vim.lsp.buf.code_action)
 	map("n", "<leader>lr", vim.lsp.buf.rename)
-	map("n", "<leader>lf", function()
-		vim.lsp.buf.format({ async = true })
-	end)
+	-- map("n", "<leader>lf", function()
+	-- 	vim.lsp.buf.format({ async = true })
+	-- end)
 	map("n", "<leader>ls", vim.lsp.buf.signature_help)
 	map("n", "K", vim.lsp.buf.hover)
 	map("n", "gd", vim.lsp.buf.definition)
@@ -96,7 +98,8 @@ M.init = function()
 end
 
 M.disabled_servers = {
-	"clangd",  -- disable in favour of ccls
+	"gopls",
+	-- "clangd",  -- disable in favour of ccls
 	-- "tsserver", -- disable in favour of typescript-tools
 }
 

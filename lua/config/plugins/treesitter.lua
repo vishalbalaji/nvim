@@ -6,8 +6,6 @@ local M = {
 	dependencies = {
 		{ "nvim-treesitter/playground",                  cmd = "TSPlaygroundToggle" },
 		{ "nvim-treesitter/nvim-treesitter-context",     event = "VeryLazy" },
-		-- { "mrjones2014/nvim-ts-rainbow", event = "VeryLazy" },
-		{ "HiPhish/nvim-ts-rainbow2",                    event = "VeryLazy" },
 		{ "nvim-treesitter/nvim-treesitter-textobjects", event = "VeryLazy" },
 		{ "windwp/nvim-ts-autotag",                      event = "VeryLazy" },
 		{
@@ -104,18 +102,6 @@ M.config = function()
 			scope_incremental = "<c-s>",
 			node_decremental = "<c-backspace>",
 		},
-	}
-
-	vim.api.nvim_set_hl(0, "TSRainbowRed", { fg = colors.red })
-	vim.api.nvim_set_hl(0, "TSRainbowBlue", { fg = colors.blue })
-	vim.api.nvim_set_hl(0, "TSRainbowCyan", { fg = colors.cyan })
-	vim.api.nvim_set_hl(0, "TSRainbowGreen", { fg = colors.green })
-	vim.api.nvim_set_hl(0, "TSRainbowOrange", { fg = colors.orange })
-	vim.api.nvim_set_hl(0, "TSRainbowViolet", { fg = colors.magenta })
-	vim.api.nvim_set_hl(0, "TSRainbowYellow", { fg = colors.yellow })
-	config.rainbow = {
-		enable = true,
-		disable = { "html" },
 	}
 
 	config.autotag = {
