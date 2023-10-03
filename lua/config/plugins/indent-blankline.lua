@@ -32,7 +32,10 @@ function M.config()
 	vim.g.rainbow_delimiters = { highlight = highlight }
 
 	indent.setup({
-		indent = { highlight = "NonText", char = ui_icons.LineMiddle },
+		indent = {
+			highlight = "NonText",
+			char = ui_icons.LineMiddle,
+		},
 		scope = {
 			highlight = highlight,
 			char = ui_icons.LineMiddle,
@@ -47,20 +50,22 @@ function M.config()
 				},
 			},
 		},
-		buftype_exclude = { "terminal", "nofile" },
-		filetype_exclude = {
-			"help",
-			"startify",
-			"dashboard",
-			"lazy",
-			"neogitstatus",
-			"NvimTree",
-			"Trouble",
-			"text",
+		exclude = {
+			filetypes = {
+				"help",
+				"startify",
+				"dashboard",
+				"lazy",
+				"neogitstatus",
+				"NvimTree",
+				"Trouble",
+				"text",
+			},
+			buftypes = {
+				"terminal",
+				"nofile",
+			},
 		},
-		show_first_indent_level = true,
-		use_treesitter = true,
-		show_current_context = true,
 	})
 end
 

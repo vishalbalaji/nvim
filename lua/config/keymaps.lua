@@ -115,11 +115,24 @@ map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
 map("n", "<C-S-0>", "<C-w>=")
 
-map("t", "<C-Space>", "<C-\\><C-n>")
-map("t", "<C-j>", "<C-\\><C-n><C-w>j")
-map("t", "<C-k>", "<C-\\><C-n><C-w>k")
-map("t", "<C-h>", "<C-\\><C-n><C-w>h")
-map("t", "<C-l>", "<C-\\><C-n><C-w>l")
+local terminal_group = vim.api.nvim_create_augroup("terminal", { clear = true })
+vim.api.nvim_create_autocmd("TermOpen", {
+	pattern = "*",
+	group = terminal_group,
+	callback = function()
+		-- vim.keymap.set(
+		-- 	"n",
+		-- 	"<c-e>",
+		-- 	[[<c-\><c-n><cmd>e#<cr>]],
+		-- 	{ buffer = 0, desc = "go from t[E]rminal to previous buffer" }
+		-- )
+		vim.keymap.set("t", "<C-Space>", "<C-\\><C-n>")
+		vim.keymap.set("n", "<C-j>", "<C-\\><C-n><C-w>j")
+		vim.keymap.set("n", "<C-k>", "<C-\\><C-n><C-w>k")
+		vim.keymap.set("n", "<C-h>", "<C-\\><C-n><C-w>h")
+		vim.keymap.set("n", "<C-l>", "<C-\\><C-n><C-w>l")
+	end,
+})
 
 -- Other
 map("n", "<leader>x", "!chmod +x %")

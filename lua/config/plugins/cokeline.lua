@@ -28,7 +28,7 @@ M.config = function()
 	end
 	local cokeline = require("cokeline")
 
-	local get_hex = require("cokeline/utils").get_hex
+	local get_hex = require("config.plugins.colors").get_hex
 	local mappings = require("cokeline/mappings")
 
 	local colors = require("config.plugins.colors").get_colors()
