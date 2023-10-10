@@ -98,7 +98,7 @@ M.init = function()
 end
 
 M.disabled_servers = {
-	"gopls",
+	-- "gopls",
 	-- "clangd",  -- disable in favour of ccls
 	-- "tsserver", -- disable in favour of typescript-tools
 }

@@ -41,7 +41,7 @@ function M.config()
 			char = ui_icons.LineMiddle,
 			include = {
 				node_type = {
-					["*"] = { "return_statement", "ternary_expression" },
+					["*"] = { "return_statement", "ternary_expression", "arguments" },
 					lua = { "table_constructor" },
 					javascript = { "object", "object_pattern" },
 					javascriptreact = { "object", "object_pattern" },

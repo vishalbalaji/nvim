@@ -83,12 +83,17 @@ local cr_termcode = vim.api.nvim_replace_termcodes("<CR>", true, false, true)
 map("v", "/", function()
 	vim.opt.lazyredraw = true
 
+	local special_characters = { "~", "/", "%." }
+
 	vim.fn.execute('normal! "sy')
 	local pattern = vim.inspect(vim.fn.getreg("s"))
-	pattern = string.sub(pattern, 2, string.len(pattern) - 1)
-	pattern = string.gsub(pattern, "/", "\\/")
-	vim.api.nvim_feedkeys("/" .. pattern .. cr_termcode .. "N", "n", false)
 
+	pattern = string.sub(pattern, 2, string.len(pattern) - 1)
+	for _, char in pairs(special_characters) do
+		pattern = string.gsub(pattern, char, "\\" .. char)
+	end
+
+	vim.api.nvim_feedkeys("/" .. pattern .. cr_termcode .. "N", "n", false)
 	vim.opt.lazyredraw = false
 end)
 
@@ -108,29 +113,21 @@ map("n", "<M-S-x>", "<cmd>Bdelete!<CR>")
 map("n", "<M-S-w>", "<cmd>Bdelete!<CR>")
 
 -- -- Splits
-map("n", "<C-w>", "<C-w>q")
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-l>", "<C-w>l")
-map("n", "<C-S-0>", "<C-w>=")
+local wincmd = function(char) return function() vim.cmd.wincmd(char) end end
+
+map("n", "<C-w>", wincmd("q"))
+map("n", "<C-j>", wincmd("j"))
+map("n", "<C-k>", wincmd("k"))
+map("n", "<C-h>", wincmd("h"))
+map("n", "<C-l>", wincmd("l"))
+map("n", "<C-S-0>", wincmd("="))
 
 local terminal_group = vim.api.nvim_create_augroup("terminal", { clear = true })
 vim.api.nvim_create_autocmd("TermOpen", {
 	pattern = "*",
 	group = terminal_group,
 	callback = function()
-		-- vim.keymap.set(
-		-- 	"n",
-		-- 	"<c-e>",
-		-- 	[[<c-\><c-n><cmd>e#<cr>]],
-		-- 	{ buffer = 0, desc = "go from t[E]rminal to previous buffer" }
-		-- )
-		vim.keymap.set("t", "<C-Space>", "<C-\\><C-n>")
-		vim.keymap.set("n", "<C-j>", "<C-\\><C-n><C-w>j")
-		vim.keymap.set("n", "<C-k>", "<C-\\><C-n><C-w>k")
-		vim.keymap.set("n", "<C-h>", "<C-\\><C-n><C-w>h")
-		vim.keymap.set("n", "<C-l>", "<C-\\><C-n><C-w>l")
+		map("t", "<C-Space>", "<C-\\><C-n>")
 	end,
 })
 

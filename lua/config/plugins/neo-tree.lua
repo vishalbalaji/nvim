@@ -93,6 +93,7 @@ M.config = function()
 					["/"] = "none",
 					["<Tab>"] = "open",
 					["o"] = "system_open",
+					["<Esc>"] = "<CMD>noh<CR><Esc>",
 				},
 			},
 			commands = {
