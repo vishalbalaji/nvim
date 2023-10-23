@@ -14,10 +14,10 @@ local M = {
 		{ "williamboman/mason-lspconfig.nvim", event = "VeryLazy" },
 
 		require("config.plugins.lsp.cmp"),
-		require("config.plugins.lsp.conform"),
-		require("config.plugins.lsp.nvim-lint"),
+		require("config.plugins.lsp.none-ls"),
+		-- require("config.plugins.lsp.conform"),
+		-- require("config.plugins.lsp.nvim-lint"),
 		require("config.plugins.lsp.trouble"),
-		-- require("config.plugins.lsp.null-ls"),
 		-- require("config.plugins.lsp.custom.ccls"),
 		-- require("config.plugins.lsp.custom.typescript-tools"),
 	},

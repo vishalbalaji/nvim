@@ -22,10 +22,10 @@ map("n", "Q", "<nop>")
 map("n", "<leader>d", "<cmd>cd %:p:h<CR><cmd>pwd<CR>")
 map("n", "<leader>m", vim.cmd.messages)
 map("n", "gx", function()
-	vim.fn.jobstart({ "xdg-open", vim.fn.expand("<cfile>") })
+	vim.fn.jobstart({ "open", vim.fn.expand("<cfile>") })
 end)
 map("x", "gx", function()
-	vim.fn.jobstart({ "xdg-open", vim.fn.expand("<cfile>") })
+	vim.fn.jobstart({ "open", vim.fn.expand("<cfile>") })
 end)
 
 -- Maintain Cursor Position
