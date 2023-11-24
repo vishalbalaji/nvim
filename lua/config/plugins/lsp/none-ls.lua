@@ -100,6 +100,9 @@ M.config = function()
 			formatting.shfmt.with({
 				extra_filetypes = { "zsh" },
 			}),
+
+			-- YAML
+			diagnostics.yamllint,
 		},
 	})
 

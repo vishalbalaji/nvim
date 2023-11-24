@@ -76,7 +76,23 @@ M.tailwindcss = {
 }
 
 M.emmet_ls = {
-	extra_filetypes = { "svelte" },
+	filetypes = {
+		"css",
+		"eruby",
+		"html",
+		"javascript",
+		"javascriptreact",
+		"less",
+		"sass",
+		"scss",
+		"svelte",
+		"pug",
+		"typescriptreact",
+		"vue",
+	},
+	init_options = {
+		js = { options = { ["markup.attributes"] = { class = "className" } } },
+	},
 }
 
 M.bashls = {

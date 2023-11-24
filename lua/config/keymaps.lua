@@ -27,6 +27,7 @@ end)
 map("x", "gx", function()
 	vim.fn.jobstart({ "open", vim.fn.expand("<cfile>") })
 end)
+-- map("n", ":", ":<C-f>")
 
 -- Maintain Cursor Position
 map("n", "J", "mzJ`z")
@@ -52,16 +53,11 @@ map("x", "s", '"_s')
 map("x", "r", '"_r')
 
 -- Move
-map("n", "<A-h>", "<Plug>GoNSMLeft")
-map("n", "<A-j>", "<Plug>GoNSMDown")
-map("n", "<A-k>", "<Plug>GoNSMUp")
-map("n", "<A-l>", "<Plug>GoNSMRight")
-map("x", "<A-h>", "<Plug>GoVSMLeft")
-map("x", "<A-j>", "<Plug>GoVSMDown")
-map("x", "<A-k>", "<Plug>GoVSMUp")
-map("x", "<A-l>", "<Plug>GoVSMRight")
-
 map("v", ">", "<nop>")
+
+local pattern = [[\v['"({[< (\.\.\.)\@\/\-\_]@<=(\w)|(\.\.\.)|^(\w)|([A-Z])|([]'"\>\)}]\.)@<=(\w)|(['"])@<=([][(){}.,;])(['"])]]
+map({'n', 'v'}, 'w', function() vim.fn.search(pattern) end)
+map({'n', 'v'}, 'b', function() vim.fn.search(pattern, 'b') end)
 
 -- Surround
 local function visual_surround(char)

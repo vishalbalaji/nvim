@@ -75,7 +75,7 @@ function M.config()
 					icon = ui_icons.File,
 					symbols = {
 						modified = ui_icons.Circle,
-						color = { fg = colors.green },
+						color = { fg = colors.green, bg = colors.green },
 					},
 				},
 				{

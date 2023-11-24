@@ -7,7 +7,7 @@ local M = {
 		{ "nvim-treesitter/playground",                  cmd = "TSPlaygroundToggle" },
 		{ "nvim-treesitter/nvim-treesitter-context",     event = "VeryLazy" },
 		{ "nvim-treesitter/nvim-treesitter-textobjects", event = "VeryLazy" },
-		{ "windwp/nvim-ts-autotag",                      event = "VeryLazy" },
+		{ "gungun974/nvim-ts-autotag",                   event = "VeryLazy" },
 		{
 			"andymass/vim-matchup",
 			event = "VeryLazy",
@@ -30,7 +30,6 @@ end
 
 M.config = function()
 	local config = {}
-	local colors = require("config.plugins.colors").get_colors()
 
 	-- Base-Level Settings
 	config.ensure_installed = { "c", "lua", "rust", "help", "javascript", "typescript", "vim" }
@@ -99,8 +98,7 @@ M.config = function()
 		keymaps = {
 			init_selection = "<c-space>",
 			node_incremental = "<c-space>",
-			scope_incremental = "<c-s>",
-			node_decremental = "<c-backspace>",
+			node_decremental = "<c-s-space>",
 		},
 	}
 
@@ -125,7 +123,10 @@ M.config = function()
 	config.ignore_install = { "help" }
 
 	require("nvim-treesitter.configs").setup(config)
-	require("treesitter-context").setup({ enable = true })
+	require("treesitter-context").setup({
+		enable = true,
+		max_lines = 4,
+	})
 	treesitter_hls()
 end
 
