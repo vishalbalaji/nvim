@@ -16,7 +16,7 @@ M.config = function()
 		-- configuration goes here, for example:
 		segments = {
 			{
-				sign = { name = { "GitSigns" } },
+				sign = { namespace = { "gitsigns" } },
 				click = "v:lua.ScSa",
 				maxwidth = 1,
 			},

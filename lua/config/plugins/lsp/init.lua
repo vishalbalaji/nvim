@@ -11,7 +11,7 @@ local M = {
 			},
 		},
 		"williamboman/mason.nvim",
-		{ "williamboman/mason-lspconfig.nvim", event = "VeryLazy" },
+		{ "williamboman/mason-lspconfig.nvim",    event = "VeryLazy" },
 
 		require("config.plugins.lsp.cmp"),
 		require("config.plugins.lsp.none-ls"),

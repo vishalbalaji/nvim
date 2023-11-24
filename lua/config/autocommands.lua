@@ -50,15 +50,23 @@ if vim.env.TERM == "xterm-kitty" then
 	autocmd({ "VimEnter" }, {
 		once = true,
 		callback = function()
-			vim.fn.jobstart("kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0", { detach = true })
-			-- vim.cmd("silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0")
+			if vim.env.TERM == "xterm-kitty" then
+				vim.fn.jobstart("kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0", { detach = true })
+				vim.api.nvim_create_user_command("KittyPadding", function()
+					vim.fn.jobstart("kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0", { detach = true })
+				end, {})
+				vim.keymap.set("n", "<M-S-r>", vim.cmd.KittyPadding, { noremap = true, silent = true })
+			end
 		end,
 	})
 
 	autocmd({ "VimLeave" }, {
 		callback = function()
-			vim.fn.jobstart("kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10", { detach = true })
-			-- vim.cmd("silent !kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10")
+			if vim.env.TERM == "xterm-kitty" then
+				vim.keymap.del("n", "<M-S-r>")
+				vim.api.nvim_del_user_command("KittyPadding")
+				vim.fn.jobstart("kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10", { detach = true })
+			end
 		end,
 	})
 end
@@ -75,14 +83,14 @@ autocmd({ "BufReadPost" }, {
 })
 
 local function starts_with(str, start)
-   return str:sub(1, #start) == start
+	return str:sub(1, #start) == start
 end
 
 autocmd({ "VimEnter" }, {
 	pattern = "*",
 	callback = function()
 		local current_dir = vim.fn.system("pwd")
-		if starts_with(current_dir, vim.env.HOME .. '/work') or starts_with(current_dir, '/media/DATA/work') then
+		if starts_with(current_dir, vim.env.HOME .. "/work") or starts_with(current_dir, "/media/DATA/work") then
 			vim.opt.expandtab = true
 			vim.opt.colorcolumn = "120"
 		end

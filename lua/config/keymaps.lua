@@ -21,10 +21,7 @@ map("n", "<Esc>", "<Esc><cmd>noh<CR>")
 map("n", "Q", "<nop>")
 map("n", "<leader>d", "<cmd>cd %:p:h<CR><cmd>pwd<CR>")
 map("n", "<leader>m", vim.cmd.messages)
-map("n", "gx", function()
-	vim.fn.jobstart({ "open", vim.fn.expand("<cfile>") })
-end)
-map("x", "gx", function()
+map({ "n", "x" }, "gx", function()
 	vim.fn.jobstart({ "open", vim.fn.expand("<cfile>") })
 end)
 -- map("n", ":", ":<C-f>")
@@ -55,9 +52,14 @@ map("x", "r", '"_r')
 -- Move
 map("v", ">", "<nop>")
 
-local pattern = [[\v['"({[< (\.\.\.)\@\/\-\_]@<=(\w)|(\.\.\.)|^(\w)|([A-Z])|([]'"\>\)}]\.)@<=(\w)|(['"])@<=([][(){}.,;])(['"])]]
-map({'n', 'v'}, 'w', function() vim.fn.search(pattern) end)
-map({'n', 'v'}, 'b', function() vim.fn.search(pattern, 'b') end)
+-- Motion
+local word_pattern = [[\v['"({[<> (\.\.\.)\@\/\-\_\t(\.\.\.)]@<=(\w)|^(\w)|[a-z]@<=([A-Z])|([]'"\>\)}]\.)@<=(\w)|(['"])@<=([][(){}.,;])(['"])]]
+map({ "n", "v" }, "w", function()
+	vim.fn.search(word_pattern)
+end)
+map({ "n", "v" }, "b", function()
+	vim.fn.search(word_pattern, "b")
+end)
 
 -- Surround
 local function visual_surround(char)
@@ -109,7 +111,11 @@ map("n", "<M-S-x>", "<cmd>Bdelete!<CR>")
 map("n", "<M-S-w>", "<cmd>Bdelete!<CR>")
 
 -- -- Splits
-local wincmd = function(char) return function() vim.cmd.wincmd(char) end end
+local wincmd = function(char)
+	return function()
+		vim.cmd.wincmd(char)
+	end
+end
 
 map("n", "<C-w>", wincmd("q"))
 map("n", "<C-j>", wincmd("j"))
