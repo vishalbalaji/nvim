@@ -90,7 +90,8 @@ autocmd({ "VimEnter" }, {
 	pattern = "*",
 	callback = function()
 		local current_dir = vim.fn.system("pwd")
-		if starts_with(current_dir, vim.env.HOME .. "/work") or starts_with(current_dir, "/media/DATA/work") then
+		local root_dir = vim.fn.expand("~")
+		if starts_with(current_dir, root_dir .. "/work") or starts_with(current_dir, "/media/DATA/work") then
 			vim.opt.expandtab = true
 			vim.opt.colorcolumn = "120"
 		end
@@ -105,5 +106,24 @@ autocmd({ "VimEnter" }, {
 -- 		vim.opt.softtabstop = 2
 -- 		vim.opt.shiftwidth = 2
 -- 		vim.opt.expandtab = false
+-- 	end,
+-- })
+
+-- To automatically reload buffer content when the file changes
+-- vim.o.autoread = true
+
+-- trigger `autoread` when files changes on disk
+-- autocmd("FocusGained,BufEnter,CursorHold,CursorHoldI", {
+-- 	callback = function()
+-- 		if vim.api.nvim_get_mode().mode ~= "c" then
+-- 			vim.api.nvim_command("checktime")
+-- 		end
+-- 	end,
+-- })
+
+-- -- notification after file change
+-- autocmd("FileChangedShellPost", {
+-- 	callback = function()
+-- 		vim.api.nvim_echo({ { "File changed on disk. Buffer reloaded.", "WarningMsg" } }, true, {})
 -- 	end,
 -- })

@@ -48,7 +48,7 @@ M.config = function()
 	local diagnostics = null_ls.builtins.diagnostics
 
 	local eslint_opts = {
-		extra_filetypes = { "svelte" },
+		extra_filetypes = { "svelte", "astro" },
 		condition = function(utils)
 			return utils.root_has_file({ ".eslintrc", ".eslintrc.json", ".eslintrc.js", ".eslintrc.cjs" })
 		end,
@@ -71,7 +71,7 @@ M.config = function()
 
 			-- Web Dev
 			formatting.prettierd.with({
-				filetypes = { "json", "html", "css", "yaml" },
+				filetypes = { "json", "html", "css", "yaml", "astro" },
 			}),
 			code_actions.eslint_d.with(eslint_opts),
 			diagnostics.eslint_d.with(eslint_opts),
@@ -102,7 +102,9 @@ M.config = function()
 			}),
 
 			-- YAML
-			diagnostics.yamllint,
+			diagnostics.yamllint.with({
+				extra_args = { "-c", "/Users/vishal/.config/yamllint/config/default" }
+			}),
 		},
 	})
 
