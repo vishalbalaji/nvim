@@ -18,6 +18,7 @@ local M = {
 		-- require("config.plugins.lsp.conform"),
 		-- require("config.plugins.lsp.nvim-lint"),
 		require("config.plugins.lsp.trouble"),
+		require("config.plugins.lsp.garbage-day"),
 		-- require("config.plugins.lsp.custom.ccls"),
 		-- require("config.plugins.lsp.custom.typescript-tools"),
 	},
