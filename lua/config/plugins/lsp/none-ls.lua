@@ -54,7 +54,23 @@ M.config = function()
 	local eslint_opts = {
 		extra_filetypes = { "svelte", "astro" },
 		condition = function(utils)
-			return utils.root_has_file({ ".eslintrc", ".eslintrc.json", ".eslintrc.js", ".eslintrc.cjs" })
+			return utils.root_has_file({
+				"eslint.config.ts",
+				"eslint.config.js",
+				"eslint.config.mjs",
+				"eslint.config.cjs",
+
+				".eslintrc.ts",
+				".eslintrc.js",
+				".eslintrc.mjs",
+				".eslintrc.cjs",
+
+				".eslintrc.yaml",
+				".eslintrc.yml",
+
+				".eslintrc.json",
+				".eslintrc.json5",
+			})
 		end,
 	}
 
