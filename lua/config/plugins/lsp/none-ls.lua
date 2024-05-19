@@ -5,7 +5,7 @@ local M = {
 	dependencies = {
 		"nvimtools/none-ls-extras.nvim",
 		"gbprod/none-ls-shellcheck.nvim",
-	}
+	},
 }
 
 local null_ls_stop = function()
@@ -58,7 +58,6 @@ M.config = function()
 		end,
 	}
 
-
 	require("config.plugins.colors").safe_hl("NullLsInfoBorder", { link = "FloatBorder" })
 	nls.setup({
 		border = "rounded",
@@ -76,8 +75,9 @@ M.config = function()
 
 			-- Web Dev
 			formatting.prettierd.with({
-				filetypes = { "json", "html", "css", "yaml", "astro" },
+				filetypes = { "html", "css", "yaml", "astro" },
 			}),
+			require("none-ls.formatting.jq"),
 
 			require("none-ls.code_actions.eslint_d").with(eslint_opts), -- code_actions.eslint_d.with(eslint_opts),
 			require("none-ls.diagnostics.eslint_d").with(eslint_opts), -- diagnostics.eslint_d.with(eslint_opts),
@@ -114,7 +114,7 @@ M.config = function()
 
 			-- YAML
 			diagnostics.yamllint.with({
-				extra_args = { "-c", "/Users/vishal/.config/yamllint/config/default" }
+				extra_args = { "-c", "/Users/vishal/.config/yamllint/config/default" },
 			}),
 		},
 	})
