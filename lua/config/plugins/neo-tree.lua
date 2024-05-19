@@ -1,7 +1,6 @@
 local M = {
 	"nvim-neo-tree/neo-tree.nvim",
 	enabled = true,
-	cmd = "NeoTree",
 	branch = "v3.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
