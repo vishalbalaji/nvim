@@ -22,7 +22,7 @@ map("n", "Q", "<nop>")
 map("n", "<leader>d", "<cmd>cd %:p:h<CR><cmd>pwd<CR>")
 map("n", "<leader>m", vim.cmd.messages)
 map({ "n", "x" }, "gx", function()
-	vim.fn.jobstart({ "open", vim.fn.expand("<cfile>") })
+	vim.fn.jobstart({ "xdg-open", vim.fn.expand("<cfile>") })
 end)
 -- map("n", ":", ":<C-f>")
 

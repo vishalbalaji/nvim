@@ -1,13 +1,13 @@
 local M = {
 	"nvim-neo-tree/neo-tree.nvim",
 	enabled = true,
+	cmd = "NeoTree",
 	branch = "v3.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"kyazdani42/nvim-web-devicons",
+		"nvim-tree/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
 	},
-	lazy = false,
 }
 
 M.keys = {
@@ -39,7 +39,7 @@ end
 
 M.is_neotree_open = function()
 	for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-		if vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(win), "ft") == "neo-tree" then
+		if vim.api.nvim_get_option_value("ft", { buf = vim.api.nvim_win_get_buf(win) }) == "neo-tree" then
 			return true
 		end
 	end
@@ -55,6 +55,9 @@ M.config = function()
 			icon = {
 				folder_empty = "󰜌",
 				folder_empty_open = "󰜌",
+
+				default = require("nvim-web-devicons").get_default_icon().icon,
+				highlight = "DevIconsDefault",
 			},
 			git_status = {
 				symbols = {
@@ -93,14 +96,17 @@ M.config = function()
 					["/"] = "none",
 					["<Tab>"] = "open",
 					["o"] = "system_open",
-					["<Esc>"] = "<CMD>noh<CR><Esc>",
+					["<Esc>"] = "esc",
 				},
 			},
 			commands = {
 				system_open = function(state)
 					local node = state.tree:get_node()
 					local path = node:get_id()
-					vim.api.nvim_command(string.format("silent !open -g '%s'", path))
+					vim.api.nvim_command(string.format("!xdg-open '%s' &", path))
+				end,
+				esc = function()
+					vim.api.nvim_command("noh")
 				end,
 			},
 			filtered_items = {
@@ -109,7 +115,7 @@ M.config = function()
 				hide_hidden = false,
 			},
 			follow_current_file = {
-				enabled = true
+				enabled = true,
 			}, -- This will find and focus the file in the active buffer every
 		},
 	})

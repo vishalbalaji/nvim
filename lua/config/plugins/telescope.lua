@@ -3,6 +3,8 @@ local M = {
 	enabled = true,
 	cmd = { "Telescope" },
 	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+		"nvim-telescope/telescope-fzy-native.nvim",
 		{
 			"danielfalk/smart-open.nvim",
 			dependencies = { "kkharji/sqlite.lua" },

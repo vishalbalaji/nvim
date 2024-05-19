@@ -1,4 +1,4 @@
-local root_pattern = require("lspconfig.util").root_pattern
+local root_pattern = require("lspconfig").util.root_pattern
 local M = {}
 
 M.sumneko_lua = {

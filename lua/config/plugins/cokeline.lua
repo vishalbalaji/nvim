@@ -1,11 +1,11 @@
-local exclude_filetypes = { "man" }
+local exclude_filetypes = { "man", "oil" }
 local function exclude()
 	return vim.tbl_contains(exclude_filetypes, vim.bo.filetype)
 end
 
 local M = {
 	"noib3/cokeline.nvim",
-	requires = "kyazdani42/nvim-web-devicons", -- If you want devicons
+	requires = "nvim-tree/nvim-web-devicons", -- If you want devicons
 	event = "UIEnter",
 }
 

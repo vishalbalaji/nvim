@@ -2,7 +2,7 @@ local M = {
 	"Everblush/nvim",
 	name = "everblush",
 	enabled = true,
-	lazy = true,
+	lazy = false,
 	priority = 1000,
 }
 
