@@ -1,4 +1,6 @@
-require("config.global.settings")
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+vim.g.have_nerd_font = true
 
 local M = {}
 
@@ -21,64 +23,17 @@ function M.hl(code, options)
 	end
 end
 
-M.icons = require("config.global.icons")
+local icons = require("config.global.icons")
 
-M.lsp = {
-	signs = {
-		Error = M.icons.diagnostics.BoldError,
-		Warn = M.icons.diagnostics.BoldWarning,
-		Hint = M.icons.diagnostics.BoldHint,
-		Info = M.icons.diagnostics.BoldInformation,
-		Other = M.icons.diagnostics.BoldQuestion,
-	},
-	utils = {
-		eslint_config_names = {
-			"eslint.config.ts",
-			"eslint.config.js",
-			"eslint.config.mjs",
-			"eslint.config.cjs",
+M.icons = icons
 
-			".eslintrc.ts",
-			".eslintrc.js",
-			".eslintrc.mjs",
-			".eslintrc.cjs",
-
-			".eslintrc.yaml",
-			".eslintrc.yml",
-
-			".eslintrc.json",
-			".eslintrc.json5",
-		},
-
-		prettier_config_names = {
-			".prettierrc",
-
-			".prettierrc.json",
-			".prettierrc.json5",
-
-			".prettierrc.yml",
-			".prettierrc.yaml",
-
-			".prettierrc.ts",
-			".prettierrc.js",
-			".prettierrc.cjs",
-			".prettierrc.mjs",
-
-			"prettier.config.ts",
-			"prettier.config.js",
-			"prettier.config.cjs",
-			"prettier.config.mjs",
-
-			".prettierrc.toml",
-		},
-
-		tailwind_config_names = {
-			"tailwind.config.ts",
-			"tailwind.config.js",
-			"tailwind.config.cjs",
-			"tailwind.config.mjs",
-		},
-	},
+M.lsp = require("config.global.lsp")
+M.lsp.signs = {
+	[-1] = { label = "Other", icon = icons.diagnostics.BoldQuestion },
+	[vim.diagnostic.severity.ERROR] = { label = "Error", icon = icons.diagnostics.BoldError },
+	[vim.diagnostic.severity.WARN] = { label = "Warn", icon = icons.diagnostics.BoldWarning },
+	[vim.diagnostic.severity.HINT] = { label = "Hint", icon = icons.diagnostics.BoldHint },
+	[vim.diagnostic.severity.INFO] = { label = "Info", icon = icons.diagnostics.BoldInformation },
 }
 
 _G.Config = M
