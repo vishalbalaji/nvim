@@ -59,12 +59,33 @@ function M.git()
 	local changed = (git_info.changed and git_info.changed ~= 0) and ("%#GitSignsChange# ~" .. git_info.changed) or ""
 	local removed = (git_info.removed and git_info.removed ~= 0) and ("%#GitSignsDelete# -" .. git_info.removed) or ""
 
-	return table.concat({
-		" " .. git_info.head,
-		added,
-		changed,
-		removed,
-	})
+	return " " .. git_info.head .. added .. changed .. removed
+end
+
+function M.diagnostics()
+	local items = ""
+	local item_count = 0
+	local s = vim.diagnostic.severity
+
+	local order = { s.ERROR, s.WARN, s.HINT, s.INFO }
+
+	for _, k in ipairs(order) do
+		local v = Config.lsp.signs[k]
+		local count = vim.tbl_count(vim.diagnostic.get(0, { severity = k }))
+		if count > 0 then
+			items = items
+				.. (item_count > 0 and " " or "")
+				.. "%#Diagnostic"
+				.. v.label
+				.. "#"
+				.. v.icon
+				.. " "
+				.. count
+			item_count = item_count + 1
+		end
+	end
+
+	return items
 end
 
 local showcmd_filter = { "h", "j", "k", "l", "i", "o" }
@@ -88,7 +109,8 @@ function M.macro_recording()
 	end
 end
 
-M.filename = "%F"
+--Relative path
+M.filename = "%{expand('%:~:.')}"
 
 M.lineinfo = "%p%% %l:%c"
 

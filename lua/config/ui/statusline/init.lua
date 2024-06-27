@@ -22,6 +22,7 @@ return {
 				},
 
 				right = {
+					m.diagnostics,
 					m.showcmd,
 					m.macro_recording,
 					m.lineinfo,
