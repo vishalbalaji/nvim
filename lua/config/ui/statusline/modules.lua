@@ -67,7 +67,12 @@ function M.diagnostics()
 	local item_count = 0
 	local s = vim.diagnostic.severity
 
-	local order = { s.ERROR, s.WARN, s.HINT, s.INFO }
+	local order = {
+		s.HINT,
+		s.INFO,
+		s.WARN,
+		s.ERROR,
+	}
 
 	for _, k in ipairs(order) do
 		local v = Config.lsp.signs[k]
