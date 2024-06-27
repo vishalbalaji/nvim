@@ -62,29 +62,20 @@ function M.git()
 	return " " .. git_info.head .. added .. changed .. removed
 end
 
+local s = vim.diagnostic.severity
+local diagnostic_order = { s.HINT, s.INFO, s.WARN, s.ERROR }
 function M.diagnostics()
 	local items = ""
 	local item_count = 0
-	local s = vim.diagnostic.severity
 
-	local order = {
-		s.HINT,
-		s.INFO,
-		s.WARN,
-		s.ERROR,
-	}
-
-	for _, k in ipairs(order) do
+	for _, k in ipairs(diagnostic_order) do
 		local v = Config.lsp.signs[k]
 		local count = vim.tbl_count(vim.diagnostic.get(0, { severity = k }))
 		if count > 0 then
 			items = items
 				.. (item_count > 0 and " " or "")
-				.. "%#Diagnostic"
-				.. v.label
-				.. "#"
-				.. v.icon
-				.. " "
+				.. ("%#Diagnostic" .. v.label .. "#")
+				.. (v.icon .. " ")
 				.. count
 			item_count = item_count + 1
 		end
