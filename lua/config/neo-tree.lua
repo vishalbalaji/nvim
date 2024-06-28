@@ -87,7 +87,7 @@ return {
 		Config.hl("NeoTreeNormal", { link = "NormalAlt" })
 		Config.hl("NeoTreeNormalNC", { link = "NormalAlt" })
 
-		local neotree_bg = Config.get_hex("NeoTreeNormal", "bg")
+		local neotree_bg = Config.get_hl("NeoTreeNormal").bg
 		Config.hl("NeoTreeWinSeparator", { fg = neotree_bg, bg = neotree_bg })
 	end,
 

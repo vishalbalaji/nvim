@@ -48,7 +48,7 @@ local function process_groups(group)
 
 		if text and text ~= "" then
 			local hl = opts.hl or "Normal"
-			text = "%#" .. hl .. "#" .. text .. "%#Statusline#"
+			text = table.concat({ "%#", hl, "#", text, "%#StatusLine#" })
 			items = items .. (modules > 0 and " " or "") .. text
 			modules = modules + 1
 		end
@@ -63,7 +63,8 @@ local M = {}
 function M.setup(opts)
 	vim.opt.showcmdloc = "statusline"
 
-	Config.hl("Statusline", { link = "NonText" })
+	Config.hl("StatusLine", { link = "NonText" })
+	Config.hl("StatusLineNC", { link = "Statusline" })
 	if opts.fillchar and opts.fillchar ~= "" then
 		vim.opt.fillchars:append("stl:" .. opts.fillchar)
 	end
@@ -72,36 +73,68 @@ function M.setup(opts)
 
 	Statusline.active = function()
 		local groups = opts.groups or {}
-		local left = process_groups(groups.left)
-		local middle = process_groups(groups.middle)
-		local right = process_groups(groups.right)
 
-		return (left ~= "" and " " .. left .. " " or "")
-			.. "%="
-			.. (middle ~= "" and " " .. middle .. " " or "")
-			.. "%="
-			.. (right ~= "" and " " .. right .. " " or "")
+		local parts = {}
+
+		local left = process_groups(groups.left)
+		if left then
+			table.insert(parts, " ")
+			table.insert(parts, left)
+			table.insert(parts, " ")
+		end
+
+		local middle = process_groups(groups.middle)
+		if middle then
+			table.insert(parts, "%= ")
+			table.insert(parts, middle)
+			table.insert(parts, " %=")
+		end
+
+		local right = process_groups(groups.right)
+		if right then
+			table.insert(parts, " ")
+			table.insert(parts, right)
+			table.insert(parts, " ")
+		end
+
+		return table.concat(parts)
 	end
 
 	function Statusline.inactive()
-		return " %F"
+		return " %F "
 	end
 
 	function Statusline.short()
-		return " short"
+		return " short "
 	end
 
-	vim.api.nvim_exec2(
-		[[
-				augroup Statusline
-				au!
-				au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
-				au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
-				au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
-				augroup END
-			]],
-		{ output = false }
-	)
+	local statusline_group = vim.api.nvim_create_augroup("Statusline", { clear = true })
+	vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+		group = statusline_group,
+		pattern = "*",
+		callback = function()
+			vim.opt_local.statusline = "%!v:lua.Statusline.active()"
+		end,
+	})
+
+	vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+		group = statusline_group,
+		pattern = "*",
+		callback = function()
+			vim.opt_local.statusline = "%!v:lua.Statusline.inactive()"
+		end,
+	})
+
+	-- vim.api.nvim_exec2(
+	-- 	[[
+	-- 			augroup Statusline
+	-- 			au!
+	-- 			au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
+	-- 			au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
+	-- 			augroup END
+	-- 		]],
+	-- 	{ output = false }
+	-- )
 end
 
 return M

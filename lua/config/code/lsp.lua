@@ -11,12 +11,8 @@ return { -- LSP Configuration & Plugins
 	"neovim/nvim-lspconfig",
 	event = "LazyFile",
 	dependencies = {
-		-- Automatically install LSPs and related tools to stdpath for Neovim
 		mason, -- NOTE: Must be loaded before dependants
 
-		-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-		-- used for completion, annotations and signatures of Neovim apis
-		-- Use neodev-types with lazydev
 		{ "folke/neodev.nvim", config = function() end },
 		{
 			"folke/lazydev.nvim",
@@ -70,6 +66,8 @@ return { -- LSP Configuration & Plugins
 				signs = true,
 				underline = true,
 			},
+
+			--- Server Config
 			servers = {
 				lua_ls = {
 					-- cmd = {...},
@@ -103,6 +101,24 @@ return { -- LSP Configuration & Plugins
 			vim.fn.sign_define(name, { text = d.icon, texthl = name, numhl = "" })
 		end
 
+		Config.hl("DiagnosticOk", { link = "TSRainbowGreen" })
+		Config.hl("DiagnosticHint", { link = "TSRainbowGreen" })
+		Config.hl("DiagnosticInfo", { link = "TSRainbowBlue" })
+		Config.hl("DiagnosticWarn", { link = "TSRainbowYellow" })
+		Config.hl("DiagnosticError", { link = "TSRainbowRed" })
+
+		local ok_fg = Config.get_hl("DiagnosticOk").fg
+		local hint_fg = Config.get_hl("DiagnosticHint").fg
+		local info_fg = Config.get_hl("DiagnosticInfo").fg
+		local warn_fg = Config.get_hl("DiagnosticWarn").fg
+		local error_fg = Config.get_hl("DiagnosticError").fg
+
+		Config.hl("DiagnosticUnderlineOk", { undercurl = true, special = ok_fg })
+		Config.hl("DiagnosticUnderlineHint", { undercurl = true, special = hint_fg })
+		Config.hl("DiagnosticUnderlineInfo", { undercurl = true, special = info_fg })
+		Config.hl("DiagnosticUnderlineWarn", { undercurl = true, special = warn_fg })
+		Config.hl("DiagnosticUnderlineError", { undercurl = true, special = error_fg })
+
 		vim.diagnostic.config(opts.diagnostics)
 
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -130,7 +146,36 @@ return { -- LSP Configuration & Plugins
 
 				-- WARN: This is not Goto Definition, this is Goto Declaration.
 				--  For example, in C this would take you to the header.
-				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+				map("gD", vim.lsp.buf.declaration, "[G]oto [D]efinition")
+
+				-- map("gd", function()
+				-- 	vim.lsp.buf.definition({
+				-- 		reuse_win = true,
+				-- 		on_list = function(options)
+				-- 			if #options.items > 1 then
+				-- 				vim.fn.setqflist({}, " ", options)
+				-- 				vim.cmd.copen()
+				-- 			else
+				-- 				if options.items[0].ro
+				-- 			end
+				-- 		end,
+				-- 	})
+				-- end, "[G]oto [D]efinition")
+
+				-- map("gD", function()
+				-- 	vim.lsp.buf.declaration({
+				-- 		reuse_win = true,
+				-- 		on_list = function(options)
+				-- 			Config.adaptive_split()
+				-- 			vim.fn.setqflist({}, " ", options)
+				-- 			if #options.items > 1 then
+				-- 				vim.cmd.copen()
+				-- 			else
+				-- 				vim.cmd.cfirst()
+				-- 			end
+				-- 		end,
+				-- 	})
+				-- end, "[G]oto [D]eclaration")
 
 				-- The following two autocommands are used to highlight references of the
 				-- word under your cursor when your cursor rests there for a little while.

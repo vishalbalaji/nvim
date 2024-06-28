@@ -9,7 +9,6 @@
   "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
   "conform.nvim": { "branch": "master", "commit": "c26dadf8a47a547768d1048a0d698ecec33494ce" },
   "dressing.nvim": { "branch": "master", "commit": "6741f1062d3dc6e4755367a7e9b347b553623f04" },
-  "everblush": { "branch": "main", "commit": "9a0e695fdd57b340d3ba2b72406e3ca519029f25" },
   "foldhue.nvim": { "branch": "main", "commit": "c63b07ecfe42f08b8986543d8f47bf58939c6050" },
   "friendly-snippets": { "branch": "main", "commit": "682157939e57bd6a2c86277dfd4d6fbfce63dbac" },
   "gitsigns.nvim": { "branch": "main", "commit": "805610a9393fa231f2c2b49cb521bfa413fadb3d" },
@@ -49,5 +48,7 @@
   "quick-scope": { "branch": "master", "commit": "256d81e391a22eeb53791ff62ce65f870418fa71" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "dd1156723eb8483e4403eb8765bbdff456b6981d" },
   "smart-splits.nvim": { "branch": "master", "commit": "f9c76974964cdead4527d217870194af66105e15" },
-  "vim-matchup": { "branch": "master", "commit": "ff3bea611696f5cfdfe61a939149daadff41f2af" }
+  "tokyonight.nvim": { "branch": "main", "commit": "30d7be361a7fbf187a881f17e574e9213d5108ea" },
+  "vim-matchup": { "branch": "master", "commit": "ff3bea611696f5cfdfe61a939149daadff41f2af" },
+  "vim-visual-multi": { "branch": "master", "commit": "b84a6d42c1c10678928b0bf8327f378c8bc8af5a" }
 }

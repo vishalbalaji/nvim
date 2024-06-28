@@ -50,38 +50,48 @@ function M.mode()
 end
 
 function M.git()
-	local git_info = vim.b.gitsigns_status_dict
-	if not git_info or git_info.head == "" then
+	local g = vim.b.gitsigns_status_dict
+	if not g or g.head == "" then
 		return ""
 	end
 
-	local added = (git_info.added and git_info.added ~= 0) and ("%#GitSignsAdd# +" .. git_info.added) or ""
-	local changed = (git_info.changed and git_info.changed ~= 0) and ("%#GitSignsChange# ~" .. git_info.changed) or ""
-	local removed = (git_info.removed and git_info.removed ~= 0) and ("%#GitSignsDelete# -" .. git_info.removed) or ""
+	local changes = {}
+	if g.added and g.added ~= 0 then
+		table.insert(changes, ("%#GitSignsAdd#+" .. g.added))
+	end
 
-	return " " .. git_info.head .. added .. changed .. removed
+	if g.changed and g.changed ~= 0 then
+		table.insert(changes, ("%#GitSignsChange#~" .. g.changed))
+	end
+
+	if g.removed and g.removed ~= 0 then
+		table.insert(changes, ("%#GitSignsDelete#-" .. g.removed))
+	end
+
+	return table.concat({
+		Config.icons.git.Branch,
+		" ",
+		g.head,
+		(#changes > 0 and " " or ""),
+	}) .. table.concat(changes, " ")
 end
 
 local s = vim.diagnostic.severity
 local diagnostic_order = { s.HINT, s.INFO, s.WARN, s.ERROR }
 function M.diagnostics()
-	local items = ""
+	local items = {}
 	local item_count = 0
 
 	for _, k in ipairs(diagnostic_order) do
 		local v = Config.lsp.signs[k]
 		local count = vim.tbl_count(vim.diagnostic.get(0, { severity = k }))
 		if count > 0 then
-			items = items
-				.. (item_count > 0 and " " or "")
-				.. ("%#Diagnostic" .. v.label .. "#")
-				.. (v.icon .. " ")
-				.. count
+			table.insert(items, table.concat({ "%#Diagnostic", v.label, "#", v.icon, " ", count }))
 			item_count = item_count + 1
 		end
 	end
 
-	return items
+	return table.concat(items, " ")
 end
 
 local showcmd_filter = { "h", "j", "k", "l", "i", "o" }

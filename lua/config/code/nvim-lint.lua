@@ -16,6 +16,8 @@ return {
 			-- ['_'] = { 'fallback linter' },
 			-- ["*"] = { "typos" },
 
+			json = { "jsonlint" },
+
 			[{
 				"sh",
 				"zsh",

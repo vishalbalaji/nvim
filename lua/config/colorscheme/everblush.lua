@@ -9,11 +9,7 @@ return { -- You can easily change to a different colorscheme.
 		override = {
 			NormalAlt = { bg = "contrast" },
 			NonText = { fg = "comment" },
-			WinSeparator = { link = "NonText" },
-			FoldColumn = { link = "NonText" },
 			CursorLine = { bg = "color0" },
-			LineNr = { link = "NonText" },
-			CursorLineNr = { link = "SpecialComment" },
 
 			TSRainbowRed = { fg = "color1" },
 			TSRainbowGreen = { fg = "color2" },
@@ -26,8 +22,6 @@ return { -- You can easily change to a different colorscheme.
 	},
 	init = function()
 		-- Load the colorscheme here.
-		-- Like many other themes, this one has different styles, and you could load
-		-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
 		vim.cmd.colorscheme("everblush")
 	end,
 }

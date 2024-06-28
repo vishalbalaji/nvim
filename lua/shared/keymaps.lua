@@ -28,6 +28,7 @@ end
 return {
 	-- Sensible defaults
 	{ "<Esc>", "<cmd>nohlsearch<CR>" },
+	{ "<Esc><Esc>", "<C-\\><C-n>", mode = "t", desc = "Exit terminal mode" },
 	{ "<Tab>", "za" },
 	{ "<C-p>", "<Nop>", mode = { "i", "s" } },
 	{ "<C-n>", "<Nop>", mode = { "i", "s" } },
@@ -44,8 +45,9 @@ return {
 	{ "<C-j>", wincmd("j"), desc = "Move focus to the lower window" },
 	{ "<C-k>", wincmd("k"), desc = "Move focus to the upper window" },
 	{ "<C-S-0>", wincmd("="), desc = "Make window sizes equal" },
-	{ "<C-CR>", wincmd("s"), desc = "Create horizontal split" },
-	{ "<C-S-CR>", wincmd("v"), desc = "Create vertical split" },
+	{ "<C-s><C-s>", wincmd("s"), desc = "Create horizontal split" },
+	{ "<C-s><C-v>", wincmd("v"), desc = "Create vertival split" },
+	{ "<C-CR>", Config.adaptive_split, desc = "Create adaptive split" },
 
 	-- Clipboard
 	{ "p", '"_dP', mode = "v" },
