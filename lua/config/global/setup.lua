@@ -44,4 +44,11 @@ M.lsp.signs = {
 	[vim.diagnostic.severity.INFO] = { label = "Info", icon = icons.diagnostics.BoldInformation },
 }
 
+local lualine = require("lib.lualine")
+M.lualine = {
+	create_highlight_groups = lualine.create_highlight_groups,
+	get_mode = lualine.get_mode,
+	get_mode_suffix = lualine.get_mode_suffix,
+}
+
 _G.Config = M

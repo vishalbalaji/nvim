@@ -1,7 +1,8 @@
----@class StatuslineOpts
----@field hl? string
-
 ---@alias StatuslineModule string|fun():string
+
+---@class StatuslineOpts
+---@field hl? StatuslineModule
+---@field format? fun(val:string):string
 
 ---@class StatuslineComponent: StatuslineOpts
 ---@field [1] StatuslineModule
@@ -47,7 +48,16 @@ local function process_groups(group)
 		end
 
 		if text and text ~= "" then
-			local hl = opts.hl or "Normal"
+			local hl = opts.hl
+			if type(hl) == "function" then
+				hl = hl()
+			end
+			hl = (hl and hl ~= "") and hl or "Normal"
+
+			if opts.format then
+				text = opts.format(text)
+			end
+
 			text = table.concat({ "%#", hl, "#", text, "%#StatusLine#" })
 			items = items .. (modules > 0 and " " or "") .. text
 			modules = modules + 1
@@ -76,26 +86,28 @@ function M.setup(opts)
 
 		local parts = {}
 
+		table.insert(parts, " ")
 		local left = process_groups(groups.left)
-		if left then
-			table.insert(parts, " ")
+		if left and left ~= "" then
 			table.insert(parts, left)
 			table.insert(parts, " ")
 		end
 
+		table.insert(parts, "%=")
 		local middle = process_groups(groups.middle)
-		if middle then
-			table.insert(parts, "%= ")
+		if middle and middle ~= "" then
+			table.insert(parts, " ")
 			table.insert(parts, middle)
-			table.insert(parts, " %=")
+			table.insert(parts, " ")
 		end
+		table.insert(parts, "%=")
 
 		local right = process_groups(groups.right)
-		if right then
+		if right and right ~= "" then
 			table.insert(parts, " ")
 			table.insert(parts, right)
-			table.insert(parts, " ")
 		end
+		table.insert(parts, " ")
 
 		return table.concat(parts)
 	end

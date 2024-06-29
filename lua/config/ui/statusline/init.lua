@@ -13,7 +13,10 @@ return {
 
 			groups = {
 				left = {
-					{ m.mode, hl = "SpecialComment" },
+					{
+						m.mode,
+						hl = m.get_mode_hl("b"),
+					},
 					m.git,
 				},
 

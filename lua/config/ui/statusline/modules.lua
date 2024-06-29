@@ -1,53 +1,7 @@
--- stylua: ignore
-local mode_map = {
-  ['n']      = 'NORMAL',
-  ['no']     = 'O-PENDING',
-  ['nov']    = 'O-PENDING',
-  ['noV']    = 'O-PENDING',
-  ['no\22'] = 'O-PENDING',
-  ['niI']    = 'NORMAL',
-  ['niR']    = 'NORMAL',
-  ['niV']    = 'NORMAL',
-  ['v']      = 'VISUAL',
-  ['vs']     = 'VISUAL',
-  ['V']      = 'V-LINE',
-  ['Vs']     = 'V-LINE',
-  ['\22']   = 'V-BLOCK',
-  ['\22s']  = 'V-BLOCK',
-  ['s']      = 'SELECT',
-  ['S']      = 'S-LINE',
-  ['\19']   = 'S-BLOCK',
-  ['i']      = 'INSERT',
-  ['ic']     = 'INSERT',
-  ['ix']     = 'INSERT',
-  ['R']      = 'REPLACE',
-  ['Rc']     = 'REPLACE',
-  ['Rx']     = 'REPLACE',
-  ['Rv']     = 'V-REPLACE',
-  ['Rvc']    = 'V-REPLACE',
-  ['Rvx']    = 'V-REPLACE',
-  ['c']      = 'COMMAND',
-  ['cv']     = 'EX',
-  ['ce']     = 'EX',
-  ['r']      = 'REPLACE',
-  ['rm']     = 'MORE',
-  ['r?']     = 'CONFIRM',
-  ['!']      = 'SHELL',
-  ['t']      = 'TERMINAL[I]',
-  ['nt']     = 'TERMINAL[N]',
-  ['ntT']    = 'TERMINAL[N]',
-}
-
----@type table<string, StatuslineModule>
+---@type table<string, StatuslineModule|fun(...):StatuslineModule>
 local M = {}
 
-function M.mode()
-	local mode_code = vim.api.nvim_get_mode().mode
-	if mode_map[mode_code] == nil then
-		return mode_code
-	end
-	return mode_map[mode_code]
-end
+M.mode = Config.lualine.get_mode
 
 function M.git()
 	local g = vim.b.gitsigns_status_dict
@@ -97,7 +51,7 @@ end
 local showcmd_filter = { "h", "j", "k", "l", "i", "o" }
 function M.showcmd()
 	local text = vim.api.nvim_eval_statusline("%S", {}).str or ""
-	local state = vim.api.nvim_exec2("echo state()", { output = true }).output
+	local state = vim.fn.state()
 
 	if state == "S" and vim.tbl_contains(showcmd_filter, text) then
 		text = ""
@@ -116,7 +70,17 @@ function M.macro_recording()
 end
 
 --Relative path
-M.filename = "%{expand('%:~:.')}"
+function M.filename()
+	return vim.api.nvim_eval_statusline("%{expand('%:~:.')}", {}).str or ""
+end
+
+---@param section string
+function M.get_mode_hl(section)
+	return function()
+		local hl_group = "lualine_" .. section .. Config.lualine.get_mode_suffix()
+		return vim.fn.hlexists(hl_group) == 1 and hl_group or ""
+	end
+end
 
 M.lineinfo = "%p%% %l:%c"
 

@@ -10,6 +10,8 @@ return { -- You can easily change to a different colorscheme.
 		-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
 		vim.cmd.colorscheme("tokyonight-night")
 
+		Config.lualine.create_highlight_groups(require("lualine.themes.tokyonight"))
+
 		-- You can configure highlights by doing something like:
 		vim.cmd.hi("Comment gui=none")
 	end,
