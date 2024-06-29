@@ -21,7 +21,18 @@ return {
 				},
 
 				middle = {
-					m.filename,
+					{
+						m.filename,
+						format = function(val)
+							local modified = vim.api.nvim_eval_statusline("%m", {}).str
+							local items = {}
+							if modified ~= "" then
+								table.insert(items, m.hl(Config.icons.ui.Circle, "TSRainbowGreen"))
+							end
+							table.insert(items, m.hl(val, "Normal"))
+							return table.concat(items, " ")
+						end,
+					},
 				},
 
 				right = {

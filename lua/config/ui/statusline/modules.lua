@@ -82,6 +82,11 @@ function M.get_mode_hl(section)
 	end
 end
 
+---@param hl_name string
+function M.hl(text, hl_name)
+	return "%#" .. hl_name .. "#" .. text .. "%#StatusLine#"
+end
+
 M.lineinfo = "%p%% %l:%c"
 
 return M
