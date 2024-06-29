@@ -1,6 +1,6 @@
 return {
 	name = "statusline",
-	dir = "",
+	dir = "config.ui.statusline",
 	dependencies = {
 		require("config.colorscheme"),
 	},

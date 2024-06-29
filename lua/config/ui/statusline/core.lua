@@ -147,17 +147,6 @@ function M.setup(opts)
 			vim.opt_local.statusline = "%!v:lua.Statusline.inactive()"
 		end,
 	})
-
-	-- vim.api.nvim_exec2(
-	-- 	[[
-	-- 			augroup Statusline
-	-- 			au!
-	-- 			au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
-	-- 			au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
-	-- 			augroup END
-	-- 		]],
-	-- 	{ output = false }
-	-- )
 end
 
 return M

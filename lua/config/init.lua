@@ -111,7 +111,7 @@ end
 
 local M = {
 	name = "basic",
-	dir = ".",
+	dir = "config",
 	lazy = false,
 	priority = 999,
 	keys = function()
