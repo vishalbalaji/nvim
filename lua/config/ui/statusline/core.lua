@@ -9,14 +9,20 @@
 
 ---@alias StatuslineGroup (string|(fun():string)|StatuslineComponent)[]
 
+---@class StatuslineBaseOpts
+---@field fillchar? string
+---@field hl? vim.api.keyset.highlight
+
+---@class StatuslineNCOpts: StatuslineBaseOpts
+
 ---@class StatuslineGroups
 ---@field left? StatuslineGroup
 ---@field middle? StatuslineGroup
 ---@field right? StatuslineGroup
 
----@class StatuslineConfig
----@field fillchar? string
+---@class StatuslineConfig: StatuslineBaseOpts
 ---@field groups? StatuslineGroups
+---@field nc? StatuslineNCOpts
 
 ---@param group StatuslineGroup
 local function process_groups(group)
@@ -71,14 +77,17 @@ local M = {}
 
 ---@param opts StatuslineConfig
 function M.setup(opts)
-	vim.opt.showcmdloc = "statusline"
+	local nc = opts.nc or {}
 
-	Config.util.hl("StatusLine", { link = "NonText" })
-	Config.util.hl("StatusLineNC", { link = "StatusLine" })
+	Config.util.hl("StatusLine", opts.hl or {})
+	Config.util.hl("StatusLineNC", nc.hl or { link = "StatusLine" })
 
 	if opts.fillchar and opts.fillchar ~= "" then
 		vim.opt.fillchars:append("stl:" .. opts.fillchar)
-		vim.opt.fillchars:append("stlnc:" .. opts.fillchar)
+	end
+
+	if nc.fillchar and nc.fillchar ~= "" then
+		vim.opt.fillchars:append("stlnc:" .. nc.fillchar)
 	end
 
 	Statusline = {}

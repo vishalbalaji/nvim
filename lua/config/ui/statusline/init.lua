@@ -10,6 +10,12 @@ return {
 		---@type StatuslineConfig
 		return {
 			fillchar = "━",
+			hl = { link = "NonText" },
+
+			nc = {
+				hl = { link = "RainbowRed" },
+				fillchar = ".",
+			},
 
 			groups = {
 				left = {
@@ -45,6 +51,7 @@ return {
 		}
 	end,
 	config = function(_, opts)
+		vim.opt.showcmdloc = "statusline"
 		require("config.ui.statusline.core").setup(opts)
 	end,
 }
