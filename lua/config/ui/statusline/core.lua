@@ -74,9 +74,11 @@ function M.setup(opts)
 	vim.opt.showcmdloc = "statusline"
 
 	Config.hl("StatusLine", { link = "NonText" })
-	Config.hl("StatusLineNC", { link = "Statusline" })
+	Config.hl("StatusLineNC", { link = "StatusLine" })
+
 	if opts.fillchar and opts.fillchar ~= "" then
 		vim.opt.fillchars:append("stl:" .. opts.fillchar)
+		vim.opt.fillchars:append("stlnc:" .. opts.fillchar)
 	end
 
 	Statusline = {}
