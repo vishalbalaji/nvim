@@ -4,10 +4,16 @@ local M = {
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
-	opts = {},
 	cmd = "Mason",
 	keys = {
 		{ "<leader>lm", vim.cmd.Mason, desc = "[L]SP: [M]ason" },
+	},
+	---@type MasonSettings
+	opts = {
+		ui = {
+			border = "rounded",
+			height = 0.8,
+		},
 	},
 	config = function() end,
 }

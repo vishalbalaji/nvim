@@ -16,4 +16,7 @@ return {
 	keys = {
 		{ "<leader>g", "<cmd>LazyGit<cr>", desc = "LazyGit" },
 	},
+	init = function()
+		Config.util.hl("LazyGitBorder", { link = "FloatBorder" })
+	end,
 }

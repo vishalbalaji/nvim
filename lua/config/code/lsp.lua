@@ -95,7 +95,7 @@ return { -- LSP Configuration & Plugins
 		}
 	end,
 	config = function(_, opts)
-		-- Diagnostics setup
+		-- [DIAGNOSTICS SETUP START] ---
 		for _, d in pairs(lsp_signs) do
 			local name = "DiagnosticSign" .. d.label
 			vim.fn.sign_define(name, { text = d.icon, texthl = name, numhl = "" })
@@ -120,6 +120,13 @@ return { -- LSP Configuration & Plugins
 		Config.util.hl("DiagnosticUnderlineError", { undercurl = true, special = error_fg })
 
 		vim.diagnostic.config(opts.diagnostics)
+		--
+		-- [DIAGNOSTICS SETUP END] ---
+
+		require("lspconfig.ui.windows").default_options.border = "rounded"
+
+		Config.util.hl("LspInfoBorder", { link = "FloatBorder" })
+		Config.util.hl("LspInlayHint", { fg = Config.util.get_hl("NonText").fg, bold = true })
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("custom-lsp-attach", { clear = true }),
