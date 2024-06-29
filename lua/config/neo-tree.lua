@@ -84,11 +84,11 @@ return {
 	config = function(_, opts)
 		require("neo-tree").setup(opts)
 
-		Config.hl("NeoTreeNormal", { link = "NormalAlt" })
-		Config.hl("NeoTreeNormalNC", { link = "NormalAlt" })
+		Config.util.hl("NeoTreeNormal", { link = "NormalAlt" })
+		Config.util.hl("NeoTreeNormalNC", { link = "NormalAlt" })
 
-		local neotree_bg = Config.get_hl("NeoTreeNormal").bg
-		Config.hl("NeoTreeWinSeparator", { fg = neotree_bg, bg = neotree_bg })
+		local neotree_bg = Config.util.get_hl("NeoTreeNormal").bg
+		Config.util.hl("NeoTreeWinSeparator", { fg = neotree_bg, bg = neotree_bg })
 	end,
 
 	init = function()

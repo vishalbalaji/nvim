@@ -41,9 +41,9 @@ return {
 		}
 	end,
 	config = function()
-		Config.hl("VM_Mono", { standout = true })
-		Config.hl("VM_Cursor", { standout = true })
-		Config.hl("VM_Insert", { standout = true })
+		Config.util.hl("VM_Mono", { standout = true })
+		Config.util.hl("VM_Cursor", { standout = true })
+		Config.util.hl("VM_Insert", { standout = true })
 		-- Config.hl("VM_Extend", { link = "Special" })
 	end,
 }

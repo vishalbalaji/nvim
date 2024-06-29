@@ -31,12 +31,12 @@ local function setup(_, options)
 		vim.bo[key] = value
 	end
 
-	Config.hl("WinSeparator", { link = "NonText" })
-	Config.hl("FoldColumn", { link = "NonText" })
-	Config.hl("LineNr", { link = "NonText" })
-	Config.hl("CursorLineNr", { link = "SpecialComment" })
+	Config.util.hl("WinSeparator", { link = "NonText" })
+	Config.util.hl("FoldColumn", { link = "NonText" })
+	Config.util.hl("LineNr", { link = "NonText" })
+	Config.util.hl("CursorLineNr", { link = "SpecialComment" })
 
-	Config.hl("SpellBad", { link = "DiagnosticUnderlineError" })
+	Config.util.hl("SpellBad", { link = "DiagnosticUnderlineError" })
 
 	cmd("Q", "quitall!", {})
 	cmd("E", "e!", {})
@@ -109,58 +109,9 @@ end
 
 --- [BEGIN CONFIG] ---
 
-local tmp = {
-	-- Sensible defaults
-	{ "<Esc>", "<cmd>nohlsearch<CR>" },
-	{ "<Tab>", "za" },
-	{ "<C-p>", "<Nop>", mode = { "i", "s" } },
-	{ "<C-n>", "<Nop>", mode = { "i", "s" } },
-	{ "Q", "<Nop>" },
-
-	-- Utils
-	{ "<leader>d", "<cmd>cd %:p:h<CR><cmd>pwd<CR>", desc = "Current [D]irectory" },
-	{ "<leader>m", vim.cmd.messages, desc = "[M]essages" },
-
-	-- Windows/Splits
-	-- { "<C-w>", wincmd("q"), desc = "Close the window" },
-	-- { "<C-h>", wincmd("h"), desc = "Move focus to the left window" },
-	-- { "<C-l>", wincmd("l"), desc = "Move focus to the right window" },
-	-- { "<C-j>", wincmd("j"), desc = "Move focus to the lower window" },
-	-- { "<C-k>", wincmd("k"), desc = "Move focus to the upper window" },
-	-- { "<C-S-0>", wincmd("="), desc = "Make window sizes equal" },
-	-- { "<C-CR>", wincmd("s"), desc = "Create horizontal split" },
-	-- { "<C-S-CR>", wincmd("v"), desc = "Create vertical split" },
-
-	-- Clipboard
-	{ "p", '"_dP', mode = "v" },
-	{ "d", '"_d', mode = "v" },
-	{ "c", '"_c', mode = "v" },
-
-	{ "d", '"_d', mode = "n" },
-	{ "c", '"_c', mode = "n" },
-	{ "s", '"_s', mode = "n" },
-	{ "r", '"_r', mode = "n" },
-
-	{ "xx", "Vd", mode = "n" },
-	{ "x", "d", mode = "n" },
-
-	{ "s", '"_s', mode = "x" },
-	{ "r", '"_r', mode = "x" },
-
-	-- Maintain Cursor Position
-	-- { "J", "mzJ`z" },
-	-- { "<C-d>", "<C-d>zz" },
-	-- { "<C-u>", "<C-u>zz" },
-	-- { "n", "nzzzv" },
-	-- { "N", "Nzzzv" },
-
-	-- Visual Search
-	-- { "/", visual_hl_search, mode = "v" },
-}
-
 local M = {
 	name = "basic",
-	dir = "",
+	dir = ".",
 	lazy = false,
 	priority = 999,
 	keys = function()

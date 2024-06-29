@@ -54,13 +54,13 @@ return {
 		}
 
 		hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-			Config.hl("RainbowRed", { link = "TSRainbowRed" })
-			Config.hl("RainbowYellow", { link = "TSRainbowYellow" })
-			Config.hl("RainbowBlue", { link = "TSRainbowBlue" })
-			Config.hl("RainbowOrange", { link = "TSRainbowOrange" })
-			Config.hl("RainbowGreen", { link = "TSRainbowGreen" })
-			Config.hl("RainbowViolet", { link = "TSRainbowViolet" })
-			Config.hl("RainbowCyan", { link = "TSRainbowCyan" })
+			Config.util.hl("RainbowRed", { link = "TSRainbowRed" })
+			Config.util.hl("RainbowYellow", { link = "TSRainbowYellow" })
+			Config.util.hl("RainbowBlue", { link = "TSRainbowBlue" })
+			Config.util.hl("RainbowOrange", { link = "TSRainbowOrange" })
+			Config.util.hl("RainbowGreen", { link = "TSRainbowGreen" })
+			Config.util.hl("RainbowViolet", { link = "TSRainbowViolet" })
+			Config.util.hl("RainbowCyan", { link = "TSRainbowCyan" })
 		end)
 
 		vim.g.rainbow_delimiters = { highlight = highlight }

@@ -80,7 +80,7 @@ M.config = function()
 	})
 
 	devicons.set_default_icon(lsp_icons._default, default_icon_color, default_icon_cterm)
-	Config.hl("DevIconsDefault", { fg = default_icon_color })
+	Config.util.hl("DevIconsDefault", { fg = default_icon_color })
 end
 
 return M

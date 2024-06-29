@@ -47,7 +47,7 @@ return {
 	{ "<C-S-0>", wincmd("="), desc = "Make window sizes equal" },
 	{ "<C-s><C-s>", wincmd("s"), desc = "Create horizontal split" },
 	{ "<C-s><C-v>", wincmd("v"), desc = "Create vertival split" },
-	{ "<C-CR>", Config.adaptive_split, desc = "Create adaptive split" },
+	{ "<C-CR>", Config.util.adaptive_split, desc = "Create adaptive split" },
 
 	-- Clipboard
 	{ "p", '"_dP', mode = "v" },

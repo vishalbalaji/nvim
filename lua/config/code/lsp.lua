@@ -101,23 +101,23 @@ return { -- LSP Configuration & Plugins
 			vim.fn.sign_define(name, { text = d.icon, texthl = name, numhl = "" })
 		end
 
-		Config.hl("DiagnosticOk", { link = "TSRainbowGreen" })
-		Config.hl("DiagnosticHint", { link = "TSRainbowGreen" })
-		Config.hl("DiagnosticInfo", { link = "TSRainbowBlue" })
-		Config.hl("DiagnosticWarn", { link = "TSRainbowYellow" })
-		Config.hl("DiagnosticError", { link = "TSRainbowRed" })
+		Config.util.hl("DiagnosticOk", { link = "TSRainbowGreen" })
+		Config.util.hl("DiagnosticHint", { link = "TSRainbowGreen" })
+		Config.util.hl("DiagnosticInfo", { link = "TSRainbowBlue" })
+		Config.util.hl("DiagnosticWarn", { link = "TSRainbowYellow" })
+		Config.util.hl("DiagnosticError", { link = "TSRainbowRed" })
 
-		local ok_fg = Config.get_hl("DiagnosticOk").fg
-		local hint_fg = Config.get_hl("DiagnosticHint").fg
-		local info_fg = Config.get_hl("DiagnosticInfo").fg
-		local warn_fg = Config.get_hl("DiagnosticWarn").fg
-		local error_fg = Config.get_hl("DiagnosticError").fg
+		local ok_fg = Config.util.get_hl("DiagnosticOk").fg
+		local hint_fg = Config.util.get_hl("DiagnosticHint").fg
+		local info_fg = Config.util.get_hl("DiagnosticInfo").fg
+		local warn_fg = Config.util.get_hl("DiagnosticWarn").fg
+		local error_fg = Config.util.get_hl("DiagnosticError").fg
 
-		Config.hl("DiagnosticUnderlineOk", { undercurl = true, special = ok_fg })
-		Config.hl("DiagnosticUnderlineHint", { undercurl = true, special = hint_fg })
-		Config.hl("DiagnosticUnderlineInfo", { undercurl = true, special = info_fg })
-		Config.hl("DiagnosticUnderlineWarn", { undercurl = true, special = warn_fg })
-		Config.hl("DiagnosticUnderlineError", { undercurl = true, special = error_fg })
+		Config.util.hl("DiagnosticUnderlineOk", { undercurl = true, special = ok_fg })
+		Config.util.hl("DiagnosticUnderlineHint", { undercurl = true, special = hint_fg })
+		Config.util.hl("DiagnosticUnderlineInfo", { undercurl = true, special = info_fg })
+		Config.util.hl("DiagnosticUnderlineWarn", { undercurl = true, special = warn_fg })
+		Config.util.hl("DiagnosticUnderlineError", { undercurl = true, special = error_fg })
 
 		vim.diagnostic.config(opts.diagnostics)
 

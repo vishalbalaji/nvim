@@ -45,7 +45,7 @@ return { -- Autocompletion
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 
-		Config.hl("CmpGhostText", { link = "Comment", default = true })
+		Config.util.hl("CmpGhostText", { link = "Comment", default = true })
 
 		luasnip.config.setup({})
 		luasnip.filetype_extend("all", { "loremipsum", "license" })

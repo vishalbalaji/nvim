@@ -2,41 +2,15 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
 
-local M = {}
+local Config = {}
 
----@param hlgroup_name string
-function M.get_hl(hlgroup_name)
-	return vim.api.nvim_get_hl(0, {
-		name = hlgroup_name,
-		link = false,
-	})
-end
-
----@param code string
----@param options vim.api.keyset.highlight
-function M.hl(code, options)
-	local ok, _ = pcall(vim.api.nvim_set_hl, 0, code, options)
-	if not ok then
-		print("[DEBUG] Could not highlight: '" .. code .. "'", vim.inspect(options))
-	end
-end
-
-function M.adaptive_split()
-	local win = vim.api.nvim_win_get_config(vim.api.nvim_get_current_win())
-
-	if win.width / 4 > win.height then
-		vim.cmd.vsplit()
-	else
-		vim.cmd.split()
-	end
-end
+Config.util = require("config.global.util")
 
 local icons = require("config.global.icons")
+Config.icons = icons
 
-M.icons = icons
-
-M.lsp = require("config.global.lsp")
-M.lsp.signs = {
+Config.lsp = require("config.global.lsp")
+Config.lsp.signs = {
 	[-1] = { label = "Other", icon = icons.diagnostics.BoldQuestion },
 	[vim.diagnostic.severity.ERROR] = { label = "Error", icon = icons.diagnostics.BoldError },
 	[vim.diagnostic.severity.WARN] = { label = "Warn", icon = icons.diagnostics.BoldWarning },
@@ -45,10 +19,10 @@ M.lsp.signs = {
 }
 
 local lualine = require("lib.lualine")
-M.lualine = {
+Config.lualine = {
 	create_highlight_groups = lualine.create_highlight_groups,
 	get_mode = lualine.get_mode,
 	get_mode_suffix = lualine.get_mode_suffix,
 }
 
-_G.Config = M
+_G.Config = Config
