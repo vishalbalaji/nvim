@@ -27,7 +27,7 @@ return {
 							local modified = vim.api.nvim_eval_statusline("%m", {}).str
 							local items = {}
 							if modified ~= "" then
-								table.insert(items, m.hl(Config.icons.ui.Circle, "TSRainbowGreen"))
+								table.insert(items, m.hl(Config.icons.ui.Circle, "RainbowGreen"))
 							end
 							table.insert(items, m.hl(val, "Normal"))
 							return table.concat(items, " ")

@@ -19,9 +19,9 @@ return {
 		},
 
 		on_attach = function()
-			Config.util.hl("GitSignsAdd", { link = "TSRainbowGreen" })
-			Config.util.hl("GitSignsChange", { link = "TSRainbowYellow" })
-			Config.util.hl("GitSignsDelete", { link = "TSRainbowRed" })
+			Config.util.hl("GitSignsAdd", { link = "RainbowGreen" })
+			Config.util.hl("GitSignsChange", { link = "RainbowYellow" })
+			Config.util.hl("GitSignsDelete", { link = "RainbowRed" })
 		end,
 	},
 }

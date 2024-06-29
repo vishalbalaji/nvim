@@ -41,9 +41,8 @@ return {
 
 	config = function(_, opts)
 		local ibl = require("ibl")
-		local hooks = require("ibl.hooks")
 
-		local highlight = {
+		opts.scope.highlight = {
 			"RainbowRed",
 			"RainbowYellow",
 			"RainbowBlue",
@@ -53,20 +52,7 @@ return {
 			"RainbowCyan",
 		}
 
-		hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-			Config.util.hl("RainbowRed", { link = "TSRainbowRed" })
-			Config.util.hl("RainbowYellow", { link = "TSRainbowYellow" })
-			Config.util.hl("RainbowBlue", { link = "TSRainbowBlue" })
-			Config.util.hl("RainbowOrange", { link = "TSRainbowOrange" })
-			Config.util.hl("RainbowGreen", { link = "TSRainbowGreen" })
-			Config.util.hl("RainbowViolet", { link = "TSRainbowViolet" })
-			Config.util.hl("RainbowCyan", { link = "TSRainbowCyan" })
-		end)
-
-		vim.g.rainbow_delimiters = { highlight = highlight }
-
-		opts.scope.highlight = highlight
-
+		vim.g.rainbow_delimiters = { highlight = opts.scope.highlight }
 		ibl.setup(opts)
 	end,
 }
