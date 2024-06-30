@@ -42,8 +42,15 @@ return {
 				},
 
 				right = {
+					{
+						require("lazy.status").updates,
+						hl = "Special",
+						format = function(val)
+							return table.concat({ Config.icons.ui.Package, val }, " ")
+						end,
+					},
 					m.diagnostics,
-					m.showcmd,
+					m.create_showcmd(),
 					m.macro_recording,
 					m.lineinfo,
 				},
@@ -51,7 +58,6 @@ return {
 		}
 	end,
 	config = function(_, opts)
-		vim.opt.showcmdloc = "statusline"
 		require("config.ui.statusline.core").setup(opts)
 	end,
 }

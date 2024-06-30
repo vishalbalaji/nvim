@@ -44,6 +44,9 @@ return {
 			--   end,
 			-- },
 			eslint_d = {
+				env = {
+					ESLINT_USE_FLAT_CONFIG = "true",
+				},
 				condition = function(ctx)
 					return vim.fs.find(Config.lsp.utils.eslint_config_names, { path = ctx.filename, upward = true })[1]
 				end,
@@ -129,6 +132,8 @@ return {
 			callback = N.debounce(100, N.lint),
 		})
 
-		require("mason-nvim-lint").setup()
+		require("mason-nvim-lint").setup({
+			automatic_installation = false
+		})
 	end,
 }

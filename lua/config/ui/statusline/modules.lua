@@ -49,15 +49,18 @@ function M.diagnostics()
 end
 
 local showcmd_filter = { "h", "j", "k", "l", "i", "o" }
-function M.showcmd()
-	local text = vim.api.nvim_eval_statusline("%S", {}).str or ""
-	local state = vim.fn.state()
+function M.create_showcmd()
+	vim.opt.showcmdloc = "statusline"
+	return function()
+		local text = vim.api.nvim_eval_statusline("%S", {}).str or ""
+		local state = vim.fn.state()
 
-	if state == "S" and vim.tbl_contains(showcmd_filter, text) then
-		text = ""
+		if state == "S" and vim.tbl_contains(showcmd_filter, text) then
+			text = ""
+		end
+
+		return text
 	end
-
-	return text
 end
 
 function M.macro_recording()
@@ -85,6 +88,30 @@ end
 ---@param hl_name string
 function M.hl(text, hl_name)
 	return "%#" .. hl_name .. "#" .. text .. "%#StatusLine#"
+end
+
+function M.create_lsp()
+	local attached_lsp = {}
+	vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach" }, {
+		pattern = "*",
+		callback = vim.schedule_wrap(function(data)
+			local items = {}
+			for _, value in ipairs(vim.lsp.get_clients({ bufnr = data.buf })) do
+				table.insert(items, value.name)
+			end
+
+			attached_lsp[data.buf] = table.concat(items, " ")
+			vim.cmd("redrawstatus")
+		end),
+	})
+
+	return function()
+		local attached = attached_lsp[vim.api.nvim_get_current_buf()] or ""
+		if attached == "" then
+			return ""
+		end
+		return "LSP:" .. " " .. attached
+	end
 end
 
 M.lineinfo = "%p%% %l:%c"
