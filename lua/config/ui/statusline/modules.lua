@@ -1,5 +1,12 @@
----@type table<string, StatuslineModule|fun(...):StatuslineModule>
-local M = {}
+---@type table<string, StatusLineModule|any>
+local M = {
+	---@type table<string, fun(...):StatusLineModule>
+	create = {},
+	---@type table<string, fun(...):StatusLineModule>
+	util = {},
+}
+
+local statusline_group = vim.api.nvim_create_augroup("StatuslineModules", { clear = true })
 
 M.mode = Config.lualine.get_mode
 
@@ -30,27 +37,35 @@ function M.git()
 	}) .. table.concat(changes, " ")
 end
 
-local s = vim.diagnostic.severity
-local diagnostic_order = { s.HINT, s.INFO, s.WARN, s.ERROR }
-function M.diagnostics()
-	local items = {}
-	local item_count = 0
+function M.create.diagnostics()
+	vim.api.nvim_create_autocmd("DiagnosticChanged", {
+		group = statusline_group,
+		pattern = "*",
+		command = "redrawstatus",
+	})
 
-	for _, k in ipairs(diagnostic_order) do
-		local v = Config.lsp.signs[k]
-		local count = vim.tbl_count(vim.diagnostic.get(0, { severity = k }))
-		if count > 0 then
-			table.insert(items, table.concat({ "%#Diagnostic", v.label, "#", v.icon, " ", count }))
-			item_count = item_count + 1
+	local s = vim.diagnostic.severity
+	local diagnostic_order = { s.HINT, s.INFO, s.WARN, s.ERROR }
+	return function()
+		local items = {}
+		local item_count = 0
+
+		for _, k in ipairs(diagnostic_order) do
+			local v = Config.lsp.signs[k]
+			local count = vim.tbl_count(vim.diagnostic.get(0, { severity = k }))
+			if count > 0 then
+				table.insert(items, table.concat({ "%#Diagnostic", v.label, "#", v.icon, " ", count }))
+				item_count = item_count + 1
+			end
 		end
-	end
 
-	return table.concat(items, " ")
+		return table.concat(items, " ")
+	end
 end
 
-local showcmd_filter = { "h", "j", "k", "l", "i", "o" }
-function M.create_showcmd()
+function M.create.showcmd()
 	vim.opt.showcmdloc = "statusline"
+	local showcmd_filter = { "h", "j", "k", "l", "i", "o" }
 	return function()
 		local text = vim.api.nvim_eval_statusline("%S", {}).str or ""
 		local state = vim.fn.state()
@@ -74,11 +89,12 @@ end
 
 --Relative path
 function M.filename()
-	return vim.api.nvim_eval_statusline("%{expand('%:~:.')}", {}).str or ""
+	local text = vim.api.nvim_eval_statusline("%{expand('%:~:.')}", {}).str
+	return text ~= "" and text or "[No Name]"
 end
 
 ---@param section string
-function M.get_mode_hl(section)
+function M.util.get_mode_hl(section)
 	return function()
 		local hl_group = "lualine_" .. section .. Config.lualine.get_mode_suffix()
 		return vim.fn.hlexists(hl_group) == 1 and hl_group or ""
@@ -86,13 +102,14 @@ function M.get_mode_hl(section)
 end
 
 ---@param hl_name string
-function M.hl(text, hl_name)
+function M.util.hl(text, hl_name)
 	return "%#" .. hl_name .. "#" .. text .. "%#StatusLine#"
 end
 
-function M.create_lsp()
+function M.create.lsp()
 	local attached_lsp = {}
 	vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach" }, {
+		group = statusline_group,
 		pattern = "*",
 		callback = vim.schedule_wrap(function(data)
 			local items = {}
@@ -111,6 +128,23 @@ function M.create_lsp()
 			return ""
 		end
 		return "LSP:" .. " " .. attached
+	end
+end
+
+function M.ft()
+	return vim.bo.filetype
+end
+
+function M.create.ft_icon()
+	local devicons = require("nvim-web-devicons")
+
+	return function()
+		local filename = vim.fn.expand("%:t")
+		local icon, hl = devicons.get_icon(filename)
+		if not icon then
+			return ""
+		end
+		return M.util.hl(icon, hl)
 	end
 end
 

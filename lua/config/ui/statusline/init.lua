@@ -3,11 +3,14 @@ return {
 	dir = "config.ui.statusline",
 	dependencies = {
 		require("config.colorscheme"),
+		require("config.devicons"),
 	},
 	opts = function()
 		local m = require("config.ui.statusline.modules")
 
-		---@type StatuslineConfig
+		local ft_icon = m.create.ft_icon()
+
+		---@type StatusLineConfig
 		return {
 			fillchar = "━",
 			hl = { link = "NonText" },
@@ -21,7 +24,7 @@ return {
 				left = {
 					{
 						m.mode,
-						hl = m.get_mode_hl("b"),
+						hl = m.util.get_mode_hl("b"),
 					},
 					m.git,
 				},
@@ -29,19 +32,28 @@ return {
 				middle = {
 					{
 						m.filename,
-						format = function(val)
+						format = function(val, opts)
 							local modified = vim.api.nvim_eval_statusline("%m", {}).str
 							local items = {}
 							if modified ~= "" then
-								table.insert(items, m.hl(Config.icons.ui.Circle, "RainbowGreen"))
+								table.insert(items, m.util.hl(Config.icons.ui.Circle, "RainbowGreen"))
 							end
-							table.insert(items, m.hl(val, "Normal"))
+
+							local icon = ft_icon()
+							if icon ~= "" then
+								table.insert(items, icon)
+							end
+
+							table.insert(items, m.util.hl(val, opts.hl))
 							return table.concat(items, " ")
 						end,
 					},
 				},
 
 				right = {
+					ft_icon,
+					m.ft,
+					m.create.diagnostics(),
 					{
 						require("lazy.status").updates,
 						hl = "Special",
@@ -49,8 +61,7 @@ return {
 							return table.concat({ Config.icons.ui.Package, val }, " ")
 						end,
 					},
-					m.diagnostics,
-					m.create_showcmd(),
+					m.create.showcmd(),
 					m.macro_recording,
 					m.lineinfo,
 				},

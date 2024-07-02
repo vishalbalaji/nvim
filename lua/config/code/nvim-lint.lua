@@ -23,14 +23,16 @@ return {
 				"zsh",
 			}] = { "shellcheck" },
 
-			[{
-				"javascript",
-				"javascriptreact",
-				"typescript",
-				"typescriptreact",
-				"astro",
-				"svelte",
-			}] = { "eslint_d" },
+			-- [{
+			-- 	"javascript",
+			-- 	"javascriptreact",
+			-- 	"typescript",
+			-- 	"typescriptreact",
+			-- 	"astro",
+			-- 	"svelte",
+			-- }] = {
+			-- 	"eslint_d",
+			-- },
 		},
 		-- or add custom linters.
 		---@type table<string,table>
@@ -43,10 +45,8 @@ return {
 			--     return vim.fs.find({ "selene.toml" }, { path = ctx.filename, upward = true })[1]
 			--   end,
 			-- },
+
 			eslint_d = {
-				env = {
-					ESLINT_USE_FLAT_CONFIG = "true",
-				},
 				condition = function(ctx)
 					return vim.fs.find(Config.lsp.utils.eslint_config_names, { path = ctx.filename, upward = true })[1]
 				end,
@@ -133,7 +133,7 @@ return {
 		})
 
 		require("mason-nvim-lint").setup({
-			automatic_installation = false
+			automatic_installation = false,
 		})
 	end,
 }

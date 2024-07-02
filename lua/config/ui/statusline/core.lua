@@ -1,30 +1,33 @@
----@alias StatuslineModule string|fun():string
+---@alias StatusLineModule string|fun():string
 
----@class StatuslineOpts
----@field hl? StatuslineModule
----@field format? fun(val:string):string
+---@class StatusLineComponentFormatOpts
+---@field hl string
 
----@class StatuslineComponent: StatuslineOpts
----@field [1] StatuslineModule
+---@class StatusLineComponentOpts
+---@field hl? StatusLineModule
+---@field format? fun(val:string, opts:StatusLineComponentFormatOpts):string
 
----@alias StatuslineGroup (string|(fun():string)|StatuslineComponent)[]
+---@class StatusLineComponent: StatusLineComponentOpts
+---@field [1] StatusLineModule
 
----@class StatuslineBaseOpts
+---@alias StatusLineGroup (string|(fun():string)|StatusLineComponent)[]
+
+---@class StatusLineBaseOpts
 ---@field fillchar? string
 ---@field hl? vim.api.keyset.highlight
 
----@class StatuslineNCOpts: StatuslineBaseOpts
+---@class StatusLineNCOpts: StatusLineBaseOpts
 
----@class StatuslineGroups
----@field left? StatuslineGroup
----@field middle? StatuslineGroup
----@field right? StatuslineGroup
+---@class StatusLineGroups
+---@field left? StatusLineGroup
+---@field middle? StatusLineGroup
+---@field right? StatusLineGroup
 
----@class StatuslineConfig: StatuslineBaseOpts
----@field groups? StatuslineGroups
----@field nc? StatuslineNCOpts
+---@class StatusLineConfig: StatusLineBaseOpts
+---@field groups? StatusLineGroups
+---@field nc? StatusLineNCOpts
 
----@param group StatuslineGroup
+---@param group StatusLineGroup
 local function process_groups(group)
 	if not group then
 		return ""
@@ -47,7 +50,10 @@ local function process_groups(group)
 		else
 			opts = module
 			local f = opts[1]
-			if type(f) == "function" then
+			local t1 = type(f)
+			assert(t1 == "string" or t1 == "function", "Invalid statusline component: " .. tostring(f))
+
+			if t1 == "function" then
 				f = f()
 			end
 			text = f
@@ -61,7 +67,9 @@ local function process_groups(group)
 			hl = (hl and hl ~= "") and hl or "Normal"
 
 			if opts.format then
-				text = opts.format(text)
+				---@type StatusLineComponentFormatOpts
+				local processed_opts = { hl = hl }
+				text = opts.format(text, processed_opts)
 			end
 
 			text = table.concat({ "%#", hl, "#", text, "%#StatusLine#" })
@@ -75,7 +83,7 @@ end
 
 local M = {}
 
----@param opts StatuslineConfig
+---@param opts StatusLineConfig
 function M.setup(opts)
 	local nc = opts.nc or {}
 
@@ -90,9 +98,9 @@ function M.setup(opts)
 		vim.opt.fillchars:append("stlnc:" .. nc.fillchar)
 	end
 
-	Statusline = {}
+	StatusLine = {}
 
-	Statusline.active = function()
+	StatusLine.active = function()
 		local groups = opts.groups or {}
 
 		local parts = {}
@@ -123,20 +131,20 @@ function M.setup(opts)
 		return table.concat(parts)
 	end
 
-	function Statusline.inactive()
+	function StatusLine.inactive()
 		return " %F "
 	end
 
-	function Statusline.short()
+	function StatusLine.short()
 		return " short "
 	end
 
-	local statusline_group = vim.api.nvim_create_augroup("Statusline", { clear = true })
+	local statusline_group = vim.api.nvim_create_augroup("StatusLine", { clear = true })
 	vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
 		group = statusline_group,
 		pattern = "*",
 		callback = function()
-			vim.opt_local.statusline = "%!v:lua.Statusline.active()"
+			vim.opt_local.statusline = "%!v:lua.StatusLine.active()"
 		end,
 	})
 
@@ -144,7 +152,7 @@ function M.setup(opts)
 		group = statusline_group,
 		pattern = "*",
 		callback = function()
-			vim.opt_local.statusline = "%!v:lua.Statusline.inactive()"
+			vim.opt_local.statusline = "%!v:lua.StatusLine.inactive()"
 		end,
 	})
 end

@@ -8,16 +8,16 @@ return {
 	keys = {
 		{ "<leader>lf", mode = { "n", "v" }, desc = "[L]SP: [F]ormat" },
 	},
+
+	---@type conform.setupOpts
 	opts = {
 		-- LazyVim will use these options when formatting with the conform.nvim formatter
 		format = {
 			timeout_ms = 3000,
 			async = false, -- not recommended to change
 			quiet = false, -- not recommended to change
-			lsp_format = "fallback", -- not recommended to change
 		},
 
-		---@type table<string, conform.FormatterUnit[]>
 		formatters_by_ft = {
 			-- The options you set here will be merged with the builtin formatters.
 			-- You can also define any custom formatters here.
@@ -39,11 +39,13 @@ return {
 				"astro",
 				"svelte",
 			}] = {
-				{ "prettierd", "eslint_d" },
+				{
+					"prettierd",
+					-- "eslint_d"
+				},
 			},
 		},
 
-		---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer): nil|conform.FormatterConfigOverride>
 		formatters = {
 			-- # Example of using dprint only when a dprint.json file is present
 			-- dprint = {
@@ -92,7 +94,9 @@ return {
 		local conform = require("conform")
 		conform.setup(opts)
 
-		vim.keymap.set({ "n", "v" }, "<leader>lf", conform.format)
+		vim.keymap.set({ "n", "v" }, "<leader>lf", function()
+			conform.format({ lsp_format = "fallback" })
+		end)
 
 		require("mason-conform").setup({})
 	end,
