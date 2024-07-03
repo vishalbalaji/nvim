@@ -1,5 +1,6 @@
 return {
 	require("config.mini.extra"),
+	require("config.mini.hipatterns"),
 	require("config.mini.move"),
 	require("config.mini.pairs"),
 	require("config.mini.pick"),
