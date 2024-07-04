@@ -57,6 +57,7 @@ return { -- LSP Configuration & Plugins
 					header = "",
 					border = "rounded",
 					source = false,
+					prefix = "",
 					format = function(diagnostic)
 						local icon = get_sign_icon(diagnostic)
 						return icon .. " " .. diagnostic.source .. ": " .. diagnostic.message

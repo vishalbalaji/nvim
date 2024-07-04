@@ -33,6 +33,18 @@ return {
 	},
 	config = function(_, opts)
 		require("mini.pick").setup(opts)
+		-- vim.schedule(function()
+		-- 	---@type string
+		-- 	local highlights = vim.api.nvim_exec2("hi", { output = true }).output
+		-- 	print(vim.inspect(highlights))
+
+		-- 	-- MiniPick.registry.tmp = function(local_opts)
+		-- 	-- 	vim.schedule(function()
+		-- 	-- 	end)
+		-- 	-- 	return MiniPick.start({ source = { items = { "foo", "bar", "baz" } } })
+		-- 	-- end
+		-- end)
+
 		MiniPick.registry.files = function(local_opts)
 			local command = { "fd", "--type=f", "--no-follow", "--color=never", "--hidden", "-E.git", "-Enode_modules" }
 			local show_with_icons = function(buf_id, items, query)

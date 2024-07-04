@@ -41,7 +41,7 @@ return {
 			}] = {
 				{
 					"prettierd",
-					-- "eslint_d"
+					-- eslint_d
 				},
 			},
 		},

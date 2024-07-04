@@ -1,4 +1,5 @@
-local inline_marker = Config.icons.ui.Circle .. " "
+local circle_marker = Config.icons.ui.Circle .. " "
+local square_marker = Config.icons.ui.Square .. " "
 
 local M = {
 	---@type table<string,true>
@@ -331,9 +332,9 @@ function M.wrap_pattern_with_filter(pattern, filter)
 	end
 end
 
+---@type table<string, fun(opts:table|nil):table>
 local H = {}
 
----@param opts table|nil
 function H.shorthand(opts)
 	local default_opts = { style = "full", priority = 200, filter = M.always_true, inline_text = "█" }
 	opts = vim.tbl_deep_extend("force", default_opts, opts or {})
@@ -370,7 +371,8 @@ function H.shorthand(opts)
 	}
 end
 
----@param opts table|nil
+-- TODO: Handle for text/docuemntColor for tailwind colors instead of pattern
+-- Required to fetch colors for things like `bg-primary`
 function H.tailwind(opts)
 	local default_opts = { enabled = true, style = "full", priority = 200, filter = M.always_true, inline_text = "█" }
 	opts = vim.tbl_deep_extend("force", default_opts, opts or {})
@@ -446,6 +448,7 @@ end
 return {
 	"echasnovski/mini.hipatterns",
 	version = "*",
+	enabled = false,
 	desc = "Highlight colors in your code. Also includes Tailwind CSS support.",
 	keys = {
 		{
@@ -459,8 +462,8 @@ return {
 	opts = function()
 		local hi = require("mini.hipatterns")
 		return {
-			-- custom LazyVim option to enable the tailwind integration
 			highlighters = {
+				-- custom LazyVim option to enable the tailwind integration
 				tailwind = H.tailwind({
 					filter = function()
 						return vim.tbl_contains({
@@ -471,6 +474,7 @@ return {
 							"html-eex",
 							"javascript",
 							"javascriptreact",
+							"noice",
 							"rust",
 							"svelte",
 							"typescript",
@@ -480,17 +484,17 @@ return {
 					end,
 					priority = 2000,
 					style = "inline",
-					inline_text = inline_marker,
+					inline_text = circle_marker,
 				}),
 				hex_color = hi.gen_highlighter.hex_color({
 					priority = 2000,
 					style = "inline",
-					inline_text = inline_marker,
+					inline_text = square_marker,
 				}),
 				shorthand = H.shorthand({
 					priority = 2000,
 					style = "inline",
-					inline_text = inline_marker,
+					inline_text = square_marker,
 				}),
 			},
 		}

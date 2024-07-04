@@ -8,7 +8,7 @@ end
 local cmd = vim.api.nvim_create_user_command
 local autocmd = vim.api.nvim_create_autocmd
 
----@param options BasicOpts
+---@param options ConfigOpts
 local function setup(_, options)
 	local wo = options.wo or {}
 	options.wo = nil
@@ -35,6 +35,7 @@ local function setup(_, options)
 	Config.util.hl("FoldColumn", { link = "NonText" })
 	Config.util.hl("LineNr", { link = "NonText" })
 	Config.util.hl("CursorLineNr", { link = "SpecialComment" })
+	Config.util.hl("Visual", { link = "CursorLine" })
 
 	Config.util.hl("SpellBad", { link = "DiagnosticUnderlineError" })
 
@@ -110,19 +111,20 @@ end
 --- [BEGIN CONFIG] ---
 
 local M = {
-	name = "basic",
+	name = "config",
 	dir = "config",
 	lazy = false,
 	priority = 999,
+
 	keys = function()
-		---@type BasicKeys
+		---@type ConfigKeys
 		local keys = {}
 
 		return append_table(require("shared.keymaps"), keys)
 	end,
 
 	opts = function()
-		---@type BasicOpts
+		---@type ConfigOpts
 		local opts = {
 			opt = {
 				list = true,

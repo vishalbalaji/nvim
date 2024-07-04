@@ -50,18 +50,24 @@ return { -- Autocompletion
 		luasnip.config.setup({})
 		luasnip.filetype_extend("all", { "loremipsum", "license" })
 
+		local highlight_colors = require("nvim-highlight-colors")
+
 		cmp.setup({
 			window = {
-				completion = cmp.config.window.bordered(),
+				completion = cmp.config.window.bordered({
+					winhighlight = "CursorLine:CursorLine",
+				}),
 				documentation = cmp.config.window.bordered(),
 			},
 			formatting = {
 				expandable_indicator = true,
 				fields = { "kind", "abbr", "menu" },
-				format = function(entry, vim_item)
+				format = function(entry, item)
+					local color_item = highlight_colors.format(entry, { kind = item.kind })
+
 					-- Kind icons
-					vim_item.kind = string.format("%s", Config.icons.kind[vim_item.kind])
-					vim_item.menu = ({
+					item.kind = string.format("%s", Config.icons.kind[item.kind])
+					item.menu = ({
 						nvim_lsp = "[LSP]",
 						luasnip = "[Snippet]",
 						buffer = "[Buffer]",
@@ -70,6 +76,11 @@ return { -- Autocompletion
 						cmdline = "[CMD]",
 					})[entry.source.name]
 
+					if color_item.abbr_hl_group then
+						item.kind_hl_group = color_item.abbr_hl_group
+						item.kind = color_item.abbr
+					end
+
 					-- if entry.source.name == "nvim_lsp" then
 					-- 	pcall(function()
 					-- 		print()
@@ -77,7 +88,7 @@ return { -- Autocompletion
 					-- 	end)
 					-- end
 
-					return vim_item
+					return item
 				end,
 			},
 
@@ -181,5 +192,15 @@ return { -- Autocompletion
 				{ name = "buffer" },
 			},
 		})
+
+		Config.util.mod_hl("CmpItemKind", { bg = "NONE" })
+
+		Config.util.mod_hl("CmpItemAbbr", { bg = "NONE" })
+		Config.util.mod_hl("CmpItemAbbrMatchFuzzy", { bg = "NONE" })
+		Config.util.mod_hl("CmpItemAbbrMatch", { bg = "NONE" })
+		Config.util.mod_hl("CmpItemAbbrDeprecated", { bg = "NONE" })
+		Config.util.mod_hl("CmpItemAbbr", { bg = "NONE" })
+
+		Config.util.mod_hl("CmpItemMenu", { bg = "NONE" })
 	end,
 }

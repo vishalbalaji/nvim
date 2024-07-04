@@ -144,6 +144,7 @@ function M.create.ft_icon()
 		if not icon then
 			return ""
 		end
+		---@type string
 		return M.util.hl(icon, hl)
 	end
 end

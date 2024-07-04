@@ -5,6 +5,7 @@ return { -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter-context",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"gungun974/nvim-ts-autotag",
+		"nvim-treesitter/playground",
 		{
 			"andymass/vim-matchup",
 			init = function()

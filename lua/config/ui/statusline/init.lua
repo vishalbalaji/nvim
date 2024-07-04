@@ -54,16 +54,13 @@ return {
 					ft_icon,
 					m.ft,
 					m.create.diagnostics(),
-					{
-						require("lazy.status").updates,
-						hl = "Special",
-						format = function(val)
-							return table.concat({ Config.icons.ui.Package, val }, " ")
-						end,
-					},
+					{ require("lazy.status").updates, hl = "Special" },
 					m.create.showcmd(),
 					m.macro_recording,
-					m.lineinfo,
+					{
+						m.lineinfo,
+						hl = "NonText",
+					},
 				},
 			},
 		}

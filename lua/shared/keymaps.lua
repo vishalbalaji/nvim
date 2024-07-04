@@ -1,4 +1,4 @@
----@alias BasicKeys LazyKeysSpec[]
+---@alias ConfigKeys LazyKeysSpec[]
 
 local cr_termcode = vim.api.nvim_replace_termcodes("<CR>", true, false, true)
 local function visual_hl_search()
@@ -24,7 +24,7 @@ local wincmd = function(char)
 	end
 end
 
----@type BasicKeys
+---@type ConfigKeys
 return {
 	-- Sensible defaults
 	{ "<Esc>", "<cmd>nohlsearch<CR>" },
