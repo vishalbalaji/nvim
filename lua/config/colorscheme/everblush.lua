@@ -11,13 +11,20 @@ return { -- You can easily change to a different colorscheme.
 			NonText = { fg = "comment" },
 			CursorLine = { bg = "color0" },
 
-			RainbowRed = { fg = "color1" },
-			RainbowGreen = { fg = "color2" },
-			RainbowYellow = { fg = "color3" },
-			RainbowBlue = { fg = "color4" },
-			RainbowViolet = { fg = "color5" },
-			RainbowCyan = { fg = "color6" },
-			RainbowOrange = { fg = "color7" },
+			TSRainbowRed = { fg = "color1" },
+			TSRainbowGreen = { fg = "color2" },
+			TSRainbowYellow = { fg = "color3" },
+			TSRainbowBlue = { fg = "color4" },
+			TSRainbowViolet = { fg = "color5" },
+			TSRainbowCyan = { fg = "color6" },
+			TSRainbowOrange = { fg = "color7" },
+
+			WinSeparator = { link = "NonText" },
+			FoldColumn = { link = "NonText" },
+			LineNr = { link = "NonText" },
+			CursorLineNr = { link = "SpecialComment" },
+			Visual = { bg = "color0" },
+			SpellBad = { link = "DiagnosticUnderlineError" },
 		},
 	},
 	init = function()
@@ -27,9 +34,9 @@ return { -- You can easily change to a different colorscheme.
 		local lualine_theme = require("lualine.themes.everblush")
 		lualine_theme.normal.b = { fg = lualine_theme.normal.a.bg }
 
-		for _, mode in pairs(lualine_theme) do
-			mode.b.gui = "bold"
-		end
+		-- for _, mode in pairs(lualine_theme) do
+		-- 	mode.b.gui = "bold"
+		-- end
 
 		Config.lualine.create_highlight_groups(lualine_theme)
 	end,

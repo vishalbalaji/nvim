@@ -31,14 +31,6 @@ local function setup(_, options)
 		vim.bo[key] = value
 	end
 
-	Config.util.hl("WinSeparator", { link = "NonText" })
-	Config.util.hl("FoldColumn", { link = "NonText" })
-	Config.util.hl("LineNr", { link = "NonText" })
-	Config.util.hl("CursorLineNr", { link = "SpecialComment" })
-	Config.util.hl("Visual", { link = "CursorLine" })
-
-	Config.util.hl("SpellBad", { link = "DiagnosticUnderlineError" })
-
 	cmd("Q", "quitall!", {})
 	cmd("E", "e!", {})
 	cmd("W", "w! | e!", {})

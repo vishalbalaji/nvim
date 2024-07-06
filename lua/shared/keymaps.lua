@@ -39,12 +39,13 @@ return {
 	{ "<leader>m", vim.cmd.messages, desc = "[M]essages" },
 
 	-- Windows/Splits
-	{ "<C-w>", wincmd("q"), desc = "Close the window" },
+	{ "<C-q>", wincmd("q"), desc = "Close the window" },
 	{ "<C-h>", wincmd("h"), desc = "Move focus to the left window" },
 	{ "<C-l>", wincmd("l"), desc = "Move focus to the right window" },
 	{ "<C-j>", wincmd("j"), desc = "Move focus to the lower window" },
 	{ "<C-k>", wincmd("k"), desc = "Move focus to the upper window" },
 	{ "<C-S-0>", wincmd("="), desc = "Make window sizes equal" },
+	{ "<C-m>", wincmd("|"), desc = "Maximize window" },
 	{ "<C-s><C-s>", wincmd("s"), desc = "Create horizontal split" },
 	{ "<C-s><C-v>", wincmd("v"), desc = "Create vertival split" },
 	{ "<C-CR>", Config.util.adaptive_split, desc = "Create adaptive split" },

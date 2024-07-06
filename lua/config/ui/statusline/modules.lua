@@ -138,14 +138,23 @@ end
 function M.create.ft_icon()
 	local devicons = require("nvim-web-devicons")
 
+	vim.api.nvim_create_autocmd("BufEnter", {
+		group = statusline_group,
+		pattern = "*",
+		callback = function()
+			local filename = vim.fn.expand("%:t")
+			local icon, hl = devicons.get_icon(filename)
+			_G.stl_ft_icon = icon
+			_G.stl_ft_hl = hl
+		end,
+	})
+
 	return function()
-		local filename = vim.fn.expand("%:t")
-		local icon, hl = devicons.get_icon(filename)
-		if not icon then
+		if not _G.stl_ft_icon then
 			return ""
 		end
 		---@type string
-		return M.util.hl(icon, hl)
+		return M.util.hl(_G.stl_ft_icon, _G.stl_ft_hl)
 	end
 end
 

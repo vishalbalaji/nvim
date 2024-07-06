@@ -16,7 +16,7 @@ return {
 			hl = { link = "NonText" },
 
 			nc = {
-				hl = { link = "RainbowRed" },
+				hl = { link = "TSRainbowRed" },
 				fillchar = ".",
 			},
 
@@ -36,7 +36,7 @@ return {
 							local modified = vim.api.nvim_eval_statusline("%m", {}).str
 							local items = {}
 							if modified ~= "" then
-								table.insert(items, m.util.hl(Config.icons.ui.Circle, "RainbowGreen"))
+								table.insert(items, m.util.hl(Config.icons.ui.Circle, "TSRainbowGreen"))
 							end
 
 							local icon = ft_icon()
