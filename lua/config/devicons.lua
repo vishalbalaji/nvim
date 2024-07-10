@@ -2,6 +2,7 @@ local lsp_icons = Config.icons.lsp
 
 local M = {
 	"nvim-tree/nvim-web-devicons",
+	event = "LazyFile",
 	enabled = true,
 	lazy = false,
 	priority = 999,

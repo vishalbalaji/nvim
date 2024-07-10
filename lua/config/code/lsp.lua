@@ -92,6 +92,16 @@ return { -- LSP Configuration & Plugins
 						"postcss.config.*ts"
 					),
 				},
+				svelte = {
+					on_attach = function(client)
+						vim.api.nvim_create_autocmd("BufWritePost", {
+							pattern = { "*.js", "*.ts" },
+							callback = function(ctx)
+								client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
+							end,
+						})
+					end,
+				},
 			},
 		}
 	end,
@@ -144,17 +154,23 @@ return { -- LSP Configuration & Plugins
 				-- or a suggestion from your LSP for this to activate.
 				map("<leader>la", vim.lsp.buf.code_action, "Code [A]ction")
 
+				map("<leader>ls", vim.lsp.buf.signature_help, "[S]ignature")
+
 				-- Opens a popup that displays documentation about the word under your cursor
 				--  See `:help K` for why this keymap.
 				map("K", vim.lsp.buf.hover, "Hover Documentation")
 
 				map("gr", vim.lsp.buf.references, "[G]oto [R]eferences")
 
-				map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+				map("gd", function()
+					vim.lsp.buf.definition({ reuse_win = true })
+				end, "[G]oto [D]efinition")
 
 				-- WARN: This is not Goto Definition, this is Goto Declaration.
 				--  For example, in C this would take you to the header.
-				map("gD", vim.lsp.buf.declaration, "[G]oto [D]efinition")
+				map("gD", function()
+					vim.lsp.buf.declaration({ reuse_win = true })
+				end, "[G]oto [D]efinition")
 
 				-- map("gd", function()
 				-- 	vim.lsp.buf.definition({

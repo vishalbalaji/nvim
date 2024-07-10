@@ -1,5 +1,6 @@
 return {
 	"stevearc/dressing.nvim",
+	event = "LazyFile",
 	opts = {
 		input = {
 			override = function(conf)

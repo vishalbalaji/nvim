@@ -22,6 +22,8 @@ return {
 			-- The options you set here will be merged with the builtin formatters.
 			-- You can also define any custom formatters here.
 
+			markdown = { "injected" },
+
 			lua = { "stylua" },
 
 			json = { "jq" },

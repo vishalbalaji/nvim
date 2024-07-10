@@ -1,6 +1,6 @@
 return {
 	"echasnovski/mini.extra",
 	version = "*",
-	event = "VeryLazy",
+	event = "LazyFile",
 	opts = {},
 }

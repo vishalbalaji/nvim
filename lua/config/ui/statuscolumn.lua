@@ -1,5 +1,6 @@
 return {
 	"luukvbaal/statuscol.nvim",
+	event = "LazyFile",
 	dependencies = {
 		require("config.gitsigns"),
 	},

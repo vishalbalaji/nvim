@@ -1,7 +1,7 @@
 return {
 	"tzachar/highlight-undo.nvim",
 	enabled = true,
-	event = "VeryLazy",
+	event = "LazyFile",
 	opts = {
 		duration = 300,
 		undo = {

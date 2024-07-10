@@ -22,10 +22,7 @@ return {
 
 			groups = {
 				left = {
-					{
-						m.mode,
-						hl = m.util.get_mode_hl("b"),
-					},
+					{ m.mode, hl = m.util.get_mode_hl("b") },
 					m.git,
 				},
 

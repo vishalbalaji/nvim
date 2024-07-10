@@ -29,6 +29,7 @@ return {
 		mappings = {
 			move_down = "<C-j>",
 			move_up = "<C-k>",
+			choose_marked = "<C-CR>",
 		},
 	},
 	config = function(_, opts)
@@ -44,7 +45,7 @@ return {
 		-- 	-- 	return MiniPick.start({ source = { items = { "foo", "bar", "baz" } } })
 		-- 	-- end
 		-- end)
-
+		--
 		MiniPick.registry.files = function(local_opts)
 			local command = { "fd", "--type=f", "--no-follow", "--color=never", "--hidden", "-E.git", "-Enode_modules" }
 			local show_with_icons = function(buf_id, items, query)
