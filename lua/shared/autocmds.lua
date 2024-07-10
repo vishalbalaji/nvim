@@ -11,17 +11,16 @@ return {
 	},
 	{
 		"FileType",
-		once = true,
 		pattern = { "help", "qf" },
 		callback = vim.schedule_wrap(function(opts)
-			print(vim.inspect(opts))
 			vim.keymap.set("n", "q", vim.cmd.quit, { noremap = true, silent = true, buffer = opts.buf })
 		end),
 	},
-	{
+	vim.env.TERM == "xterm-kitty" and {
 		"VimEnter",
 		once = true,
 		callback = function()
+			print("hello")
 			if vim.env.TERM == "xterm-kitty" then
 				vim.fn.jobstart("kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0", { detach = true })
 				vim.api.nvim_create_user_command("KittyPadding", function()
@@ -30,8 +29,8 @@ return {
 				vim.keymap.set("n", "<M-S-r>", vim.cmd.KittyPadding, { noremap = true, silent = true })
 			end
 		end,
-	},
-	{
+	} or nil,
+	vim.env.TERM == "xterm-kitty" and {
 		"VimLeave",
 		callback = function()
 			if vim.env.TERM == "xterm-kitty" then
@@ -40,7 +39,7 @@ return {
 				vim.fn.jobstart("kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=10", { detach = true })
 			end
 		end,
-	},
+	} or nil,
 	{
 		"FileType",
 		once = true,
