@@ -13,6 +13,26 @@ return {
 			end,
 		},
 		{
+			"<leader>fp",
+			function()
+				local root_patterns = { ".git" }
+				vim.cmd.Pick(
+					"files",
+					"cwd='"
+						.. vim.fs.dirname(
+							vim.fs.find(root_patterns, { upward = true, path = vim.fn.expand("%:p:h") })[1]
+						)
+						.. "'"
+				)
+			end,
+		},
+		{
+			"<leader>fd",
+			function()
+				vim.cmd.Pick("files", "cwd='%:p:h'")
+			end,
+		},
+		{
 			"<leader>fF",
 			function()
 				vim.cmd.Pick("grep_live")

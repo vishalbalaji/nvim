@@ -1,6 +1,12 @@
 ---@type ConfigAutocmd[]
 return {
-	{ "VimEnter", once = true, command = "set formatoptions-=cro" },
+	{
+		"BufEnter",
+		once = true,
+		callback = function()
+			vim.opt.formatoptions = vim.opt.formatoptions - { "c", "r", "o" }
+		end,
+	},
 	{
 		"TextYankPost",
 		desc = "Highlight when yanking (copying) text",
@@ -20,7 +26,6 @@ return {
 		"VimEnter",
 		once = true,
 		callback = function()
-			print("hello")
 			if vim.env.TERM == "xterm-kitty" then
 				vim.fn.jobstart("kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=0", { detach = true })
 				vim.api.nvim_create_user_command("KittyPadding", function()

@@ -1,7 +1,7 @@
 ---@class ConfigOpts
 ---@field opt? vim.opt
 ---@field wo? vim.wo
----@field bo? vim.wo
+---@field bo? vim.bo
 
 ---@type ConfigOpts
 return {

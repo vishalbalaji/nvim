@@ -29,6 +29,47 @@ local M = {}
 
 local config_group = vim.api.nvim_create_augroup("ConfigGroup", { clear = true })
 
+local function set_opts(target, opts)
+	for key, value in pairs(opts) do
+		local ok, err = pcall(function()
+			target[key] = value
+		end)
+		if not ok then
+			print(err)
+		end
+	end
+end
+
+local function set_cmds(commands)
+	for _, cmdopts in ipairs(commands) do
+		local name = cmdopts[1] or cmdopts.name
+		cmdopts[1] = nil
+		cmdopts.name = nil
+
+		local command = cmdopts.command
+		cmdopts.command = nil
+
+		local ok, err = pcall(vim.api.nvim_create_user_command, name, command, cmdopts)
+		if not ok then
+			print(err)
+		end
+	end
+end
+
+local function set_autocmds(autocmds)
+	for _, auopts in ipairs(autocmds) do
+		local event = auopts[1] or auopts.event
+		auopts[1] = nil
+		auopts.event = nil
+
+		auopts.group = auopts.group or config_group
+		local ok, err = pcall(vim.api.nvim_create_autocmd, event, auopts)
+		if not ok then
+			print(err)
+		end
+	end
+end
+
 ---@param options ConfigSpec
 function M.setup(options)
 	local opts = options.opts or {}
@@ -42,54 +83,11 @@ function M.setup(options)
 	local opt = opts.opt or {}
 	opts.opt = {}
 
-	for key, value in pairs(opt) do
-		vim.opt[key] = value
-	end
-
-	for key, value in pairs(wo) do
-		vim.wo[key] = value
-	end
-
-	for key, value in pairs(bo) do
-		vim.bo[key] = value
-	end
-
-	for i, cmdopts in ipairs(options.commands or {}) do
-		local name = cmdopts[1] or cmdopts.name
-		cmdopts[1] = nil
-		cmdopts.name = nil
-
-		local command = cmdopts.command
-		cmdopts.command = nil
-
-		if not name or name == "" then
-			print("Could not create command with index: " .. i)
-			goto continue
-		end
-
-		if not command or command == "" then
-			print("Could not create command: " .. name)
-			goto continue
-		end
-
-		vim.api.nvim_create_user_command(name, command, cmdopts)
-		::continue::
-	end
-
-	for i, auopts in ipairs(options.autocmds or {}) do
-		local event = auopts[1] or auopts.event
-		auopts[1] = nil
-		auopts.event = nil
-
-		if not event or event == "" then
-			print("Could not create autocommand with index: " .. i)
-			goto continue
-		end
-
-		auopts.group = auopts.group or config_group
-		vim.api.nvim_create_autocmd(event, auopts)
-		::continue::
-	end
+	pcall(set_opts, vim.opt, opt)
+	pcall(set_opts, vim.wo, wo)
+	pcall(set_opts, vim.bo, bo)
+	pcall(set_cmds, options.commands or {})
+	pcall(set_autocmds, options.autocmds or {})
 end
 
 return M
