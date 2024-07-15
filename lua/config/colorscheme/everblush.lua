@@ -25,6 +25,7 @@ return { -- You can easily change to a different colorscheme.
 			CursorLineNr = { link = "SpecialComment" },
 			Visual = { bg = "color0" },
 			SpellBad = { link = "DiagnosticUnderlineError" },
+			ColorColumn = { link = "CursorLine" }
 		},
 	},
 	init = function()

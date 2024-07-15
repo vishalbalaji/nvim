@@ -5,17 +5,28 @@ function M.get_hl(hl_name)
 	return vim.api.nvim_get_hl(0, { name = hl_name, link = false })
 end
 
+---@class ModHLOpts: vim.api.keyset.highlight
+---@field set? boolean
+
 -- CREDIT: https://www.reddit.com/r/neovim/comments/wcmqi7/a_simple_utility_function_to_override_and_update/
 ---@param hl_name string
----@param opts vim.api.keyset.highlight
+---@param opts ModHLOpts
 function M.mod_hl(hl_name, opts)
+	opts = vim.tbl_deep_extend("force", { set = true }, opts)
+	local set = opts.set
+	opts.set = nil
 	local ok, hl_def = pcall(M.get_hl, hl_name)
 	if ok then
 		for k, v in pairs(opts) do
 			hl_def[k] = v
 		end
-		vim.api.nvim_set_hl(0, hl_name, hl_def)
+		if set then
+			vim.api.nvim_set_hl(0, hl_name, hl_def)
+		end
 	end
+
+	---@cast hl_def vim.api.keyset.highlight
+	return hl_def
 end
 
 ---@param hl_name string

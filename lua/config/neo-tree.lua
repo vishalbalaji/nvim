@@ -7,7 +7,8 @@ return {
 		require("config.devicons"),
 	},
 	keys = {
-		{ "<leader>e", "<cmd>Neotree toggle<CR>" },
+		{ "<C-e>", "<cmd>Neotree toggle<CR>" },
+		{ "<leader>e", "<cmd>Neotree focus<CR>" },
 	},
 	cmd = "Neotree",
 	opts = {

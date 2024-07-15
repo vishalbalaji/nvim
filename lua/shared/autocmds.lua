@@ -1,12 +1,6 @@
 ---@type ConfigAutocmd[]
 return {
-	{
-		"BufEnter",
-		once = true,
-		callback = function()
-			vim.opt.formatoptions = vim.opt.formatoptions - { "c", "r", "o" }
-		end,
-	},
+	{ command = "setlocal formatoptions-=cro", "BufEnter" },
 	{
 		"TextYankPost",
 		desc = "Highlight when yanking (copying) text",

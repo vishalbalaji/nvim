@@ -9,7 +9,7 @@ return {
 		local padding = { text = { " " } }
 
 		return {
-			ft_ignore = { "neo-tree" }, -- lua table with 'filetype' values for which 'statuscolumn' will be unset
+			ft_ignore = { "neo-tree", "terminal" }, -- lua table with 'filetype' values for which 'statuscolumn' will be unset
 			segments = {
 				{
 					sign = { namespace = { "gitsigns" } },
