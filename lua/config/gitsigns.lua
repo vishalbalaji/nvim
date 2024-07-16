@@ -44,7 +44,6 @@ return {
 			Config.util.hl("GitSignsChange", { link = "TSRainbowYellow" })
 			Config.util.hl("GitSignsDelete", { link = "TSRainbowRed" })
 
-			print(Config.util.get_hl("GitSignsChange").fg, cmul(Config.util.get_hl("GitSignsChange").fg, 0.5))
 			Config.util.hl("GitSignsStagedAdd", { fg = cmul(Config.util.get_hl("GitSignsAdd").fg, 0.5) })
 			Config.util.hl("GitSignsStagedChange", { fg = cmul(Config.util.get_hl("GitSignsChange").fg, 0.5) })
 			Config.util.hl("GitSignsStagedDelete", { fg = cmul(Config.util.get_hl("GitSignsDelete").fg, 0.5) })
