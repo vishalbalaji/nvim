@@ -9,33 +9,28 @@ return {
 		{
 			"<leader>ff",
 			function()
-				vim.cmd.Pick("files")
+				vim.cmd.Pick("files", "name='" .. vim.fn.getcwd() .. "'")
 			end,
 		},
 		{
 			"<leader>fp",
 			function()
 				local root_patterns = { ".git" }
-				vim.cmd.Pick(
-					"files",
-					"cwd='"
-						.. vim.fs.dirname(
-							vim.fs.find(root_patterns, { upward = true, path = vim.fn.expand("%:p:h") })[1]
-						)
-						.. "'"
-				)
+				local dir =
+					vim.fs.dirname(vim.fs.find(root_patterns, { upward = true, path = vim.fn.expand("%:p:h") })[1])
+				vim.cmd.Pick("files", "cwd='" .. dir .. "'", "name='" .. dir .. "'")
 			end,
 		},
 		{
 			"<leader>fd",
 			function()
-				vim.cmd.Pick("files", "cwd='%:p:h'")
+				vim.cmd.Pick("files", "cwd='%:p:h'", "name='%:p:h'")
 			end,
 		},
 		{
 			"<leader>fF",
 			function()
-				vim.cmd.Pick("grep_live")
+				vim.cmd.Pick("grep_live", "cwd='%:p:h'")
 			end,
 		},
 		{
@@ -71,9 +66,15 @@ return {
 			local show_with_icons = function(buf_id, items, query)
 				return MiniPick.default_show(buf_id, items, query, { show_icons = true })
 			end
-			local source = { name = "Files", show = show_with_icons, cwd = local_opts.cwd }
+			local source = { name = local_opts.name or "Files", show = show_with_icons, cwd = local_opts.cwd }
 			local_opts.cwd = nil
 			return MiniPick.builtin.cli({ command = command }, { source = source })
+		end
+
+		MiniPick.registry.grep_live = function(local_opts)
+			local _opts = { source = { cwd = local_opts.cwd } }
+			local_opts.cwd = nil
+			return MiniPick.builtin.grep_live(local_opts, _opts)
 		end
 	end,
 }
