@@ -32,7 +32,7 @@ return { -- LSP Configuration & Plugins
 		{ "<leader>li", vim.cmd.LspInfo, desc = "[L]SP: [I]nfo" },
 		{ "[d", vim.diagnostic.goto_prev, desc = "[L]SP: Go to previous [D]iagnostic message" },
 		{ "]d", vim.diagnostic.goto_next, desc = "[L]SP: Go to next [D]iagnostic message" },
-		{ "<leader>le", vim.diagnostic.open_float, desc = "[L]SP: Show diagnostic [E]rror messages" },
+		{ "L", vim.diagnostic.open_float, desc = "[L]SP: Show diagnostic error messages in float" },
 		{ "<leader>lq", vim.diagnostic.setloclist, desc = "[L]SP: Open diagnostic [Q]uickfix list" },
 	},
 

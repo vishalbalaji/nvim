@@ -33,10 +33,6 @@ return {
 							local modified = vim.api.nvim_eval_statusline("%m", {}).str
 							local items = {}
 
-							if vim.t.maximized then
-								table.insert(items, "")
-							end
-
 							if modified ~= "" then
 								table.insert(items, m.util.hl(Config.icons.ui.Circle, "TSRainbowGreen"))
 							end
@@ -53,6 +49,9 @@ return {
 				},
 
 				right = {
+					function()
+						return vim.t.maximized and "" or ""
+					end,
 					ft_icon,
 					m.ft,
 					m.create.diagnostics(),
