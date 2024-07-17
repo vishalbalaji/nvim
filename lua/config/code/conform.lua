@@ -64,16 +64,22 @@ return {
 			injected = { options = { ignore_errors = true } },
 
 			eslint_d = {
-				condition = function(ctx)
+				condition = function()
 					---@diagnostic disable-next-line: return-type-mismatch, undefined-field
-					return vim.fs.find(Config.lsp.utils.eslint_config_names, { path = ctx.filename, upward = true })[1]
+					return vim.fs.find(
+						Config.lsp.utils.eslint_config_names,
+						{ path = vim.fn.expand("%:p:h"), upward = true }
+					)[1]
 				end,
 			},
 
 			prettierd = {
-				condition = function(ctx)
+				condition = function()
 					---@diagnostic disable-next-line: return-type-mismatch, undefined-field
-					return vim.fs.find(Config.lsp.utils.prettier_config_names, { path = ctx.filename, upward = true })[1]
+					return vim.fs.find(
+						Config.lsp.utils.prettier_config_names,
+						{ path = vim.fn.expand("%:p:h"), upward = true }
+					)[1]
 				end,
 			},
 		},

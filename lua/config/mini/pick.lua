@@ -62,13 +62,22 @@ return {
 		-- end)
 		--
 		MiniPick.registry.files = function(local_opts)
-			local command = { "fd", "--type=f", "--no-follow", "--color=never", "--hidden", "-E.git", "-Enode_modules" }
 			local show_with_icons = function(buf_id, items, query)
 				return MiniPick.default_show(buf_id, items, query, { show_icons = true })
 			end
 			local source = { name = local_opts.name or "Files", show = show_with_icons, cwd = local_opts.cwd }
 			local_opts.cwd = nil
-			return MiniPick.builtin.cli({ command = command }, { source = source })
+			return MiniPick.builtin.cli({
+				command = {
+					"fd",
+					"--type=f",
+					"--no-follow",
+					"--color=never",
+					"--hidden",
+					"-E.*/*",
+					"-Enode_modules",
+				},
+			}, { source = source })
 		end
 
 		MiniPick.registry.grep_live = function(local_opts)
