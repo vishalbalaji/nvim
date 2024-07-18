@@ -34,6 +34,12 @@ return {
 			end,
 		},
 		{
+			"<leader>fb",
+			function ()
+				vim.cmd.Pick("buffers")
+			end
+		},
+		{
 			"<leader>fh",
 			function()
 				vim.cmd.Pick("help")
