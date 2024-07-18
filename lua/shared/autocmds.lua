@@ -33,6 +33,7 @@ return {
 		end,
 	} or nil,
 
+	-- FT autocommands
 	{
 		"FileType",
 		once = true,
@@ -57,10 +58,19 @@ return {
 	{
 		"FileType",
 		once = true,
-		pattern = { "gitcommit" },
+		pattern = "gitcommit",
 		callback = function()
 			vim.opt_local.colorcolumn = tostring(vim.bo.textwidth)
 			vim.opt_local.spell = true
+		end,
+	},
+	{
+		"TermOpen",
+		callback = function()
+			vim.opt_local.statuscolumn = ""
+			vim.opt_local.number = false
+			vim.opt_local.relativenumber = false
+			vim.cmd.startinsert()
 		end,
 	},
 }

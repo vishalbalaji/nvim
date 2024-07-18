@@ -10,7 +10,7 @@
 ---@class ConfigAutocmd: vim.api.keyset.create_autocmd
 ---@field [1]? (string|string[]) Event(s) that will trigger the handler
 ---@field event? (string|string[]) Event(s) that will trigger the handler
----@field callback? any|(fun(opts:ConfigAutocmdCallbackOpts):any|string) optional: Lua function (or Vimscript function name, if string) called when the event(s) is triggered. Lua callback can return a truthy value (not false or nil) to delete the autocommand. Receives one argument, a table with these keys:
+---@field callback? any|(fun(event:ConfigAutocmdCallbackOpts):any|string) optional: Lua function (or Vimscript function name, if string) called when the event(s) is triggered. Lua callback can return a truthy value (not false or nil) to delete the autocommand. Receives one argument, a table with these keys:
 
 ---@class ConfigCommands: vim.api.keyset.user_command
 ---@field [1]? string Name of the new user command. Must begin with an uppercase letter
