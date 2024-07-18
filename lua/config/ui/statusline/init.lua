@@ -16,7 +16,7 @@ return {
 			hl = { link = "NonText" },
 
 			nc = {
-				hl = { link = "TSRainbowRed" },
+				hl = { link = "RainbowRed" },
 				fillchar = ".",
 			},
 
@@ -34,7 +34,7 @@ return {
 							local items = {}
 
 							if modified ~= "" then
-								table.insert(items, m.util.hl(Config.icons.ui.Circle, "TSRainbowGreen"))
+								table.insert(items, m.util.hl(Config.icons.ui.Circle, "RainbowGreen"))
 							end
 
 							local icon = ft_icon()

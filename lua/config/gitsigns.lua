@@ -40,9 +40,9 @@ return {
 		},
 
 		on_attach = function()
-			Config.util.hl("GitSignsAdd", { link = "TSRainbowGreen" })
-			Config.util.hl("GitSignsChange", { link = "TSRainbowYellow" })
-			Config.util.hl("GitSignsDelete", { link = "TSRainbowRed" })
+			Config.util.hl("GitSignsAdd", { link = "RainbowGreen" })
+			Config.util.hl("GitSignsChange", { link = "RainbowYellow" })
+			Config.util.hl("GitSignsDelete", { link = "RainbowRed" })
 
 			Config.util.hl("GitSignsStagedAdd", { fg = cmul(Config.util.get_hl("GitSignsAdd").fg, 0.5) })
 			Config.util.hl("GitSignsStagedChange", { fg = cmul(Config.util.get_hl("GitSignsChange").fg, 0.5) })

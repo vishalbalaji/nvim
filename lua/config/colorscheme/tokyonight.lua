@@ -6,13 +6,13 @@ return { -- You can easily change to a different colorscheme.
 	"folke/tokyonight.nvim",
 	opts = {
 		on_highlights = function(hl, c)
-			hl.TSRainbowRed = { fg = c.red }
-			hl.TSRainbowGreen = { fg = c.green }
-			hl.TSRainbowYellow = { fg = c.yellow }
-			hl.TSRainbowBlue = { fg = c.blue }
-			hl.TSRainbowViolet = { fg = c.magenta }
-			hl.TSRainbowCyan = { fg = c.cyan }
-			hl.TSRainbowOrange = { fg = c.orange }
+			hl.RainbowRed = { fg = c.red }
+			hl.RainbowGreen = { fg = c.green }
+			hl.RainbowYellow = { fg = c.yellow }
+			hl.RainbowBlue = { fg = c.blue }
+			hl.RainbowViolet = { fg = c.magenta }
+			hl.RainbowCyan = { fg = c.cyan }
+			hl.RainbowOrange = { fg = c.orange }
 		end,
 	},
 	config = function(_, opts)

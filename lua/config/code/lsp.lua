@@ -112,11 +112,11 @@ return { -- LSP Configuration & Plugins
 			vim.fn.sign_define(name, { text = d.icon, texthl = name, numhl = "" })
 		end
 
-		Config.util.hl("DiagnosticHint", { link = "TSRainbowGreen" })
-		Config.util.hl("DiagnosticOk", { link = "TSRainbowGreen" })
-		Config.util.hl("DiagnosticInfo", { link = "TSRainbowBlue" })
-		Config.util.hl("DiagnosticWarn", { link = "TSRainbowYellow" })
-		Config.util.hl("DiagnosticError", { link = "TSRainbowRed" })
+		Config.util.hl("DiagnosticHint", { link = "RainbowGreen" })
+		Config.util.hl("DiagnosticOk", { link = "RainbowGreen" })
+		Config.util.hl("DiagnosticInfo", { link = "RainbowBlue" })
+		Config.util.hl("DiagnosticWarn", { link = "RainbowYellow" })
+		Config.util.hl("DiagnosticError", { link = "RainbowRed" })
 
 		local ok_fg = Config.util.get_hl("DiagnosticOk").fg
 		local hint_fg = Config.util.get_hl("DiagnosticHint").fg
