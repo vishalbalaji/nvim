@@ -1,6 +1,6 @@
 ---@type ConfigAutocmd[]
 return {
-	{ command = "setlocal formatoptions-=cro", "BufEnter" },
+	{ "BufEnter", command = "setlocal formatoptions-=cro" },
 	{
 		"TextYankPost",
 		desc = "Highlight when yanking (copying) text",
@@ -8,13 +8,6 @@ return {
 		callback = function()
 			vim.highlight.on_yank()
 		end,
-	},
-	{
-		"FileType",
-		pattern = { "help", "qf" },
-		callback = vim.schedule_wrap(function(opts)
-			vim.keymap.set("n", "q", vim.cmd.quit, { noremap = true, silent = true, buffer = opts.buf })
-		end),
 	},
 	vim.env.TERM == "xterm-kitty" and {
 		"VimEnter",
@@ -39,6 +32,7 @@ return {
 			end
 		end,
 	} or nil,
+
 	{
 		"FileType",
 		once = true,
@@ -48,24 +42,25 @@ return {
 			vim.bo.tabstop = 2
 			vim.bo.softtabstop = 2
 			vim.bo.shiftwidth = 2
+
+			vim.opt_local.spell = true
+			vim.opt_local.wrap = true
 		end,
 	},
 	{
 		"FileType",
+		pattern = { "help", "qf" },
+		callback = vim.schedule_wrap(function(ctx)
+			vim.keymap.set("n", "q", vim.cmd.quit, { noremap = true, silent = true, buffer = ctx.buf })
+		end),
+	},
+	{
+		"FileType",
 		once = true,
-		pattern = { "markdown", "gitcommit", "diff" },
+		pattern = { "gitcommit" },
 		callback = function()
-			if vim.bo.filetype == "diff" then
-				vim.cmd("TSBufDisable highlight")
-				vim.cmd("hi! link diffAdded DiffAdd")
-				return
-			end
-			if vim.bo.filetype == "gitcommit" then
-				vim.cmd("setlocal colorcolumn=80")
-			elseif vim.bo.filetype == "markdown" then
-				vim.cmd("setlocal wrap")
-			end
-			vim.cmd("setlocal spell")
+			vim.opt_local.colorcolumn = tostring(vim.bo.textwidth)
+			vim.opt_local.spell = true
 		end,
 	},
 }
