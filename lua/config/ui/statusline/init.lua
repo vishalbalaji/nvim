@@ -49,19 +49,21 @@ return {
 				},
 
 				right = {
-					function()
-						return vim.t.maximized and "" or ""
-					end,
 					ft_icon,
 					m.ft,
 					m.create.diagnostics(),
 					{ require("lazy.status").updates, hl = "Special" },
 					m.create.showcmd(),
 					m.macro_recording,
+					function()
+						return vim.t.maximized and "" or ""
+					end,
+					{ "[", hl = "NonText" },
 					{
 						m.lineinfo,
 						hl = "NonText",
 					},
+					{ "]", hl = "NonText" },
 				},
 			},
 		}

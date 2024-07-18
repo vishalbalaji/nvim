@@ -50,6 +50,9 @@ local function process_groups(group)
 		else
 			opts = module
 			local f = opts[1]
+			if not f then
+				goto continue
+			end
 			local t1 = type(f)
 			assert(t1 == "string" or t1 == "function", "Invalid statusline component: " .. tostring(f))
 
@@ -76,6 +79,7 @@ local function process_groups(group)
 			items = items .. (modules > 0 and " " or "") .. text
 			modules = modules + 1
 		end
+		::continue::
 	end
 
 	return items

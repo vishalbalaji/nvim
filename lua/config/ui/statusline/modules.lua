@@ -141,9 +141,11 @@ function M.create.ft_icon()
 	vim.api.nvim_create_autocmd("BufEnter", {
 		group = statusline_group,
 		pattern = "*",
-		callback = function()
-			local filename = vim.fn.expand("%:t")
-			local icon, hl = devicons.get_icon(filename)
+		callback = function(ctx)
+			local icon, hl = devicons.get_icon(vim.fs.basename(ctx.file))
+			if not icon then
+				icon, hl = devicons.get_icon_by_filetype(vim.bo[ctx.buf].ft)
+			end
 			_G.stl_ft_icon = icon
 			_G.stl_ft_hl = hl
 		end,
@@ -158,6 +160,6 @@ function M.create.ft_icon()
 	end
 end
 
-M.lineinfo = "%p%% %l:%c"
+M.lineinfo = "%l:%c %p%%"
 
 return M
