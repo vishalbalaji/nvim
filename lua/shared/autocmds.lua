@@ -33,36 +33,12 @@ return {
 		end,
 	} or nil,
 
-	-- FT autocommands
-	{
-		"FileType",
-		once = true,
-		pattern = "markdown",
-		callback = function()
-			vim.bo.expandtab = true
-			vim.bo.tabstop = 2
-			vim.bo.softtabstop = 2
-			vim.bo.shiftwidth = 2
-
-			vim.opt_local.spell = true
-			vim.opt_local.wrap = true
-		end,
-	},
 	{
 		"FileType",
 		pattern = { "help", "qf" },
 		callback = vim.schedule_wrap(function(ctx)
 			vim.keymap.set("n", "q", vim.cmd.quit, { noremap = true, silent = true, buffer = ctx.buf })
 		end),
-	},
-	{
-		"FileType",
-		once = true,
-		pattern = "gitcommit",
-		callback = function()
-			vim.opt_local.colorcolumn = tostring(vim.bo.textwidth)
-			vim.opt_local.spell = true
-		end,
 	},
 	{
 		"TermOpen",
