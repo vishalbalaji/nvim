@@ -51,6 +51,7 @@
   "pretty-fold.nvim": { "branch": "master", "commit": "ce302faec7da79ea8afb5a6eec5096b68ba28cb5" },
   "quick-scope": { "branch": "master", "commit": "256d81e391a22eeb53791ff62ce65f870418fa71" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "5c9660801ce345cd3835e1947c12b54290ab7e71" },
+  "render-markdown": { "branch": "main", "commit": "123048b428eb85618780fcef9ea9f4d68b5d2508" },
   "smart-splits.nvim": { "branch": "master", "commit": "e186518f9d7eb4b1e43fbbe0c52bf323637194d0" },
   "statuscol.nvim": { "branch": "main", "commit": "d6f7f5437c5404d958b88bb73e0721b1c0e09223" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "cf48d4dfce44e0b9a2e19a008d6ec6ea6f01a83b" },
