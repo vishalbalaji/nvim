@@ -40,17 +40,13 @@ return {
 	cmd = "Hello",
 	config = function()
 		vim.api.nvim_create_user_command("Hello", function()
-			print("--------")
-			print(table.concat(get_tabs(), "\n"))
-			print("--------")
-			-- local buf = vim.api.nvim_create_buf(true, false)
-			-- vim.bo[buf].buflisted = false
-			-- vim.api.nvim_buf_set_name(buf, "tabs")
+			local buf = vim.api.nvim_create_buf(true, false)
+			vim.bo[buf].buflisted = false
+			vim.bo[buf].ft = "custom.tabs"
+			vim.api.nvim_buf_set_name(buf, "tabs")
 
-			-- local tabs = get_tabs()
-			-- vim.api.nvim_buf_set_text(buf, 0, 0, 0, 0, tabs)
-
-			-- vim.api.nvim_set_current_buf(buf)
+			local tabs = get_tabs()
+			vim.api.nvim_buf_set_text(buf, 0, 0, 0, 0, tabs)
 		end, {})
 	end,
 }
