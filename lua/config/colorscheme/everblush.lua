@@ -1,4 +1,5 @@
-return { -- You can easily change to a different colorscheme.
+return {
+	-- You can easily change to a different colorscheme.
 	-- Change the name of the colorscheme plugin below, and then
 	-- change the command in the config to whatever the name of that colorscheme is.
 	--
@@ -25,7 +26,7 @@ return { -- You can easily change to a different colorscheme.
 			CursorLineNr = { link = "SpecialComment" },
 			Visual = { bg = "color0" },
 			SpellBad = { link = "DiagnosticUnderlineError" },
-			ColorColumn = { link = "CursorLine" }
+			ColorColumn = { link = "CursorLine" },
 		},
 	},
 	init = function()

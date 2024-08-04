@@ -10,6 +10,7 @@ return {
 	},
 	{
 		"declancm/maximize.nvim",
+		enabled = true,
 		cmd = "Maximize",
 		keys = function()
 			local maximize = require("maximize")

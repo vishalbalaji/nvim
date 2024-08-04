@@ -94,6 +94,10 @@ return { -- LSP Configuration & Plugins
 				},
 				svelte = {
 					on_attach = function(client)
+						-- TODO: Send a notification here.
+						-- Check what kind of notification is used
+						-- by tsserver
+						-- vim.notify("Whaat")
 						vim.api.nvim_create_autocmd("BufWritePost", {
 							pattern = { "*.js", "*.ts" },
 							callback = function(ctx)

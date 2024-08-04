@@ -2,7 +2,8 @@ local M = {}
 
 ---@param hl_name string
 function M.get_hl(hl_name)
-	return vim.api.nvim_get_hl(0, { name = hl_name, link = false })
+	local ok, hl_def = pcall(vim.api.nvim_get_hl, 0, { name = hl_name, link = false })
+	return ok and hl_def or nil
 end
 
 ---@class ModHLOpts: vim.api.keyset.highlight
@@ -15,8 +16,8 @@ function M.mod_hl(hl_name, opts)
 	opts = vim.tbl_deep_extend("force", { set = true }, opts)
 	local set = opts.set
 	opts.set = nil
-	local ok, hl_def = pcall(M.get_hl, hl_name)
-	if ok then
+	local hl_def = M.get_hl(hl_name)
+	if hl_def then
 		for k, v in pairs(opts) do
 			hl_def[k] = v
 		end
@@ -29,12 +30,32 @@ function M.mod_hl(hl_name, opts)
 	return hl_def
 end
 
+---@class HLOpts: vim.api.keyset.highlight
+---@field ns_id? number
+
 ---@param hl_name string
----@param opts vim.api.keyset.highlight
+---@param opts HLOpts
 function M.hl(hl_name, opts)
-	local ok, _ = pcall(vim.api.nvim_set_hl, 0, hl_name, opts)
+	opts = vim.tbl_extend("force", { ns_id = 0 }, opts or {})
+
+	local ns_id = opts.ns_id
+	opts.ns_id = nil
+
+	local ok, _ = pcall(vim.api.nvim_set_hl, ns_id, hl_name, opts)
 	if not ok then
 		print("[DEBUG] Could not highlight: '" .. hl_name .. "'", vim.inspect(opts))
+	end
+end
+
+---@param hl_name string
+---@param opts HLOpts
+function M.hl_fallback(hl_name, opts)
+	opts = vim.tbl_extend("force", { ns_id = 0 }, opts or {})
+
+	local hl = vim.api.nvim_get_hl(opts.ns_id, { name = hl_name })
+
+	if vim.tbl_isempty(hl) then
+		M.hl(hl_name, opts)
 	end
 end
 

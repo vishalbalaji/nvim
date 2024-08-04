@@ -30,7 +30,7 @@ return {
 		{
 			"<leader>fF",
 			function()
-				vim.cmd.Pick("grep_live", "cwd='%:p:h'")
+				vim.cmd.Pick("grep_live")
 			end,
 		},
 		{
