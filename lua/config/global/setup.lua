@@ -2,6 +2,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
 
+function _G.o(...)
+	print(vim.inspect(...))
+end
+
 local Config = {}
 
 Config.util = require("config.global.util")
