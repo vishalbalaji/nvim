@@ -7,9 +7,10 @@ local foldhue = {
 }
 
 local pretty_fold = {
-	"anuvyklack/pretty-fold.nvim",
+	"bbjornstad/pretty-fold.nvim",
+	-- "anuvyklack/pretty-fold.nvim",
+	-- url = "git@github.com:bbjornstad/pretty-fold.nvim.git",
 	event = "LazyFile",
-	url = "git@github.com:bbjornstad/pretty-fold.nvim.git",
 	branch = "master",
 	opts = {},
 }

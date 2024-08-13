@@ -35,9 +35,9 @@ return {
 		},
 		{
 			"<leader>fb",
-			function ()
+			function()
 				vim.cmd.Pick("buffers")
-			end
+			end,
 		},
 		{
 			"<leader>fh",

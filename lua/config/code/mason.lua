@@ -28,7 +28,8 @@ function M.setup(servers, capabilities)
 		"stylua", -- Used to format Lua code
 	})
 
-	require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+	require("mason-tool-installer").setup({})
+	-- require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 	require("mason-lspconfig").setup({
 		handlers = {

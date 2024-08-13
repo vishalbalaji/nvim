@@ -35,10 +35,11 @@ return { -- Autocompletion
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-cmdline",
-		{
-			"hrsh7th/cmp-emoji",
-			url = "git@github.com:UtkarshKunwar/cmp-emoji.git",
-		},
+		"UtkarshKunwar/cmp-emoji",
+--		{
+--			"hrsh7th/cmp-emoji",
+--			url = "git@github.com:UtkarshKunwar/cmp-emoji.git",
+--		},
 	},
 	config = function()
 		-- See `:help cmp`
