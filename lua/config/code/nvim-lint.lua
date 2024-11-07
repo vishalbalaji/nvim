@@ -49,6 +49,12 @@ return {
 			--   end,
 			-- },
 
+			shellcheck = {
+				condition = function(ctx)
+					return vim.fs.basename(ctx.filename) ~= ".env"
+				end,
+			},
+
 			eslint_d = {
 				condition = function(ctx)
 					return vim.fs.find(Config.lsp.utils.eslint_config_names, { path = ctx.filename, upward = true })[1]

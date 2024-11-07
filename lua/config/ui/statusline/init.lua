@@ -33,7 +33,7 @@ return {
 							local modified = vim.api.nvim_eval_statusline("%m", {}).str
 							local items = {}
 
-							if modified ~= "" then
+							if vim.bo.modifiable and modified ~= "" then
 								table.insert(items, m.util.hl(Config.icons.ui.Circle, "RainbowGreen"))
 							end
 

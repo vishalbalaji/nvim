@@ -28,6 +28,11 @@ return {
 
 			json = { "jq" },
 
+			python = {
+				"black", lsp_format = "fallback",
+				"isort",
+			},
+
 			[{
 				"sh",
 				"zsh",

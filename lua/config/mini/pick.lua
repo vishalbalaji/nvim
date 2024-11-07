@@ -77,11 +77,13 @@ return {
 				command = {
 					"fd",
 					"--type=f",
-					"--no-follow",
 					"--color=never",
+					"--no-follow",
+					"--no-ignore",
 					"--hidden",
-					"-E.*/*",
+					"-E.**/*",
 					"-Enode_modules",
+					"-E__pycache__",
 				},
 			}, { source = source })
 		end
