@@ -1,5 +1,6 @@
 return {
 	name = "statusline",
+	virtual = true,
 	dir = "config.ui.statusline",
 	dependencies = {
 		require("config.colorscheme"),
@@ -33,7 +34,7 @@ return {
 							local modified = vim.api.nvim_eval_statusline("%m", {}).str
 							local items = {}
 
-							if vim.bo.modifiable and modified ~= "" then
+							if not vim.bo.readonly and modified ~= "" then
 								table.insert(items, m.util.hl(Config.icons.ui.Circle, "RainbowGreen"))
 							end
 

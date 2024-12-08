@@ -36,6 +36,7 @@ end
 
 return {
 	name = "test",
+	virtual = true,
 	dir = "config.test",
 	cmd = "Hello",
 	config = function()

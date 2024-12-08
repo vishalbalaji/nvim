@@ -51,6 +51,10 @@ return {
 					-- eslint_d
 				},
 			},
+
+			sql = { "sqlfmt" },
+
+			yaml = { "yamlfmt" },
 		},
 
 		formatters = {

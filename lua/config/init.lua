@@ -8,6 +8,7 @@ end
 return {
 	name = "config",
 	dir = "config.init",
+	virtual = true,
 	lazy = false,
 	priority = 999,
 
