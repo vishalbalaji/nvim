@@ -31,9 +31,15 @@ return {
 		lsp = {
 			documentation = {
 				opts = {
-					border = { style = "rounded" },
+					-- border = { style = "rounded" },
 					relative = "cursor",
 					position = { row = 2 },
+				},
+			},
+			hover = {
+				---@type NoiceViewOptions
+				opts = {
+					border = { padding = { top = 1, right = 1, bottom = 1, left = 1 } },
 				},
 			},
 		},

@@ -55,7 +55,7 @@ return { -- LSP Configuration & Plugins
 				},
 				float = {
 					header = "",
-					border = "rounded",
+					-- border = "rounded",
 					source = false,
 					prefix = "",
 					format = function(diagnostic)
@@ -122,6 +122,12 @@ return { -- LSP Configuration & Plugins
 		Config.util.hl("DiagnosticWarn", { link = "RainbowYellow" })
 		Config.util.hl("DiagnosticError", { link = "RainbowRed" })
 
+		Config.util.hl("DiagnosticVirtualTextHint", { link = "DiagnosticHint" })
+		Config.util.hl("DiagnosticVirtualTextOk", { link = "DiagnosticOk" })
+		Config.util.hl("DiagnosticVirtualTextInfo", { link = "DiagnosticInfo" })
+		Config.util.hl("DiagnosticVirtualTextWarn", { link = "DiagnosticWarn" })
+		Config.util.hl("DiagnosticVirtualTextError", { link = "DiagnosticError" })
+
 		local ok_fg = Config.util.get_hl("DiagnosticOk").fg
 		local hint_fg = Config.util.get_hl("DiagnosticHint").fg
 		local info_fg = Config.util.get_hl("DiagnosticInfo").fg
@@ -134,11 +140,13 @@ return { -- LSP Configuration & Plugins
 		Config.util.hl("DiagnosticUnderlineWarn", { undercurl = true, special = warn_fg })
 		Config.util.hl("DiagnosticUnderlineError", { undercurl = true, special = error_fg })
 
+		Config.util.hl("LspSignatureActiveParameter", { link = "CursorLine" })
+
 		vim.diagnostic.config(opts.diagnostics)
 		--
 		-- [DIAGNOSTICS SETUP END] ---
 
-		require("lspconfig.ui.windows").default_options.border = "rounded"
+		-- require("lspconfig.ui.windows").default_options.border = "rounded"
 
 		Config.util.hl("LspInfoBorder", { link = "FloatBorder" })
 		Config.util.hl("LspInlayHint", { fg = Config.util.get_hl("NonText").fg, bold = true })
@@ -251,7 +259,16 @@ return { -- LSP Configuration & Plugins
 		--  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
 		--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+
+		-- CMP
+		pcall(function()
+			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+		end)
+
+		-- BLINK
+		pcall(function()
+			capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
+		end)
 
 		-- Ensure the servers and tools above are installed
 		--  To check the current status of installed tools and/or manually install

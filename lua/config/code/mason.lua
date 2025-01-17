@@ -11,7 +11,7 @@ local M = {
 	---@type MasonSettings
 	opts = {
 		ui = {
-			border = "rounded",
+			-- border = "rounded",
 			height = 0.8,
 		},
 	},
