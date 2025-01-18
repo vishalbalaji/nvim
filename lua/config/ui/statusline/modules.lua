@@ -83,7 +83,7 @@ function M.macro_recording()
 	if recording_register == "" then
 		return ""
 	else
-		return "Recording @" .. recording_register
+		return "| " .. M.util.hl(Config.icons.ui.Circle, "RainbowRed", "Normal") .. " Recording @" .. recording_register .. " |"
 	end
 end
 
@@ -102,8 +102,9 @@ function M.util.get_mode_hl(section)
 end
 
 ---@param hl_name string
-function M.util.hl(text, hl_name)
-	return "%#" .. hl_name .. "#" .. text .. "%#StatusLine#"
+function M.util.hl(text, hl_name, ending)
+	ending = ending or "StatusLine"
+	return "%#" .. hl_name .. "#" .. text .. "%#" .. ending .. "#"
 end
 
 function M.create.lsp()

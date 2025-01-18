@@ -2,15 +2,17 @@ local cr_termcode = vim.api.nvim_replace_termcodes("<CR>", true, false, true)
 local function visual_hl_search()
 	vim.opt.lazyredraw = true
 
-	local special_characters = { "~", "/", "%." }
-
 	vim.fn.execute('normal! "sy')
 	local pattern = vim.inspect(vim.fn.getreg("s"))
 
 	pattern = string.sub(pattern, 2, string.len(pattern) - 1)
+
+	local special_characters = { "~", "/", "%.", "%[" }
 	for _, char in pairs(special_characters) do
 		pattern = string.gsub(pattern, char, "\\" .. char)
 	end
+
+	pattern = vim.api.nvim_replace_termcodes(pattern, true, false, false)
 
 	vim.api.nvim_feedkeys("/" .. pattern .. cr_termcode .. "N", "n", false)
 	vim.opt.lazyredraw = false

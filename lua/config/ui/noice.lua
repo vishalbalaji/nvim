@@ -32,11 +32,13 @@ return {
 			documentation = {
 				opts = {
 					-- border = { style = "rounded" },
+					border = { padding = { top = 1, right = 1, bottom = 1, left = 1 } },
 					relative = "cursor",
 					position = { row = 2 },
 				},
 			},
 			hover = {
+				silent = true,
 				---@type NoiceViewOptions
 				opts = {
 					border = { padding = { top = 1, right = 1, bottom = 1, left = 1 } },

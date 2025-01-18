@@ -8,6 +8,7 @@ return {
 			groups = {
 				all = {
 					NormalAlt = { bg = "bg0" },
+					FloatBorder = { link = "NormalAlt" },
 
 					RainbowRed = { fg = "palette.red" },
 					RainbowGreen = { fg = "palette.green" },
@@ -21,13 +22,14 @@ return {
 					Search = { link = "MiniCursorWord" },
 					Visual = { link = "CursorLine" },
 					MatchParen = { bg = "bg3", fg = "NONE" },
+					Comment = { fg = "bg3" },
 					SpecialComment = { link = "RainbowBlue" },
 					NonText = { link = "Comment" },
+					FoldColumn = { link = "NonText" },
 					ColorColumn = { link = "CursorLine" },
 					LineNr = { link = "NonText" },
 					CursorLineNr = { link = "SpecialComment" },
 					WinSeparator = { link = "NonText" },
-					FoldColumn = { link = "NonText" },
 					SpellBad = { link = "DiagnosticUnderlineError" },
 				},
 			},

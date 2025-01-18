@@ -23,8 +23,14 @@ return {
 		keymap = {
 			preset = "enter",
 
+			["<Tab>"] = {},
+			["<S-Tab>"] = {},
+
+			["<CR>"] = { "accept", "fallback" },
 			["<C-k>"] = { "select_prev", "fallback" },
 			["<C-j>"] = { "select_next", "fallback" },
+			["<C-l>"] = { "snippet_forward", "fallback" },
+			["<C-h>"] = { "snippet_backward", "fallback" },
 
 			cmdline = {
 				["<CR>"] = {},
@@ -60,7 +66,19 @@ return {
 		completion = {
 			list = { selection = { preselect = false, auto_insert = true } },
 			ghost_text = { enabled = true },
+			menu = {
+				draw = {
+					treesitter = { "lsp" },
+					columns = {
+						{ "kind_icon", gap = 1 },
+						{ "label", "label_description", gap = 1 },
+						{ "kind" },
+					},
+				},
+			},
 		},
+
+		signature = { enabled = true },
 	},
 	opts_extend = { "sources.default" },
 }

@@ -55,7 +55,8 @@ return { -- LSP Configuration & Plugins
 				},
 				float = {
 					header = "",
-					-- border = "rounded",
+					---@diagnostic disable-next-line: assign-type-mismatch
+					border = { " " },
 					source = false,
 					prefix = "",
 					format = function(diagnostic)
