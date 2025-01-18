@@ -35,6 +35,12 @@ return {
 	{ "Q", "q", desc = "Remap macro key from q -> Q" },
 	{ "q", "<Nop>" },
 
+	-- For the normies
+	{ "<C-f>", "/" },
+	{ "<C-c>", "ygv", mode = { "v" } },
+	{ "<C-v>", "p" },
+	{ "<C-v>", "<Esc>pi", mode = { "i", "s" } },
+
 	-- Utils
 	{ "<leader>d", "<cmd>cd %:p:h<CR><cmd>pwd<CR>", desc = "Current [D]irectory" },
 	{ "<leader>m", vim.cmd.messages, desc = "[M]essages" },
