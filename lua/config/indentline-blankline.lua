@@ -8,6 +8,7 @@ return {
 		indent = {
 			highlight = "NonText",
 			char = ui_icons.LineMiddle,
+			tab_char = ui_icons.LineMiddle,
 		},
 		scope = {
 			char = ui_icons.LineMiddle,

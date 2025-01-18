@@ -13,7 +13,7 @@ return {
 
 		---@type StatusLineConfig
 		return {
-			fillchar = "━",
+			fillchar = "─",
 			hl = { link = "NonText" },
 
 			nc = {

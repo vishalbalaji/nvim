@@ -40,5 +40,7 @@ return {
 			mode.b = { fg = mode.a.bg }
 		end
 		Config.lualine.create_highlight_groups(lualine_theme)
+
+		Config.util.mod_hl("Comment", { italic = true })
 	end,
 }
