@@ -38,7 +38,6 @@ return {
 	-- For the normies
 	{ "<C-f>", "/" },
 	{ "<C-c>", "ygv", mode = { "v" } },
-	{ "<C-v>", "p" },
 	{ "<C-v>", "<Esc>pi", mode = { "i", "s" } },
 
 	-- Utils
@@ -58,6 +57,15 @@ return {
 	{ "<C-s><C-v>", wincmd("v"), desc = "Create vertival split" },
 	{ "<C-CR>", Config.util.adaptive_split, desc = "Create adaptive split" },
 	{ "<C-S-CR>", wincmd("r"), desc = "Rotate splits" },
+
+	-- Tabs
+	-- { "<M-S-t>", "<CMD>tabnew<CR>" },
+	-- { "<M-S-w>", "<CMD>tabclose<CR>" },
+	-- { "<M-S-h>", "<CMD>tabmove -1<CR>" },
+	-- { "<M-S-l>", "<CMD>tabmove +1<CR>" },
+	-- TODO: Remove conflicts with other stuff
+	-- { "<M-S-j>", "<CMD>tabprev<CR>", mode = "n" },
+	-- { "<M-S-k>", "<CMD>tabnext<CR>", mode = "n" },
 
 	-- Clipboard
 	{ "p", '"_dP', mode = "v" },
