@@ -50,6 +50,8 @@ return {
 		hlsearch = true,
 
 		scrolloff = 10,
+
+		conceallevel = 2,
 	},
 
 	wo = {

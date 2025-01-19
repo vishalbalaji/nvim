@@ -4,6 +4,7 @@ return {
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 		"moyiz/blink-emoji.nvim",
+		{ "saghen/blink.compat", lazy = true, verison = false },
 	},
 
 	-- use a release tag to download pre-built binaries
@@ -52,7 +53,7 @@ return {
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "emoji" },
+			default = { "lsp", "path", "snippets", "buffer", "emoji", "obsidian", "obsidian_new", "obsidian_tags" },
 			providers = {
 				emoji = {
 					module = "blink-emoji",
@@ -60,6 +61,9 @@ return {
 					score_offset = 15, -- Tune by preference
 					opts = { insert = false }, -- Insert emoji (default) or complete its name
 				},
+				obsidian = { name = "obsidian", module = "blink.compat.source" },
+				obsidian_new = { name = "obsidian_new", module = "blink.compat.source" },
+				obsidian_tags = { name = "obsidian_tags", module = "blink.compat.source" },
 			},
 		},
 
