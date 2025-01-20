@@ -88,11 +88,23 @@ end
 local M = {}
 
 ---@param opts StatusLineConfig
+local function setup_hls(opts)
+	local nc = opts.nc or {}
+	Config.util.hl("StatusLine", opts.hl or {})
+	Config.util.hl("StatusLineNC", nc.hl or { link = "StatusLine" })
+end
+
+---@param opts StatusLineConfig
 function M.setup(opts)
 	local nc = opts.nc or {}
 
-	Config.util.hl("StatusLine", opts.hl or {})
-	Config.util.hl("StatusLineNC", nc.hl or { link = "StatusLine" })
+	setup_hls(opts)
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		pattern = "*",
+		callback = function()
+			setup_hls(opts)
+		end,
+	})
 
 	if opts.fillchar and opts.fillchar ~= "" then
 		vim.opt.fillchars:append("stl:" .. opts.fillchar)

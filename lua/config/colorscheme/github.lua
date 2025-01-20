@@ -1,8 +1,23 @@
+local theme = "github_dark_default"
+
 return {
 	"projekt0n/github-nvim-theme",
 	name = "github-theme",
 	lazy = false, -- make sure we load this during startup if it is your main colorscheme
 	priority = 1000, -- make sure to load this before all the other start plugins
+	init = function()
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			pattern = "github_*",
+			callback = function()
+				local lualine_theme = require("lualine.themes." .. theme)
+				for _, mode in pairs(lualine_theme) do
+					mode.b = { fg = mode.a.bg }
+				end
+				Config.lualine.create_highlight_groups(lualine_theme)
+				Config.util.mod_hl("Comment", { italic = true })
+			end,
+		})
+	end,
 	config = function()
 		require("github-theme").setup({
 			groups = {
@@ -35,14 +50,6 @@ return {
 			},
 		})
 
-		local theme = "github_dark_default"
 		vim.cmd.colorscheme(theme)
-		local lualine_theme = require("lualine.themes." .. theme)
-		for _, mode in pairs(lualine_theme) do
-			mode.b = { fg = mode.a.bg }
-		end
-		Config.lualine.create_highlight_groups(lualine_theme)
-
-		Config.util.mod_hl("Comment", { italic = true })
 	end,
 }
