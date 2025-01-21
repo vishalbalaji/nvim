@@ -110,6 +110,40 @@ return { -- LSP Configuration & Plugins
 			},
 		}
 	end,
+	init = function()
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			callback = function()
+				Config.util.hl("DiagnosticHint", { link = "RainbowGreen" })
+				Config.util.hl("DiagnosticOk", { link = "RainbowGreen" })
+				Config.util.hl("DiagnosticInfo", { link = "RainbowBlue" })
+				Config.util.hl("DiagnosticWarn", { link = "RainbowYellow" })
+				Config.util.hl("DiagnosticError", { link = "RainbowRed" })
+
+				Config.util.hl("DiagnosticVirtualTextHint", { link = "DiagnosticHint" })
+				Config.util.hl("DiagnosticVirtualTextOk", { link = "DiagnosticOk" })
+				Config.util.hl("DiagnosticVirtualTextInfo", { link = "DiagnosticInfo" })
+				Config.util.hl("DiagnosticVirtualTextWarn", { link = "DiagnosticWarn" })
+				Config.util.hl("DiagnosticVirtualTextError", { link = "DiagnosticError" })
+
+				local ok_fg = Config.util.get_hl("DiagnosticOk").fg
+				local hint_fg = Config.util.get_hl("DiagnosticHint").fg
+				local info_fg = Config.util.get_hl("DiagnosticInfo").fg
+				local warn_fg = Config.util.get_hl("DiagnosticWarn").fg
+				local error_fg = Config.util.get_hl("DiagnosticError").fg
+
+				Config.util.hl("DiagnosticUnderlineOk", { undercurl = true, special = ok_fg })
+				Config.util.hl("DiagnosticUnderlineHint", { undercurl = true, special = hint_fg })
+				Config.util.hl("DiagnosticUnderlineInfo", { undercurl = true, special = info_fg })
+				Config.util.hl("DiagnosticUnderlineWarn", { undercurl = true, special = warn_fg })
+				Config.util.hl("DiagnosticUnderlineError", { undercurl = true, special = error_fg })
+
+				Config.util.hl("LspSignatureActiveParameter", { link = "CursorLine" })
+
+				Config.util.hl("LspInfoBorder", { link = "FloatBorder" })
+				Config.util.hl("LspInlayHint", { fg = Config.util.get_hl("NonText").fg, bold = true })
+			end,
+		})
+	end,
 	config = function(_, opts)
 		-- [DIAGNOSTICS SETUP START] ---
 		for _, d in pairs(lsp_signs) do
@@ -117,40 +151,8 @@ return { -- LSP Configuration & Plugins
 			vim.fn.sign_define(name, { text = d.icon, texthl = name, numhl = "" })
 		end
 
-		Config.util.hl("DiagnosticHint", { link = "RainbowGreen" })
-		Config.util.hl("DiagnosticOk", { link = "RainbowGreen" })
-		Config.util.hl("DiagnosticInfo", { link = "RainbowBlue" })
-		Config.util.hl("DiagnosticWarn", { link = "RainbowYellow" })
-		Config.util.hl("DiagnosticError", { link = "RainbowRed" })
-
-		Config.util.hl("DiagnosticVirtualTextHint", { link = "DiagnosticHint" })
-		Config.util.hl("DiagnosticVirtualTextOk", { link = "DiagnosticOk" })
-		Config.util.hl("DiagnosticVirtualTextInfo", { link = "DiagnosticInfo" })
-		Config.util.hl("DiagnosticVirtualTextWarn", { link = "DiagnosticWarn" })
-		Config.util.hl("DiagnosticVirtualTextError", { link = "DiagnosticError" })
-
-		local ok_fg = Config.util.get_hl("DiagnosticOk").fg
-		local hint_fg = Config.util.get_hl("DiagnosticHint").fg
-		local info_fg = Config.util.get_hl("DiagnosticInfo").fg
-		local warn_fg = Config.util.get_hl("DiagnosticWarn").fg
-		local error_fg = Config.util.get_hl("DiagnosticError").fg
-
-		Config.util.hl("DiagnosticUnderlineOk", { undercurl = true, special = ok_fg })
-		Config.util.hl("DiagnosticUnderlineHint", { undercurl = true, special = hint_fg })
-		Config.util.hl("DiagnosticUnderlineInfo", { undercurl = true, special = info_fg })
-		Config.util.hl("DiagnosticUnderlineWarn", { undercurl = true, special = warn_fg })
-		Config.util.hl("DiagnosticUnderlineError", { undercurl = true, special = error_fg })
-
-		Config.util.hl("LspSignatureActiveParameter", { link = "CursorLine" })
-
 		vim.diagnostic.config(opts.diagnostics)
-		--
 		-- [DIAGNOSTICS SETUP END] ---
-
-		-- require("lspconfig.ui.windows").default_options.border = "rounded"
-
-		Config.util.hl("LspInfoBorder", { link = "FloatBorder" })
-		Config.util.hl("LspInlayHint", { fg = Config.util.get_hl("NonText").fg, bold = true })
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("custom-lsp-attach", { clear = true }),

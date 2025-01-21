@@ -1,15 +1,43 @@
-local theme = "github_dark_default"
-
 return {
 	"projekt0n/github-nvim-theme",
 	name = "github-theme",
 	lazy = false, -- make sure we load this during startup if it is your main colorscheme
 	priority = 1000, -- make sure to load this before all the other start plugins
+	opts = {
+		groups = {
+			all = {
+				NormalAlt = { bg = "bg0" },
+				FloatBorder = { link = "NormalAlt" },
+
+				RainbowRed = { fg = "palette.red" },
+				RainbowGreen = { fg = "palette.green" },
+				RainbowYellow = { fg = "palette.yellow" },
+				RainbowBlue = { fg = "palette.blue" },
+				RainbowViolet = { fg = "palette.magenta" },
+				RainbowCyan = { fg = "palette.cyan" },
+				RainbowOrange = { fg = "palette.orange" },
+
+				CursorLine = { bg = "bg2" },
+				Search = { link = "MiniCursorWord" },
+				Visual = { link = "CursorLine" },
+				MatchParen = { bg = "bg3", fg = "NONE" },
+				Comment = { fg = "bg3" },
+				SpecialComment = { link = "RainbowBlue" },
+				NonText = { link = "Comment" },
+				FoldColumn = { link = "NonText" },
+				ColorColumn = { link = "CursorLine" },
+				LineNr = { link = "NonText" },
+				CursorLineNr = { link = "SpecialComment" },
+				WinSeparator = { link = "NonText" },
+				SpellBad = { link = "DiagnosticUnderlineError" },
+			},
+		},
+	},
 	init = function()
 		vim.api.nvim_create_autocmd("ColorScheme", {
 			pattern = "github_*",
-			callback = function()
-				local lualine_theme = require("lualine.themes." .. theme)
+			callback = function(e)
+				local lualine_theme = require("lualine.themes." .. e.match)
 				for _, mode in pairs(lualine_theme) do
 					mode.b = { fg = mode.a.bg }
 				end
@@ -17,39 +45,5 @@ return {
 				Config.util.mod_hl("Comment", { italic = true })
 			end,
 		})
-	end,
-	config = function()
-		require("github-theme").setup({
-			groups = {
-				all = {
-					NormalAlt = { bg = "bg0" },
-					FloatBorder = { link = "NormalAlt" },
-
-					RainbowRed = { fg = "palette.red" },
-					RainbowGreen = { fg = "palette.green" },
-					RainbowYellow = { fg = "palette.yellow" },
-					RainbowBlue = { fg = "palette.blue" },
-					RainbowViolet = { fg = "palette.magenta" },
-					RainbowCyan = { fg = "palette.cyan" },
-					RainbowOrange = { fg = "palette.orange" },
-
-					CursorLine = { bg = "bg2" },
-					Search = { link = "MiniCursorWord" },
-					Visual = { link = "CursorLine" },
-					MatchParen = { bg = "bg3", fg = "NONE" },
-					Comment = { fg = "bg3" },
-					SpecialComment = { link = "RainbowBlue" },
-					NonText = { link = "Comment" },
-					FoldColumn = { link = "NonText" },
-					ColorColumn = { link = "CursorLine" },
-					LineNr = { link = "NonText" },
-					CursorLineNr = { link = "SpecialComment" },
-					WinSeparator = { link = "NonText" },
-					SpellBad = { link = "DiagnosticUnderlineError" },
-				},
-			},
-		})
-
-		vim.cmd.colorscheme(theme)
 	end,
 }

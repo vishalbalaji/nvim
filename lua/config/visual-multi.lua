@@ -39,11 +39,13 @@ return {
 			["p"] = '"+<Plug>(VM-p-Paste)',
 			["y"] = '"+<Plug>(VM-Yank)',
 		}
-	end,
-	config = function()
-		Config.util.hl("VM_Mono", { standout = true })
-		Config.util.hl("VM_Cursor", { standout = true })
-		Config.util.hl("VM_Insert", { standout = true })
-		-- Config.hl("VM_Extend", { link = "Special" })
+
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			callback = function ()
+				Config.util.hl("VM_Mono", { standout = true })
+				Config.util.hl("VM_Cursor", { standout = true })
+				Config.util.hl("VM_Insert", { standout = true })
+			end
+		})
 	end,
 }

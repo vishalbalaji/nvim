@@ -15,20 +15,16 @@ return { -- You can easily change to a different colorscheme.
 			hl.RainbowOrange = { fg = c.orange }
 		end,
 	},
-	config = function(_, opts)
-		require("tokyonight").setup(opts)
-		-- Load the colorscheme here.
-		-- Like many other themes, this one has different styles, and you could load
-		-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-		vim.cmd.colorscheme("tokyonight-night")
-
-		local lualine_theme = require("lualine.themes.tokyonight")
-		for _, mode in pairs(lualine_theme) do
-			mode.b.bg = nil
-		end
-		Config.lualine.create_highlight_groups(lualine_theme)
-
-		-- You can configure highlights by doing something like:
-		vim.cmd.hi("Comment gui=none")
+	init = function()
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			pattern = "tokyonight*",
+			callback = function()
+				local lualine_theme = require("lualine.themes.tokyonight")
+				for _, mode in pairs(lualine_theme) do
+					mode.b.bg = nil
+				end
+				Config.lualine.create_highlight_groups(lualine_theme)
+			end,
+		})
 	end,
 }

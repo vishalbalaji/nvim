@@ -30,16 +30,16 @@ return {
 		},
 	},
 	init = function()
-		-- Load the colorscheme here.
-		vim.cmd.colorscheme("everblush")
-
-		local lualine_theme = require("lualine.themes.everblush")
-		lualine_theme.normal.b = { fg = lualine_theme.normal.a.bg }
-
-		-- for _, mode in pairs(lualine_theme) do
-		-- 	mode.b.gui = "bold"
-		-- end
-
-		Config.lualine.create_highlight_groups(lualine_theme)
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			pattern = "everblush",
+			callback = function(e)
+				local lualine_theme = require("lualine.themes." .. e.match)
+				lualine_theme.normal.b = { fg = lualine_theme.normal.a.bg }
+				-- for _, mode in pairs(lualine_theme) do
+				-- 	mode.b.gui = "bold"
+				-- end
+				Config.lualine.create_highlight_groups(lualine_theme)
+			end,
+		})
 	end,
 }

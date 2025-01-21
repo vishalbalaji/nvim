@@ -36,8 +36,11 @@ return {
 		},
 	},
 
-	config = function(_, _opts)
-		require("dressing").setup(_opts)
-		Config.util.hl("DressingSelectIdx", { link = "SpecialComment" })
+	init = function()
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			callback = function()
+				Config.util.hl("DressingSelectIdx", { link = "SpecialComment" })
+			end,
+		})
 	end,
 }

@@ -36,17 +36,22 @@ return { -- Autocompletion
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-cmdline",
 		"UtkarshKunwar/cmp-emoji",
---		{
---			"hrsh7th/cmp-emoji",
---			url = "git@github.com:UtkarshKunwar/cmp-emoji.git",
---		},
+		--		{
+		--			"hrsh7th/cmp-emoji",
+		--			url = "git@github.com:UtkarshKunwar/cmp-emoji.git",
+		--		},
 	},
+	init = function()
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			callback = function()
+				Config.util.hl("CmpGhostText", { link = "Comment", default = true })
+			end,
+		})
+	end,
 	config = function()
 		-- See `:help cmp`
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
-
-		Config.util.hl("CmpGhostText", { link = "Comment", default = true })
 
 		luasnip.config.setup({})
 		luasnip.filetype_extend("all", { "loremipsum", "license" })

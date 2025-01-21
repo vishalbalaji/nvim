@@ -10,18 +10,6 @@ local Config = {}
 
 Config.util = require("config.global.util")
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-	callback = function()
-		Config.util.hl_fallback("RainbowRed", { fg = "red" })
-		Config.util.hl_fallback("RainbowGreen", { fg = "green" })
-		Config.util.hl_fallback("RainbowYellow", { fg = "yellow" })
-		Config.util.hl_fallback("RainbowBlue", { fg = "blue" })
-		Config.util.hl_fallback("RainbowViolet", { fg = "violet" })
-		Config.util.hl_fallback("RainbowCyan", { fg = "cyan" })
-		Config.util.hl_fallback("RainbowOrange", { fg = "orange" })
-	end,
-})
-
 local icons = require("config.global.icons")
 Config.icons = icons
 

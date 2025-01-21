@@ -52,18 +52,27 @@ local function tailwind_config_icons()
 	return icons
 end
 
+local default_icon_color = "#6d8086"
+
+M.init = function()
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		callback = function()
+			Config.util.hl("DevIconsDefault", { fg = default_icon_color })
+		end,
+	})
+end
+
 M.config = function()
 	local devicons = require("nvim-web-devicons")
-	local default_icon_color = "#6d8086"
 	local default_icon_cterm = 231
 
 	local override_by_filename = {}
 
 	override_by_filename =
-			vim.tbl_extend("force", override_by_filename, prettier_config_icons(default_icon_color, default_icon_cterm))
+		vim.tbl_extend("force", override_by_filename, prettier_config_icons(default_icon_color, default_icon_cterm))
 
 	override_by_filename =
-			vim.tbl_extend("force", override_by_filename, eslint_config_icons(default_icon_color, default_icon_cterm))
+		vim.tbl_extend("force", override_by_filename, eslint_config_icons(default_icon_color, default_icon_cterm))
 
 	override_by_filename = vim.tbl_extend("force", override_by_filename, tailwind_config_icons())
 
@@ -81,7 +90,6 @@ M.config = function()
 	})
 
 	devicons.set_default_icon(lsp_icons._default, default_icon_color, default_icon_cterm)
-	Config.util.hl("DevIconsDefault", { fg = default_icon_color })
 end
 
 return M

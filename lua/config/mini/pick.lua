@@ -58,13 +58,19 @@ return {
 			},
 		},
 	},
+	init = function()
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			callback = function()
+				Config.util.hl("MiniPickBorder", { link = "MiniPickNormal" })
+
+				local border_hl = Config.util.get_hl("MiniPickBorder")
+				local prompt_hl = Config.util.get_hl("MiniPickPrompt")
+
+				Config.util.hl("MiniPickPrompt", { bg = border_hl.bg, fg = prompt_hl.fg })
+			end,
+		})
+	end,
 	config = function(_, opts)
-		Config.util.hl("MiniPickBorder", { link = "MiniPickNormal" })
-
-		local border_hl = Config.util.get_hl("MiniPickBorder")
-		local prompt_hl = Config.util.get_hl("MiniPickPrompt")
-		Config.util.hl("MiniPickPrompt", { bg = border_hl.bg, fg = prompt_hl.fg })
-
 		require("mini.pick").setup(opts)
 		-- vim.schedule(function()
 		-- 	---@type string

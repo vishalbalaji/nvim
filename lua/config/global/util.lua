@@ -32,30 +32,28 @@ end
 
 ---@class HLOpts: vim.api.keyset.highlight
 ---@field ns_id? number
+---@field skip_existing? boolean Skips the hl if the highlight group already exists
 
 ---@param hl_name string
 ---@param opts HLOpts
 function M.hl(hl_name, opts)
-	opts = vim.tbl_extend("force", { ns_id = 0 }, opts or {})
+	opts = vim.tbl_extend("force", { ns_id = 0, skip_existing = false }, opts or {})
 
 	local ns_id = opts.ns_id
+
+	if opts.skip_existing then
+		local hl = vim.api.nvim_get_hl(opts.ns_id, { name = hl_name })
+		if not vim.tbl_isempty(hl) then
+			return
+		end
+	end
+
+	opts.skip_existing = nil
 	opts.ns_id = nil
 
 	local ok, _ = pcall(vim.api.nvim_set_hl, ns_id, hl_name, opts)
 	if not ok then
 		print("[DEBUG] Could not highlight: '" .. hl_name .. "'", vim.inspect(opts))
-	end
-end
-
----@param hl_name string
----@param opts HLOpts
-function M.hl_fallback(hl_name, opts)
-	opts = vim.tbl_extend("force", { ns_id = 0 }, opts or {})
-
-	local hl = vim.api.nvim_get_hl(opts.ns_id, { name = hl_name })
-
-	if vim.tbl_isempty(hl) then
-		M.hl(hl_name, opts)
 	end
 end
 
