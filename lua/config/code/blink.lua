@@ -28,12 +28,15 @@ return {
 			["<S-Tab>"] = {},
 
 			["<CR>"] = { "accept", "fallback" },
+			["<C-y>"] = { "accept", "fallback" },
 			["<C-k>"] = { "select_prev", "fallback" },
 			["<C-j>"] = { "select_next", "fallback" },
 			["<C-l>"] = { "snippet_forward", "fallback" },
 			["<C-h>"] = { "snippet_backward", "fallback" },
+		},
 
-			cmdline = {
+		cmdline = {
+			keymap = {
 				["<CR>"] = {},
 				["<C-k>"] = { "select_prev", "fallback" },
 				["<C-j>"] = { "select_next", "fallback" },
